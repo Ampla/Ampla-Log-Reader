@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Ampla.LogReader.Wcf;
 
-namespace Ampla.LogReader.Wcf
+namespace Ampla.LogReader.FileSystem
 {
     public class WcfLogDirectory : IWcfLogReader
     {
@@ -13,19 +14,15 @@ namespace Ampla.LogReader.Wcf
         public WcfLogDirectory(string project)
         {
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
-            if (!Directory.Exists(folder))
-            {
-                throw new DirectoryNotFoundException(folder + " does not exist.");
-            }
 
-            folder = Path.Combine(folder, "Citect", "Ampla", "Projects");
+            folder = Path.Combine(folder, "Citect", "Ampla", "Projects", project);
             if (!Directory.Exists(folder))
             {
                 throw new DirectoryNotFoundException(folder + " does not exist.");
             }
 
             //%ProgramData%\Citect\Ampla\Projects\{Project}\ReplayLogs\WCFRecorder 
-            folder = Path.Combine(folder, project, "ReplayLogs", "WCFRecorder");
+            folder = Path.Combine(folder, "ReplayLogs", "WCFRecorder");
 
             if (!Directory.Exists(folder))
             {

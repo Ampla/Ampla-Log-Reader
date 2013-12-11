@@ -5,6 +5,15 @@ namespace Ampla.LogReader.Xml
 {
     public static class XmlHelper
     {
+        /// <summary>
+        /// Gets the value.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="xmlNode">The XML node.</param>
+        /// <param name="xPath">The executable path.</param>
+        /// <param name="defaultValue">The default value.</param>
+        /// <returns></returns>
+        /// <exception cref="System.InvalidOperationException">Use GetDateTime() to get DateTime values</exception>
         public static T GetValue<T>(XmlNode xmlNode, string xPath, T defaultValue)
         {
             if (typeof (T) == typeof (DateTime))
@@ -25,6 +34,13 @@ namespace Ampla.LogReader.Xml
             return defaultValue;
         }
 
+        /// <summary>
+        /// Gets the date time as UTC Value
+        /// </summary>
+        /// <param name="xmlNode">The XML node.</param>
+        /// <param name="xPath">The executable path.</param>
+        /// <param name="defaultValue">The default value.</param>
+        /// <returns></returns>
         public static DateTime GetDateTime(XmlNode xmlNode, string xPath, DateTime defaultValue)
         {
             XmlNode valueNode = xmlNode.SelectSingleNode(xPath);
@@ -39,6 +55,12 @@ namespace Ampla.LogReader.Xml
             return defaultValue;
         }
 
+        /// <summary> 
+        /// Gets the outer XML from the xPath specified of xmlNode
+        /// </summary>
+        /// <param name="xmlNode">The XML node.</param>
+        /// <param name="xPath">The executable path.</param>
+        /// <returns></returns>
         public static string GetOuterXml(XmlNode xmlNode, string xPath)
         {
             XmlNode node = xmlNode.SelectSingleNode(xPath);
