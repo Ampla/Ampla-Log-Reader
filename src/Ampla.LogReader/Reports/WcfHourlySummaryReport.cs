@@ -27,14 +27,17 @@ namespace Ampla.LogReader.Reports
                 analysis.Add(wcfCall);
             }
 
-            reportWriter.NewSubject("Wcf Hourly Summary");
-
-            foreach (SummaryStatistic summary in analysis.Sort(SummaryStatistic.CompareDate()))
+            using (reportWriter.StartReport("Wcf Hourly Summary"))
             {
-                reportWriter.NewSubject(summary.Name);
-                foreach (Result result in summary.Results)
+                foreach (SummaryStatistic summary in analysis.Sort(SummaryStatistic.CompareDate()))
                 {
-                    reportWriter.Write(result);
+                    using (reportWriter.StartSection(summary.Name))
+                    {
+                        foreach (Result result in summary.Results)
+                        {
+                            reportWriter.Write(result);
+                        }
+                    }
                 }
             }
         }
