@@ -35,7 +35,7 @@ namespace Ampla.LogReader.Wcf
                     Duration = TimeSpan.FromMilliseconds(XmlHelper.GetValue(xmlNode, "Duration", 0D)),
                     ResponseMessageLength = XmlHelper.GetValue(xmlNode, "ResponseMessageLength", 0D),
                     IsFault = XmlHelper.GetValue(xmlNode, "IsFault", false),
-                    FaultMessage = XmlHelper.GetValue(xmlNode, "FaultMessage", string.Empty),
+                    FaultMessage = XmlHelper.GetInnerXml(xmlNode, "FaultMessage"),
                     RequestMessage = XmlHelper.GetOuterXml(xmlNode, "RequestMessage"),
                 };
 

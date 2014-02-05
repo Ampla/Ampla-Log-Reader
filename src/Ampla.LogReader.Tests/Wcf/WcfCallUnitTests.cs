@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.IO;
 using System.Xml;
 using Ampla.LogReader.Xml;
 using NUnit.Framework;
@@ -15,7 +14,7 @@ namespace Ampla.LogReader.Wcf
 
         protected override void OnSetUp()
         {
-            XmlFragmentTextReader reader = new XmlFragmentTextReader("Xml", File.OpenRead(fileName));
+            XmlFragmentTextReader reader = new XmlFragmentTextReader("Xml", fileName);
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(reader);
 
@@ -113,7 +112,7 @@ namespace Ampla.LogReader.Wcf
         {
             WcfCall call = WcfCall.LoadFromXml(xmlNode);
 
-            string faultMessage = XmlHelper.GetValue(xmlNode, "FaultMessage", "No Message");
+            string faultMessage = XmlHelper.GetInnerXml(xmlNode, "FaultMessage");
 
             Assert.That(faultMessage, Is.Empty);
             Assert.That(call.FaultMessage, Is.EqualTo(faultMessage));

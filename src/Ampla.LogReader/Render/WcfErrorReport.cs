@@ -1,19 +1,19 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Linq;
+using Ampla.LogReader.ReportWriters;
 using Ampla.LogReader.Wcf;
 
 namespace Ampla.LogReader.Render
 {
     public class WcfErrorReport : Report
     {
-        public WcfErrorReport(List<WcfCall> wcfCalls, TextWriter writer) : base(wcfCalls, writer)
+        public WcfErrorReport(List<WcfCall> wcfCalls, IReportWriter reportWriter) : base(wcfCalls, reportWriter)
         {
         }
 
-        protected override void RenderReport(TextWriter textWriter)
+        protected override void RenderReport(IReportWriter reportWriter)
         {
-            textWriter.WriteLine("WcfErrors");
+            reportWriter.NewSubject("WcfErrors");
 
             int errors = 0;
 
@@ -22,12 +22,10 @@ namespace Ampla.LogReader.Render
             foreach (var call in WcfCalls.Where(call => call.IsFault))
             {
                 errors++;
-                textWriter.WriteLine(call.CallTime);
-                //textWriter.WriteLine(call.RequestMessage);
-                textWriter.WriteLine(call.FaultMessage);
+                reportWriter.Write("{0} - {1}", call.CallTime, call.FaultMessage);
             }
 
-            textWriter.WriteLine("{0} entries with {1} errors ({2:0.00}%).", entries, errors, errors * 100.0D / entries);
+            reportWriter.Write("{0} entries with {1} errors ({2:0.00}%).", entries, errors, errors * 100.0D / entries);
         }
     }
 }

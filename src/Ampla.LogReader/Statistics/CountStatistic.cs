@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Ampla.LogReader.Wcf;
 
 namespace Ampla.LogReader.Statistics
@@ -26,11 +25,11 @@ namespace Ampla.LogReader.Statistics
             count++;
         }
 
-        public IEnumerable Results
+        public IEnumerable<Result> Results
         {
-            get
-            {
-                yield return "Count: " + count;
+            get 
+            { 
+                yield return Result.New(name, "Count", count); 
             }
         }
 

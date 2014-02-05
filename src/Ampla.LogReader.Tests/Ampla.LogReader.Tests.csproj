@@ -53,6 +53,7 @@
     <Compile Include="TestFixture.cs" />
     <Compile Include="Wcf\WcfCallUnitTests.cs" />
     <Compile Include="Wcf\WcfLogReaderUnitTests.cs" />
+    <Compile Include="Xml\XmlContentTextReaderUnitTests.cs" />
     <Compile Include="Xml\XmlFragmentTextReaderUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -65,6 +66,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Wcf\Resources\ErrorEntry.log">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Wcf\Resources\SingleEntry.log">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

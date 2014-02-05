@@ -2,6 +2,6 @@
 {
     public interface ILogReader
     {
-        void Execute();
+        void Read();
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using Ampla.LogReader.Xml;
@@ -15,12 +16,20 @@ namespace Ampla.LogReader.Wcf
             this.fileName = fileName;
         }
 
-        public void Execute()
+        public void Read()
         {
-            XmlFragmentTextReader reader = new XmlFragmentTextReader("Xml", File.OpenRead(fileName));
+            XmlContentTextReader contentReader = new XmlContentTextReader("<WCFCall>", File.OpenRead(fileName));
+            XmlFragmentTextReader reader = new XmlFragmentTextReader("Xml", contentReader);
             XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load(reader);
-
+            try
+            {
+                xmlDoc.Load(reader);
+            }
+            catch (Exception ex)
+            {
+                throw new XmlException("Error reading file: " + fileName, ex);
+            }
+            
             XmlNodeList xmlNodeList = xmlDoc.SelectNodes("/Xml/WCFCall");
             if (xmlNodeList != null)
             {

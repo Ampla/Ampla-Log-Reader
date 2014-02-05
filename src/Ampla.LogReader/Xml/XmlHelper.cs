@@ -66,5 +66,17 @@ namespace Ampla.LogReader.Xml
             XmlNode node = xmlNode.SelectSingleNode(xPath);
             return node != null ? node.OuterXml : null;
         }
+
+        /// <summary> 
+        /// Gets the inner XML from the xPath specified of xmlNode
+        /// </summary>
+        /// <param name="xmlNode">The XML node.</param>
+        /// <param name="xPath">The executable path.</param>
+        /// <returns></returns>
+        public static string GetInnerXml(XmlNode xmlNode, string xPath)
+        {
+            XmlNode node = xmlNode.SelectSingleNode(xPath);
+            return node != null ? node.InnerXml : null;
+        }
     }
 }

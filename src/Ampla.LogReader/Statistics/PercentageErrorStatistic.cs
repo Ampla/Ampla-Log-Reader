@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Ampla.LogReader.Wcf;
 
 namespace Ampla.LogReader.Statistics
@@ -31,13 +30,13 @@ namespace Ampla.LogReader.Statistics
             total++;
         }
 
-        public IEnumerable Results
+        public IEnumerable<Result> Results
         {
             get
             {
-                yield return "Errors: " + errors;
-                yield return "Total: " + total;
-                yield return "Percentage: " + ErrorPercent.ToString("0.00");
+                yield return Result.New(name, "Errors", errors);
+                yield return Result.New(name, "Total", total);
+                yield return Result.New(name, "Percentage", ErrorPercent);
             }
         }
 

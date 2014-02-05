@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.IO;
+using Ampla.LogReader.ReportWriters;
 using Ampla.LogReader.Wcf;
 
 namespace Ampla.LogReader.Render
@@ -7,12 +7,12 @@ namespace Ampla.LogReader.Render
     public abstract class Report : IRender
     {
         private readonly List<WcfCall> wcfCalls;
-        private readonly TextWriter writer;
+        private readonly IReportWriter reportWriter;
 
-        protected Report(List<WcfCall> wcfCalls, TextWriter writer)
+        protected Report(List<WcfCall> wcfCalls, IReportWriter reportWriter)
         {
             this.wcfCalls = wcfCalls;
-            this.writer = writer;
+            this.reportWriter = reportWriter;
         }
 
         protected List<WcfCall> WcfCalls
@@ -22,9 +22,9 @@ namespace Ampla.LogReader.Render
 
         public void Render()
         {
-            RenderReport(writer);
+            RenderReport(reportWriter);
         }
 
-        protected abstract void RenderReport(TextWriter textWriter);
+        protected abstract void RenderReport(IReportWriter reportWriter);
     }
 }

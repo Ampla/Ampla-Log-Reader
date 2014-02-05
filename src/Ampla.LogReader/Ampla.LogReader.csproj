@@ -41,29 +41,36 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Assembly.Common.cs">
-      <Link>Assembly.Common.cs</Link>
+      <Link>Properties\Assembly.Common.cs</Link>
     </Compile>
     <Compile Include="..\Assembly.Version.cs">
-      <Link>Assembly.Version.cs</Link>
+      <Link>Properties\Assembly.Version.cs</Link>
     </Compile>
     <Compile Include="FileSystem\AmplaProject.cs" />
     <Compile Include="FileSystem\AmplaProjectDirectories.cs" />
     <Compile Include="ILogReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Render\WcfHourlySummaryReport.cs" />
+    <Compile Include="Render\WcfSummaryReport.cs" />
     <Compile Include="Render\IRender.cs" />
     <Compile Include="Render\Report.cs" />
     <Compile Include="Render\WcfErrorReport.cs" />
-    <Compile Include="Render\WcfErrorStatisticsReport.cs" />
+    <Compile Include="Render\WcfFaultSummaryReport.cs" />
+    <Compile Include="Statistics\Result.cs" />
     <Compile Include="Statistics\SummaryStatistic.cs" />
     <Compile Include="Statistics\PercentageErrorStatistic.cs" />
     <Compile Include="Statistics\CountStatistic.cs" />
     <Compile Include="Statistics\IStatistic.cs" />
     <Compile Include="Statistics\IWcfStatistic.cs" />
+    <Compile Include="Statistics\SummaryStatisticComparer.cs" />
     <Compile Include="Wcf\IWcfLogReader.cs" />
     <Compile Include="Wcf\WcfCall.cs" />
     <Compile Include="Statistics\WcfCallStatistics.cs" />
     <Compile Include="FileSystem\WcfLogDirectory.cs" />
     <Compile Include="Wcf\WcfLogReader.cs" />
+    <Compile Include="ReportWriters\IReportWriter.cs" />
+    <Compile Include="ReportWriters\TextReportWriter.cs" />
+    <Compile Include="Xml\XmlContentTextReader.cs" />
     <Compile Include="Xml\XmlFragmentTextReader.cs" />
     <Compile Include="Xml\XmlHelper.cs" />
   </ItemGroup>

@@ -3,41 +3,27 @@ using System.IO;
 
 namespace Ampla.LogReader.Xml
 {
-    /// <summary>
-    ///     Xml Text Reader that allows documents without a root node to be read into an Xml Document.
-    /// </summary>
-    public class XmlFragmentTextReader : TextReader
+    public class XmlContentTextReader : TextReader
     {
-        private readonly char[] rootStart;
-        private readonly char[] rootEnd;
-
+        private readonly string seekLine;
+        private readonly char[] seekChars;
+        private readonly char[] seekWithNewLineChars;
+        private char[] prefixChars;
         private readonly TextReader textReader;
         private int charsRead;
         private bool eof;
+        private bool lineFound;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XmlFragmentTextReader"/> class.
-        /// </summary>
-        /// <param name="root">The root node.</param>
-        /// <param name="stream">The stream.</param>
-        public XmlFragmentTextReader(string root, Stream stream) : this(root, new StreamReader(stream))
+        public XmlContentTextReader(string seekLine, Stream stream) : this(seekLine, new StreamReader(stream))
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XmlFragmentTextReader"/> class.
-        /// </summary>
-        /// <param name="root">The root.</param>
-        /// <param name="textReader">The text reader.</param>
-        public XmlFragmentTextReader(string root, TextReader textReader)
+        public XmlContentTextReader(string seekLine, TextReader textReader)
         {
-            rootStart = ("<" + root + ">").ToCharArray();
-            rootEnd = ("</" + root + ">").ToCharArray();
+            this.seekLine = seekLine;
+            seekChars = seekLine.ToCharArray();
+            seekWithNewLineChars = (seekLine + Environment.NewLine).ToCharArray();
             this.textReader = textReader;
-        }
-
-        public XmlFragmentTextReader(string root, string fileName) : this(root, File.OpenRead(fileName))
-        {
         }
 
         /// <summary>
@@ -51,10 +37,23 @@ namespace Ampla.LogReader.Xml
         /// </returns>
         public override int Read(char[] buffer, int index, int count)
         {
-            if (!eof && charsRead < rootStart.Length)
+            while (!eof && !lineFound)
             {
-                // Prepend root element
-                return ReadFromSource(rootStart, buffer, index, count);
+                string line = textReader.ReadLine();
+                eof = line == null;
+                if (string.Compare(line, seekLine, StringComparison.InvariantCulture) == 0)
+                {
+                    lineFound = true;
+                    int nextChar = textReader.Peek();
+
+                    prefixChars = nextChar == -1 ? seekChars : seekWithNewLineChars;
+                }
+            }
+
+            if (!eof && charsRead < prefixChars.Length)
+            {
+                // Prepend line to seek
+                return ReadFromSource(prefixChars, buffer, index, count);
             }
 
             if (!eof)
@@ -67,9 +66,7 @@ namespace Ampla.LogReader.Xml
                 eof = true;
                 charsRead = 0;
             }
-
-            // Append root element end tag at the end of the Stream
-            return ReadFromSource(rootEnd, buffer, index, count);
+            return 0;
         }
 
         private int ReadFromSource(char[] source, char[] buffer, int offset, int count)
@@ -79,5 +76,6 @@ namespace Ampla.LogReader.Xml
             charsRead += length;
             return length;
         }
+
     }
 }

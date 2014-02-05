@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using Ampla.LogReader.Wcf;
 
 namespace Ampla.LogReader.Statistics
 {
-    public class WcfCallStatistics<TStatistic> : IWcfStatistic where TStatistic : IWcfStatistic
+    public class WcfCallAnalysis<TStatistic> : IWcfStatistic where TStatistic : IWcfStatistic
     {
         private Func<WcfCall, string> selector = (entry) => entry.Url;
         private Func<WcfCall, bool> filterFunc = (entry) => true;
@@ -59,11 +57,24 @@ namespace Ampla.LogReader.Statistics
             return statistic;
         }
 
-        public IEnumerable Results
+        public List<TStatistic> Sort(IComparer<TStatistic> comparer)
+        {
+            List<TStatistic> list = new List<TStatistic>();
+            list.AddRange(dictionary.Values);
+            list.Sort(comparer);
+            return list;
+        }
+
+        public IEnumerable<Result> Results
         {
             get
             {
-                return new List<TStatistic>(dictionary.Values);
+                List<Result> results = new List<Result>();
+                foreach (var statistic in dictionary)
+                {
+                    results.AddRange(statistic.Value.Results);
+                }
+                return results;
             }
         }
     }
