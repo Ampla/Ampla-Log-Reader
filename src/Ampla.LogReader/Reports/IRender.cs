@@ -1,4 +1,4 @@
-﻿namespace Ampla.LogReader.Render
+﻿namespace Ampla.LogReader.Reports
 {
     public interface IRender
     {

@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Ampla.LogReader.FileSystem;
-using Ampla.LogReader.Render;
 using Ampla.LogReader.ReportWriters;
+using Ampla.LogReader.Reports;
 
 namespace Ampla.LogReader.Console
 {

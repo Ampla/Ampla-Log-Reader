@@ -3,11 +3,11 @@ using Ampla.LogReader.ReportWriters;
 using Ampla.LogReader.Statistics;
 using Ampla.LogReader.Wcf;
 
-namespace Ampla.LogReader.Render
+namespace Ampla.LogReader.Reports
 {
-    public class WcfHourlySummaryReport : Report
+    public class WcfSummaryReport : Report
     {
-        public WcfHourlySummaryReport(List<WcfCall> wcfCalls, IReportWriter writer)
+        public WcfSummaryReport(List<WcfCall> wcfCalls, IReportWriter writer)
             : base(wcfCalls, writer)
         {
         }
@@ -17,7 +17,7 @@ namespace Ampla.LogReader.Render
             WcfCallAnalysis<SummaryStatistic> analysis = new WcfCallAnalysis<SummaryStatistic>
                 {
                     FilterFunc = entry => true,
-                    SelectFunc = entry => entry.CallTime.ToString("yyyy-MM-dd HH-00Z"),
+                    SelectFunc = entry => "WCF Recorder",
                     //entry.Method, //entry => entry.CallTime.ToLocalTime().ToShortDateString(),
                     StatisticFactory = key => new SummaryStatistic(key)
                 };
@@ -27,15 +27,9 @@ namespace Ampla.LogReader.Render
                 analysis.Add(wcfCall);
             }
 
-            reportWriter.NewSubject("Wcf Hourly Summary");
-
-            foreach (SummaryStatistic summary in analysis.Sort(SummaryStatistic.CompareDate()))
+            foreach (var result in analysis.Results)
             {
-                reportWriter.NewSubject(summary.Name);
-                foreach (Result result in summary.Results)
-                {
-                    reportWriter.Write(result);
-                }
+                reportWriter.Write(result);
             }
         }
 

@@ -3,7 +3,7 @@ using Ampla.LogReader.ReportWriters;
 using Ampla.LogReader.Statistics;
 using Ampla.LogReader.Wcf;
 
-namespace Ampla.LogReader.Render
+namespace Ampla.LogReader.Reports
 {
     public class WcfFaultSummaryReport : Report
     {

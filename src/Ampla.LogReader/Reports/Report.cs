@@ -2,7 +2,7 @@
 using Ampla.LogReader.ReportWriters;
 using Ampla.LogReader.Wcf;
 
-namespace Ampla.LogReader.Render
+namespace Ampla.LogReader.Reports
 {
     public abstract class Report : IRender
     {
