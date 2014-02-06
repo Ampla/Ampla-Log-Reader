@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.69.1.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL" />
     <Reference Include="nunit.framework">
       <HintPath>..\Ampla.LogReader\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -49,7 +50,13 @@
     <Compile Include="..\Assembly.Version.cs">
       <Link>Properties\Assembly.Version.cs</Link>
     </Compile>
+    <Compile Include="Excel\ExcelSpreadsheetUnitTests.cs" />
+    <Compile Include="Excel\ExcelTestFixture.cs" />
+    <Compile Include="Excel\Reader\CellReaderUnitTests.cs" />
+    <Compile Include="Excel\Reader\WorksheetReaderUnitTests.cs" />
+    <Compile Include="Excel\Writer\WorksheetWriterUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TempDirectory.cs" />
     <Compile Include="TestFixture.cs" />
     <Compile Include="Wcf\WcfCallUnitTests.cs" />
     <Compile Include="Wcf\WcfLogReaderUnitTests.cs" />
@@ -73,6 +80,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

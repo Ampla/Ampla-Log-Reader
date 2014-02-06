@@ -53,6 +53,17 @@
     <Compile Include="..\Assembly.Version.cs">
       <Link>Properties\Assembly.Version.cs</Link>
     </Compile>
+    <Compile Include="ArgumentCheck.cs" />
+    <Compile Include="Excel\ExcelSpreadsheet.cs" />
+    <Compile Include="Excel\ExcelWorksheet.cs" />
+    <Compile Include="Excel\IExcelSpreadsheet.cs" />
+    <Compile Include="Excel\IWorksheet.cs" />
+    <Compile Include="Excel\Reader\CellReader.cs" />
+    <Compile Include="Excel\Reader\ICellReader.cs" />
+    <Compile Include="Excel\Reader\IWorksheetReader.cs" />
+    <Compile Include="Excel\Reader\WorksheetReader.cs" />
+    <Compile Include="Excel\Writer\IWorksheetWriter.cs" />
+    <Compile Include="Excel\Writer\WorksheetWriter.cs" />
     <Compile Include="FileSystem\AmplaProject.cs" />
     <Compile Include="FileSystem\AmplaProjectDirectories.cs" />
     <Compile Include="ILogReader.cs" />
@@ -87,6 +98,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

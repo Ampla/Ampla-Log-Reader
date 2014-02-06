@@ -10,7 +10,7 @@ namespace Ampla.LogReader.ReportWriters
         private class DisposeFunc : IDisposable
         {
             private readonly Action action;
-            private bool disposed = false;
+            private bool disposed;
 
             public DisposeFunc(Action action)
             {
