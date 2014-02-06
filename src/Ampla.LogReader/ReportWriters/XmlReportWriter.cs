@@ -19,15 +19,12 @@ namespace Ampla.LogReader.ReportWriters
 
             public void Dispose()
             {
-                if (!disposed)
-                {
-                    disposed = true;
-                    action();
-                }
+                if (disposed) return;
+                disposed = true;
+                action();
             }
         }
-
-
+        
         private XmlWriter xmlWriter;
         private readonly Stack<string> depthStack = new Stack<string>();  
 
@@ -35,10 +32,12 @@ namespace Ampla.LogReader.ReportWriters
         {
             this.xmlWriter = xmlWriter;
             xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("Reports");
         }
 
         public IDisposable StartReport(string reportName)
         {
+            xmlWriter.WriteComment(reportName);
             xmlWriter.WriteStartElement("Report");
             xmlWriter.WriteAttributeString("name", reportName);
             depthStack.Push("Report");
@@ -60,6 +59,7 @@ namespace Ampla.LogReader.ReportWriters
             xmlWriter.WriteStartElement("Section");
             xmlWriter.WriteAttributeString("name", subject);
             depthStack.Push("Section");
+            xmlWriter.WriteComment(subject);
             return new DisposeFunc(((IReportWriter)this).EndSection);
         }
 
@@ -90,6 +90,7 @@ namespace Ampla.LogReader.ReportWriters
         {
             if (xmlWriter != null)
             {
+                xmlWriter.WriteEndElement();
                 xmlWriter.WriteEndDocument();
                 xmlWriter.Flush();
                 xmlWriter = null;

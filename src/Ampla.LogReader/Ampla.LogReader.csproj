@@ -50,6 +50,8 @@
     <Compile Include="FileSystem\AmplaProjectDirectories.cs" />
     <Compile Include="ILogReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\WcfActionReport.cs" />
+    <Compile Include="Reports\WcfUrlReport.cs" />
     <Compile Include="Reports\WcfHourlySummaryReport.cs" />
     <Compile Include="Reports\WcfSummaryReport.cs" />
     <Compile Include="Reports\IRender.cs" />
