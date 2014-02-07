@@ -8,7 +8,7 @@ namespace Ampla.LogReader.ReportWriters
         IDisposable StartReport(string reportName);
         void EndReport();
 
-        IDisposable StartSection(string subject);
+        IDisposable StartSection(string section);
         void EndSection();
 
         void Write(Result result);

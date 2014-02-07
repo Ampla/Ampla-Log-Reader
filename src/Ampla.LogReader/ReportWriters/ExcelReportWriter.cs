@@ -47,10 +47,10 @@ namespace Ampla.LogReader.ReportWriters
             excelWriter = null;
         }
 
-        public IDisposable StartSection(string subject)
+        public IDisposable StartSection(string section)
         {
             MoveToNextLine();
-            excelWriter.Write(subject);
+            excelWriter.Write(section);
             return new DisposeFunc(((IReportWriter)this).EndSection);
         }
 

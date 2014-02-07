@@ -56,6 +56,12 @@
     <Compile Include="Excel\Reader\WorksheetReaderUnitTests.cs" />
     <Compile Include="Excel\Writer\WorksheetWriterUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\WcfUrlSummaryReportUnitTests.cs" />
+    <Compile Include="Reports\WcfSummaryReportUnitTests.cs" />
+    <Compile Include="Reports\WcfHourlySummaryReportUnitTests.cs" />
+    <Compile Include="Reports\WcfFaultSummaryReportUnitTests.cs" />
+    <Compile Include="Reports\WcfActionSummaryReportUnitTests.cs" />
+    <Compile Include="ReportWriters\SimpleReportWriter.cs" />
     <Compile Include="TempDirectory.cs" />
     <Compile Include="TestFixture.cs" />
     <Compile Include="Wcf\WcfCallUnitTests.cs" />

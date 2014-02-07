@@ -30,24 +30,25 @@ namespace Ampla.LogReader.Reports
             using (reportWriter.StartReport("Wcf Hourly Summary"))
             {
                 List<SummaryStatistic> summaryStatistics = analysis.Sort(SummaryStatistic.CompareDate());
-
-                reportWriter.Write("Hour");
-                foreach (Result result in summaryStatistics[0].Results)
+                if (summaryStatistics.Count > 0)
                 {
-                    reportWriter.Write(result.Topic);
-                }
-                foreach (SummaryStatistic summary in summaryStatistics)
-                {
-                    using (reportWriter.StartSection(summary.Name))
+                    reportWriter.Write("Hour");
+                    foreach (Result result in summaryStatistics[0].Results)
                     {
-                        foreach (Result result in summary.Results)
+                        reportWriter.Write(result.Topic);
+                    }
+                    foreach (SummaryStatistic summary in summaryStatistics)
+                    {
+                        using (reportWriter.StartSection(summary.Name))
                         {
-                            reportWriter.Write(result);
+                            foreach (Result result in summary.Results)
+                            {
+                                reportWriter.Write(result);
+                            }
                         }
                     }
                 }
             }
         }
-
     }
 }

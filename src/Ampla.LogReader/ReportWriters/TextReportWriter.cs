@@ -43,9 +43,9 @@ namespace Ampla.LogReader.ReportWriters
             textWriter.WriteLine();
         }
 
-        public IDisposable StartSection(string subject)
+        public IDisposable StartSection(string section)
         {
-            WriteBlock(subject, '-');
+            WriteBlock(section, '-');
             return new DisposeFunc(((IReportWriter)this).EndSection);
         }
 

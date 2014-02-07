@@ -54,12 +54,12 @@ namespace Ampla.LogReader.ReportWriters
             }
         }
 
-        public IDisposable StartSection(string subject)
+        public IDisposable StartSection(string section)
         {
             xmlWriter.WriteStartElement("Section");
-            xmlWriter.WriteAttributeString("name", subject);
+            xmlWriter.WriteAttributeString("name", section);
             depthStack.Push("Section");
-            xmlWriter.WriteComment(subject);
+            xmlWriter.WriteComment(section);
             return new DisposeFunc(((IReportWriter)this).EndSection);
         }
 

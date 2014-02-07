@@ -5,9 +5,9 @@ using Ampla.LogReader.Wcf;
 
 namespace Ampla.LogReader.Reports
 {
-    public class WcfUrlSummaryReport : Report
+    public class WcfActionSummaryReport : Report
     {
-        public WcfUrlSummaryReport(List<WcfCall> wcfCalls, IReportWriter writer)
+        public WcfActionSummaryReport(List<WcfCall> wcfCalls, IReportWriter writer)
             : base(wcfCalls, writer)
         {
         }
@@ -17,8 +17,7 @@ namespace Ampla.LogReader.Reports
             WcfCallAnalysis<SummaryStatistic> analysis = new WcfCallAnalysis<SummaryStatistic>
                 {
                     FilterFunc = entry => true,
-                    SelectFunc = entry => entry.Url,
-                    //entry.Method, //entry => entry.CallTime.ToLocalTime().ToShortDateString(),
+                    SelectFunc = entry => entry.Action,
                     StatisticFactory = key => new SummaryStatistic(key)
                 };
 
@@ -27,28 +26,30 @@ namespace Ampla.LogReader.Reports
                 analysis.Add(wcfCall);
             }
 
-            using (reportWriter.StartReport("Wcf Url Summary"))
+            using (reportWriter.StartReport("Wcf Action Summary"))
             {
                 List<SummaryStatistic> summaries = analysis.Sort(SummaryStatistic.CompareCountDesc());
 
-                reportWriter.Write("Url");
-                foreach (Result result in summaries[0].Results)
+                if (summaries.Count > 0)
                 {
-                    reportWriter.Write(result.Topic);
-                }
-
-                foreach (SummaryStatistic summary in summaries)
-                {
-                    using (reportWriter.StartSection(summary.Name))
+                    reportWriter.Write("Action");
+                    foreach (Result result in summaries[0].Results)
                     {
-                        foreach (Result result in summary.Results)
+                        reportWriter.Write(result.Topic);
+                    }
+
+                    foreach (SummaryStatistic summary in summaries)
+                    {
+                        using (reportWriter.StartSection(summary.Name))
                         {
-                            reportWriter.Write(result);
+                            foreach (Result result in summary.Results)
+                            {
+                                reportWriter.Write(result);
+                            }
                         }
                     }
                 }
             }
         }
-
     }
 }
