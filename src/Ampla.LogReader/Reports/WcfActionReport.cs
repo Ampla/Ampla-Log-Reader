@@ -18,7 +18,6 @@ namespace Ampla.LogReader.Reports
                 {
                     FilterFunc = entry => true,
                     SelectFunc = entry => entry.Action,
-                    //entry.Method, //entry => entry.CallTime.ToLocalTime().ToShortDateString(),
                     StatisticFactory = key => new SummaryStatistic(key)
                 };
 
@@ -29,7 +28,15 @@ namespace Ampla.LogReader.Reports
 
             using (reportWriter.StartReport("Wcf Action Summary"))
             {
-                foreach (SummaryStatistic summary in analysis.Sort(SummaryStatistic.CompareCountDesc()))
+                List<SummaryStatistic> summaries = analysis.Sort(SummaryStatistic.CompareCountDesc());
+
+                reportWriter.Write("Action");
+                foreach (Result result in summaries[0].Results)
+                {
+                    reportWriter.Write(result.Topic);
+                }
+
+                foreach (SummaryStatistic summary in summaries)
                 {
                     using (reportWriter.StartSection(summary.Name))
                     {

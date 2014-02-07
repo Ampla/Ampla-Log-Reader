@@ -29,7 +29,14 @@ namespace Ampla.LogReader.Reports
 
             using (reportWriter.StartReport("Wcf Hourly Summary"))
             {
-                foreach (SummaryStatistic summary in analysis.Sort(SummaryStatistic.CompareDate()))
+                List<SummaryStatistic> summaryStatistics = analysis.Sort(SummaryStatistic.CompareDate());
+
+                reportWriter.Write("Hour");
+                foreach (Result result in summaryStatistics[0].Results)
+                {
+                    reportWriter.Write(result.Topic);
+                }
+                foreach (SummaryStatistic summary in summaryStatistics)
                 {
                     using (reportWriter.StartSection(summary.Name))
                     {

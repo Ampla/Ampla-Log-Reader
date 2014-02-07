@@ -76,6 +76,7 @@
     <Compile Include="Reports\Report.cs" />
     <Compile Include="Reports\WcfErrorReport.cs" />
     <Compile Include="Reports\WcfFaultSummaryReport.cs" />
+    <Compile Include="ReportWriters\ExcelReportWriter.cs" />
     <Compile Include="ReportWriters\XmlReportWriter.cs" />
     <Compile Include="Statistics\Result.cs" />
     <Compile Include="Statistics\SummaryStatistic.cs" />

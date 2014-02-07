@@ -29,9 +29,17 @@ namespace Ampla.LogReader.Reports
 
             using (reportWriter.StartReport("Wcf Summary"))
             {
-                foreach (var result in analysis.Results)
+                reportWriter.Write("Name");
+                foreach (Result result in analysis.Results)
                 {
-                    reportWriter.Write(result);
+                    reportWriter.Write(result.Topic);
+                }
+                using (reportWriter.StartSection("WCF Summary"))
+                {
+                    foreach (var result in analysis.Results)
+                    {
+                        reportWriter.Write(result);
+                    }
                 }
             }
         }

@@ -90,6 +90,12 @@ namespace Ampla.LogReader.Console
                         reportWriter = new XmlReportWriter(xmlWriter);
                         break;
                     }
+                case OutputMode.Excel:
+                    {
+                        string fileName = options.OutputFile ?? "output.xlsx";
+                        reportWriter = new ExcelReportWriter(fileName);
+                        break;
+                    }
                 default:
                     {
                         reportWriter = new TextReportWriter(System.Console.Out);

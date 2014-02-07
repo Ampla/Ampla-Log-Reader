@@ -29,7 +29,14 @@ namespace Ampla.LogReader.Reports
 
             using (reportWriter.StartReport("Wcf Fault Summary"))
             {
-                foreach (SummaryStatistic summary in analysis.Sort(SummaryStatistic.CompareCountDesc()))
+                List<SummaryStatistic> summaryStatistics = analysis.Sort(SummaryStatistic.CompareCountDesc());
+                reportWriter.Write("Fault Message");
+                foreach (Result result in summaryStatistics[0].Results)
+                {
+                    reportWriter.Write(result.Topic);
+                }
+
+                foreach (SummaryStatistic summary in summaryStatistics)
                 {
                     using (reportWriter.StartSection(summary.Name))
                     {
