@@ -1,29 +1,31 @@
-﻿using System.Collections.Generic;
-using Ampla.LogReader.Wcf;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Ampla.LogReader.Statistics
 {
     /// <summary>
     ///     Determine the Percentage Error
     /// </summary>
-    public class PercentageErrorStatistic : IWcfStatistic
+    public class PercentageErrorStatistic<TEntry> : IStatistic<TEntry>
     {
         private readonly string name;
+        private readonly Func<TEntry, bool> isErrorFunc;
         private int errors;
         private int total ;
 
-        public PercentageErrorStatistic(string name)
+        public PercentageErrorStatistic(string name, Func<TEntry, bool> isErrorFunc)
         {
             this.name = name;
+            this.isErrorFunc = isErrorFunc;
         }
 
         /// <summary>
         /// Adds the specified entry.
         /// </summary>
         /// <param name="entry">The entry.</param>
-        public void Add(WcfCall entry)
+        public void Add(TEntry entry)
         {
-            if (entry.IsFault)
+            if (isErrorFunc(entry))
             {
                 errors++;
             }

@@ -54,6 +54,10 @@
       <Link>Properties\Assembly.Version.cs</Link>
     </Compile>
     <Compile Include="ArgumentCheck.cs" />
+    <Compile Include="EventLogs\EventLogReader.cs" />
+    <Compile Include="EventLogs\EventLogSystem.cs" />
+    <Compile Include="EventLogs\IEventLogReader.cs" />
+    <Compile Include="EventLogs\IEventLogSystem.cs" />
     <Compile Include="Excel\ExcelSpreadsheet.cs" />
     <Compile Include="Excel\ExcelWorksheet.cs" />
     <Compile Include="Excel\IExcelSpreadsheet.cs" />
@@ -68,6 +72,7 @@
     <Compile Include="FileSystem\AmplaProjectDirectories.cs" />
     <Compile Include="ILogReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\EventLogs\EventLogSummaryReport.cs" />
     <Compile Include="Reports\WcfActionSummaryReport.cs" />
     <Compile Include="Reports\WcfUrlSummaryReport.cs" />
     <Compile Include="Reports\WcfHourlySummaryReport.cs" />
@@ -78,6 +83,7 @@
     <Compile Include="Reports\WcfFaultSummaryReport.cs" />
     <Compile Include="ReportWriters\ExcelReportWriter.cs" />
     <Compile Include="ReportWriters\XmlReportWriter.cs" />
+    <Compile Include="Statistics\StatisticsAnalysis.cs" />
     <Compile Include="Statistics\Result.cs" />
     <Compile Include="Statistics\SummaryStatistic.cs" />
     <Compile Include="Statistics\PercentageErrorStatistic.cs" />
@@ -85,10 +91,11 @@
     <Compile Include="Statistics\IStatistic.cs" />
     <Compile Include="Statistics\IWcfStatistic.cs" />
     <Compile Include="Statistics\SummaryStatisticComparer.cs" />
+    <Compile Include="Statistics\TimeBasedStatistic.cs" />
     <Compile Include="Wcf\IWcfLogReader.cs" />
     <Compile Include="Wcf\WcfCall.cs" />
-    <Compile Include="Statistics\WcfCallStatistics.cs" />
-    <Compile Include="FileSystem\WcfLogDirectory.cs" />
+    <Compile Include="Statistics\WcfCallAnalysis.cs" />
+    <Compile Include="Wcf\WcfLogDirectory.cs" />
     <Compile Include="Wcf\WcfLogReader.cs" />
     <Compile Include="ReportWriters\IReportWriter.cs" />
     <Compile Include="ReportWriters\TextReportWriter.cs" />

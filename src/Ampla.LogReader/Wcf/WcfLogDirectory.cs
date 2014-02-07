@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using Ampla.LogReader.Wcf;
+using Ampla.LogReader.FileSystem;
 
-namespace Ampla.LogReader.FileSystem
+namespace Ampla.LogReader.Wcf
 {
     public class WcfLogDirectory : IWcfLogReader
     {

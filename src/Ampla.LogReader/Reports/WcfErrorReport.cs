@@ -5,9 +5,9 @@ using Ampla.LogReader.Wcf;
 
 namespace Ampla.LogReader.Reports
 {
-    public class WcfErrorReport : Report
+    public class WcfErrorReport : Report<WcfCall>
     {
-        public WcfErrorReport(List<WcfCall> wcfCalls, IReportWriter reportWriter) : base(wcfCalls, reportWriter)
+        public WcfErrorReport(List<WcfCall> entries, IReportWriter reportWriter) : base(entries, reportWriter)
         {
         }
 
@@ -18,9 +18,9 @@ namespace Ampla.LogReader.Reports
 
                 int errors = 0;
 
-                int entries = WcfCalls.Count();
+                int entries = Entries.Count();
 
-                foreach (var call in WcfCalls.Where(call => call.IsFault))
+                foreach (var call in Entries.Where(call => call.IsFault))
                 {
                     errors++;
                     reportWriter.Write("{0} - {1}", call.CallTime, call.FaultMessage);

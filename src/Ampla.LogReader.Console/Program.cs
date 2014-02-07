@@ -1,8 +1,12 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 using System.Xml;
+using Ampla.LogReader.EventLogs;
 using Ampla.LogReader.FileSystem;
 using Ampla.LogReader.ReportWriters;
 using Ampla.LogReader.Reports;
+using Ampla.LogReader.Reports.EventLogs;
+using Ampla.LogReader.Wcf;
 
 namespace Ampla.LogReader.Console
 {
@@ -15,7 +19,7 @@ namespace Ampla.LogReader.Console
             {
                 if (options.Debug)
                 {
-                    System.Diagnostics.Debugger.Break();
+                    Debugger.Break();
                 }
 
                 using (IReportWriter reportWriter = GetReportWriter(options))
@@ -33,22 +37,37 @@ namespace Ampla.LogReader.Console
                                 Directory = options.LogDirectory,
                             };
 
-                        writer.WriteLine("LogDirectory: {0}", project.Directory);
-                        WcfLogDirectory directory = new WcfLogDirectory(project);
-                        directory.Read();
+                        if (!options.SkipWcf)
+                        {
+                            writer.WriteLine("LogDirectory: {0}", project.Directory);
+                            WcfLogDirectory directory = new WcfLogDirectory(project);
+                            directory.Read();
 
-                        writer.WriteLine("Read {0} entries from WcfLog files", directory.WcfCalls.Count);
+                            writer.WriteLine("Read {0} entries from WcfLog files", directory.WcfCalls.Count);
 
-                        new WcfSummaryReport(
-                            directory.WcfCalls, reportWriter).Render();
-                        new WcfFaultSummaryReport(
-                            directory.WcfCalls, reportWriter).Render();
-                        new WcfHourlySummaryReport(
-                            directory.WcfCalls, reportWriter).Render();
-                        new WcfUrlSummaryReport(
-                            directory.WcfCalls, reportWriter).Render();
-                        new WcfActionSummaryReport(
-                            directory.WcfCalls, reportWriter).Render();
+                            new WcfSummaryReport(
+                                directory.WcfCalls, reportWriter).Render();
+                            new WcfFaultSummaryReport(
+                                directory.WcfCalls, reportWriter).Render();
+                            new WcfHourlySummaryReport(
+                                directory.WcfCalls, reportWriter).Render();
+                            new WcfUrlSummaryReport(
+                                directory.WcfCalls, reportWriter).Render();
+                            new WcfActionSummaryReport(
+                                directory.WcfCalls, reportWriter).Render();
+                        }
+
+                        if (!options.SkipEventLog)
+                        {
+                            writer.WriteLine("Event Log Processing");
+                            EventLogSystem eventLogSystem = new EventLogSystem();
+                            EventLog applicationLog = eventLogSystem.GetEventLog("Application");
+
+                            IEventLogReader reader = new EventLogReader(applicationLog);
+                            reader.Read();
+
+                            new EventLogSummaryReport(applicationLog, reader.EventLogEntries, reportWriter).Render();
+                        }
                     }
                     else
                     {

@@ -5,10 +5,10 @@ using Ampla.LogReader.Wcf;
 
 namespace Ampla.LogReader.Reports
 {
-    public class WcfSummaryReport : Report
+    public class WcfSummaryReport : Report<WcfCall>
     {
-        public WcfSummaryReport(List<WcfCall> wcfCalls, IReportWriter writer)
-            : base(wcfCalls, writer)
+        public WcfSummaryReport(List<WcfCall> entries, IReportWriter writer)
+            : base(entries, writer)
         {
         }
 
@@ -22,7 +22,7 @@ namespace Ampla.LogReader.Reports
                     StatisticFactory = key => new SummaryStatistic(key)
                 };
 
-            foreach (var wcfCall in WcfCalls)
+            foreach (var wcfCall in Entries)
             {
                 analysis.Add(wcfCall);
             }

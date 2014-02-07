@@ -44,10 +44,10 @@ namespace Ampla.LogReader.Statistics
         {
             get
             {
-                yield return Result.New<int>(Name, "Count",count);
+                yield return Result.New<int>(Name, "Count", Count);
                 yield return Result.New<DateTime>(Name, "First Entry", FirstEntry);
                 yield return Result.New<DateTime>(Name, "Last Entry", LastEntry);
-                yield return Result.New<int>(Name, "Errors", errors);
+                yield return Result.New<int>(Name, "Errors", Errors);
                 yield return Result.New<double>(Name, "Percentage", ErrorPercent);
                 yield return Result.New<TimeSpan>(Name, "Total Duration", totalDuration);
                 yield return Result.New<TimeSpan>(Name, "Maximum Duration", maxDuration);
@@ -74,6 +74,16 @@ namespace Ampla.LogReader.Statistics
             {
                 return new DateTime(lastEntryTicks, DateTimeKind.Utc).ToLocalTime();
             }
+        }
+
+        public int Count
+        {
+            get { return count; }
+        }
+
+        public int Errors
+        {
+            get { return errors; }
         }
 
         public string Name { get; private set; }

@@ -4,9 +4,9 @@ using Ampla.LogReader.Wcf;
 namespace Ampla.LogReader.Statistics
 {
     /// <summary>
-    ///     Count the number of WcfCalls
+    ///     Count the number of Entries
     /// </summary>
-    public class CountStatistic : IWcfStatistic
+    public class CountStatistic<TEntry> : IStatistic<TEntry>
     {
         private readonly string name;
         private int count;
@@ -20,7 +20,7 @@ namespace Ampla.LogReader.Statistics
         /// Adds the specified entry.
         /// </summary>
         /// <param name="entry">The entry.</param>
-        public void Add(WcfCall entry)
+        public void Add(TEntry entry)
         {
             count++;
         }

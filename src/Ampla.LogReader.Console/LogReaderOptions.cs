@@ -4,6 +4,12 @@ namespace Ampla.LogReader.Console
 {
     public class LogReaderOptions
     {
+        [Option('w', "wcf", Required = false, DefaultValue = false, HelpText = "Skip the Wcf Log processing")]
+        public bool SkipWcf { get; set; }
+
+        [Option('e', "eventlog", Required = false, DefaultValue = false, HelpText = "Skip the Event Log processing")]
+        public bool SkipEventLog { get; set; }
+
         [Option('p', "project", Required = false, HelpText = "Select the output files to log", DefaultValue = "AmplaProject")]
         public string Project { get; set; }
 

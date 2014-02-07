@@ -1,23 +1,22 @@
 ﻿using System.Collections.Generic;
 using Ampla.LogReader.ReportWriters;
-using Ampla.LogReader.Wcf;
 
 namespace Ampla.LogReader.Reports
 {
-    public abstract class Report : IRender
+    public abstract class Report<TEntry> : IRender
     {
-        private readonly List<WcfCall> wcfCalls;
+        private readonly List<TEntry> entries;
         private readonly IReportWriter reportWriter;
 
-        protected Report(List<WcfCall> wcfCalls, IReportWriter reportWriter)
+        protected Report(List<TEntry> entries, IReportWriter reportWriter)
         {
-            this.wcfCalls = wcfCalls;
+            this.entries = entries;
             this.reportWriter = reportWriter;
         }
 
-        protected List<WcfCall> WcfCalls
+        protected List<TEntry> Entries
         {
-            get { return wcfCalls; }
+            get { return entries; }
         }
 
         public void Render()
