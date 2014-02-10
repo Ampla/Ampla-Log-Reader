@@ -61,12 +61,14 @@ namespace Ampla.LogReader.Console
                         {
                             writer.WriteLine("Event Log Processing");
                             EventLogSystem eventLogSystem = new EventLogSystem();
-                            EventLog applicationLog = eventLogSystem.GetEventLog("Application");
 
-                            IEventLogReader reader = new EventLogReader(applicationLog);
-                            reader.Read();
+                            foreach (EventLog eventLog in eventLogSystem.GetEventLogs())
+                            {
+                                IEventLogReader reader = new EventLogReader(eventLog);
+                                reader.Read();
 
-                            new EventLogSummaryReport(applicationLog, reader.EventLogEntries, reportWriter).Render();
+                                new EventLogSummaryReport(eventLog, reader.EventLogEntries, reportWriter).Render();
+                            }
                         }
                     }
                     else

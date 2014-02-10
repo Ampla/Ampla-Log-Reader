@@ -50,6 +50,7 @@
     <Compile Include="..\Assembly.Version.cs">
       <Link>Properties\Assembly.Version.cs</Link>
     </Compile>
+    <Compile Include="Statistics\CountStatisticUnitTests.cs" />
     <Compile Include="EventLogs\EventLogSystemUnitTests.cs" />
     <Compile Include="Excel\ExcelSpreadsheetUnitTests.cs" />
     <Compile Include="Excel\ExcelTestFixture.cs" />

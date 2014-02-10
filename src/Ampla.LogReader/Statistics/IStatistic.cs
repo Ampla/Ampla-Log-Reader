@@ -6,5 +6,7 @@ namespace Ampla.LogReader.Statistics
     {
         void Add(TEntry entry);
         IEnumerable<Result> Results { get; }
+
+        string Name { get; }
     }
 }

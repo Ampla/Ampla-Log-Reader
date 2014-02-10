@@ -1,41 +1,43 @@
 ﻿using System.Collections.Generic;
-using Ampla.LogReader.Wcf;
 
 namespace Ampla.LogReader.Statistics
 {
     /// <summary>
     ///     Count the number of Entries
     /// </summary>
-    public class CountStatistic<TEntry> : IStatistic<TEntry>
+    public class CountStatistic<TEntry> : Statistic<TEntry>
     {
-        private readonly string name;
         private int count;
 
-        public CountStatistic(string name)
+        public CountStatistic(string name) : base(name)
         {
-            this.name = name;
         }
 
         /// <summary>
         /// Adds the specified entry.
         /// </summary>
         /// <param name="entry">The entry.</param>
-        public void Add(TEntry entry)
+        public override void Add(TEntry entry)
         {
             count++;
         }
 
-        public IEnumerable<Result> Results
+        public override IEnumerable<Result> Results
         {
             get 
             { 
-                yield return Result.New(name, "Count", count); 
+                yield return Result.New(Name, "Count", count); 
             }
+        }
+
+        public int Count
+        {
+            get { return count; }
         }
 
         public override string ToString()
         {
-            return string.Format("{0} -> Count: {1}", name, count);
+            return string.Format("{0} -> Count: {1}", Name, count);
         }
 
     }

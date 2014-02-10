@@ -83,6 +83,9 @@
     <Compile Include="Reports\WcfFaultSummaryReport.cs" />
     <Compile Include="ReportWriters\ExcelReportWriter.cs" />
     <Compile Include="ReportWriters\XmlReportWriter.cs" />
+    <Compile Include="Statistics\Comparer.cs" />
+    <Compile Include="EventLogs\Statistics\EventEntryTypeStatistic.cs" />
+    <Compile Include="Statistics\Statistic.cs" />
     <Compile Include="Statistics\StatisticsAnalysis.cs" />
     <Compile Include="Statistics\Result.cs" />
     <Compile Include="Statistics\SummaryStatistic.cs" />

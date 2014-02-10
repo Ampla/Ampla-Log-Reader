@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using Ampla.LogReader.EventLogs.Statistics;
 using Ampla.LogReader.ReportWriters;
 using Ampla.LogReader.Statistics;
 
@@ -16,12 +17,12 @@ namespace Ampla.LogReader.Reports.EventLogs
 
         protected override void RenderReport(IReportWriter reportWriter)
         {
-            GroupByAnalysis<EventLogEntry, CountStatistic<EventLogEntry>> analysis = new GroupByAnalysis<EventLogEntry, CountStatistic<EventLogEntry>>
+            GroupByAnalysis<EventLogEntry, EventLogEntryTypeStatistic> analysis = new GroupByAnalysis<EventLogEntry, EventLogEntryTypeStatistic>
             {
                 WhereFunc = entry => true,
-                GroupByFunc = entry => "All Events",
+                GroupByFunc = entry => entry.Source,
                 //entry.Method, //entry => entry.CallTime.ToLocalTime().ToShortDateString(),
-                StatisticFactory = key => new CountStatistic<EventLogEntry>(key)
+                StatisticFactory = key => new EventLogEntryTypeStatistic(key)
             };
 
             foreach (var entry in Entries)
@@ -29,18 +30,33 @@ namespace Ampla.LogReader.Reports.EventLogs
                 analysis.Add(entry);
             }
 
-            using (reportWriter.StartReport(eventLog.LogDisplayName + " - Summary"))
+            string reportName = eventLog.LogDisplayName + " - Summary";
+
+            if (reportName.Length > 31)
             {
-                reportWriter.Write("Name");
-                foreach (Result result in analysis.Results)
+                reportName = eventLog.LogDisplayName.Length > 31 ? reportName.Substring(1, 31) : eventLog.LogDisplayName;
+            }
+
+            var summaries = analysis.Sort(new Statistics.Comparer<EventLogEntryTypeStatistic>(EventLogEntryTypeStatistic.Comparer));
+
+            if (summaries.Count > 0)
+            {
+                using (reportWriter.StartReport(reportName))
                 {
-                    reportWriter.Write(result.Topic);
-                }
-                using (reportWriter.StartSection("Summary"))
-                {
-                    foreach (var result in analysis.Results)
+                    reportWriter.Write("Category");
+                    foreach (Result result in summaries[0].Results)
                     {
-                        reportWriter.Write(result);
+                        reportWriter.Write(result.Topic);
+                    }
+                    foreach (var summary in summaries)
+                    {
+                        using (reportWriter.StartSection(summary.Name))
+                        {
+                            foreach (var result in summary.Results)
+                            {
+                                reportWriter.Write(result);
+                            }
+                        }
                     }
                 }
             }

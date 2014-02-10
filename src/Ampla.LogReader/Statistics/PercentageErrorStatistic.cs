@@ -47,6 +47,11 @@ namespace Ampla.LogReader.Statistics
             get { return total == 0 ? double.NaN : errors*100.0D/total; }
         }
 
+        public string Name
+        {
+            get { return name; }
+        }
+
         public override string ToString()
         {
             return string.Format("{0}\nErrors ({1}) / Total ({2}) = {3:00.0}% errors", name, errors, total, ErrorPercent);

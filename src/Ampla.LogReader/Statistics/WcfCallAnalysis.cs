@@ -4,7 +4,7 @@ using Ampla.LogReader.Wcf;
 
 namespace Ampla.LogReader.Statistics
 {
-    public class WcfCallAnalysis<TStatistic> : IWcfStatistic where TStatistic : IWcfStatistic
+    public class WcfCallAnalysis<TStatistic> where TStatistic : IWcfStatistic
     {
         private Func<WcfCall, string> selector = (entry) => entry.Url;
         private Func<WcfCall, bool> filterFunc = (entry) => true;

@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using NUnit.Framework;
 
 namespace Ampla.LogReader.EventLogs
@@ -10,9 +12,11 @@ namespace Ampla.LogReader.EventLogs
         public void GetEventLogs()
         {
             EventLogSystem eventLogSystem = new EventLogSystem();
-            EventLog[] logs = eventLogSystem.GetEventLogs();
-
-            Assert.That(logs, Is.Not.Empty);
+            IList<EventLog> logs = eventLogSystem.GetEventLogs();
+            List<string> nameOfLogs = null;
+            // this will throw is there is a security exception accessing the name
+            Assert.DoesNotThrow(() => nameOfLogs = logs.Select(eventLog => eventLog.LogDisplayName).ToList());
+            Assert.That(nameOfLogs, Is.Not.Empty);
         }
 
         [Test]

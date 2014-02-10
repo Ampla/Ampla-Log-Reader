@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Security;
@@ -18,28 +18,29 @@ namespace Ampla.LogReader.EventLogs
             this.machineName = machineName;
         }
 
-        public EventLog[] GetEventLogs()
+        public IList<EventLog> GetEventLogs()
         {
-            return EventLog.GetEventLogs(machineName);
-        }
-
-        public EventLog GetEventLog(string displayName)
-        {
-            foreach (var eventLog in GetEventLogs())
+            List<EventLog> eventLogs = new List<EventLog>();
+            foreach (var eventLog in EventLog.GetEventLogs(machineName))
             {
                 try
                 {
-                    if (eventLog.LogDisplayName == displayName)
+                    if (eventLog.LogDisplayName != null)
                     {
-                        return eventLog;
+                        eventLogs.Add(eventLog);
                     }
                 }
                 catch (SecurityException)
                 {
                 }
-                
             }
-            return null;
+
+            return eventLogs;
+        }
+
+        public EventLog GetEventLog(string displayName)
+        {
+            return GetEventLogs().FirstOrDefault(eventLog => eventLog.LogDisplayName == displayName);
         }
     }
 }
