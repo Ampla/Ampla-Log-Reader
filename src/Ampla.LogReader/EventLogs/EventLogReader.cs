@@ -22,8 +22,9 @@ namespace Ampla.LogReader.EventLogs
             }
         }
 
-        public List<EventLogEntry> EventLogEntries { 
+        public List<EventLogEntry> EventLogEntries
+        {
             get { return entries; }
-            }
+        }
     }
 }

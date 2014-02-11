@@ -6,11 +6,12 @@ using Ampla.LogReader.Statistics;
 
 namespace Ampla.LogReader.Reports.EventLogs
 {
-    public class EventLogSummaryReport : Report<EventLogEntry>
+    public class EventLogHourlySummaryReport : Report<EventLogEntry>
     {
         private readonly EventLog eventLog;
 
-        public EventLogSummaryReport(EventLog eventLog, List<EventLogEntry> entries, IReportWriter reportWriter) : base(entries, reportWriter)
+        public EventLogHourlySummaryReport(EventLog eventLog, List<EventLogEntry> entries, IReportWriter writer)
+            : base(entries, writer)
         {
             this.eventLog = eventLog;
         }
@@ -20,8 +21,7 @@ namespace Ampla.LogReader.Reports.EventLogs
             GroupByAnalysis<EventLogEntry, EventLogEntryTypeStatistic> analysis = new GroupByAnalysis<EventLogEntry, EventLogEntryTypeStatistic>
             {
                 WhereFunc = entry => true,
-                GroupByFunc = entry => entry.Source,
-                //entry.Method, //entry => entry.CallTime.ToLocalTime().ToShortDateString(),
+                GroupByFunc = entry => entry.TimeGenerated.ToString("yyyy-MM-dd HH-00Z"),
                 StatisticFactory = key => new EventLogEntryTypeStatistic(key)
             };
 
@@ -30,14 +30,14 @@ namespace Ampla.LogReader.Reports.EventLogs
                 analysis.Add(entry);
             }
 
-            string reportName = eventLog.LogDisplayName + " - Summary";
+            string reportName = eventLog.LogDisplayName + "-Hourly Summary";
 
             if (reportName.Length > 31)
             {
                 reportName = eventLog.LogDisplayName.Length > 31 ? reportName.Substring(1, 31) : eventLog.LogDisplayName;
             }
 
-            var summaries = analysis.Sort(EventLogEntryTypeStatistic.CompareByCountDesc());
+            var summaries = analysis.Sort(Statistic.CompareByName());
 
             if (summaries.Count > 0)
             {

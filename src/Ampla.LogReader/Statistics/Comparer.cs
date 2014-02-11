@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Ampla.LogReader.Statistics
 {
-    public class Comparer<TStatistic> : IComparer<TStatistic>
+    public class Comparer<TStatistic> : IComparer<TStatistic> where TStatistic : Statistic
     {
         private readonly Func<TStatistic, TStatistic, int> compare;
 

@@ -14,7 +14,7 @@ namespace Ampla.LogReader.EventLogs
             EventLogSystem eventLogSystem = new EventLogSystem();
             IList<EventLog> logs = eventLogSystem.GetEventLogs();
             List<string> nameOfLogs = null;
-            // this will throw is there is a security exception accessing the name
+            // this will throw is there is a security exception accessing the name property
             Assert.DoesNotThrow(() => nameOfLogs = logs.Select(eventLog => eventLog.LogDisplayName).ToList());
             Assert.That(nameOfLogs, Is.Not.Empty);
         }

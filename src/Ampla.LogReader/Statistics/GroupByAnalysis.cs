@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using Ampla.LogReader.Wcf;
 
 namespace Ampla.LogReader.Statistics
 {
-    public class WcfCallAnalysis<TStatistic> where TStatistic : IWcfStatistic
+    public class GroupByAnalysis<TEntry, TStatistic> where TStatistic : IStatistic<TEntry>
     {
-        private Func<WcfCall, string> selector = (entry) => entry.Url;
-        private Func<WcfCall, bool> filterFunc = (entry) => true;
+        private Func<TEntry, string> selector;
+        private Func<TEntry, bool> filterFunc = (entry) => true;
         private Func<string, TStatistic> factory;
 
         private readonly Dictionary<string, TStatistic> dictionary = new Dictionary<string, TStatistic>();
 
-        public Func<WcfCall, bool> FilterFunc
+        public Func<TEntry, bool> WhereFunc
         {
             set
             {
@@ -20,7 +19,7 @@ namespace Ampla.LogReader.Statistics
             }
         }
 
-        public Func<WcfCall, string> SelectFunc
+        public Func<TEntry, string> GroupByFunc
         {
             set
             {
@@ -34,19 +33,19 @@ namespace Ampla.LogReader.Statistics
             {
                 factory = value;
             }
-        } 
+        }
 
-        public void Add(WcfCall entry)
+        public void Add(TEntry entry)
         {
             if (filterFunc(entry))
             {
                 string key = selector.Invoke(entry);
-                IWcfStatistic statistic = GetStatisticForKey(key);
+                IStatistic<TEntry> statistic = GetStatisticForKey(key);
                 statistic.Add(entry);
             }
         }
 
-        protected IWcfStatistic GetStatisticForKey(string key)
+        protected IStatistic<TEntry> GetStatisticForKey(string key)
         {
             TStatistic statistic;
             if (!dictionary.TryGetValue(key, out statistic))

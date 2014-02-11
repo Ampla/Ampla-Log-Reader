@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Ampla.LogReader.Wcf;
@@ -8,31 +9,28 @@ namespace Ampla.LogReader.Statistics
     /// <summary>
     ///     A set of summary statistics 
     /// </summary>
-    public class SummaryStatistic : IWcfStatistic
+    public class SummaryStatistic : Statistic<WcfCall>
     {
-        private int errors;
-        private int count ;
         private long firstEntryTicks = DateTime.MaxValue.Ticks;
         private long lastEntryTicks = DateTime.MinValue.Ticks;
         private TimeSpan totalDuration = TimeSpan.Zero;
         private TimeSpan maxDuration = TimeSpan.Zero;
 
-        public SummaryStatistic(string name)
+        public SummaryStatistic(string name) : base(name)
         {
-            Name = name;
         }
 
         /// <summary>
         /// Adds the specified entry.
         /// </summary>
         /// <param name="entry">The entry.</param>
-        public void Add(WcfCall entry)
+        public override void Add(WcfCall entry)
         {
             if (entry.IsFault)
             {
-                errors++;
+                Errors++;
             }
-            count++;
+            Count++;
             long ticks = entry.CallTime.Ticks;
             firstEntryTicks = Math.Min(firstEntryTicks, ticks);
             lastEntryTicks = Math.Max(lastEntryTicks, ticks);
@@ -40,7 +38,7 @@ namespace Ampla.LogReader.Statistics
             maxDuration = entry.Duration > maxDuration ? entry.Duration : maxDuration;
         }
 
-        public IEnumerable<Result> Results
+        public override IEnumerable<Result> Results
         {
             get
             {
@@ -51,13 +49,13 @@ namespace Ampla.LogReader.Statistics
                 yield return Result.New<double>(Name, "Percentage", ErrorPercent);
                 yield return Result.New<TimeSpan>(Name, "Total Duration", totalDuration);
                 yield return Result.New<TimeSpan>(Name, "Maximum Duration", maxDuration);
-                yield return Result.New<TimeSpan>(Name, "Average Duration", new TimeSpan(totalDuration.Ticks / count));
+                yield return Result.New<TimeSpan>(Name, "Average Duration", new TimeSpan(totalDuration.Ticks / Count));
             }
         }
 
         public double ErrorPercent
         {
-            get { return count == 0 ? double.NaN : errors*100.0D/count; }
+            get { return Count == 0 ? 0.0d : Errors*100.0D/Count; }
         }
 
         public DateTime FirstEntry
@@ -76,17 +74,9 @@ namespace Ampla.LogReader.Statistics
             }
         }
 
-        public int Count
-        {
-            get { return count; }
-        }
+        public int Count { get; private set; }
 
-        public int Errors
-        {
-            get { return errors; }
-        }
-
-        public string Name { get; private set; }
+        public int Errors { get; private set; }
 
         public override string ToString()
         {
@@ -94,19 +84,9 @@ namespace Ampla.LogReader.Statistics
             return Name + "\n\t" + string.Join("\n\t", values);
         }
 
-        public static IComparer<SummaryStatistic> CompareName()
-        {
-            return new SummaryStatisticComparer((x, y) => StringComparer.InvariantCulture.Compare(x.Name, y.Name));
-        }
-
-        public static IComparer<SummaryStatistic> CompareDate()
-        {
-            return new SummaryStatisticComparer((x, y) => x.firstEntryTicks.CompareTo(y.firstEntryTicks));
-        }
-
         public static IComparer<SummaryStatistic> CompareCountDesc()
         {
-            return new SummaryStatisticComparer((x, y) => y.count.CompareTo(x.count));
+            return new Comparer<SummaryStatistic>((x, y) => y.Count.CompareTo(x.Count));
         }
     }
 }

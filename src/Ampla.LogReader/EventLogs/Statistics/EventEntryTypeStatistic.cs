@@ -84,7 +84,7 @@ namespace Ampla.LogReader.EventLogs.Statistics
         /// <param name="x">The x.</param>
         /// <param name="y">The y.</param>
         /// <returns></returns>
-        public static int Comparer(EventLogEntryTypeStatistic x, EventLogEntryTypeStatistic y)
+        private static int CompareByCountDesc(EventLogEntryTypeStatistic x, EventLogEntryTypeStatistic y)
         {
             int compare = x.ErrorCount.CompareTo(y.ErrorCount);
             if (compare == 0)
@@ -113,5 +113,12 @@ namespace Ampla.LogReader.EventLogs.Statistics
             }
             return -compare;
         }
+
+        public static IComparer<EventLogEntryTypeStatistic> CompareByCountDesc()
+        {
+            return new LogReader.Statistics.Comparer<EventLogEntryTypeStatistic>(CompareByCountDesc);
+        }
+
+
     }
 }

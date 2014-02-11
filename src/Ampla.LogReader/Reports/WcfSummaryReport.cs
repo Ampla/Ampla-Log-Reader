@@ -14,10 +14,10 @@ namespace Ampla.LogReader.Reports
 
         protected override void RenderReport(IReportWriter reportWriter)
         {
-            WcfCallAnalysis<SummaryStatistic> analysis = new WcfCallAnalysis<SummaryStatistic>
+            GroupByAnalysis<WcfCall, SummaryStatistic> analysis = new GroupByAnalysis<WcfCall, SummaryStatistic>
                 {
-                    FilterFunc = entry => true,
-                    SelectFunc = entry => "WCF Recorder",
+                    WhereFunc = entry => true,
+                    GroupByFunc = entry => "WCF Recorder",
                     //entry.Method, //entry => entry.CallTime.ToLocalTime().ToShortDateString(),
                     StatisticFactory = key => new SummaryStatistic(key)
                 };

@@ -14,10 +14,10 @@ namespace Ampla.LogReader.Reports
 
         protected override void RenderReport(IReportWriter reportWriter)
         {
-            WcfCallAnalysis<SummaryStatistic> analysis = new WcfCallAnalysis<SummaryStatistic>
+            GroupByAnalysis<WcfCall,SummaryStatistic> analysis = new GroupByAnalysis<WcfCall,SummaryStatistic>
                 {
-                    FilterFunc = entry => true,
-                    SelectFunc = entry => entry.CallTime.ToString("yyyy-MM-dd HH-00Z"),
+                    WhereFunc = entry => true,
+                    GroupByFunc = entry => entry.CallTime.ToString("yyyy-MM-dd HH-00Z"),
                     //entry.Method, //entry => entry.CallTime.ToLocalTime().ToShortDateString(),
                     StatisticFactory = key => new SummaryStatistic(key)
                 };
@@ -29,7 +29,7 @@ namespace Ampla.LogReader.Reports
 
             using (reportWriter.StartReport("Wcf Hourly Summary"))
             {
-                List<SummaryStatistic> summaryStatistics = analysis.Sort(SummaryStatistic.CompareDate());
+                List<SummaryStatistic> summaryStatistics = analysis.Sort(Statistic.CompareByName());
                 if (summaryStatistics.Count > 0)
                 {
                     reportWriter.Write("Hour");

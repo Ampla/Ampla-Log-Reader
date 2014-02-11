@@ -13,7 +13,7 @@ namespace Ampla.LogReader.EventLogs
         {
         }
 
-        public EventLogSystem(string machineName)
+        private EventLogSystem(string machineName)
         {
             this.machineName = machineName;
         }

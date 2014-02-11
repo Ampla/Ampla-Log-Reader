@@ -68,6 +68,8 @@ namespace Ampla.LogReader.Console
                                 reader.Read();
 
                                 new EventLogSummaryReport(eventLog, reader.EventLogEntries, reportWriter).Render();
+                                new EventLogHourlySummaryReport(eventLog, reader.EventLogEntries, reportWriter).Render();
+                                new EventLogDumpReport(eventLog, reader.EventLogEntries, reportWriter).Render();
                             }
                         }
                     }
