@@ -22,3 +22,7 @@ Provides summary information from machine event logs.
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/Ampla/ampla-wcf-reader/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/Ampla/ampla-log-reader/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
