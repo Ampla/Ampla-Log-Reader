@@ -40,5 +40,9 @@ namespace Ampla.LogReader.Statistics
             return string.Format("{0} -> Count: {1}", Name, count);
         }
 
+        public static IComparer<CountStatistic<TEntry>> CompareByCountDesc()
+        {
+            return new Comparer<CountStatistic<TEntry>>((x,y) => y.Count.CompareTo(x.Count));
+        }
     }
 }

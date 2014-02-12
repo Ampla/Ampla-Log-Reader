@@ -3,23 +3,23 @@ using Ampla.LogReader.ReportWriters;
 using Ampla.LogReader.Statistics;
 using Ampla.LogReader.Wcf;
 
-namespace Ampla.LogReader.Reports
+namespace Ampla.LogReader.Reports.Wcf
 {
-    public class WcfFaultSummaryReport : Report<WcfCall>
+    public class WcfUrlSummaryReport : Report<WcfCall>
     {
-        public WcfFaultSummaryReport(List<WcfCall> entries, IReportWriter writer)
+        public WcfUrlSummaryReport(List<WcfCall> entries, IReportWriter writer)
             : base(entries, writer)
         {
         }
 
         protected override void RenderReport(IReportWriter reportWriter)
         {
-            GroupByAnalysis<WcfCall, SummaryStatistic> analysis = new GroupByAnalysis<WcfCall, SummaryStatistic>
+            GroupByAnalysis<WcfCall, WcfSummaryStatistic> analysis = new GroupByAnalysis<WcfCall, WcfSummaryStatistic>
                 {
-                    WhereFunc = entry => entry.IsFault,
-                    GroupByFunc = entry => entry.FaultMessage,
+                    WhereFunc = entry => true,
+                    GroupByFunc = entry => entry.Url,
                     //entry.Method, //entry => entry.CallTime.ToLocalTime().ToShortDateString(),
-                    StatisticFactory = key => new SummaryStatistic(key)
+                    StatisticFactory = key => new WcfSummaryStatistic(key)
                 };
 
             foreach (var wcfCall in Entries)
@@ -27,18 +27,18 @@ namespace Ampla.LogReader.Reports
                 analysis.Add(wcfCall);
             }
 
-            using (reportWriter.StartReport("Wcf Fault Summary"))
+            using (reportWriter.StartReport("Wcf Url Summary"))
             {
-                List<SummaryStatistic> summaryStatistics = analysis.Sort(SummaryStatistic.CompareCountDesc());
-                if (summaryStatistics.Count > 0)
+                List<WcfSummaryStatistic> summaries = analysis.Sort(WcfSummaryStatistic.CompareByCountDesc());
+                if (summaries.Count > 0)
                 {
-                    reportWriter.Write("Fault Message");
-                    foreach (Result result in summaryStatistics[0].Results)
+                    reportWriter.Write("Url");
+                    foreach (Result result in summaries[0].Results)
                     {
                         reportWriter.Write(result.Topic);
                     }
 
-                    foreach (SummaryStatistic summary in summaryStatistics)
+                    foreach (WcfSummaryStatistic summary in summaries)
                     {
                         using (reportWriter.StartSection(summary.Name))
                         {

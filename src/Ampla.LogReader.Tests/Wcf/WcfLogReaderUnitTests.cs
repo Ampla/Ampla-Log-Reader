@@ -8,21 +8,21 @@ namespace Ampla.LogReader.Wcf
         [Test]
         public void LoadSingleEntry()
         {
-            WcfLogReader reader = new WcfLogReader(@".\Wcf\Resources\SingleEntry.log");
-            Assert.That(reader.WcfCalls, Is.Empty);
+            ILogReader<WcfCall> reader = new WcfLogReader(@".\Wcf\Resources\SingleEntry.log");
+            Assert.That(reader.Entries, Is.Empty);
             reader.Read();
 
-            Assert.That(reader.WcfCalls, Is.Not.Empty);
+            Assert.That(reader.Entries, Is.Not.Empty);
         }
 
         [Test]
         public void LoadErrorEntry()
         {
-            WcfLogReader reader = new WcfLogReader(@".\Wcf\Resources\ErrorEntry.log");
-            Assert.That(reader.WcfCalls, Is.Empty);
+            ILogReader<WcfCall> reader = new WcfLogReader(@".\Wcf\Resources\ErrorEntry.log");
+            Assert.That(reader.Entries, Is.Empty);
             reader.Read();
 
-            Assert.That(reader.WcfCalls, Is.Not.Empty);
+            Assert.That(reader.Entries, Is.Not.Empty);
         }
     }
 }

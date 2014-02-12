@@ -4,11 +4,11 @@ using Ampla.LogReader.FileSystem;
 
 namespace Ampla.LogReader.Wcf
 {
-    public class WcfLogDirectory : IWcfLogReader
+    public class WcfLogDirectory : ILogReader<WcfCall>
     {
         private readonly string directory;
 
-        private List<WcfCall> wcfCalls = new List<WcfCall>(); 
+        private List<WcfCall> entries = new List<WcfCall>(); 
         
         public WcfLogDirectory(AmplaProject project)
         {
@@ -22,17 +22,17 @@ namespace Ampla.LogReader.Wcf
 
         public void Read()
         {
-            List<WcfCall> calls = new List<WcfCall>();
+            List<WcfCall> list = new List<WcfCall>();
             IEnumerable<FileInfo> wcfReaderFiles = new DirectoryInfo(directory).EnumerateFiles();
             foreach (FileInfo file in wcfReaderFiles)
             {
                 WcfLogReader reader = new WcfLogReader(file.FullName);
                 reader.Read();
-                calls.AddRange(reader.WcfCalls);
+                list.AddRange(reader.Entries);
             }
-            wcfCalls = calls;
+            entries = list;
         }
 
-        public List<WcfCall> WcfCalls { get { return wcfCalls; } }
+        public List<WcfCall> Entries { get { return entries; } }
     }
 }

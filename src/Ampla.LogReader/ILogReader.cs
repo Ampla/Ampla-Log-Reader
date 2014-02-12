@@ -1,7 +1,11 @@
-﻿namespace Ampla.LogReader
+﻿using System.Collections.Generic;
+
+namespace Ampla.LogReader
 {
-    public interface ILogReader
+    public interface ILogReader<TEntry>
     {
         void Read();
+
+        List<TEntry> Entries { get; }
     }
 }

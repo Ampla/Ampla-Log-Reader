@@ -3,14 +3,16 @@ using System.IO;
 using System.Xml;
 using Ampla.LogReader.EventLogs;
 using Ampla.LogReader.FileSystem;
+using Ampla.LogReader.Remoting;
 using Ampla.LogReader.ReportWriters;
-using Ampla.LogReader.Reports;
 using Ampla.LogReader.Reports.EventLogs;
+using Ampla.LogReader.Reports.Remoting;
+using Ampla.LogReader.Reports.Wcf;
 using Ampla.LogReader.Wcf;
 
 namespace Ampla.LogReader.Console
 {
-    class Program
+    public static class Program
     {
         static void Main(string[] args)
         {
@@ -43,18 +45,40 @@ namespace Ampla.LogReader.Console
                             WcfLogDirectory directory = new WcfLogDirectory(project);
                             directory.Read();
 
-                            writer.WriteLine("Read {0} entries from WcfLog files", directory.WcfCalls.Count);
+                            writer.WriteLine("Read {0} entries from WcfLog files", directory.Entries.Count);
 
                             new WcfSummaryReport(
-                                directory.WcfCalls, reportWriter).Render();
+                                directory.Entries, reportWriter).Render();
                             new WcfFaultSummaryReport(
-                                directory.WcfCalls, reportWriter).Render();
+                                directory.Entries, reportWriter).Render();
                             new WcfHourlySummaryReport(
-                                directory.WcfCalls, reportWriter).Render();
+                                directory.Entries, reportWriter).Render();
                             new WcfUrlSummaryReport(
-                                directory.WcfCalls, reportWriter).Render();
+                                directory.Entries, reportWriter).Render();
                             new WcfActionSummaryReport(
-                                directory.WcfCalls, reportWriter).Render();
+                                directory.Entries, reportWriter).Render();
+                        }
+
+                        if (!options.SkipRemoting)
+                        {
+                            writer.WriteLine("LogDirectory: {0}", project.Directory);
+                            RemotingDirectory directory = new RemotingDirectory(project);
+                            directory.Read();
+
+                            writer.WriteLine("Read {0} entries from Remoting files", directory.Entries.Count);
+
+                            new RemotingSummaryReport(
+                                directory.Entries, reportWriter).Render();
+                            new RemotingIdentitySummaryReport(
+                                directory.Entries, reportWriter).Render();
+                            //new WcfFaultSummaryReport(
+                            //    directory.Entries, reportWriter).Render();
+                            //new RemotingHourlySummaryReport(
+                            //    directory.Entries, reportWriter).Render();
+                            //new RemotingUrlSummaryReport(
+                            //    directory.Entries, reportWriter).Render();
+                            //new WcfActionSummaryReport(
+                            //    directory.Entries, reportWriter).Render();
                         }
 
                         if (!options.SkipEventLog)
@@ -64,12 +88,12 @@ namespace Ampla.LogReader.Console
 
                             foreach (EventLog eventLog in eventLogSystem.GetEventLogs())
                             {
-                                IEventLogReader reader = new EventLogReader(eventLog);
+                                EventLogReader reader = new EventLogReader(eventLog);
                                 reader.Read();
 
-                                new EventLogSummaryReport(eventLog, reader.EventLogEntries, reportWriter).Render();
-                                new EventLogHourlySummaryReport(eventLog, reader.EventLogEntries, reportWriter).Render();
-                                new EventLogDumpReport(eventLog, reader.EventLogEntries, reportWriter).Render();
+                                new EventLogSummaryReport(eventLog, reader.Entries, reportWriter).Render();
+                                new EventLogHourlySummaryReport(eventLog, reader.Entries, reportWriter).Render();
+                                new EventLogDumpReport(eventLog, reader.Entries, reportWriter).Render();
                             }
                         }
                     }
@@ -85,7 +109,7 @@ namespace Ampla.LogReader.Console
                             WcfLogDirectory directory = new WcfLogDirectory(project);
                             directory.Read();
 
-                            WcfSummaryReport statistics = new WcfSummaryReport(directory.WcfCalls,
+                            WcfSummaryReport statistics = new WcfSummaryReport(directory.Entries,
                                                                                reportWriter);
                             statistics.Render();
                         }
@@ -108,7 +132,7 @@ namespace Ampla.LogReader.Console
                 case OutputMode.Xml:
                     {
                         string fileName = options.OutputFile ?? "output.xml";
-                        XmlWriterSettings settings = new XmlWriterSettings() {Indent = true};
+                        XmlWriterSettings settings = new XmlWriterSettings {Indent = true};
                         XmlWriter xmlWriter = XmlWriter.Create(fileName, settings);
                         reportWriter = new XmlReportWriter(xmlWriter);
                         break;

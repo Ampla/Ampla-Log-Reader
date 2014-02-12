@@ -16,5 +16,15 @@ namespace Ampla.LogReader.FileSystem
                 return folder;
             }
         }
+
+        public string RemotingDirectory
+        {
+            get
+            {
+                //%ProgramData%\Citect\Ampla\Projects\{Project}\ReplayLogs\PAQueryLoad 
+                string folder = Path.Combine(Directory, "ReplayLogs", "PAQueryLoad");
+                return folder;
+            }
+        }
     }
 }

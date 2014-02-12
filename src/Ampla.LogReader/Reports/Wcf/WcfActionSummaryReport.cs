@@ -3,7 +3,7 @@ using Ampla.LogReader.ReportWriters;
 using Ampla.LogReader.Statistics;
 using Ampla.LogReader.Wcf;
 
-namespace Ampla.LogReader.Reports
+namespace Ampla.LogReader.Reports.Wcf
 {
     public class WcfActionSummaryReport : Report<WcfCall>
     {
@@ -14,11 +14,11 @@ namespace Ampla.LogReader.Reports
 
         protected override void RenderReport(IReportWriter reportWriter)
         {
-            GroupByAnalysis<WcfCall,SummaryStatistic> analysis = new GroupByAnalysis<WcfCall,SummaryStatistic>()
+            GroupByAnalysis<WcfCall, WcfSummaryStatistic> analysis = new GroupByAnalysis<WcfCall, WcfSummaryStatistic>()
                 {
                     WhereFunc = entry => true,
                     GroupByFunc = entry => entry.Action,
-                    StatisticFactory = key => new SummaryStatistic(key)
+                    StatisticFactory = key => new WcfSummaryStatistic(key)
                 };
 
             foreach (var wcfCall in Entries)
@@ -28,7 +28,7 @@ namespace Ampla.LogReader.Reports
 
             using (reportWriter.StartReport("Wcf Action Summary"))
             {
-                List<SummaryStatistic> summaries = analysis.Sort(SummaryStatistic.CompareCountDesc());
+                List<WcfSummaryStatistic> summaries = analysis.Sort(WcfSummaryStatistic.CompareByCountDesc());
 
                 if (summaries.Count > 0)
                 {
@@ -38,7 +38,7 @@ namespace Ampla.LogReader.Reports
                         reportWriter.Write(result.Topic);
                     }
 
-                    foreach (SummaryStatistic summary in summaries)
+                    foreach (WcfSummaryStatistic summary in summaries)
                     {
                         using (reportWriter.StartSection(summary.Name))
                         {

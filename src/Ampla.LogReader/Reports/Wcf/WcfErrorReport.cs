@@ -3,7 +3,7 @@ using System.Linq;
 using Ampla.LogReader.ReportWriters;
 using Ampla.LogReader.Wcf;
 
-namespace Ampla.LogReader.Reports
+namespace Ampla.LogReader.Reports.Wcf
 {
     public class WcfErrorReport : Report<WcfCall>
     {

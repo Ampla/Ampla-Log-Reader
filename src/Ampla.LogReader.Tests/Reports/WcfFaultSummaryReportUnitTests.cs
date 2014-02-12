@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Ampla.LogReader.ReportWriters;
+using Ampla.LogReader.Reports.Wcf;
 using Ampla.LogReader.Wcf;
 using NUnit.Framework;
 

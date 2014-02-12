@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace Ampla.LogReader.EventLogs
 {
-    public class EventLogReader : IEventLogReader
+    public class EventLogReader : ILogReader<EventLogEntry>
     {
         private readonly EventLog eventLog;
         private readonly List<EventLogEntry> entries;
@@ -22,7 +22,7 @@ namespace Ampla.LogReader.EventLogs
             }
         }
 
-        public List<EventLogEntry> EventLogEntries
+        public List<EventLogEntry> Entries
         {
             get { return entries; }
         }

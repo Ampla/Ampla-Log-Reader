@@ -45,7 +45,7 @@ namespace Ampla.LogReader.Statistics
             }
         }
 
-        protected IStatistic<TEntry> GetStatisticForKey(string key)
+        private IStatistic<TEntry> GetStatisticForKey(string key)
         {
             TStatistic statistic;
             if (!dictionary.TryGetValue(key, out statistic))

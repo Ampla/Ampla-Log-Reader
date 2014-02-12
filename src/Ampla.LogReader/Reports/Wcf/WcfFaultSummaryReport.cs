@@ -3,23 +3,23 @@ using Ampla.LogReader.ReportWriters;
 using Ampla.LogReader.Statistics;
 using Ampla.LogReader.Wcf;
 
-namespace Ampla.LogReader.Reports
+namespace Ampla.LogReader.Reports.Wcf
 {
-    public class WcfHourlySummaryReport : Report<WcfCall>
+    public class WcfFaultSummaryReport : Report<WcfCall>
     {
-        public WcfHourlySummaryReport(List<WcfCall> entries, IReportWriter writer)
+        public WcfFaultSummaryReport(List<WcfCall> entries, IReportWriter writer)
             : base(entries, writer)
         {
         }
 
         protected override void RenderReport(IReportWriter reportWriter)
         {
-            GroupByAnalysis<WcfCall,SummaryStatistic> analysis = new GroupByAnalysis<WcfCall,SummaryStatistic>
+            GroupByAnalysis<WcfCall, WcfSummaryStatistic> analysis = new GroupByAnalysis<WcfCall, WcfSummaryStatistic>
                 {
-                    WhereFunc = entry => true,
-                    GroupByFunc = entry => entry.CallTime.ToString("yyyy-MM-dd HH-00Z"),
+                    WhereFunc = entry => entry.IsFault,
+                    GroupByFunc = entry => entry.FaultMessage,
                     //entry.Method, //entry => entry.CallTime.ToLocalTime().ToShortDateString(),
-                    StatisticFactory = key => new SummaryStatistic(key)
+                    StatisticFactory = key => new WcfSummaryStatistic(key)
                 };
 
             foreach (var wcfCall in Entries)
@@ -27,17 +27,18 @@ namespace Ampla.LogReader.Reports
                 analysis.Add(wcfCall);
             }
 
-            using (reportWriter.StartReport("Wcf Hourly Summary"))
+            using (reportWriter.StartReport("Wcf Fault Summary"))
             {
-                List<SummaryStatistic> summaryStatistics = analysis.Sort(Statistic.CompareByName());
+                List<WcfSummaryStatistic> summaryStatistics = analysis.Sort(WcfSummaryStatistic.CompareByCountDesc());
                 if (summaryStatistics.Count > 0)
                 {
-                    reportWriter.Write("Hour");
+                    reportWriter.Write("Fault Message");
                     foreach (Result result in summaryStatistics[0].Results)
                     {
                         reportWriter.Write(result.Topic);
                     }
-                    foreach (SummaryStatistic summary in summaryStatistics)
+
+                    foreach (WcfSummaryStatistic summary in summaryStatistics)
                     {
                         using (reportWriter.StartSection(summary.Name))
                         {

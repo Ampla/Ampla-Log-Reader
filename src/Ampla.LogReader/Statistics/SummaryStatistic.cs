@@ -1,41 +1,56 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Ampla.LogReader.Wcf;
 
 namespace Ampla.LogReader.Statistics
 {
     /// <summary>
     ///     A set of summary statistics 
     /// </summary>
-    public class SummaryStatistic : Statistic<WcfCall>
+    public class SummaryStatistic<TEntry> : Statistic<TEntry>
     {
+        private readonly Func<TEntry, bool> isFaultFunc;
+        private readonly Func<TEntry, DateTime> callTimeFunc;
+        private readonly Func<TEntry, TimeSpan> durationFunc;
         private long firstEntryTicks = DateTime.MaxValue.Ticks;
         private long lastEntryTicks = DateTime.MinValue.Ticks;
         private TimeSpan totalDuration = TimeSpan.Zero;
         private TimeSpan maxDuration = TimeSpan.Zero;
 
-        public SummaryStatistic(string name) : base(name)
+        protected SummaryStatistic(string name, Func<TEntry, bool> isFaultFunc, Func<TEntry, DateTime> callTimeFunc, Func<TEntry, TimeSpan> durationFunc) : base(name)
         {
+            this.isFaultFunc = isFaultFunc;
+            this.callTimeFunc = callTimeFunc;
+            this.durationFunc = durationFunc;
         }
 
         /// <summary>
         /// Adds the specified entry.
         /// </summary>
         /// <param name="entry">The entry.</param>
-        public override void Add(WcfCall entry)
+        public override void Add(TEntry entry)
         {
-            if (entry.IsFault)
-            {
-                Errors++;
-            }
             Count++;
-            long ticks = entry.CallTime.Ticks;
-            firstEntryTicks = Math.Min(firstEntryTicks, ticks);
-            lastEntryTicks = Math.Max(lastEntryTicks, ticks);
-            totalDuration = totalDuration.Add(entry.Duration);
-            maxDuration = entry.Duration > maxDuration ? entry.Duration : maxDuration;
+            if (isFaultFunc != null)
+            {
+                if (isFaultFunc(entry))
+                {
+                    Errors++;
+                }
+            }
+            if (callTimeFunc != null)
+            {
+                DateTime callTime = callTimeFunc(entry);
+                long ticks = callTime.Ticks;
+                firstEntryTicks = Math.Min(firstEntryTicks, ticks);
+                lastEntryTicks = Math.Max(lastEntryTicks, ticks);
+            }
+            if (durationFunc != null)
+            {
+                TimeSpan duration = durationFunc(entry);
+                totalDuration = totalDuration.Add(duration);
+                maxDuration = duration > maxDuration ? duration : maxDuration;
+            }
         }
 
         public override IEnumerable<Result> Results
@@ -43,13 +58,22 @@ namespace Ampla.LogReader.Statistics
             get
             {
                 yield return Result.New<int>(Name, "Count", Count);
-                yield return Result.New<DateTime>(Name, "First Entry", FirstEntry);
-                yield return Result.New<DateTime>(Name, "Last Entry", LastEntry);
-                yield return Result.New<int>(Name, "Errors", Errors);
-                yield return Result.New<double>(Name, "Percentage", ErrorPercent);
-                yield return Result.New<TimeSpan>(Name, "Total Duration", totalDuration);
-                yield return Result.New<TimeSpan>(Name, "Maximum Duration", maxDuration);
-                yield return Result.New<TimeSpan>(Name, "Average Duration", new TimeSpan(totalDuration.Ticks / Count));
+                if (callTimeFunc != null)
+                {
+                    yield return Result.New<DateTime>(Name, "First Entry", FirstEntry);
+                    yield return Result.New<DateTime>(Name, "Last Entry", LastEntry);
+                }
+                if (isFaultFunc != null)
+                {
+                    yield return Result.New<int>(Name, "Errors", Errors);
+                    yield return Result.New<double>(Name, "Percentage", ErrorPercent);
+                }
+                if (durationFunc != null)
+                {
+                    yield return Result.New<TimeSpan>(Name, "Total Duration", totalDuration);
+                    yield return Result.New<TimeSpan>(Name, "Maximum Duration", maxDuration);
+                    yield return Result.New<TimeSpan>(Name, "Average Duration", new TimeSpan(totalDuration.Ticks/Count));
+                }
             }
         }
 
@@ -84,9 +108,9 @@ namespace Ampla.LogReader.Statistics
             return Name + "\n\t" + string.Join("\n\t", values);
         }
 
-        public static IComparer<SummaryStatistic> CompareCountDesc()
+        public static IComparer<SummaryStatistic<TEntry>> CompareByCountDesc()
         {
-            return new Comparer<SummaryStatistic>((x, y) => y.Count.CompareTo(x.Count));
+            return new Comparer<SummaryStatistic<TEntry>>((x, y) => y.Count.CompareTo(x.Count));
         }
     }
 }

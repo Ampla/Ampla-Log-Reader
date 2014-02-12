@@ -2,23 +2,24 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
+using Ampla.LogReader.Wcf;
 using Ampla.LogReader.Xml;
 
-namespace Ampla.LogReader.Wcf
+namespace Ampla.LogReader.Remoting
 {
-    public class WcfLogReader : ILogReader<WcfCall>
+    public class RemotingLogReader : ILogReader<RemotingEntry>
     {
         private readonly string fileName;
-        private readonly List<WcfCall> wcfCalls = new List<WcfCall>();
+        private readonly List<RemotingEntry> entries = new List<RemotingEntry>();
 
-        public WcfLogReader(string fileName)
+        public RemotingLogReader(string fileName)
         {
             this.fileName = fileName;
         }
 
         public void Read()
         {
-            XmlContentTextReader contentReader = new XmlContentTextReader("<WCFCall>", File.OpenRead(fileName));
+            XmlContentTextReader contentReader = new XmlContentTextReader("<RemotingEntry>", File.OpenRead(fileName));
             XmlFragmentTextReader reader = new XmlFragmentTextReader("Xml", contentReader);
             XmlDocument xmlDoc = new XmlDocument();
             try
@@ -30,19 +31,19 @@ namespace Ampla.LogReader.Wcf
                 throw new XmlException("Error reading file: " + fileName, ex);
             }
             
-            XmlNodeList xmlNodeList = xmlDoc.SelectNodes("/Xml/WCFCall");
+            XmlNodeList xmlNodeList = xmlDoc.SelectNodes("/Xml/RemotingEntry");
             if (xmlNodeList != null)
             {
                 foreach (XmlNode node in xmlNodeList)
                 {
-                    wcfCalls.Add(WcfCall.LoadFromXml(node));
+                    entries.Add(RemotingEntry.LoadFromXml(node));
                 }
             }
         }
 
-        public List<WcfCall> Entries
+        public List<RemotingEntry> Entries
         {
-            get { return wcfCalls; }
+            get { return entries; }
         }
     }
 }

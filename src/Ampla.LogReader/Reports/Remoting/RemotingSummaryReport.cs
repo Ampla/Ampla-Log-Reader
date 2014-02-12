@@ -1,0 +1,55 @@
+﻿using System.Collections.Generic;
+using Ampla.LogReader.Remoting;
+using Ampla.LogReader.ReportWriters;
+using Ampla.LogReader.Statistics;
+
+namespace Ampla.LogReader.Reports.Remoting
+{
+    public class RemotingSummaryReport : Report<RemotingEntry>
+    {
+        public RemotingSummaryReport(List<RemotingEntry> entries, IReportWriter reportWriter)
+            : base(entries, reportWriter)
+        {
+        }
+
+        protected override void RenderReport(IReportWriter reportWriter)
+        {
+            GroupByAnalysis<RemotingEntry, RemotingSummaryStatistic> analysis = new GroupByAnalysis<RemotingEntry, RemotingSummaryStatistic>
+            {
+                WhereFunc = entry => true,
+                GroupByFunc = entry => entry.Method,
+                //entry.Method, //entry => entry.CallTime.ToLocalTime().ToShortDateString(),
+                StatisticFactory = key => new RemotingSummaryStatistic(key)
+            };
+
+            foreach (var entry in Entries)
+            {
+                analysis.Add(entry);
+            }
+
+            var summaries = analysis.Sort(RemotingSummaryStatistic.CompareByCountDesc());
+
+            if (summaries.Count > 0)
+            {
+                using (reportWriter.StartReport("Remoting - Summary"))
+                {
+                    reportWriter.Write("Method");
+                    foreach (Result result in summaries[0].Results)
+                    {
+                        reportWriter.Write(result.Topic);
+                    }
+                    foreach (var summary in summaries)
+                    {
+                        using (reportWriter.StartSection(summary.Name))
+                        {
+                            foreach (var result in summary.Results)
+                            {
+                                reportWriter.Write(result);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

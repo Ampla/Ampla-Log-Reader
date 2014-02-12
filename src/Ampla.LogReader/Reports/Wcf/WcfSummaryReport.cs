@@ -3,7 +3,7 @@ using Ampla.LogReader.ReportWriters;
 using Ampla.LogReader.Statistics;
 using Ampla.LogReader.Wcf;
 
-namespace Ampla.LogReader.Reports
+namespace Ampla.LogReader.Reports.Wcf
 {
     public class WcfSummaryReport : Report<WcfCall>
     {
@@ -14,12 +14,12 @@ namespace Ampla.LogReader.Reports
 
         protected override void RenderReport(IReportWriter reportWriter)
         {
-            GroupByAnalysis<WcfCall, SummaryStatistic> analysis = new GroupByAnalysis<WcfCall, SummaryStatistic>
+            GroupByAnalysis<WcfCall, WcfSummaryStatistic> analysis = new GroupByAnalysis<WcfCall, WcfSummaryStatistic>
                 {
                     WhereFunc = entry => true,
                     GroupByFunc = entry => "WCF Recorder",
                     //entry.Method, //entry => entry.CallTime.ToLocalTime().ToShortDateString(),
-                    StatisticFactory = key => new SummaryStatistic(key)
+                    StatisticFactory = key => new WcfSummaryStatistic(key)
                 };
 
             foreach (var wcfCall in Entries)

@@ -50,6 +50,8 @@
     <Compile Include="..\Assembly.Version.cs">
       <Link>Properties\Assembly.Version.cs</Link>
     </Compile>
+    <Compile Include="Remoting\RemotingLogReaderUnitTests.cs" />
+    <Compile Include="Remoting\RemotingEntryUnitTests.cs" />
     <Compile Include="Statistics\CountStatisticUnitTests.cs" />
     <Compile Include="EventLogs\EventLogSystemUnitTests.cs" />
     <Compile Include="Excel\ExcelSpreadsheetUnitTests.cs" />
@@ -81,6 +83,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Remoting\Resources\SingleEntry.log">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Wcf\Resources\ErrorEntry.log">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

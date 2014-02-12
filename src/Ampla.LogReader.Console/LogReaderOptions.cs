@@ -7,6 +7,9 @@ namespace Ampla.LogReader.Console
         [Option('w', "wcf", Required = false, DefaultValue = false, HelpText = "Skip the Wcf Log processing")]
         public bool SkipWcf { get; set; }
 
+        [Option('r', "remoting", Required = false, DefaultValue = false, HelpText = "Skip the Remoting Log processing")]
+        public bool SkipRemoting { get; set; }
+
         [Option('e', "eventlog", Required = false, DefaultValue = false, HelpText = "Skip the Event Log processing")]
         public bool SkipEventLog { get; set; }
 
