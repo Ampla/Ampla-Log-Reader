@@ -14,7 +14,7 @@ namespace Ampla.LogReader.Reports.Remoting
 
         protected override void RenderReport(IReportWriter reportWriter)
         {
-            GroupByAnalysis<RemotingEntry, RemotingSummaryStatistic> analysis = new GroupByAnalysis<RemotingEntry, RemotingSummaryStatistic>
+            GroupByAnalysis<RemotingEntry, RemotingSummaryStatistic, string> analysis = new GroupByAnalysis<RemotingEntry, RemotingSummaryStatistic, string>
             {
                 WhereFunc = entry => true,
                 GroupByFunc = entry => entry.Method,

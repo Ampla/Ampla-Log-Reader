@@ -75,13 +75,14 @@
     <Compile Include="Remoting\RemotingEntry.cs" />
     <Compile Include="Remoting\RemotingLogReader.cs" />
     <Compile Include="Reports\EventLogs\EventLogDumpReport.cs" />
+    <Compile Include="Reports\EventLogs\EventLogHourlySummaryReport.cs" />
     <Compile Include="Reports\EventLogs\EventLogSummaryReport.cs" />
     <Compile Include="Reports\Remoting\RemotingIdentitySummaryReport.cs" />
     <Compile Include="Reports\Remoting\RemotingSummaryReport.cs" />
     <Compile Include="Reports\Wcf\WcfActionSummaryReport.cs" />
     <Compile Include="Reports\Wcf\WcfHourlySummaryReport.cs" />
     <Compile Include="Reports\Wcf\WcfUrlSummaryReport.cs" />
-    <Compile Include="Reports\EventLogs\EventLogHourlySummaryReport.cs" />
+    <Compile Include="Reports\HourlySummaryReport.cs" />
     <Compile Include="Reports\Wcf\WcfSummaryReport.cs" />
     <Compile Include="Reports\IRender.cs" />
     <Compile Include="Reports\Report.cs" />
@@ -90,7 +91,7 @@
     <Compile Include="ReportWriters\ExcelReportWriter.cs" />
     <Compile Include="ReportWriters\XmlReportWriter.cs" />
     <Compile Include="Statistics\Comparer.cs" />
-    <Compile Include="EventLogs\Statistics\EventEntryTypeStatistic.cs" />
+    <Compile Include="EventLogs\Statistics\EventLogEntryTypeStatistic.cs" />
     <Compile Include="Statistics\RemotingSummaryStatistic.cs" />
     <Compile Include="Statistics\Statistic.cs" />
     <Compile Include="Statistics\GroupByAnalysis.cs" />

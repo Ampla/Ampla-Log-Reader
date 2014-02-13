@@ -14,7 +14,7 @@ namespace Ampla.LogReader.Reports.Wcf
 
         protected override void RenderReport(IReportWriter reportWriter)
         {
-            GroupByAnalysis<WcfCall, WcfSummaryStatistic> analysis = new GroupByAnalysis<WcfCall, WcfSummaryStatistic>
+            GroupByAnalysis<WcfCall, WcfSummaryStatistic, string> analysis = new GroupByAnalysis<WcfCall, WcfSummaryStatistic, string>
                 {
                     WhereFunc = entry => entry.IsFault,
                     GroupByFunc = entry => entry.FaultMessage,

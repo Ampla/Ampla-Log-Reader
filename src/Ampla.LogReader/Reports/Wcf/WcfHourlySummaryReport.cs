@@ -5,50 +5,15 @@ using Ampla.LogReader.Wcf;
 
 namespace Ampla.LogReader.Reports.Wcf
 {
-    public class WcfHourlySummaryReport : Report<WcfCall>
+    public class WcfHourlySummaryReport : HourlySummaryReport<WcfCall, WcfSummaryStatistic>
     {
         public WcfHourlySummaryReport(List<WcfCall> entries, IReportWriter writer)
-            : base(entries, writer)
+            : base("Wcf Hourly Summary", 
+            entries, 
+            writer, 
+            entry => entry.CallTime,
+            key => new WcfSummaryStatistic(key.ToString("yyyy-MM-dd HH:mmZ")))
         {
-        }
-
-        protected override void RenderReport(IReportWriter reportWriter)
-        {
-            GroupByAnalysis<WcfCall, WcfSummaryStatistic> analysis = new GroupByAnalysis<WcfCall, WcfSummaryStatistic>
-                {
-                    WhereFunc = entry => true,
-                    GroupByFunc = entry => entry.CallTime.ToString("yyyy-MM-dd HH-00Z"),
-                    //entry.Method, //entry => entry.CallTime.ToLocalTime().ToShortDateString(),
-                    StatisticFactory = key => new WcfSummaryStatistic(key)
-                };
-
-            foreach (var wcfCall in Entries)
-            {
-                analysis.Add(wcfCall);
-            }
-
-            using (reportWriter.StartReport("Wcf Hourly Summary"))
-            {
-                List<WcfSummaryStatistic> summaryStatistics = analysis.Sort(Statistic.CompareByName());
-                if (summaryStatistics.Count > 0)
-                {
-                    reportWriter.Write("Hour");
-                    foreach (Result result in summaryStatistics[0].Results)
-                    {
-                        reportWriter.Write(result.Topic);
-                    }
-                    foreach (WcfSummaryStatistic summary in summaryStatistics)
-                    {
-                        using (reportWriter.StartSection(summary.Name))
-                        {
-                            foreach (Result result in summary.Results)
-                            {
-                                reportWriter.Write(result);
-                            }
-                        }
-                    }
-                }
-            }
         }
     }
 }

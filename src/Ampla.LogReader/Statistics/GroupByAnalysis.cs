@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace Ampla.LogReader.Statistics
 {
-    public class GroupByAnalysis<TEntry, TStatistic> where TStatistic : IStatistic<TEntry>
+    public class GroupByAnalysis<TEntry, TStatistic, TKey> where TStatistic : IStatistic<TEntry>
     {
-        private Func<TEntry, string> selector;
+        private Func<TEntry, TKey> selector;
         private Func<TEntry, bool> filterFunc = (entry) => true;
-        private Func<string, TStatistic> factory;
+        private Func<TKey, TStatistic> factory;
 
-        private readonly Dictionary<string, TStatistic> dictionary = new Dictionary<string, TStatistic>();
+        private readonly Dictionary<TKey, TStatistic> dictionary = new Dictionary<TKey, TStatistic>();
 
         public Func<TEntry, bool> WhereFunc
         {
@@ -19,7 +19,7 @@ namespace Ampla.LogReader.Statistics
             }
         }
 
-        public Func<TEntry, string> GroupByFunc
+        public Func<TEntry, TKey> GroupByFunc
         {
             set
             {
@@ -27,7 +27,7 @@ namespace Ampla.LogReader.Statistics
             }
         }
 
-        public Func<string, TStatistic> StatisticFactory
+        public Func<TKey, TStatistic> StatisticFactory
         {
             set
             {
@@ -39,13 +39,13 @@ namespace Ampla.LogReader.Statistics
         {
             if (filterFunc(entry))
             {
-                string key = selector.Invoke(entry);
+                TKey key = selector.Invoke(entry);
                 IStatistic<TEntry> statistic = GetStatisticForKey(key);
                 statistic.Add(entry);
             }
         }
 
-        private IStatistic<TEntry> GetStatisticForKey(string key)
+        private IStatistic<TEntry> GetStatisticForKey(TKey key)
         {
             TStatistic statistic;
             if (!dictionary.TryGetValue(key, out statistic))

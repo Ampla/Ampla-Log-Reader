@@ -19,11 +19,6 @@ namespace Ampla.LogReader.Console
             LogReaderOptions options = new LogReaderOptions();
             if (CommandLine.Parser.Default.ParseArgumentsStrict(args, options))
             {
-                if (options.Debug)
-                {
-                    Debugger.Break();
-                }
-
                 using (IReportWriter reportWriter = GetReportWriter(options))
                 {
                     System.Console.WriteLine("Project: {0}", options.Project);
@@ -92,7 +87,7 @@ namespace Ampla.LogReader.Console
                                 reader.Read();
 
                                 new EventLogSummaryReport(eventLog, reader.Entries, reportWriter).Render();
-                                new EventLogHourlySummaryReport(eventLog, reader.Entries, reportWriter).Render();
+                                new EventLogHourlySummaryReport(eventLog.LogDisplayName + "-Hourly", reader.Entries, reportWriter).Render();
                                 new EventLogDumpReport(eventLog, reader.Entries, reportWriter).Render();
                             }
                         }

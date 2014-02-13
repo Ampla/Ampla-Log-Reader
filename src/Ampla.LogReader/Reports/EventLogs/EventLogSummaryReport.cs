@@ -17,7 +17,7 @@ namespace Ampla.LogReader.Reports.EventLogs
 
         protected override void RenderReport(IReportWriter reportWriter)
         {
-            GroupByAnalysis<EventLogEntry, EventLogEntryTypeStatistic> analysis = new GroupByAnalysis<EventLogEntry, EventLogEntryTypeStatistic>
+            GroupByAnalysis<EventLogEntry, EventLogEntryTypeStatistic, string> analysis = new GroupByAnalysis<EventLogEntry, EventLogEntryTypeStatistic, string>
             {
                 WhereFunc = entry => true,
                 GroupByFunc = entry => entry.Source,

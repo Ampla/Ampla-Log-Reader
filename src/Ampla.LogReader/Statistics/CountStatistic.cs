@@ -9,7 +9,8 @@ namespace Ampla.LogReader.Statistics
     {
         private int count;
 
-        public CountStatistic(string name) : base(name)
+        public CountStatistic(string name)
+            : base(name)
         {
         }
 
@@ -24,10 +25,7 @@ namespace Ampla.LogReader.Statistics
 
         public override IEnumerable<Result> Results
         {
-            get 
-            { 
-                yield return Result.New(Name, "Count", count); 
-            }
+            get { yield return Result.New(Name, "Count", count); }
         }
 
         public int Count
@@ -38,11 +36,6 @@ namespace Ampla.LogReader.Statistics
         public override string ToString()
         {
             return string.Format("{0} -> Count: {1}", Name, count);
-        }
-
-        public static IComparer<CountStatistic<TEntry>> CompareByCountDesc()
-        {
-            return new Comparer<CountStatistic<TEntry>>((x,y) => y.Count.CompareTo(x.Count));
         }
     }
 }
