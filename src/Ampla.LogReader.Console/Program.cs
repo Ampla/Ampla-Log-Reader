@@ -88,7 +88,7 @@ namespace Ampla.LogReader.Console
 
                                 new EventLogSummaryReport(eventLog, reader.Entries, reportWriter).Render();
                                 new EventLogHourlySummaryReport(eventLog.LogDisplayName + "-Hourly", reader.Entries, reportWriter).Render();
-                                new EventLogDumpReport(eventLog, reader.Entries, reportWriter).Render();
+                                new EventLogDetailsReport(eventLog, reader.Entries, reportWriter).Render();
                             }
                         }
                     }

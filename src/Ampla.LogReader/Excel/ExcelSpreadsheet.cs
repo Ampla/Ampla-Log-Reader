@@ -31,7 +31,9 @@ namespace Ampla.LogReader.Excel
             existingFile = fileInfo.Exists;
 
             this.filename = filename;
-            workbook = existingFile ? new XLWorkbook(filename) : new XLWorkbook();
+            workbook = existingFile
+                           ? new XLWorkbook(filename, XLEventTracking.Disabled)
+                           : new XLWorkbook(XLEventTracking.Disabled);
             disposed = false;
         }
 

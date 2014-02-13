@@ -52,6 +52,11 @@
     </Compile>
     <Compile Include="Remoting\RemotingLogReaderUnitTests.cs" />
     <Compile Include="Remoting\RemotingEntryUnitTests.cs" />
+    <Compile Include="Reports\EventLogs\EventLogDetailsReportUnitTests.cs" />
+    <Compile Include="Reports\EventLogs\EventLogHourlySummaryReportUnitTests.cs" />
+    <Compile Include="Reports\EventLogs\EventLogSummaryReportUnitTests.cs" />
+    <Compile Include="Reports\Remoting\RemotingIdentitySummaryReportUnitTests.cs" />
+    <Compile Include="Reports\Remoting\RemotingSummaryReportUnitTests.cs" />
     <Compile Include="Statistics\CountStatisticUnitTests.cs" />
     <Compile Include="EventLogs\EventLogSystemUnitTests.cs" />
     <Compile Include="Excel\ExcelSpreadsheetUnitTests.cs" />
@@ -60,11 +65,11 @@
     <Compile Include="Excel\Reader\WorksheetReaderUnitTests.cs" />
     <Compile Include="Excel\Writer\WorksheetWriterUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reports\WcfUrlSummaryReportUnitTests.cs" />
-    <Compile Include="Reports\WcfSummaryReportUnitTests.cs" />
-    <Compile Include="Reports\WcfHourlySummaryReportUnitTests.cs" />
-    <Compile Include="Reports\WcfFaultSummaryReportUnitTests.cs" />
-    <Compile Include="Reports\WcfActionSummaryReportUnitTests.cs" />
+    <Compile Include="Reports\Wcf\WcfUrlSummaryReportUnitTests.cs" />
+    <Compile Include="Reports\Wcf\WcfSummaryReportUnitTests.cs" />
+    <Compile Include="Reports\Wcf\WcfHourlySummaryReportUnitTests.cs" />
+    <Compile Include="Reports\Wcf\WcfFaultSummaryReportUnitTests.cs" />
+    <Compile Include="Reports\Wcf\WcfActionSummaryReportUnitTests.cs" />
     <Compile Include="ReportWriters\SimpleReportWriter.cs" />
     <Compile Include="TempDirectory.cs" />
     <Compile Include="TestFixture.cs" />

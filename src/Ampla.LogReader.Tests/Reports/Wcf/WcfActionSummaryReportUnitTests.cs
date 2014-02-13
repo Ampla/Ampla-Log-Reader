@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Ampla.LogReader.ReportWriters;
-using Ampla.LogReader.Reports.Wcf;
 using Ampla.LogReader.Wcf;
 using NUnit.Framework;
 
-namespace Ampla.LogReader.Reports
+namespace Ampla.LogReader.Reports.Wcf
 {
     [TestFixture]
     public class WcfActionSummaryReportUnitTests : TestFixture

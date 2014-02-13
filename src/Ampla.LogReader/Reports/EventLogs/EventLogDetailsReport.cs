@@ -4,11 +4,11 @@ using Ampla.LogReader.ReportWriters;
 
 namespace Ampla.LogReader.Reports.EventLogs
 {
-    public class EventLogDumpReport : Report<EventLogEntry>
+    public class EventLogDetailsReport : Report<EventLogEntry>
     {
         private readonly EventLog eventLog;
 
-        public EventLogDumpReport(EventLog eventLog, List<EventLogEntry> entries, IReportWriter reportWriter)
+        public EventLogDetailsReport(EventLog eventLog, List<EventLogEntry> entries, IReportWriter reportWriter)
             : base(entries, reportWriter)
         {
             this.eventLog = eventLog;

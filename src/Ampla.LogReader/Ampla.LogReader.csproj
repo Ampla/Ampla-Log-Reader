@@ -74,7 +74,7 @@
     <Compile Include="Remoting\RemotingDirectory.cs" />
     <Compile Include="Remoting\RemotingEntry.cs" />
     <Compile Include="Remoting\RemotingLogReader.cs" />
-    <Compile Include="Reports\EventLogs\EventLogDumpReport.cs" />
+    <Compile Include="Reports\EventLogs\EventLogDetailsReport.cs" />
     <Compile Include="Reports\EventLogs\EventLogHourlySummaryReport.cs" />
     <Compile Include="Reports\EventLogs\EventLogSummaryReport.cs" />
     <Compile Include="Reports\Remoting\RemotingIdentitySummaryReport.cs" />
