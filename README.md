@@ -11,14 +11,44 @@ WCF Logs
 ===
 Provides information about the number of calls, errors and types of messages from the Wcf Logs.
 
-Production Analyst Logs
+Production Analyst Logs (Remoting Logs)
 ===
-Provides summary information about the calls between Ampla Server and Production Analyst clients
+Provides summary information about the remoting calls between Ampla Server and Production Analyst clients
 
-Event Logs
+Event Logs (Windows Event Logs)
 ===
 Provides summary information from machine event logs. 
 
+Reports
+===
+The Ampla Log Reader outputs its findings in Reports.  Reports provide high level statistics about the entries in each of the logs.
 
+A list of current reports include:
+  - WCF Reports
+	- Wcf Summary Report
+	- Wcf Action Report 
+	- Wcf Fault Report
+	- Wcf Url Report
+	- Wcf Hourly Summary Report
+	- Wcf Details Report
+
+  - Event Log Reports
+    - Event Log Summary Report
+	- Event Log Hourly Summary Report
+	- Event Log Details Report
+	
+  - Remoting Reports
+    - Remoting Summary Report
+    - Remoting Identity Report
+	
+Most reports provide group the events using different dimension and provide the following statistics
+ - Count per category
+ - Number of errors per category
+ - Percentage errors
+ - First record
+ - Last record
+ - Total Duration 
+ - Average duration
+ 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/Ampla/ampla-wcf-reader/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
