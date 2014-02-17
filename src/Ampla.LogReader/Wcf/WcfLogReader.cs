@@ -35,7 +35,9 @@ namespace Ampla.LogReader.Wcf
             {
                 foreach (XmlNode node in xmlNodeList)
                 {
-                    wcfCalls.Add(WcfCall.LoadFromXml(node));
+                    WcfCall wcfCall = WcfCall.LoadFromXml(node);
+                    wcfCall.Source = fileName;
+                    wcfCalls.Add(wcfCall);
                 }
             }
         }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Xml;
 using Ampla.LogReader.Xml;
 
@@ -6,23 +8,25 @@ namespace Ampla.LogReader.Wcf
 {
     public class WcfCall
     {
-        public DateTime CallTime { get; set; }
+        public DateTime CallTime { get; private set; }
 
-        public string Url { get; set; }
+        public string Url { get; private set; }
 
-        public string Action { get; set; }
+        public string Action { get; private set; }
 
-        public string Method { get; set; }
+        public string Method { get; private set; }
 
-        public TimeSpan Duration { get; set; }
+        public TimeSpan Duration { get; private set; }
 
-        public double ResponseMessageLength { get; set; }
+        public double ResponseMessageLength { get; private set; }
 
-        public bool IsFault { get; set; }
+        public bool IsFault { get; private set; }
 
-        public string FaultMessage { get; set; }
+        public string FaultMessage { get; private set; }
 
-        public string RequestMessage { get; set; }
+        public string RequestMessage { get; private set; }
+
+        public string Source { get; set; }
 
         public static WcfCall LoadFromXml(XmlNode xmlNode)
         {
@@ -39,7 +43,57 @@ namespace Ampla.LogReader.Wcf
                     RequestMessage = XmlHelper.GetOuterXml(xmlNode, "RequestMessage"),
                 };
 
+            if (string.IsNullOrEmpty(call.Method))
+            {
+                call.Method = call.Action != null && call.Action.Contains("/")
+                                  ? call.Action.Substring(call.Action.LastIndexOf('/')+1)
+                                  : call.Action;
+            }
+
             return call;
+        }
+
+        /// <summary>
+        /// Creates the data table with the WcfCalls
+        /// </summary>
+        /// <param name="wcfCalls">The WCF calls.</param>
+        /// <returns></returns>
+        public static DataTable CreateDataTable(IEnumerable<WcfCall> wcfCalls)
+        {
+            DataTable dataTable = new DataTable("WcfCalls");
+            dataTable.Columns.Add("Id", typeof (int));
+            dataTable.Columns.Add("CallTimeUtc", typeof (DateTime));
+            dataTable.Columns.Add("CallTimeLocal", typeof (DateTime));
+            dataTable.Columns.Add("Url", typeof (string));
+            dataTable.Columns.Add("Action", typeof (string));
+            dataTable.Columns.Add("Method", typeof (string));
+            dataTable.Columns.Add("Duration", typeof (double));
+            dataTable.Columns.Add("RequestMessage", typeof (string));
+            dataTable.Columns.Add("ResponseMessageLength", typeof (double));
+            dataTable.Columns.Add("IsFault", typeof (bool));
+            dataTable.Columns.Add("FaultMessage", typeof (string));
+            dataTable.Columns.Add("Source", typeof (string));
+
+            int count = 0;
+
+            foreach (WcfCall call in wcfCalls)
+            {
+                dataTable.Rows.Add(++count,
+                                   call.CallTime,
+                                   call.CallTime.ToLocalTime(),
+                                   call.Url,
+                                   call.Action,
+                                   call.Method,
+                                   call.Duration.TotalSeconds,
+                                   call.RequestMessage,
+                                   call.ResponseMessageLength,
+                                   call.IsFault,
+                                   call.FaultMessage,
+                                   call.Source);
+            }
+
+            dataTable.AcceptChanges();
+            return dataTable;
         }
     }
 }

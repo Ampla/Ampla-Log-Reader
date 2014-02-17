@@ -71,7 +71,8 @@ namespace Ampla.LogReader.Wcf
             string method = XmlHelper.GetValue(xmlNode, "Method", "No Method");
 
             Assert.That(method, Is.Empty);
-            Assert.That(call.Method, Is.EqualTo(method));
+            Assert.That(call.Method, Is.Not.EqualTo(method));
+            Assert.That(call.Action, Is.StringEnding(call.Method));
         }
 
         [Test]
@@ -128,6 +129,21 @@ namespace Ampla.LogReader.Wcf
             Assert.That(requestMessage, Is.Not.Empty);
             Assert.That(requestMessage, Is.StringContaining("http://schemas.xmlsoap.org/soap/envelope/"));
             Assert.That(call.RequestMessage, Is.EqualTo(requestMessage));
+        }
+
+        [Test]
+        public void Source()
+        {
+            WcfLogReader reader = new WcfLogReader(fileName);
+            reader.Read();
+
+            Assert.That(reader.Entries.Count, Is.EqualTo(1));
+            WcfCall call = reader.Entries[0];
+
+            string source = fileName;
+
+            Assert.That(source, Is.Not.Empty);
+            Assert.That(call.Source, Is.EqualTo(source));
         }
     }
 }

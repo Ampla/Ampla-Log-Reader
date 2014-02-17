@@ -50,6 +50,7 @@
     <Compile Include="..\Assembly.Version.cs">
       <Link>Properties\Assembly.Version.cs</Link>
     </Compile>
+    <Compile Include="FileSystem\AmplaProjectUnitTests.cs" />
     <Compile Include="Remoting\RemotingLogReaderUnitTests.cs" />
     <Compile Include="Remoting\RemotingEntryUnitTests.cs" />
     <Compile Include="Reports\EventLogs\EventLogDetailsReportUnitTests.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="ReportWriters\SimpleReportWriter.cs" />
     <Compile Include="TempDirectory.cs" />
     <Compile Include="TestFixture.cs" />
+    <Compile Include="Wcf\WcfCallExcelUnitTests.cs" />
     <Compile Include="Wcf\WcfCallUnitTests.cs" />
     <Compile Include="Wcf\WcfLogReaderUnitTests.cs" />
     <Compile Include="Xml\XmlContentTextReaderUnitTests.cs" />

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using Ampla.LogReader.Excel.Reader;
 using Ampla.LogReader.Excel.Writer;
 
@@ -26,6 +27,13 @@ namespace Ampla.LogReader.Excel
         /// <param name="name"></param>
         /// <returns></returns>
         IWorksheetWriter WriteToWorksheet(string name);
+
+        /// <summary>
+        ///     Writes a DataTable as a new Worksheet
+        /// </summary>
+        /// <param name="dataTable"></param>
+        /// <param name="name"></param>
+        IWorksheetWriter WriteDataToWorksheet(DataTable dataTable, string name);
 
         /// <summary>
         /// Gets a value indicating whether this instance is read only.

@@ -6,11 +6,11 @@ namespace Ampla.LogReader.ReportWriters
 {
     public class SimpleReportWriter : IReportWriter
     {
-        private StringBuilder stringBuilder;
+        private readonly StringBuilder stringBuilder;
 
         public SimpleReportWriter()
         {
-            this.stringBuilder = new StringBuilder();
+            stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("SimpleReportWriter");
         }
 

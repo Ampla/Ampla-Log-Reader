@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.IO;
 using System.Linq;
 using Ampla.LogReader.Excel.Reader;
@@ -32,8 +33,8 @@ namespace Ampla.LogReader.Excel
 
             this.filename = filename;
             workbook = existingFile
-                           ? new XLWorkbook(filename, XLEventTracking.Disabled)
-                           : new XLWorkbook(XLEventTracking.Disabled);
+                           ? new XLWorkbook(filename, XLEventTracking.Enabled)
+                           : new XLWorkbook(XLEventTracking.Enabled);
             disposed = false;
         }
 
@@ -92,6 +93,15 @@ namespace Ampla.LogReader.Excel
         private void CheckDisposed()
         {
             if (disposed) throw new ObjectDisposedException("ExcelSpreadsheet");
+        }
+
+        public IWorksheetWriter WriteDataToWorksheet(DataTable dataTable, string name)
+        {
+            if (IsReadOnly) throw new InvalidOperationException("Excel Spreadsheet is opened as ReadOnly");
+
+            var worksheet = workbook.Worksheets.Add(dataTable, name);
+            
+            return new WorksheetWriter(worksheet);
         }
 
         /// <summary>

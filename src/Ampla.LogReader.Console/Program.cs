@@ -6,6 +6,7 @@ using Ampla.LogReader.FileSystem;
 using Ampla.LogReader.Remoting;
 using Ampla.LogReader.ReportWriters;
 using Ampla.LogReader.Reports.EventLogs;
+using Ampla.LogReader.Reports.Packs;
 using Ampla.LogReader.Reports.Remoting;
 using Ampla.LogReader.Reports.Wcf;
 using Ampla.LogReader.Wcf;
@@ -42,6 +43,10 @@ namespace Ampla.LogReader.Console
 
                             writer.WriteLine("Read {0} entries from WcfLog files", directory.Entries.Count);
 
+                            writer.WriteLine("Creating Wcf Report -> WcfCall.Details.xlsx");
+
+                            new WcfExcelReportPack("WcfCall.Details.xlsx", directory).Render();
+
                             new WcfSummaryReport(
                                 directory.Entries, reportWriter).Render();
                             new WcfFaultSummaryReport(
@@ -61,6 +66,9 @@ namespace Ampla.LogReader.Console
                             directory.Read();
 
                             writer.WriteLine("Read {0} entries from Remoting files", directory.Entries.Count);
+
+                            new RemotingReportPack("Remoting.Details.xlsx", directory).Render();
+
 
                             new RemotingSummaryReport(
                                 directory.Entries, reportWriter).Render();
@@ -95,7 +103,8 @@ namespace Ampla.LogReader.Console
                     else
                     {
                         AmplaProjectDirectories projectDirectories = new AmplaProjectDirectories();
-                        foreach (AmplaProject project in projectDirectories.Projects)
+
+                        foreach (AmplaProject project in projectDirectories.GetAmplaProjects())
                         {
                             writer.WriteLine("======================");
                             writer.WriteLine("Project: {0}", project.ProjectName);

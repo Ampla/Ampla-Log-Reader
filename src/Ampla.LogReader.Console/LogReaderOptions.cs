@@ -16,7 +16,7 @@ namespace Ampla.LogReader.Console
         [Option('p', "project", Required = false, HelpText = "Select the output files to log", DefaultValue = "AmplaProject")]
         public string Project { get; set; }
 
-        [Option('m', "mode", Required = false, HelpText = "Select the Output mode (Text, Xml, Excel)", DefaultValue = OutputMode.Text)]
+        [Option('m', "mode", Required = false, HelpText = "Select the Output mode (Text, Xml, Excel)", DefaultValue = OutputMode.Excel)]
         public OutputMode OutputMode { get; set; }
 
         [Option('o', "output", Required = false, HelpText = "Select the Output file", DefaultValue = null)]

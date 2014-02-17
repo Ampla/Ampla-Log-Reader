@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using Ampla.LogReader.Excel.Reader;
 using Ampla.LogReader.Excel.Writer;
 using NUnit.Framework;
@@ -21,6 +22,7 @@ namespace Ampla.LogReader.Excel
             Assert.Throws<ArgumentException>(() => ExcelSpreadsheet.CreateNew(""));
         }
 
+        [Test]
         public void ReadOnlyWorksheet()
         {
             using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.CreateNew(Filename))
@@ -59,6 +61,46 @@ namespace Ampla.LogReader.Excel
             }
 
             Assert.That(result, Is.EquivalentTo(list));
+        }
+
+        [Test]
+        public void AddDataTable()
+        {
+            DataTable dataTable = new DataTable("Test");
+            dataTable.Columns.Add("A", typeof (string));
+            dataTable.Columns.Add("B", typeof (int));
+            dataTable.Columns.Add("C", typeof (double));
+
+            dataTable.Rows.Add("One", 1, 1.1D);
+            dataTable.Rows.Add("Two", 2, 1.2D);
+            dataTable.Rows.Add("Three", 3, 1.3D);
+
+            using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.CreateNew(Filename))
+            {
+                IWorksheetWriter worksheet = spreadsheet.WriteDataToWorksheet(dataTable, "Test");
+                Assert.That(worksheet, Is.Not.Null);
+            }
+
+            List<string> result1;
+            List<string> result2;
+            List<string> result3;
+            List<string> result4;
+
+            using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.OpenReadOnly(Filename))
+            {
+                IWorksheetReader worksheet = spreadsheet.ReadWorksheet("Test");
+                Assert.That(worksheet, Is.Not.Null);
+                result1 = worksheet.ReadRow();
+                result2 = worksheet.ReadRow();
+                result3 = worksheet.ReadRow();
+                result4 = worksheet.ReadRow();
+                
+            }
+
+            Assert.That(result1, Is.EquivalentTo(new []{"A", "B", "C"}));
+            Assert.That(result2, Is.EquivalentTo(new[] { "One", "1", "1.1" }));
+            Assert.That(result3, Is.EquivalentTo(new[] { "Two", "2", "1.2" }));
+            Assert.That(result4, Is.EquivalentTo(new[] { "Three", "3", "1.3" }));
         }
 
 

@@ -77,9 +77,12 @@
     <Compile Include="Reports\EventLogs\EventLogDetailsReport.cs" />
     <Compile Include="Reports\EventLogs\EventLogHourlySummaryReport.cs" />
     <Compile Include="Reports\EventLogs\EventLogSummaryReport.cs" />
+    <Compile Include="Reports\Packs\RemotingReportPack.cs" />
     <Compile Include="Reports\Remoting\RemotingIdentitySummaryReport.cs" />
     <Compile Include="Reports\Remoting\RemotingSummaryReport.cs" />
+    <Compile Include="Reports\ReportPack.cs" />
     <Compile Include="Reports\Wcf\WcfActionSummaryReport.cs" />
+    <Compile Include="Reports\Packs\WcfExcelReportPack.cs" />
     <Compile Include="Reports\Wcf\WcfHourlySummaryReport.cs" />
     <Compile Include="Reports\Wcf\WcfUrlSummaryReport.cs" />
     <Compile Include="Reports\HourlySummaryReport.cs" />

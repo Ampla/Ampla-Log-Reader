@@ -9,7 +9,7 @@ namespace Ampla.LogReader.FileSystem
     {
         private readonly AmplaProject[] projects;
 
-        public AmplaProjectDirectories(string directory)
+        private AmplaProjectDirectories(string directory)
         {
             List<AmplaProject> projectList = new List<AmplaProject>();
             if (Directory.Exists(directory))
@@ -33,9 +33,14 @@ namespace Ampla.LogReader.FileSystem
         {
         }
 
-        public AmplaProject[] Projects
+        public AmplaProject GetAmplaProject(string projectName)
         {
-            get { return projects; }
+            return projects.FirstOrDefault(project => project.ProjectName == projectName);
+        }
+
+        public IEnumerable<AmplaProject> GetAmplaProjects()
+        {
+            return projects;
         }
     }
 }

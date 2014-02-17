@@ -69,9 +69,11 @@ namespace Ampla.LogReader.Remoting
 
             string typeName = XmlHelper.GetValue(xmlNode, "__TypeName", string.Empty);
 
+            const string truncatedName = "Citect.Ampla.General.Common.IReportingService";
+
             Assert.That(typeName, Is.Not.Empty);
-            Assert.That(typeName, Is.StringContaining("IReportingService"));
-            Assert.That(entry.TypeName, Is.EqualTo(typeName));
+            Assert.That(typeName, Is.StringStarting(truncatedName));
+            Assert.That(entry.TypeName, Is.EqualTo(truncatedName));
         }
 
 
