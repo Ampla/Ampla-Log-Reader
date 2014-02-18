@@ -5,7 +5,7 @@ using Ampla.LogReader.Statistics;
 
 namespace Ampla.LogReader.EventLogs.Statistics
 {
-    public class EventLogEntryTypeStatistic : Statistic<EventLogEntry>
+    public class EventLogEntryTypeStatistic : Statistic<SimpleEventLogEntry>
     {
         private readonly List<int> eventTypes = new List<int>();
 
@@ -13,7 +13,7 @@ namespace Ampla.LogReader.EventLogs.Statistics
         {
         }
 
-        public override void Add(EventLogEntry entry)
+        public override void Add(SimpleEventLogEntry entry)
         {
             switch (entry.EntryType)
             {

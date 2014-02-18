@@ -44,5 +44,17 @@ namespace Ampla.LogReader.EventLogs
             EventLog system = eventLogSystem.GetEventLog("Security");
             Assert.That(system, Is.Null);
         }
+
+        [Test]
+        public void GetReaders()
+        {
+            EventLogSystem eventLogSystem = new EventLogSystem();
+            EventLogReader[] readers = eventLogSystem.GetReaders();
+            Assert.That(readers, Is.Not.Empty);
+            foreach (EventLogReader reader in readers)
+            {
+                Assert.That(reader.Name, Is.Not.Empty);
+            }
+        }
     }
 }

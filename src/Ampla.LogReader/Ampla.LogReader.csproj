@@ -57,6 +57,7 @@
     <Compile Include="EventLogs\EventLogReader.cs" />
     <Compile Include="EventLogs\EventLogSystem.cs" />
     <Compile Include="EventLogs\IEventLogSystem.cs" />
+    <Compile Include="EventLogs\SimpleEventLogEntry.cs" />
     <Compile Include="Excel\ExcelSpreadsheet.cs" />
     <Compile Include="Excel\ExcelWorksheet.cs" />
     <Compile Include="Excel\IExcelSpreadsheet.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Reports\EventLogs\EventLogHourlySummaryReport.cs" />
     <Compile Include="Reports\EventLogs\EventLogSummaryReport.cs" />
     <Compile Include="Reports\Packs\RemotingReportPack.cs" />
+    <Compile Include="Reports\Packs\EventLogReportPack.cs" />
     <Compile Include="Reports\Remoting\RemotingIdentitySummaryReport.cs" />
     <Compile Include="Reports\Remoting\RemotingSummaryReport.cs" />
     <Compile Include="Reports\ReportPack.cs" />

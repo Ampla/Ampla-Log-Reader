@@ -50,6 +50,7 @@
     <Compile Include="..\Assembly.Version.cs">
       <Link>Properties\Assembly.Version.cs</Link>
     </Compile>
+    <Compile Include="EventLogs\EventLogReaderUnitTests.cs" />
     <Compile Include="FileSystem\AmplaProjectUnitTests.cs" />
     <Compile Include="Remoting\RemotingLogReaderUnitTests.cs" />
     <Compile Include="Remoting\RemotingEntryUnitTests.cs" />

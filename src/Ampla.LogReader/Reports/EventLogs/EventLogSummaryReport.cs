@@ -1,23 +1,25 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using Ampla.LogReader.EventLogs;
 using Ampla.LogReader.EventLogs.Statistics;
 using Ampla.LogReader.ReportWriters;
 using Ampla.LogReader.Statistics;
 
 namespace Ampla.LogReader.Reports.EventLogs
 {
-    public class EventLogSummaryReport : Report<EventLogEntry>
+    public class EventLogSummaryReport : Report<SimpleEventLogEntry>
     {
         private readonly EventLog eventLog;
 
-        public EventLogSummaryReport(EventLog eventLog, List<EventLogEntry> entries, IReportWriter reportWriter) : base(entries, reportWriter)
+        public EventLogSummaryReport(EventLog eventLog, List<SimpleEventLogEntry> entries, IReportWriter reportWriter)
+            : base(entries, reportWriter)
         {
             this.eventLog = eventLog;
         }
 
         protected override void RenderReport(IReportWriter reportWriter)
         {
-            GroupByAnalysis<EventLogEntry, EventLogEntryTypeStatistic, string> analysis = new GroupByAnalysis<EventLogEntry, EventLogEntryTypeStatistic, string>
+            GroupByAnalysis<SimpleEventLogEntry, EventLogEntryTypeStatistic, string> analysis = new GroupByAnalysis<SimpleEventLogEntry, EventLogEntryTypeStatistic, string>
             {
                 WhereFunc = entry => true,
                 GroupByFunc = entry => entry.Source,

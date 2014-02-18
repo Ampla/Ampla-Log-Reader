@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Globalization;
+using Ampla.LogReader.EventLogs;
 using Ampla.LogReader.EventLogs.Statistics;
 using Ampla.LogReader.ReportWriters;
-using Ampla.LogReader.Statistics;
 
 namespace Ampla.LogReader.Reports.EventLogs
 {
-    public class EventLogHourlySummaryReport : HourlySummaryReport<EventLogEntry, EventLogEntryTypeStatistic>
+    public class EventLogHourlySummaryReport : HourlySummaryReport<SimpleEventLogEntry, EventLogEntryTypeStatistic>
     {
-        public EventLogHourlySummaryReport(string reportName, List<EventLogEntry> entries, IReportWriter writer) :
+        public EventLogHourlySummaryReport(string reportName, List<SimpleEventLogEntry> entries, IReportWriter writer) :
             base(reportName,
                  entries,
                  writer,
-                 entry => entry.TimeGenerated,
-                 key => new EventLogEntryTypeStatistic(key.ToString()))
+                 entry => entry.CallTime,
+                 key => new EventLogEntryTypeStatistic(key.ToString(CultureInfo.InvariantCulture)))
         {
         }
     }

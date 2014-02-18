@@ -14,7 +14,7 @@ namespace Ampla.LogReader.Reports.EventLogs
          {
              EventLog eventLog = new EventLogSystem().GetEventLog("Application");
              SimpleReportWriter writer = new SimpleReportWriter();
-             EventLogSummaryReport report = new EventLogSummaryReport(eventLog, new List<EventLogEntry>(), writer);
+             EventLogSummaryReport report = new EventLogSummaryReport(eventLog, new List<SimpleEventLogEntry>(), writer);
              
              report.Render();
 

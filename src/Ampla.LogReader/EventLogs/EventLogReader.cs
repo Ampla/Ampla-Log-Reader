@@ -3,26 +3,34 @@ using System.Diagnostics;
 
 namespace Ampla.LogReader.EventLogs
 {
-    public class EventLogReader : ILogReader<EventLogEntry>
+    public class EventLogReader : ILogReader<SimpleEventLogEntry>
     {
         private readonly EventLog eventLog;
-        private readonly List<EventLogEntry> entries;
+        private readonly List<SimpleEventLogEntry> entries;
+        private bool hasRead;
 
         public EventLogReader(EventLog eventLog)
         {
             this.eventLog = eventLog;
-            entries = new List<EventLogEntry>();
+            entries = new List<SimpleEventLogEntry>();
+            Name = eventLog.LogDisplayName;
         }
 
         public void Read()
         {
-            foreach (EventLogEntry entry in eventLog.Entries)
+            if (!hasRead)
             {
-                entries.Add(entry);
+                foreach (EventLogEntry entry in eventLog.Entries)
+                {
+                    entries.Add(new SimpleEventLogEntry(entry));
+                }
             }
+            hasRead = true;
         }
 
-        public List<EventLogEntry> Entries
+        public string Name { get; private set; }
+
+        public List<SimpleEventLogEntry> Entries
         {
             get { return entries; }
         }

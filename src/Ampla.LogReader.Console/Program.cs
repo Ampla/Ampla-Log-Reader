@@ -1,11 +1,9 @@
-﻿using System.Diagnostics;
-using System.IO;
+﻿using System.IO;
 using System.Xml;
 using Ampla.LogReader.EventLogs;
 using Ampla.LogReader.FileSystem;
 using Ampla.LogReader.Remoting;
 using Ampla.LogReader.ReportWriters;
-using Ampla.LogReader.Reports.EventLogs;
 using Ampla.LogReader.Reports.Packs;
 using Ampla.LogReader.Reports.Remoting;
 using Ampla.LogReader.Reports.Wcf;
@@ -89,15 +87,19 @@ namespace Ampla.LogReader.Console
                             writer.WriteLine("Event Log Processing");
                             EventLogSystem eventLogSystem = new EventLogSystem();
 
+                            new EventLogReportPack("EventLog.Details.xlsx", eventLogSystem).Render();
+
+                            /*
                             foreach (EventLog eventLog in eventLogSystem.GetEventLogs())
                             {
                                 EventLogReader reader = new EventLogReader(eventLog);
                                 reader.Read();
 
-                                new EventLogSummaryReport(eventLog, reader.Entries, reportWriter).Render();
-                                new EventLogHourlySummaryReport(eventLog.LogDisplayName + "-Hourly", reader.Entries, reportWriter).Render();
-                                new EventLogDetailsReport(eventLog, reader.Entries, reportWriter).Render();
+                                //new EventLogSummaryReport(eventLog, reader.Entries, reportWriter).Render();
+                                //new EventLogHourlySummaryReport(eventLog.LogDisplayName + "-Hourly", reader.Entries, reportWriter).Render();
+                                //new EventLogDetailsReport(eventLog, reader.Entries, reportWriter).Render();
                             }
+                             */
                         }
                     }
                     else

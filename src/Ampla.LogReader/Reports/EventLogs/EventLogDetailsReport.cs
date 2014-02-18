@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using Ampla.LogReader.EventLogs;
 using Ampla.LogReader.ReportWriters;
 
 namespace Ampla.LogReader.Reports.EventLogs
 {
-    public class EventLogDetailsReport : Report<EventLogEntry>
+    public class EventLogDetailsReport : Report<SimpleEventLogEntry>
     {
         private readonly EventLog eventLog;
 
-        public EventLogDetailsReport(EventLog eventLog, List<EventLogEntry> entries, IReportWriter reportWriter)
+        public EventLogDetailsReport(EventLog eventLog, List<SimpleEventLogEntry> entries, IReportWriter reportWriter)
             : base(entries, reportWriter)
         {
             this.eventLog = eventLog;
@@ -30,12 +31,12 @@ namespace Ampla.LogReader.Reports.EventLogs
                     reportWriter.Write("UserName");
                     reportWriter.Write("Message");
 
-                    foreach (EventLogEntry entry in Entries)
+                    foreach (SimpleEventLogEntry entry in Entries)
                     {
                         string instance = string.Format("{0}", entry.Index);
                         using (reportWriter.StartSection(instance))
                         {
-                            reportWriter.Write("{0}", entry.TimeGenerated);
+                            reportWriter.Write("{0}", entry.CallTime);
                             reportWriter.Write("{0}", entry.Source);
                             reportWriter.Write("{0}", entry.InstanceId);
                             reportWriter.Write("{0}", entry.Category);

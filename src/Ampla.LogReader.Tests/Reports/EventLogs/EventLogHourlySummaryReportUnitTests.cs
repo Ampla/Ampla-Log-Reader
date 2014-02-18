@@ -13,7 +13,7 @@ namespace Ampla.LogReader.Reports.EventLogs
          public void EmptyCalls()
          {
              SimpleReportWriter writer = new SimpleReportWriter();
-             EventLogHourlySummaryReport report = new EventLogHourlySummaryReport("Application", new List<EventLogEntry>(), writer);
+             EventLogHourlySummaryReport report = new EventLogHourlySummaryReport("Application", new List<SimpleEventLogEntry>(), writer);
              
              report.Render();
 

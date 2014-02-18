@@ -5,7 +5,7 @@ namespace Ampla.LogReader.EventLogs
 {
     public interface IEventLogSystem
     {
-        IList<EventLog> GetEventLogs();
+        EventLogReader[] GetReaders();
 
         EventLog GetEventLog(string displayName);
     }

@@ -18,6 +18,11 @@ namespace Ampla.LogReader.EventLogs
             this.machineName = machineName;
         }
 
+        public EventLogReader[] GetReaders()
+        {
+            return GetEventLogs().Select(eventLog => new EventLogReader(eventLog)).ToArray();
+        }
+
         public IList<EventLog> GetEventLogs()
         {
             List<EventLog> eventLogs = new List<EventLog>();
