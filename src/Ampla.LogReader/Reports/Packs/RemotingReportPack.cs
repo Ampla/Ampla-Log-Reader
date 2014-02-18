@@ -1,4 +1,5 @@
 ﻿using Ampla.LogReader.Excel;
+using Ampla.LogReader.FileSystem;
 using Ampla.LogReader.Remoting;
 
 namespace Ampla.LogReader.Reports.Packs
@@ -7,6 +8,12 @@ namespace Ampla.LogReader.Reports.Packs
     {
         private readonly string fileName;
         private readonly ILogReader<RemotingEntry> reader;
+
+        public RemotingReportPack(AmplaProject amplaProject)
+        {
+            fileName = amplaProject.ProjectName + ".Remoting.xlsx";
+            reader = new RemotingDirectory(amplaProject);
+        }
 
         public RemotingReportPack(string fileName, ILogReader<RemotingEntry> reader)
         {

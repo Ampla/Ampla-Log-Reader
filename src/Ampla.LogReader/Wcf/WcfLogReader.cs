@@ -6,18 +6,18 @@ using Ampla.LogReader.Xml;
 
 namespace Ampla.LogReader.Wcf
 {
-    public class WcfLogReader : ILogReader<WcfCall>
+    public class WcfLogReader : LogReader<WcfCall>
     {
         private readonly string fileName;
-        private readonly List<WcfCall> wcfCalls = new List<WcfCall>();
 
         public WcfLogReader(string fileName)
         {
             this.fileName = fileName;
         }
 
-        public void Read()
+        protected override List<WcfCall> ReadEntries()
         {
+            List<WcfCall> wcfCalls = new List<WcfCall>();
             XmlContentTextReader contentReader = new XmlContentTextReader("<WCFCall>", File.OpenRead(fileName));
             XmlFragmentTextReader reader = new XmlFragmentTextReader("Xml", contentReader);
             XmlDocument xmlDoc = new XmlDocument();
@@ -29,7 +29,7 @@ namespace Ampla.LogReader.Wcf
             {
                 throw new XmlException("Error reading file: " + fileName, ex);
             }
-            
+
             XmlNodeList xmlNodeList = xmlDoc.SelectNodes("/Xml/WCFCall");
             if (xmlNodeList != null)
             {
@@ -40,11 +40,8 @@ namespace Ampla.LogReader.Wcf
                     wcfCalls.Add(wcfCall);
                 }
             }
+            return wcfCalls;
         }
 
-        public List<WcfCall> Entries
-        {
-            get { return wcfCalls; }
-        }
     }
 }

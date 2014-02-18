@@ -29,7 +29,7 @@ namespace Ampla.LogReader.Console
                     {
                         AmplaProject project = new AmplaProject
                             {
-                                ProjectName = "",
+                                ProjectName = "(Custom)",
                                 Directory = options.LogDirectory,
                             };
 
@@ -88,18 +88,6 @@ namespace Ampla.LogReader.Console
                             EventLogSystem eventLogSystem = new EventLogSystem();
 
                             new EventLogReportPack("EventLog.Details.xlsx", eventLogSystem).Render();
-
-                            /*
-                            foreach (EventLog eventLog in eventLogSystem.GetEventLogs())
-                            {
-                                EventLogReader reader = new EventLogReader(eventLog);
-                                reader.Read();
-
-                                //new EventLogSummaryReport(eventLog, reader.Entries, reportWriter).Render();
-                                //new EventLogHourlySummaryReport(eventLog.LogDisplayName + "-Hourly", reader.Entries, reportWriter).Render();
-                                //new EventLogDetailsReport(eventLog, reader.Entries, reportWriter).Render();
-                            }
-                             */
                         }
                     }
                     else
@@ -108,16 +96,9 @@ namespace Ampla.LogReader.Console
 
                         foreach (AmplaProject project in projectDirectories.GetAmplaProjects())
                         {
-                            writer.WriteLine("======================");
                             writer.WriteLine("Project: {0}", project.ProjectName);
-                            writer.WriteLine("Directory: {0}", project.Directory);
-
-                            WcfLogDirectory directory = new WcfLogDirectory(project);
-                            directory.Read();
-
-                            WcfSummaryReport statistics = new WcfSummaryReport(directory.Entries,
-                                                                               reportWriter);
-                            statistics.Render();
+                            new WcfExcelReportPack(project).Render();
+                            new RemotingReportPack(project).Render();
                         }
                     }
                 }

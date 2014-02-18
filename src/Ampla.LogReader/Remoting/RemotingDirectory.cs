@@ -4,22 +4,21 @@ using Ampla.LogReader.FileSystem;
 
 namespace Ampla.LogReader.Remoting
 {
-    public class RemotingDirectory : ILogReader<RemotingEntry>
+    public class RemotingDirectory : LogReader<RemotingEntry>
     {
         private readonly string directory;
-        private List<RemotingEntry> entries;
 
         public RemotingDirectory(AmplaProject project)
         {
             string folder = project.RemotingDirectory;
             if (!Directory.Exists(folder))
             {
-                throw new DirectoryNotFoundException(folder + " does not exist.");
+                //throw new DirectoryNotFoundException(folder + " does not exist.");
             }
             directory = folder;
         }
 
-        public void Read()
+        protected override List<RemotingEntry> ReadEntries()
         {
             List<RemotingEntry> list = new List<RemotingEntry>();
             IEnumerable<FileInfo> remotingFiles = new DirectoryInfo(directory).EnumerateFiles();
@@ -29,9 +28,8 @@ namespace Ampla.LogReader.Remoting
                 reader.Read();
                 list.AddRange(reader.Entries);
             }
-            entries = list;
+            return list;
         }
 
-        public List<RemotingEntry> Entries { get { return entries; } }
     }
 }
