@@ -11,20 +11,26 @@ namespace Ampla.LogReader.Reports.Remoting
     {
         private readonly RemotingSummaryStatistic summaryStatistic;
         private readonly TopNStatistics<RemotingEntry> top10IdentityStats;
+        private readonly TopNStatistics<RemotingEntry> top10MethodStats;
 
         public RemotingSummaryPage(IExcelSpreadsheet excelSpreadsheet, List<RemotingEntry> entries)
             : base(excelSpreadsheet, entries, "Summary")
         {
             summaryStatistic = new RemotingSummaryStatistic("Summary");
             top10IdentityStats = new TopNStatistics<RemotingEntry>
-                ("Top 3 Identities", 3,
+                ("Top 20 Identities", 20,
                  entry => entry.Identity,
+                 entry => true);
+
+            top10MethodStats = new TopNStatistics<RemotingEntry>
+                ("Top 20 Methods", 20,
+                 entry => entry.Method,
                  entry => true);
         }
 
         protected override void RenderPage(IWorksheetWriter writer, IEnumerable<RemotingEntry> entries)
         {
-            UpdateStatistics(new IStatistic<RemotingEntry>[] {summaryStatistic, top10IdentityStats});
+            UpdateStatistics(new IStatistic<RemotingEntry>[] {summaryStatistic, top10IdentityStats, top10MethodStats});
 
             writer.WriteRow("Summary of Remoting calls");
             if (summaryStatistic.Count > 0)
@@ -33,13 +39,23 @@ namespace Ampla.LogReader.Reports.Remoting
                 writer.WriteRow("From: ", summaryStatistic.FirstEntry.ToLocalTime());
                 writer.WriteRow("To: ", summaryStatistic.LastEntry.ToLocalTime());
                 writer.WriteRow("Duration (hrs): ", summaryStatistic.LastEntry.Subtract(summaryStatistic.FirstEntry).TotalHours);
-                
+
+                var current = writer.GetCurrentCell();
                 writer.WriteRow();
                 
-                writer.WriteRow("Top 3 Identities");
+                writer.WriteRow(top10IdentityStats.Name, "Count");
                 foreach (var result in top10IdentityStats.Results)
                 {
                     writer.WriteRow(result.Topic, (IConvertible) result.Data);
+                }
+
+                writer.MoveTo(current.Row, current.Column + 3);
+                writer.WriteRow();
+
+                writer.WriteRow(top10MethodStats.Name, "Count");
+                foreach (var result in top10MethodStats.Results)
+                {
+                    writer.WriteRow(result.Topic, (IConvertible)result.Data);
                 }
             }
             else

@@ -6,7 +6,7 @@ namespace Ampla.LogReader.Statistics
     public class GroupByAnalysis<TEntry, TStatistic, TKey> where TStatistic : IStatistic<TEntry>
     {
         private Func<TEntry, TKey> selector;
-        private Func<TEntry, bool> filterFunc = (entry) => true;
+        private Func<TEntry, bool> filterFunc = entry => true;
         private Func<TKey, TStatistic> factory;
 
         private readonly Dictionary<TKey, TStatistic> dictionary = new Dictionary<TKey, TStatistic>();
