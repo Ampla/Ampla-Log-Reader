@@ -148,5 +148,59 @@ namespace Ampla.LogReader.Excel.Writer
             }
         }
 
+        [Test]
+        public void WriteRows()
+        {
+            using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.CreateNew(Filename))
+            {
+                using (IWorksheetWriter writer = spreadsheet.WriteToWorksheet("UnitTests"))
+                {
+                    Assert.That(writer.GetCurrentCell().Address, Is.EqualTo("A1"));
+                    writer.WriteRow(); // A1
+                    writer.WriteRow("One"); // A2
+                    writer.WriteRow("One", "Two"); // A3:B3
+                    writer.WriteRow("One", "Two", "Three"); // A4:C4
+                    Assert.That(writer.GetCurrentCell().Address, Is.EqualTo("A5"));
+                }
+            }
+
+            using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.OpenReadOnly(Filename))
+            {
+                IWorksheetReader reader = spreadsheet.ReadWorksheet("UnitTests");
+                List<string> row1 = reader.ReadRow();
+                List<string> row2 = reader.ReadRow();
+                List<string> row3 = reader.ReadRow();
+                List<string> row4 = reader.ReadRow();
+                Assert.That(row1, Is.Empty);
+                Assert.That(row2, Is.Not.Empty);
+                Assert.That(row2, Is.EquivalentTo(new[] { "One" }));
+                Assert.That(row3, Is.Not.Empty);
+                Assert.That(row3, Is.EquivalentTo(new[] { "One", "Two" }));
+                Assert.That(row4, Is.Not.Empty);
+                Assert.That(row4, Is.EquivalentTo(new[] { "One", "Two", "Three" }));
+            }
+        }
+
+        [Test]
+        public void WriteRowsNullParams()
+        {
+            using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.CreateNew(Filename))
+            {
+                using (IWorksheetWriter writer = spreadsheet.WriteToWorksheet("UnitTests"))
+                {
+                    Assert.That(writer.GetCurrentCell().Address, Is.EqualTo("A1"));
+                    writer.WriteRow((string[]) null); // A1
+                    Assert.That(writer.GetCurrentCell().Address, Is.EqualTo("A2"));
+                }
+            }
+
+            using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.OpenReadOnly(Filename))
+            {
+                IWorksheetReader reader = spreadsheet.ReadWorksheet("UnitTests");
+                List<string> row1 = reader.ReadRow();
+                Assert.That(row1, Is.Empty);
+            }
+        }
+
     }
 }

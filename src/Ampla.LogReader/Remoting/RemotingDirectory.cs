@@ -8,28 +8,38 @@ namespace Ampla.LogReader.Remoting
     {
         private readonly string directory;
 
-        public RemotingDirectory(AmplaProject project)
+        public RemotingDirectory(string folder)
         {
-            string folder = project.RemotingDirectory;
             if (!Directory.Exists(folder))
             {
-                //throw new DirectoryNotFoundException(folder + " does not exist.");
             }
             directory = folder;
+        }
+
+        public RemotingDirectory(AmplaProject project) : this(project.RemotingDirectory)
+        {
         }
 
         protected override List<RemotingEntry> ReadEntries()
         {
             List<RemotingEntry> list = new List<RemotingEntry>();
-            IEnumerable<FileInfo> remotingFiles = new DirectoryInfo(directory).EnumerateFiles();
-            foreach (FileInfo file in remotingFiles)
+
+            if (DirectoryExists())
             {
-                RemotingLogReader reader = new RemotingLogReader(file.FullName);
-                reader.Read();
-                list.AddRange(reader.Entries);
+                IEnumerable<FileInfo> remotingFiles = new DirectoryInfo(directory).EnumerateFiles();
+                foreach (FileInfo file in remotingFiles)
+                {
+                    RemotingLogReader reader = new RemotingLogReader(file.FullName);
+                    reader.Read();
+                    list.AddRange(reader.Entries);
+                }
             }
             return list;
         }
 
+        public bool DirectoryExists()
+        {
+            return Directory.Exists(directory);
+        }
     }
 }

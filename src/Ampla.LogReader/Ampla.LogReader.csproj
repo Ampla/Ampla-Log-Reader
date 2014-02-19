@@ -82,8 +82,10 @@
     <Compile Include="Reports\Packs\RemotingReportPack.cs" />
     <Compile Include="Reports\Packs\EventLogReportPack.cs" />
     <Compile Include="Reports\Remoting\RemotingIdentitySummaryReport.cs" />
+    <Compile Include="Reports\Remoting\RemotingSummaryPage.cs" />
     <Compile Include="Reports\Remoting\RemotingSummaryReport.cs" />
     <Compile Include="Reports\ReportPack.cs" />
+    <Compile Include="Reports\ReportPage.cs" />
     <Compile Include="Reports\Wcf\WcfActionSummaryReport.cs" />
     <Compile Include="Reports\Packs\WcfExcelReportPack.cs" />
     <Compile Include="Reports\Wcf\WcfHourlySummaryReport.cs" />
@@ -107,6 +109,7 @@
     <Compile Include="Statistics\CountStatistic.cs" />
     <Compile Include="Statistics\IStatistic.cs" />
     <Compile Include="Statistics\TimeBasedStatistic.cs" />
+    <Compile Include="Statistics\TopNStatistics.cs" />
     <Compile Include="Statistics\WcfSummaryStatistic.cs" />
     <Compile Include="Wcf\WcfCall.cs" />
     <Compile Include="Wcf\WcfLogDirectory.cs" />

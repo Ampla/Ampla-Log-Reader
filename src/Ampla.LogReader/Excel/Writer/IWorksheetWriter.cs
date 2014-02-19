@@ -36,9 +36,22 @@ namespace Ampla.LogReader.Excel.Writer
         void WriteRow(List<string> row);
 
         /// <summary>
+        ///     Writes a list of values to the current row
+        /// </summary>
+        /// <param name="values"></param>
+        void WriteRow(params IConvertible[] values);
+
+        /// <summary>
         /// Writes the specified value to the current cell and moves to the next column
         /// </summary>
         /// <param name="value">The value.</param>
         void Write(string value);
+
+        /// <summary>
+        ///     Writes a value to the current cell and moves to the next column
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value"></param>
+        void WriteValue<T>(T value);
     }
 }

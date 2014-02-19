@@ -51,13 +51,17 @@
       <Link>Properties\Assembly.Version.cs</Link>
     </Compile>
     <Compile Include="EventLogs\EventLogReaderUnitTests.cs" />
+    <Compile Include="FileSystem\AmplaProjects.cs" />
     <Compile Include="FileSystem\AmplaProjectUnitTests.cs" />
+    <Compile Include="Remoting\RemotingDirectoryUnitTests.cs" />
     <Compile Include="Remoting\RemotingLogReaderUnitTests.cs" />
     <Compile Include="Remoting\RemotingEntryUnitTests.cs" />
     <Compile Include="Reports\EventLogs\EventLogDetailsReportUnitTests.cs" />
     <Compile Include="Reports\EventLogs\EventLogHourlySummaryReportUnitTests.cs" />
     <Compile Include="Reports\EventLogs\EventLogSummaryReportUnitTests.cs" />
     <Compile Include="Reports\Remoting\RemotingIdentitySummaryReportUnitTests.cs" />
+    <Compile Include="Reports\Packs\RemotingReportPackUnitTests.cs" />
+    <Compile Include="Reports\Remoting\RemotingSummaryPageUnitTests.cs" />
     <Compile Include="Reports\Remoting\RemotingSummaryReportUnitTests.cs" />
     <Compile Include="Statistics\CountStatisticUnitTests.cs" />
     <Compile Include="EventLogs\EventLogSystemUnitTests.cs" />
@@ -92,6 +96,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Remoting\Resources\SingleEntry.log">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\AmplaProjects\AmplaProject\ReplayLogs\PAQueryLoad\PAQueryLoad.log">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\AmplaProjects\AmplaProject\ReplayLogs\WCFRecorder\WCFRecorder.log">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\AmplaProjects\WCFOnly\ReplayLogs\WCFRecorder\WCFRecorder.log">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Wcf\Resources\ErrorEntry.log">
