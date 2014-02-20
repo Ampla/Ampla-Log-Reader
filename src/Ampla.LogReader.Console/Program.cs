@@ -65,7 +65,7 @@ namespace Ampla.LogReader.Console
 
                             writer.WriteLine("Read {0} entries from Remoting files", directory.Entries.Count);
 
-                            new RemotingReportPack("Remoting.Details.xlsx", directory).Render();
+                            new RemotingExcelReportPack("Remoting.Details.xlsx", directory).Render();
 
 
                             new RemotingSummaryReport(
@@ -98,7 +98,7 @@ namespace Ampla.LogReader.Console
                         {
                             writer.WriteLine("Project: {0}", project.ProjectName);
                             new WcfExcelReportPack(project).Render();
-                            new RemotingReportPack(project).Render();
+                            new RemotingExcelReportPack(project).Render();
                         }
                     }
                 }

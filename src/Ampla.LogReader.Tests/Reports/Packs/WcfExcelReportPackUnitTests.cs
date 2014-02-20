@@ -6,17 +6,20 @@ using NUnit.Framework;
 namespace Ampla.LogReader.Reports.Packs
 {
     [TestFixture]
-    public class RemotingReportPackUnitTests : ExcelTestFixture
+    public class WcfExcelReportPackUnitTests : ExcelTestFixture
     {
          [Test]
-         public void WithRemotingFiles()
+         public void WithWcfCalls()
          {
              AmplaProject project = AmplaTestProjects.GetAmplaProject();
 
-             RemotingReportPack reportPack = new RemotingReportPack(Filename, project);
+             WcfExcelReportPack reportPack = new WcfExcelReportPack(Filename, project);
              reportPack.Render();
 
              Assert.That(File.Exists(Filename), Is.True);
+
+             AssertWorksheetExists("Summary");
+             AssertWorksheetExists("WcfCalls");
          }
     }
 }

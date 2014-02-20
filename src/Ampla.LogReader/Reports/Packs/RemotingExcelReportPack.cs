@@ -1,28 +1,29 @@
 ﻿using Ampla.LogReader.Excel;
 using Ampla.LogReader.FileSystem;
 using Ampla.LogReader.Remoting;
+using Ampla.LogReader.Reports.Pages;
 using Ampla.LogReader.Reports.Remoting;
 
 namespace Ampla.LogReader.Reports.Packs
 {
-    public class RemotingReportPack : ReportPack
+    public class RemotingExcelReportPack : ReportPack
     {
         private readonly string fileName;
         private readonly ILogReader<RemotingEntry> reader;
 
-        public RemotingReportPack(AmplaProject amplaProject)
+        public RemotingExcelReportPack(AmplaProject amplaProject)
         {
             fileName = amplaProject.ProjectName + ".Remoting.xlsx";
             reader = new RemotingDirectory(amplaProject);
         }
 
-        public RemotingReportPack(string fileName, AmplaProject amplaProject)
+        public RemotingExcelReportPack(string fileName, AmplaProject amplaProject)
         {
             this.fileName = fileName;
             reader = new RemotingDirectory(amplaProject);
         }
 
-        public RemotingReportPack(string fileName, ILogReader<RemotingEntry> reader)
+        public RemotingExcelReportPack(string fileName, ILogReader<RemotingEntry> reader)
         {
             this.fileName = fileName;
             this.reader = reader;

@@ -23,5 +23,14 @@ namespace Ampla.LogReader.Excel
 
         private TempDirectory TempDirectory { get; set; }
 
+
+        public void AssertWorksheetExists(string worksheet)
+        {
+            using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.OpenReadOnly(Filename))
+            {
+                IWorksheet ws = spreadsheet.GetWorksheet(worksheet);
+                Assert.That(ws, Is.Not.Null, "{0} worksheet does not exist in {1}", worksheet, Filename);
+            }
+        }
     }
 }

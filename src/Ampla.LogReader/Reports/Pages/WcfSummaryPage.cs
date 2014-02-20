@@ -2,37 +2,37 @@
 using System.Collections.Generic;
 using Ampla.LogReader.Excel;
 using Ampla.LogReader.Excel.Writer;
-using Ampla.LogReader.Remoting;
 using Ampla.LogReader.Statistics;
+using Ampla.LogReader.Wcf;
 
-namespace Ampla.LogReader.Reports.Remoting
+namespace Ampla.LogReader.Reports.Pages
 {
-    public class RemotingSummaryPage : ReportPage<RemotingEntry>
+    public class WcfSummaryPage : ReportPage<WcfCall>
     {
-        private readonly RemotingSummaryStatistic summaryStatistic;
-        private readonly TopNStatistics<RemotingEntry> top10IdentityStats;
-        private readonly TopNStatistics<RemotingEntry> top10MethodStats;
+        private readonly WcfSummaryStatistic summaryStatistic;
+        private readonly TopNStatistics<WcfCall> top10UrlStats;
+        private readonly TopNStatistics<WcfCall> top10MethodStats;
 
-        public RemotingSummaryPage(IExcelSpreadsheet excelSpreadsheet, List<RemotingEntry> entries)
+        public WcfSummaryPage(IExcelSpreadsheet excelSpreadsheet, List<WcfCall> entries)
             : base(excelSpreadsheet, entries, "Summary")
         {
-            summaryStatistic = new RemotingSummaryStatistic("Summary");
-            top10IdentityStats = new TopNStatistics<RemotingEntry>
-                ("Top 20 Identities", 20,
-                 entry => entry.Identity,
+            summaryStatistic = new WcfSummaryStatistic("Summary");
+            top10UrlStats = new TopNStatistics<WcfCall>
+                ("Top 20 Urls", 20,
+                 entry => entry.Url,
                  entry => true);
 
-            top10MethodStats = new TopNStatistics<RemotingEntry>
+            top10MethodStats = new TopNStatistics<WcfCall>
                 ("Top 20 Methods", 20,
                  entry => entry.Method,
                  entry => true);
         }
 
-        protected override void RenderPage(IWorksheetWriter writer, IEnumerable<RemotingEntry> entries)
+        protected override void RenderPage(IWorksheetWriter writer)
         {
-            UpdateStatistics(new IStatistic<RemotingEntry>[] {summaryStatistic, top10IdentityStats, top10MethodStats});
+            UpdateStatistics(new IStatistic<WcfCall>[] {summaryStatistic, top10UrlStats, top10MethodStats});
 
-            writer.WriteRow("Summary of Remoting calls");
+            writer.WriteRow("Summary of Wcf calls");
             if (summaryStatistic.Count > 0)
             {
                 writer.WriteRow("Count: ", summaryStatistic.Count);
@@ -43,8 +43,8 @@ namespace Ampla.LogReader.Reports.Remoting
                 var current = writer.GetCurrentCell();
                 writer.WriteRow();
                 
-                writer.WriteRow(top10IdentityStats.Name, "Count");
-                foreach (var result in top10IdentityStats.Results)
+                writer.WriteRow(top10UrlStats.Name, "Count");
+                foreach (var result in top10UrlStats.Results)
                 {
                     writer.WriteRow(result.Topic, (IConvertible) result.Data);
                 }
@@ -62,9 +62,6 @@ namespace Ampla.LogReader.Reports.Remoting
             {
                 writer.WriteRow("Count:", "no entries");
             }
-
-            
-
         }
         
     }

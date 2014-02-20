@@ -1,5 +1,6 @@
 ﻿using Ampla.LogReader.Excel;
 using Ampla.LogReader.FileSystem;
+using Ampla.LogReader.Reports.Pages;
 using Ampla.LogReader.Wcf;
 
 namespace Ampla.LogReader.Reports.Packs
@@ -14,6 +15,11 @@ namespace Ampla.LogReader.Reports.Packs
             fileName = amplaProject.ProjectName + ".Wcf.xlsx";
             reader = new WcfLogDirectory(amplaProject);
         }
+        public WcfExcelReportPack(string fileName, AmplaProject amplaProject)
+        {
+            this.fileName = fileName;
+            reader = new WcfLogDirectory(amplaProject);
+        }
 
         public WcfExcelReportPack(string fileName, ILogReader<WcfCall> reader)
         {
@@ -26,6 +32,7 @@ namespace Ampla.LogReader.Reports.Packs
             reader.Read();
             using (IExcelSpreadsheet excel = ExcelSpreadsheet.CreateNew(fileName))
             {
+                new WcfSummaryPage(excel, reader.Entries).Render();
                 excel.WriteDataToWorksheet(WcfCall.CreateDataTable(reader.Entries), "WcfCalls");
             }
         }

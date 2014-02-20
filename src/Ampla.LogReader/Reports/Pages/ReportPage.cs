@@ -3,7 +3,7 @@ using Ampla.LogReader.Excel;
 using Ampla.LogReader.Excel.Writer;
 using Ampla.LogReader.Statistics;
 
-namespace Ampla.LogReader.Reports
+namespace Ampla.LogReader.Reports.Pages
 {
     public abstract class ReportPage<TEntry>
     {
@@ -21,7 +21,7 @@ namespace Ampla.LogReader.Reports
         {
             IWorksheetWriter writer = excelSpreadsheet.WriteToWorksheet(PageName);
             
-            RenderPage(writer, entries);
+            RenderPage(writer);
         }
 
         protected void UpdateStatistics(IStatistic<TEntry>[] statistics)
@@ -37,6 +37,6 @@ namespace Ampla.LogReader.Reports
 
         public string PageName { get; private set; }
 
-        protected abstract void RenderPage(IWorksheetWriter writer, IEnumerable<TEntry> list);
+        protected abstract void RenderPage(IWorksheetWriter writer);
     }
 }

@@ -4,22 +4,24 @@ using Ampla.LogReader.Excel;
 using Ampla.LogReader.Excel.Reader;
 using Ampla.LogReader.FileSystem;
 using Ampla.LogReader.Remoting;
+using Ampla.LogReader.Reports.Pages;
+using Ampla.LogReader.Wcf;
 using NUnit.Framework;
 
-namespace Ampla.LogReader.Reports.Remoting
+namespace Ampla.LogReader.Reports.Wcf
 {
     [TestFixture]
-    public class RemotingSummaryPageUnitTests : ExcelTestFixture
+    public class WcfSummaryPageUnitTests : ExcelTestFixture
     {
-        private const string logFileName = @".\Remoting\Resources\SingleEntry.log";
+        private const string logFileName = @".\Wcf\Resources\SingleEntry.log";
 
         [Test]
         public void NoRecords()
         {
-            RemotingSummaryPage page;
+            WcfSummaryPage page;
             using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.CreateNew(Filename))
             {
-                page = new RemotingSummaryPage(spreadsheet, new List<RemotingEntry>());
+                page = new WcfSummaryPage(spreadsheet, new List<WcfCall>());
                 page.Render();
             }
 
@@ -36,13 +38,13 @@ namespace Ampla.LogReader.Reports.Remoting
         [Test]
         public void OneRecord()
         {
-            ILogReader<RemotingEntry> logReader = new RemotingLogReader(logFileName);
+            ILogReader<WcfCall> logReader = new WcfLogReader(logFileName);
             logReader.Read();
 
-            RemotingSummaryPage page;
+            WcfSummaryPage page;
             using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.CreateNew(Filename))
             {
-                page = new RemotingSummaryPage(spreadsheet, logReader.Entries);
+                page = new WcfSummaryPage(spreadsheet, logReader.Entries);
                 page.Render();
             }
 
@@ -73,12 +75,12 @@ namespace Ampla.LogReader.Reports.Remoting
         {
             AmplaProject project = AmplaTestProjects.GetAmplaProject();
 
-            RemotingSummaryPage page;
+            WcfSummaryPage page;
             using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.CreateNew(Filename))
             {
-                RemotingDirectory directory = new RemotingDirectory(project);
+                WcfLogDirectory directory = new WcfLogDirectory(project);
                 directory.Read();
-                page = new RemotingSummaryPage(spreadsheet, directory.Entries);
+                page = new WcfSummaryPage(spreadsheet, directory.Entries);
                 page.Render();
             }
 

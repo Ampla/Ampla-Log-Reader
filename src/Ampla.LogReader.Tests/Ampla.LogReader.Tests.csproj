@@ -59,10 +59,12 @@
     <Compile Include="Reports\EventLogs\EventLogDetailsReportUnitTests.cs" />
     <Compile Include="Reports\EventLogs\EventLogHourlySummaryReportUnitTests.cs" />
     <Compile Include="Reports\EventLogs\EventLogSummaryReportUnitTests.cs" />
+    <Compile Include="Reports\Packs\WcfExcelReportPackUnitTests.cs" />
     <Compile Include="Reports\Remoting\RemotingIdentitySummaryReportUnitTests.cs" />
-    <Compile Include="Reports\Packs\RemotingReportPackUnitTests.cs" />
-    <Compile Include="Reports\Remoting\RemotingSummaryPageUnitTests.cs" />
+    <Compile Include="Reports\Packs\RemotingExcelReportPackUnitTests.cs" />
+    <Compile Include="Reports\Pages\RemotingSummaryPageUnitTests.cs" />
     <Compile Include="Reports\Remoting\RemotingSummaryReportUnitTests.cs" />
+    <Compile Include="Reports\Pages\WcfSummaryPageUnitTests.cs" />
     <Compile Include="Statistics\CountStatisticUnitTests.cs" />
     <Compile Include="EventLogs\EventLogSystemUnitTests.cs" />
     <Compile Include="Excel\ExcelSpreadsheetUnitTests.cs" />
@@ -102,7 +104,13 @@
     <None Include="Resources\AmplaProjects\AmplaProject\ReplayLogs\PAQueryLoad\PAQueryLoad.log">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\AmplaProjects\AmplaProject\ReplayLogs\WCFRecorder\WCFRecorder.log">
+    <None Include="Resources\AmplaProjects\AmplaProject\ReplayLogs\WCFRecorder\WCFRecorder_201308050923.log">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\AmplaProjects\AmplaProject\ReplayLogs\WCFRecorder\WCFRecorder_201308050931.log">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\AmplaProjects\AmplaProject\ReplayLogs\WCFRecorder\WCFRecorder_201308091407.log">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\AmplaProjects\WCFOnly\ReplayLogs\WCFRecorder\WCFRecorder.log">
