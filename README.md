@@ -19,6 +19,18 @@ Event Logs (Windows Event Logs)
 ===
 Provides summary information from machine event logs. 
 
+To Run 
+===
+
+Output all Wcf and Remoting logs from all the project logs in %ProgramData%\Citect\Ampla\Projects
+```
+Ampla.LogReader.Console.exe
+```
+
+Each Project will output a {ProjectName}.Wcf.xlsx and {ProjectName}.Remoting.xlsx.
+
+
+
 Reports
 ===
 The Ampla Log Reader outputs its findings in Reports.  Reports provide high level statistics about the entries in each of the logs.
