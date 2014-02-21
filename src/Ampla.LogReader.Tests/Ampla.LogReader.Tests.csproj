@@ -51,6 +51,9 @@
       <Link>Properties\Assembly.Version.cs</Link>
     </Compile>
     <Compile Include="EventLogs\EventLogReaderUnitTests.cs" />
+    <Compile Include="Excel\ExcelCell.cs" />
+    <Compile Include="Excel\ExcelPage.cs" />
+    <Compile Include="Excel\ExcelRow.cs" />
     <Compile Include="FileSystem\AmplaProjects.cs" />
     <Compile Include="FileSystem\AmplaProjectUnitTests.cs" />
     <Compile Include="Remoting\RemotingDirectoryUnitTests.cs" />

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Ampla.LogReader.Excel;
 using Ampla.LogReader.Excel.Writer;
 using Ampla.LogReader.Statistics;
@@ -38,5 +39,15 @@ namespace Ampla.LogReader.Reports.Pages
         public string PageName { get; private set; }
 
         protected abstract void RenderPage(IWorksheetWriter writer);
+
+
+        protected void WriteStatistics(TopNStatistics<TEntry> topNStatistics, IWorksheetWriter writer)
+        {
+            writer.WriteRow(topNStatistics.Name, "Count");
+            foreach (var result in topNStatistics.Results)
+            {
+                writer.WriteRow(result.Topic, (IConvertible)result.Data);
+            }
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using Ampla.LogReader.Excel.Reader;
+using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace Ampla.LogReader.Excel
 {
@@ -24,7 +26,7 @@ namespace Ampla.LogReader.Excel
         private TempDirectory TempDirectory { get; set; }
 
 
-        public void AssertWorksheetExists(string worksheet)
+        protected void AssertWorksheetExists(string worksheet)
         {
             using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.OpenReadOnly(Filename))
             {
@@ -32,5 +34,6 @@ namespace Ampla.LogReader.Excel
                 Assert.That(ws, Is.Not.Null, "{0} worksheet does not exist in {1}", worksheet, Filename);
             }
         }
+
     }
 }

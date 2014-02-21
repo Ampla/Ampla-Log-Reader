@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Ampla.LogReader.Excel;
 using Ampla.LogReader.Excel.Reader;
 using Ampla.LogReader.FileSystem;
 using Ampla.LogReader.Remoting;
-using Ampla.LogReader.Reports.Pages;
 using NUnit.Framework;
 
-namespace Ampla.LogReader.Reports.Remoting
+namespace Ampla.LogReader.Reports.Pages
 {
     [TestFixture]
     public class RemotingSummaryPageUnitTests : ExcelTestFixture
@@ -17,19 +15,25 @@ namespace Ampla.LogReader.Reports.Remoting
         [Test]
         public void NoRecords()
         {
-            RemotingSummaryPage page;
+            string pageName;
             using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.CreateNew(Filename))
             {
-                page = new RemotingSummaryPage(spreadsheet, new List<RemotingEntry>());
+                RemotingSummaryPage page = new RemotingSummaryPage(spreadsheet, new List<RemotingEntry>());
                 page.Render();
+                pageName = page.PageName;
             }
 
             using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.OpenReadOnly(Filename))
             {
-                using (IWorksheetReader reader = spreadsheet.ReadWorksheet(page.PageName))
+                using (ExcelPage page = new ExcelPage(spreadsheet, pageName))
                 {
-                    List<string> row1 = reader.ReadRow();
-                    Assert.That(row1, Is.Not.Empty);
+                    page.ReadLines(10);
+                    page.Row(1).AssertValues<string>(Is.Not.Empty);
+                    page.Row(2).AssertValues<string>(Is.Not.Empty);
+
+                    page.FindRow(1, value => value.StartsWith("Count"))
+                        .Column(2)
+                        .AssertValue<string>(Is.Not.EqualTo("0"));
                 }
             }
         }
@@ -40,31 +44,27 @@ namespace Ampla.LogReader.Reports.Remoting
             ILogReader<RemotingEntry> logReader = new RemotingLogReader(logFileName);
             logReader.Read();
 
-            RemotingSummaryPage page;
+            string pageName;
             using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.CreateNew(Filename))
             {
-                page = new RemotingSummaryPage(spreadsheet, logReader.Entries);
+                RemotingSummaryPage page = new RemotingSummaryPage(spreadsheet, logReader.Entries);
                 page.Render();
+                pageName = page.PageName;
             }
 
             using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.OpenReadOnly(Filename))
             {
-                using (IWorksheetReader reader = spreadsheet.ReadWorksheet(page.PageName))
+                using (ExcelPage page = new ExcelPage(spreadsheet, pageName))
                 {
-                    List<string> row1 = reader.ReadRow();
-                    Assert.That(row1, Is.Not.Empty);
-                    List<string> row2 = reader.ReadRow();
-                    Assert.That(row2, Is.EquivalentTo(new [] {"Count: ", "1"}));
+                    page.ReadLines(10);
+                    page.Row(1).AssertValues<string>(Is.Not.Empty);
+                    page.Row(2).AssertValues<string>(Is.Not.Empty);
 
-                    List<string> row3 = reader.ReadRow();
-                    Assert.That(row3, Is.Not.Empty);
-
-                    List<string> row4 = reader.ReadRow();
-                    Assert.That(row4, Is.Not.Empty);
-
-                    List<string> row5 = reader.ReadRow();
-                    Assert.That(row5, Is.Not.Empty);
-
+                    page.FindRow(
+                        1,
+                        value => value.StartsWith("Count"))
+                        .Column(2)
+                        .AssertValue<int>(Is.EqualTo(1));
                 }
             }
         }
@@ -74,36 +74,29 @@ namespace Ampla.LogReader.Reports.Remoting
         {
             AmplaProject project = AmplaTestProjects.GetAmplaProject();
 
-            RemotingSummaryPage page;
+            string pageName;
             using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.CreateNew(Filename))
             {
                 RemotingDirectory directory = new RemotingDirectory(project);
                 directory.Read();
-                page = new RemotingSummaryPage(spreadsheet, directory.Entries);
+                RemotingSummaryPage page = new RemotingSummaryPage(spreadsheet, directory.Entries);
                 page.Render();
+                pageName = page.PageName;
             }
 
             using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.OpenReadOnly(Filename))
             {
-                using (IWorksheetReader reader = spreadsheet.ReadWorksheet(page.PageName))
+                using (ExcelPage page = new ExcelPage(spreadsheet, pageName))
                 {
-                    List<string> row1 = reader.ReadRow();
-                    Assert.That(row1, Is.Not.Empty);
-                    List<string> row2 = reader.ReadRow();
-                    Assert.That(row2, Is.Not.Empty);
+                    page.ReadLines(10);
+                    page.Row(1).AssertValues<string>(Is.Not.Empty);
+                    page.Row(2).AssertValues<string>(Is.Not.Empty);
 
-                    int count = int.Parse(row2[1]);
-                    Assert.That(count, Is.GreaterThan(1));
-
-                    List<string> row3 = reader.ReadRow();
-                    Assert.That(row3, Is.Not.Empty);
-
-                    List<string> row4 = reader.ReadRow();
-                    Assert.That(row4, Is.Not.Empty);
-
-                    List<string> row5 = reader.ReadRow();
-                    Assert.That(row5, Is.Not.Empty);
-
+                    page.FindRow(
+                        1,
+                        value => value.StartsWith("Count"))
+                        .Column(2)
+                        .AssertValue<int>(Is.GreaterThan(0));
                 }
             }
         }

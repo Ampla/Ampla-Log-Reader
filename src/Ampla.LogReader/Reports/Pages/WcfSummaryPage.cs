@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Ampla.LogReader.Excel;
 using Ampla.LogReader.Excel.Writer;
 using Ampla.LogReader.Statistics;
@@ -38,25 +37,23 @@ namespace Ampla.LogReader.Reports.Pages
                 writer.WriteRow("Count: ", summaryStatistic.Count);
                 writer.WriteRow("From: ", summaryStatistic.FirstEntry.ToLocalTime());
                 writer.WriteRow("To: ", summaryStatistic.LastEntry.ToLocalTime());
-                writer.WriteRow("Duration (hrs): ", summaryStatistic.LastEntry.Subtract(summaryStatistic.FirstEntry).TotalHours);
+                writer.WriteRow();
+                writer.WriteRow("Number of Faults:", summaryStatistic.Errors);
+                writer.WriteRow("Fault (%):", summaryStatistic.ErrorPercent);
+                writer.WriteRow();
+                writer.WriteRow("Total Duration (sec): ", summaryStatistic.TotalDuration.TotalSeconds);
+                writer.WriteRow("Maximum Duration (sec): ", summaryStatistic.MaxDuration.TotalSeconds);
+                writer.WriteRow("Average Duration (sec): ", summaryStatistic.AverageDuration.TotalSeconds);
 
                 var current = writer.GetCurrentCell();
                 writer.WriteRow();
-                
-                writer.WriteRow(top10UrlStats.Name, "Count");
-                foreach (var result in top10UrlStats.Results)
-                {
-                    writer.WriteRow(result.Topic, (IConvertible) result.Data);
-                }
+
+                WriteStatistics(top10MethodStats, writer);
 
                 writer.MoveTo(current.Row, current.Column + 3);
                 writer.WriteRow();
 
-                writer.WriteRow(top10MethodStats.Name, "Count");
-                foreach (var result in top10MethodStats.Results)
-                {
-                    writer.WriteRow(result.Topic, (IConvertible)result.Data);
-                }
+                WriteStatistics(top10UrlStats, writer);
             }
             else
             {

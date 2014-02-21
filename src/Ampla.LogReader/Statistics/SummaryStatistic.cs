@@ -102,6 +102,46 @@ namespace Ampla.LogReader.Statistics
 
         public int Errors { get; private set; }
 
+        public TimeSpan TotalDuration  
+        {
+            get
+            {
+                if (durationFunc == null)
+                {
+                    throw new InvalidOperationException("Unable to Calculate Total Duration");
+                }
+                return totalDuration;
+            }
+        }
+
+        public TimeSpan MaxDuration
+        {
+            get
+            {
+                if (durationFunc == null)
+                {
+                    throw new InvalidOperationException("Unable to Calculate Maximum Duration");
+                }
+                return maxDuration;
+            }
+        }
+
+        public TimeSpan AverageDuration
+        {
+            get
+            {
+                if (durationFunc == null)
+                {
+                    throw new InvalidOperationException("Unable to Calculate Average Duration");
+                }
+
+                int count = Count == 0 ? 1 : Count;
+
+                return new TimeSpan(totalDuration.Ticks / count);
+            }
+        }
+
+
         public override string ToString()
         {
             List<string> values = Results.Select(result => result.ToString()).ToList();

@@ -42,27 +42,20 @@ namespace Ampla.LogReader.Reports.Pages
 
                 var current = writer.GetCurrentCell();
                 writer.WriteRow();
-                
-                writer.WriteRow(top10IdentityStats.Name, "Count");
-                foreach (var result in top10IdentityStats.Results)
-                {
-                    writer.WriteRow(result.Topic, (IConvertible) result.Data);
-                }
+
+                WriteStatistics(top10MethodStats, writer);
 
                 writer.MoveTo(current.Row, current.Column + 3);
                 writer.WriteRow();
 
-                writer.WriteRow(top10MethodStats.Name, "Count");
-                foreach (var result in top10MethodStats.Results)
-                {
-                    writer.WriteRow(result.Topic, (IConvertible)result.Data);
-                }
+                WriteStatistics(top10IdentityStats, writer);
             }
             else
             {
                 writer.WriteRow("Count:", "no entries");
             }
         }
+
         
     }
 }
