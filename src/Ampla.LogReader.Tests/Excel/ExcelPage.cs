@@ -35,7 +35,8 @@ namespace Ampla.LogReader.Excel
         {
             foreach (ExcelRow row in rows)
             {
-                if (selectFunc(row.GetValueAt<string>(column)))
+                string value = row.GetValueAt<string>(column);
+                if (value != null && selectFunc(value))
                 {
                     return row;
                 }
@@ -73,7 +74,7 @@ namespace Ampla.LogReader.Excel
                 ExcelRow excelRow = rows[row - 1];
                 return excelRow;
             }
-            Assert.Fail("Unable to find Row {0} in {1}", row, this);
+            Assert.Fail("Row {0} was not read in ReadLines().\r\n{1}", row, this);
             return null;
         }
     }

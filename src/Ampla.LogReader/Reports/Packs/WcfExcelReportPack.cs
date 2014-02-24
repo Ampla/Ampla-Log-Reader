@@ -34,6 +34,9 @@ namespace Ampla.LogReader.Reports.Packs
             {
                 new WcfSummaryPage(excel, reader.Entries).Render();
                 excel.WriteDataToWorksheet(WcfCall.CreateDataTable(reader.Entries), "WcfCalls");
+
+                // write fault details to separate page
+                new WcfFaultSummaryPage(excel, reader.Entries).Render();
             }
         }
     }

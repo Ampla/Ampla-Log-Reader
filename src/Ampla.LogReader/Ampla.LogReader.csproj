@@ -81,6 +81,7 @@
     <Compile Include="Reports\EventLogs\EventLogSummaryReport.cs" />
     <Compile Include="Reports\Packs\RemotingExcelReportPack.cs" />
     <Compile Include="Reports\Packs\EventLogReportPack.cs" />
+    <Compile Include="Reports\Pages\WcfFaultSummaryPage.cs" />
     <Compile Include="Reports\Remoting\RemotingIdentitySummaryReport.cs" />
     <Compile Include="Reports\Pages\RemotingSummaryPage.cs" />
     <Compile Include="Reports\Remoting\RemotingSummaryReport.cs" />

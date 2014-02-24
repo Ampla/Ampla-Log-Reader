@@ -53,6 +53,7 @@
     <Compile Include="EventLogs\EventLogReaderUnitTests.cs" />
     <Compile Include="Excel\ExcelCell.cs" />
     <Compile Include="Excel\ExcelPage.cs" />
+    <Compile Include="Excel\ExcelPageUnitTests.cs" />
     <Compile Include="Excel\ExcelRow.cs" />
     <Compile Include="FileSystem\AmplaProjects.cs" />
     <Compile Include="FileSystem\AmplaProjectUnitTests.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Reports\EventLogs\EventLogHourlySummaryReportUnitTests.cs" />
     <Compile Include="Reports\EventLogs\EventLogSummaryReportUnitTests.cs" />
     <Compile Include="Reports\Packs\WcfExcelReportPackUnitTests.cs" />
+    <Compile Include="Reports\Pages\WcfFaultSummaryPageUnitTests.cs" />
     <Compile Include="Reports\Remoting\RemotingIdentitySummaryReportUnitTests.cs" />
     <Compile Include="Reports\Packs\RemotingExcelReportPackUnitTests.cs" />
     <Compile Include="Reports\Pages\RemotingSummaryPageUnitTests.cs" />
@@ -114,6 +116,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\AmplaProjects\AmplaProject\ReplayLogs\WCFRecorder\WCFRecorder_201308091407.log">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\AmplaProjects\WCFFaults\ReplayLogs\WCFRecorder\WCFRecorder.log">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\AmplaProjects\WCFOnly\ReplayLogs\WCFRecorder\WCFRecorder.log">

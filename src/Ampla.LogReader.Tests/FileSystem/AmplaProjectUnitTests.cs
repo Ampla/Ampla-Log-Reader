@@ -51,5 +51,16 @@ namespace Ampla.LogReader.FileSystem
             Assert.That(Directory.Exists(project.RemotingDirectory), Is.True);
             Assert.That(Directory.Exists(project.WcfLogDirectory), Is.True);
         }
+
+        [Test]
+        public void WcfFaultsProject()
+        {
+            AmplaProject project = AmplaTestProjects.GetWcfFaultsProject();
+            Assert.That(project, Is.Not.Null);
+
+            Assert.That(Directory.Exists(project.Directory), Is.True);
+            Assert.That(Directory.Exists(project.RemotingDirectory), Is.False);
+            Assert.That(Directory.Exists(project.WcfLogDirectory), Is.True);
+        }
     }
 }
