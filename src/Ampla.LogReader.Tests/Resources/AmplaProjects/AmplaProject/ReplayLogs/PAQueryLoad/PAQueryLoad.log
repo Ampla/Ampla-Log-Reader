@@ -1,0 +1,375 @@
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T03:59:59</UTCDateTime>
+<LocalDateTime>2013-04-30T13:59:59</LocalDateTime>
+<__MethodName>get_AuthenticationUrl</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.ISecurityService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args/>
+<__MessageResponseTime>0</__MessageResponseTime>
+</RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T03:59:59</UTCDateTime>
+<LocalDateTime>2013-04-30T13:59:59</LocalDateTime>
+<__MethodName>Login</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.ISecurityService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args/>
+<__MessageResponseTime>27.0015</__MessageResponseTime>
+</RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T03:59:59</UTCDateTime>
+<LocalDateTime>2013-04-30T13:59:59</LocalDateTime>
+<__MethodName>GetUserName</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.ISecurityService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>4682a57e-7d20-4b2c-a2ae-46a6899feaaf</System.Guid>
+</__Args>
+<__MessageResponseTime>0</__MessageResponseTime>
+</RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T04:00:00</UTCDateTime>
+<LocalDateTime>2013-04-30T14:00:00</LocalDateTime>
+<__MethodName>GetPeriodDescriptors</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.INavigationService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>4682a57e-7d20-4b2c-a2ae-46a6899feaaf</System.Guid>
+<System.String>Enterprise</System.String>
+<System.DateTime>30/04/2013 4:00:00 AM</System.DateTime>
+</__Args>
+<__MessageResponseTime>6.0003</__MessageResponseTime>
+</RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T04:00:00</UTCDateTime>
+<LocalDateTime>2013-04-30T14:00:00</LocalDateTime>
+<__MethodName>Query</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.IDataService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>4682a57e-7d20-4b2c-a2ae-46a6899feaaf</System.Guid>
+<Citect.Ampla.General.Common.ViewDescriptor>View Descriptor [Metrics.AnalysisView]</Citect.Ampla.General.Common.ViewDescriptor>
+<Citect.Ampla.General.Common.FilterValues>@GroupBy={Hour}, Location={&quot;Enterprise&quot;}, Period={&quot;Hour&quot;}, Sample Period={Current Day}</Citect.Ampla.General.Common.FilterValues>
+<Citect.Ampla.General.Common.QueryFlags>Pivot, FieldMask, LookupLists, EvaluatedFields</Citect.Ampla.General.Common.QueryFlags>
+</__Args>
+<__MessageResponseTime>38.0022</__MessageResponseTime>
+</RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T04:00:01</UTCDateTime>
+<LocalDateTime>2013-04-30T14:00:01</LocalDateTime>
+<__MethodName>GetUserHome</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.IGeneralService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>4682a57e-7d20-4b2c-a2ae-46a6899feaaf</System.Guid>
+</__Args>
+<__MessageResponseTime>10.0005</__MessageResponseTime>
+</RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T04:00:01</UTCDateTime>
+<LocalDateTime>2013-04-30T14:00:01</LocalDateTime>
+<__MethodName>GetUserFavorites</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.IGeneralService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>4682a57e-7d20-4b2c-a2ae-46a6899feaaf</System.Guid>
+</__Args>
+<__MessageResponseTime>2.0001</__MessageResponseTime>
+</RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T04:00:01</UTCDateTime>
+<LocalDateTime>2013-04-30T14:00:01</LocalDateTime>
+<__MethodName>GetUserId</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.ISecurityService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>4682a57e-7d20-4b2c-a2ae-46a6899feaaf</System.Guid>
+</__Args>
+<__MessageResponseTime>0</__MessageResponseTime>
+</RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T04:00:01</UTCDateTime>
+<LocalDateTime>2013-04-30T14:00:01</LocalDateTime>
+<__MethodName>GetUserHome</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.IGeneralService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>4682a57e-7d20-4b2c-a2ae-46a6899feaaf</System.Guid>
+</__Args>
+<__MessageResponseTime>1</__MessageResponseTime>
+</RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T04:00:03</UTCDateTime>
+<LocalDateTime>2013-04-30T14:00:03</LocalDateTime>
+<__MethodName>Query</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.IDataService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>4682a57e-7d20-4b2c-a2ae-46a6899feaaf</System.Guid>
+<Citect.Ampla.General.Common.ViewDescriptor>View Descriptor [Metrics.AnalysisView]</Citect.Ampla.General.Common.ViewDescriptor>
+<Citect.Ampla.General.Common.FilterValues>@GroupBy={Hour}, Location={&quot;Enterprise&quot; with recurse}, Period={&quot;Hour&quot;}, Sample Period={Current Day}</Citect.Ampla.General.Common.FilterValues>
+<Citect.Ampla.General.Common.QueryFlags>Pivot, FieldMask, LookupLists, EvaluatedFields</Citect.Ampla.General.Common.QueryFlags>
+</__Args>
+<__MessageResponseTime>35.002</__MessageResponseTime>
+</RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T04:00:09</UTCDateTime>
+<LocalDateTime>2013-04-30T14:00:09</LocalDateTime>
+<__MethodName>Query</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.IDataService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>4682a57e-7d20-4b2c-a2ae-46a6899feaaf</System.Guid>
+<Citect.Ampla.General.Common.ViewDescriptor>View Descriptor [Production.StandardView]</Citect.Ampla.General.Common.ViewDescriptor>
+<Citect.Ampla.General.Common.FilterValues>@GroupBy={Hour}, Location={&quot;Enterprise&quot; with recurse}, Sample Period={Current Day}</Citect.Ampla.General.Common.FilterValues>
+<Citect.Ampla.General.Common.QueryFlags>Pivot, FieldMask, LookupLists, EvaluatedFields</Citect.Ampla.General.Common.QueryFlags>
+</__Args>
+<__MessageResponseTime>3.0001</__MessageResponseTime>
+</RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T04:00:17</UTCDateTime>
+<LocalDateTime>2013-04-30T14:00:17</LocalDateTime>
+<__MethodName>Query</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.IDataService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>4682a57e-7d20-4b2c-a2ae-46a6899feaaf</System.Guid>
+<Citect.Ampla.General.Common.ViewDescriptor>View Descriptor [Production.StandardView]</Citect.Ampla.General.Common.ViewDescriptor>
+<Citect.Ampla.General.Common.FilterValues>@GroupBy={Hour}, Location={&quot;Enterprise&quot; with recurse}, Sample Period={Current week}</Citect.Ampla.General.Common.FilterValues>
+<Citect.Ampla.General.Common.QueryFlags>Pivot, FieldMask, LookupLists, EvaluatedFields</Citect.Ampla.General.Common.QueryFlags>
+</__Args>
+<__MessageResponseTime>2.0001</__MessageResponseTime>
+</RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T04:00:33</UTCDateTime>
+<LocalDateTime>2013-04-30T14:00:33</LocalDateTime>
+<__MethodName>Authorize</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.ISecurityService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>4682a57e-7d20-4b2c-a2ae-46a6899feaaf</System.Guid>
+<System.String>Enterprise.Site.Area.Production</System.String>
+<System.String>Add Record</System.String>
+</__Args>
+<__MessageResponseTime>0</__MessageResponseTime>
+</RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T04:00:33</UTCDateTime>
+<LocalDateTime>2013-04-30T14:00:33</LocalDateTime>
+<__MethodName>Query</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.IDataService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>4682a57e-7d20-4b2c-a2ae-46a6899feaaf</System.Guid>
+<Citect.Ampla.General.Common.ViewDescriptor>View Descriptor [Production.StandardView]</Citect.Ampla.General.Common.ViewDescriptor>
+<Citect.Ampla.General.Common.FilterValues>@GroupBy={Hour}, Location={&quot;Enterprise.Site.Area.Production&quot;}, Sample Period={Current week}</Citect.Ampla.General.Common.FilterValues>
+<Citect.Ampla.General.Common.QueryFlags>Pivot, FieldMask, LookupLists, EvaluatedFields</Citect.Ampla.General.Common.QueryFlags>
+</__Args>
+<__MessageResponseTime>2.0001</__MessageResponseTime>
+</RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T04:00:34</UTCDateTime>
+<LocalDateTime>2013-04-30T14:00:34</LocalDateTime>
+<__MethodName>GetPeriodDescriptors</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.INavigationService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>4682a57e-7d20-4b2c-a2ae-46a6899feaaf</System.Guid>
+<System.String>Enterprise.Site.Area.Metrics</System.String>
+<System.DateTime>30/04/2013 4:00:34 AM</System.DateTime>
+</__Args>
+<__MessageResponseTime>1</__MessageResponseTime>
+</RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T04:00:34</UTCDateTime>
+<LocalDateTime>2013-04-30T14:00:34</LocalDateTime>
+<__MethodName>Query</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.IDataService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>4682a57e-7d20-4b2c-a2ae-46a6899feaaf</System.Guid>
+<Citect.Ampla.General.Common.ViewDescriptor>View Descriptor [Metrics.AnalysisView]</Citect.Ampla.General.Common.ViewDescriptor>
+<Citect.Ampla.General.Common.FilterValues>@GroupBy={Hour}, Location={&quot;Enterprise.Site.Area.Metrics&quot;}, Period={&quot;Hour&quot;}, Sample Period={Current week}</Citect.Ampla.General.Common.FilterValues>
+<Citect.Ampla.General.Common.QueryFlags>Pivot, FieldMask, LookupLists, EvaluatedFields</Citect.Ampla.General.Common.QueryFlags>
+</__Args>
+<__MessageResponseTime>4.0002</__MessageResponseTime>
+</RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T04:00:37</UTCDateTime>
+<LocalDateTime>2013-04-30T14:00:37</LocalDateTime>
+<__MethodName>Query</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.IDataService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>4682a57e-7d20-4b2c-a2ae-46a6899feaaf</System.Guid>
+<Citect.Ampla.General.Common.ViewDescriptor>View Descriptor [Production.StandardView]</Citect.Ampla.General.Common.ViewDescriptor>
+<Citect.Ampla.General.Common.FilterValues>@GroupBy={Hour}, Location={&quot;Enterprise.Site.Area.Production&quot;}, Sample Period={Current week}</Citect.Ampla.General.Common.FilterValues>
+<Citect.Ampla.General.Common.QueryFlags>Pivot, FieldMask, LookupLists, EvaluatedFields</Citect.Ampla.General.Common.QueryFlags>
+</__Args>
+<__MessageResponseTime>2.0001</__MessageResponseTime>
+</RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T04:00:38</UTCDateTime>
+<LocalDateTime>2013-04-30T14:00:38</LocalDateTime>
+<__MethodName>GetPeriodDescriptors</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.INavigationService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>4682a57e-7d20-4b2c-a2ae-46a6899feaaf</System.Guid>
+<System.String>Enterprise.Site.Area.Metrics</System.String>
+<System.DateTime>30/04/2013 4:00:38 AM</System.DateTime>
+</__Args>
+<__MessageResponseTime>1.0001</__MessageResponseTime>
+</RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T04:00:38</UTCDateTime>
+<LocalDateTime>2013-04-30T14:00:38</LocalDateTime>
+<__MethodName>Query</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.IDataService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>4682a57e-7d20-4b2c-a2ae-46a6899feaaf</System.Guid>
+<Citect.Ampla.General.Common.ViewDescriptor>View Descriptor [Metrics.AnalysisView]</Citect.Ampla.General.Common.ViewDescriptor>
+<Citect.Ampla.General.Common.FilterValues>@GroupBy={Hour}, Location={&quot;Enterprise.Site.Area.Metrics&quot;}, Period={&quot;Hour&quot;}, Sample Period={Current week}</Citect.Ampla.General.Common.FilterValues>
+<Citect.Ampla.General.Common.QueryFlags>Pivot, FieldMask, LookupLists, EvaluatedFields</Citect.Ampla.General.Common.QueryFlags>
+</__Args>
+<__MessageResponseTime>5.0003</__MessageResponseTime>
+</RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T04:00:38</UTCDateTime>
+<LocalDateTime>2013-04-30T14:00:38</LocalDateTime>
+<__MethodName>Query</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.IDataService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>4682a57e-7d20-4b2c-a2ae-46a6899feaaf</System.Guid>
+<Citect.Ampla.General.Common.ViewDescriptor>View Descriptor [Production.StandardView]</Citect.Ampla.General.Common.ViewDescriptor>
+<Citect.Ampla.General.Common.FilterValues>@GroupBy={Hour}, Location={&quot;Enterprise.Site.Area.Production&quot;}, Sample Period={Current week}</Citect.Ampla.General.Common.FilterValues>
+<Citect.Ampla.General.Common.QueryFlags>Pivot, FieldMask, LookupLists, EvaluatedFields</Citect.Ampla.General.Common.QueryFlags>
+</__Args>
+<__MessageResponseTime>2.0001</__MessageResponseTime>
+</RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T04:00:52</UTCDateTime>
+<LocalDateTime>2013-04-30T14:00:52</LocalDateTime>
+<__MethodName>GetUserId</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.ISecurityService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>4682a57e-7d20-4b2c-a2ae-46a6899feaaf</System.Guid>
+</__Args>
+<__MessageResponseTime>0</__MessageResponseTime>
+</RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T04:01:15</UTCDateTime>
+<LocalDateTime>2013-04-30T14:01:15</LocalDateTime>
+<__MethodName>Query</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.IDataService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>4682a57e-7d20-4b2c-a2ae-46a6899feaaf</System.Guid>
+<Citect.Ampla.General.Common.ViewDescriptor>View Descriptor [Production.StandardView]</Citect.Ampla.General.Common.ViewDescriptor>
+<Citect.Ampla.General.Common.FilterValues>@GroupBy={Hour}, Location={&quot;Enterprise.Site.Area.Production&quot;}, Sample Period={Current week}</Citect.Ampla.General.Common.FilterValues>
+<Citect.Ampla.General.Common.QueryFlags>Pivot, FieldMask, LookupLists, EvaluatedFields</Citect.Ampla.General.Common.QueryFlags>
+</__Args>
+<__MessageResponseTime>2.0001</__MessageResponseTime>
+</RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T04:09:59</UTCDateTime>
+<LocalDateTime>2013-04-30T14:09:59</LocalDateTime>
+<__MethodName>Renew</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.ISecurityService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>4682a57e-7d20-4b2c-a2ae-46a6899feaaf</System.Guid>
+</__Args>
+<__MessageResponseTime>1.0001</__MessageResponseTime>
+</RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T04:19:59</UTCDateTime>
+<LocalDateTime>2013-04-30T14:19:59</LocalDateTime>
+<__MethodName>Renew</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.ISecurityService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>4682a57e-7d20-4b2c-a2ae-46a6899feaaf</System.Guid>
+</__Args>
+<__MessageResponseTime>0</__MessageResponseTime>
+</RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T04:29:59</UTCDateTime>
+<LocalDateTime>2013-04-30T14:29:59</LocalDateTime>
+<__MethodName>Renew</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.ISecurityService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>4682a57e-7d20-4b2c-a2ae-46a6899feaaf</System.Guid>
+</__Args>
+<__MessageResponseTime>0</__MessageResponseTime>
+</RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T04:39:59</UTCDateTime>
+<LocalDateTime>2013-04-30T14:39:59</LocalDateTime>
+<__MethodName>Renew</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.ISecurityService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>4682a57e-7d20-4b2c-a2ae-46a6899feaaf</System.Guid>
+</__Args>
+<__MessageResponseTime>0</__MessageResponseTime>
+</RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T04:49:59</UTCDateTime>
+<LocalDateTime>2013-04-30T14:49:59</LocalDateTime>
+<__MethodName>Renew</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.ISecurityService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>4682a57e-7d20-4b2c-a2ae-46a6899feaaf</System.Guid>
+</__Args>
+<__MessageResponseTime>1.0001</__MessageResponseTime>
+</RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T04:59:59</UTCDateTime>
+<LocalDateTime>2013-04-30T14:59:59</LocalDateTime>
+<__MethodName>Renew</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.ISecurityService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>4682a57e-7d20-4b2c-a2ae-46a6899feaaf</System.Guid>
+</__Args>
+<__MessageResponseTime>0</__MessageResponseTime>
+</RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T05:09:59</UTCDateTime>
+<LocalDateTime>2013-04-30T15:09:59</LocalDateTime>
+<__MethodName>Renew</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.ISecurityService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>4682a57e-7d20-4b2c-a2ae-46a6899feaaf</System.Guid>
+</__Args>
+<__MessageResponseTime>0</__MessageResponseTime>
+</RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T05:19:59</UTCDateTime>
+<LocalDateTime>2013-04-30T15:19:59</LocalDateTime>
+<__MethodName>Renew</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.ISecurityService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>4682a57e-7d20-4b2c-a2ae-46a6899feaaf</System.Guid>
+</__Args>
+<__MessageResponseTime>0</__MessageResponseTime>
+</RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2013-04-30T05:21:56</UTCDateTime>
+<LocalDateTime>2013-04-30T15:21:56</LocalDateTime>
+<__MethodName>Logout</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.ISecurityService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>4682a57e-7d20-4b2c-a2ae-46a6899feaaf</System.Guid>
+</__Args>
+<__MessageResponseTime>0</__MessageResponseTime>
+</RemotingEntry>

@@ -32,7 +32,7 @@ x64/
 *.tli
 *.tlh
 *.tmp
-*.log
+#*.log  #Need to include the log files
 *.vspscc
 *.vssscc
 .builds

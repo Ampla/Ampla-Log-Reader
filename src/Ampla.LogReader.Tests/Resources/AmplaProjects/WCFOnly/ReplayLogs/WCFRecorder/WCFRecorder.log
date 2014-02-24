@@ -1,0 +1,25 @@
+﻿<WCFCall>
+  <CallTime>2013-06-25T00:34:44.7577344Z</CallTime>
+  <Url>http://localhost:8889/Ampla/ServiceAdministration/2007/07/Soap11</Url>
+  <Action>http://www.citect.com/Ampla/ServiceAdministration/2007/07/ServiceAdministration/GetServiceConfiguration</Action>
+  <Method></Method>
+  <Duration>28.0016</Duration>
+  <ResponseMessageLength>4.46</ResponseMessageLength>
+  <IsFault>false</IsFault>
+  <FaultMessage />
+  <RequestMessage>
+    <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+      <s:Header>
+        <To
+          s:mustUnderstand="1" xmlns="http://schemas.microsoft.com/ws/2005/05/addressing/none">http://localhost:8889/Ampla/ServiceAdministration/2007/07/Soap11</To>
+        <Action
+          s:mustUnderstand="1" xmlns="http://schemas.microsoft.com/ws/2005/05/addressing/none">http://www.citect.com/Ampla/ServiceAdministration/2007/07/ServiceAdministration/GetServiceConfiguration</Action>
+      </s:Header>
+      <s:Body>
+        <GetServiceConfigurationRequestMessage xmlns="http://www.citect.com/Ampla/ServiceAdministration/2007/07">
+          <Request xmlns:i="http://www.w3.org/2001/XMLSchema-instance"></Request>
+        </GetServiceConfigurationRequestMessage>
+      </s:Body>
+    </s:Envelope>
+  </RequestMessage>
+</WCFCall>
