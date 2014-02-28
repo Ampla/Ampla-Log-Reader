@@ -114,6 +114,7 @@
     <Compile Include="Statistics\TopNStatistics.cs" />
     <Compile Include="Statistics\WcfSummaryStatistic.cs" />
     <Compile Include="Wcf\WcfCall.cs" />
+    <Compile Include="Wcf\WcfFault.cs" />
     <Compile Include="Wcf\WcfLogDirectory.cs" />
     <Compile Include="Wcf\WcfLogReader.cs" />
     <Compile Include="ReportWriters\IReportWriter.cs" />

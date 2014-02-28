@@ -22,7 +22,7 @@ namespace Ampla.LogReader.Wcf
 
         public bool IsFault { get; private set; }
 
-        public string FaultMessage { get; private set; }
+        public WcfFault Fault { get; private set; }
 
         public string RequestMessage { get; private set; }
 
@@ -39,9 +39,18 @@ namespace Ampla.LogReader.Wcf
                     Duration = TimeSpan.FromMilliseconds(XmlHelper.GetValue(xmlNode, "Duration", 0D)),
                     ResponseMessageLength = XmlHelper.GetValue(xmlNode, "ResponseMessageLength", 0D),
                     IsFault = XmlHelper.GetValue(xmlNode, "IsFault", false),
-                    FaultMessage = XmlHelper.GetInnerXml(xmlNode, "FaultMessage"),
+                    Fault = null,
                     RequestMessage = XmlHelper.GetOuterXml(xmlNode, "RequestMessage"),
                 };
+
+            if (call.IsFault)
+            {
+                XmlNode faultNode = XmlHelper.GetNode(xmlNode, "FaultMessage");
+                if (faultNode != null)
+                {
+                    call.Fault = new WcfFault(faultNode);
+                }
+            }
 
             if (string.IsNullOrEmpty(call.Method))
             {
@@ -71,8 +80,10 @@ namespace Ampla.LogReader.Wcf
             dataTable.Columns.Add("RequestMessage", typeof (string));
             dataTable.Columns.Add("ResponseMessageLength", typeof (double));
             dataTable.Columns.Add("IsFault", typeof (bool));
-            dataTable.Columns.Add("FaultMessage", typeof (string));
-            dataTable.Columns.Add("Source", typeof (string));
+            dataTable.Columns.Add("FaultCode", typeof (string));
+            dataTable.Columns.Add("FaultString", typeof (string));
+            dataTable.Columns.Add("FaultDetails", typeof(string));
+            dataTable.Columns.Add("Source", typeof(string));
 
             int count = 0;
 
@@ -88,7 +99,9 @@ namespace Ampla.LogReader.Wcf
                                    call.RequestMessage,
                                    call.ResponseMessageLength,
                                    call.IsFault,
-                                   call.FaultMessage,
+                                   call.Fault != null ? call.Fault.FaultCode : null,
+                                   call.Fault != null ? call.Fault.FaultString : null,
+                                   call.Fault != null ? call.Fault.Details : null,
                                    call.Source);
             }
 

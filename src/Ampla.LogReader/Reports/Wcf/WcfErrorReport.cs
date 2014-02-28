@@ -23,7 +23,7 @@ namespace Ampla.LogReader.Reports.Wcf
                 foreach (var call in Entries.Where(call => call.IsFault))
                 {
                     errors++;
-                    reportWriter.Write("{0} - {1}", call.CallTime, call.FaultMessage);
+                    reportWriter.Write("{0} - {1}", call.CallTime, call.Fault.FaultString);
                 }
 
                 reportWriter.Write("{0} entries with {1} errors ({2:0.00}%).", entries, errors, errors*100.0D/entries);

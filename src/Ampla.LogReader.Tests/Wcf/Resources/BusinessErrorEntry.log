@@ -1,0 +1,78 @@
+﻿<WCFCall>
+  <CallTime>2013-09-02T05:59:25.7879007Z</CallTime>
+  <Url>http://localhost:8889/Ampla/Data/2008/06/Soap11</Url>
+  <Action>http://www.citect.com/Ampla/Data/2008/06/DataWebServiceContract/GetDataIn</Action>
+  <Method>GetData</Method>
+  <Duration>58.0033</Duration>
+  <ResponseMessageLength>0.81</ResponseMessageLength>
+  <IsFault>true</IsFault>
+  <FaultMessage>
+    <Fault xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+      <faultcode xmlns:a="http://schemas.xmlsoap.org/soap/envelope/" xmlns="">a:Client</faultcode>
+      <faultstring
+        xml:lang="en-AU" xmlns="">
+        A business error has occured.
+        The field '' does not exist.
+      </faultstring>
+      <detail xmlns="">
+        <BusinessErrors xmlns="http://www.citect.com/Ampla/Data/2008/06" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+          <Errors>
+            <BusinessError>
+              <RecordIndex>0</RecordIndex>
+              <Code>InvalidRequest</Code>
+              <Message>The field '' does not exist.</Message>
+              <StackTrace></StackTrace>
+            </BusinessError>
+          </Errors>
+        </BusinessErrors>
+      </detail>
+    </Fault>
+  </FaultMessage>
+  <RequestMessage>
+    <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <s:Header xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+        <To
+          s:mustUnderstand="1" xmlns="http://schemas.microsoft.com/ws/2005/05/addressing/none">http://l-19s2cw1:8889/Ampla/Data/2008/06/Soap11</To>
+        <Action
+          s:mustUnderstand="1" xmlns="http://schemas.microsoft.com/ws/2005/05/addressing/none">http://www.citect.com/Ampla/Data/2008/06/DataWebServiceContract/GetDataIn</Action>
+      </s:Header>
+      <soap:Body>
+        <GetDataRequestMessage xmlns="http://www.citect.com/Ampla/Data/2008/06">
+          <GetDataRequest>
+            <Credentials>
+              <Username>User</Username>
+              <Password>password</Password>
+              <Session></Session>
+            </Credentials>
+            <View>
+              <Context>Plant</Context>
+              <Mode>Location</Mode>
+              <Module>Production</Module>
+              <Name></Name>
+              <Fields>
+                <FieldName></FieldName>
+              </Fields>
+              <ModelFields>
+                <FieldName></FieldName>
+              </ModelFields>
+            </View>
+            <Filter>
+              <Location>Enterprise.Site.Area.Production</Location>
+              <SamplePeriod></SamplePeriod>
+              <Criteria>
+                <FilterEntries>
+                  <Name></Name>
+                  <Value></Value>
+                </FilterEntries>
+              </Criteria>
+            </Filter>
+            <OutputOptions>
+              <ResolveIdentifiers>false</ResolveIdentifiers>
+            </OutputOptions>
+            <Localization></Localization>
+          </GetDataRequest>
+        </GetDataRequestMessage>
+      </soap:Body>
+    </soap:Envelope>
+  </RequestMessage>
+</WCFCall>

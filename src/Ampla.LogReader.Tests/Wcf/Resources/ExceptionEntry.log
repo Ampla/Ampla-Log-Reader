@@ -1,0 +1,76 @@
+﻿<WCFCall>
+  <CallTime>2013-09-02T05:20:52.8316072Z</CallTime>
+  <Url>http://localhost:8889/Ampla/Data/2008/06/Soap11</Url>
+  <Action>http://www.citect.com/Ampla/Data/2008/06/DataWebServiceContract/GetDataIn</Action>
+  <Method>GetData</Method>
+  <Duration>627.0358</Duration>
+  <ResponseMessageLength>3.23</ResponseMessageLength>
+  <IsFault>true</IsFault>
+  <FaultMessage>
+    <Fault xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+      <faultcode xmlns:a="http://schemas.microsoft.com/net/2005/12/windowscommunicationfoundation/dispatcher" xmlns="">a:InternalServiceFault</faultcode>
+      <faultstring
+        xml:lang="en-AU" xmlns="">User 'User' is currently disabled.</faultstring>
+      <detail xmlns="">
+        <ExceptionDetail xmlns="http://schemas.datacontract.org/2004/07/System.ServiceModel" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+          <HelpLink
+            i:nil="true"></HelpLink>
+          <InnerException
+            i:nil="true"></InnerException>
+          <Message>User 'User' is currently disabled.</Message>
+          <StackTrace>
+            at Citect.Ampla.General.Server.Services.Implementation.AuthenticationService.GetUserFromCredentials(ICredentials credentials) in c:\Projects\Applications\v5.2\Code\General.Server\Services\Implementation\AuthenticationService.cs:line 186
+            at Citect.Ampla.General.Server.Services.Implementation.SessionManagerService.CreateClientSession(ICredentials credentials, String ipAddress) in c:\Projects\Applications\v5.2\Code\General.Server\Services\Implementation\SessionManagerService.cs:line 145
+            at Citect.Ampla.General.Server.Services.Implementation.SessionManagerService.CreateSession(ICredentials credentials, String ipAddress) in c:\Projects\Applications\v5.2\Code\General.Server\Services\Implementation\SessionManagerService.cs:line 113
+            at Citect.Ampla.General.Server.Sessions.AutoLogoutSession..ctor(ICredentials credentials, String ipAddress, ISessionManagerService sessionManagerService) in c:\Projects\Applications\v5.2\Code\General.Server\Sessions\AutoLogoutSession.cs:line 56
+            at Citect.Ampla.Public.WebService.Data.V200806.DataWebService.GetData(GetDataRequestMessage requestMessage) in c:\Projects\Applications\v5.2\Code\WebServices\Public\WebService\Data\V200806\DataWebServiceImplementation.cs:line 866
+            at SyncInvokeGetData(Object , Object[] , Object[] )
+            at System.ServiceModel.Dispatcher.SyncMethodInvoker.Invoke(Object instance, Object[] inputs, Object[]&amp; outputs)
+            at System.ServiceModel.Dispatcher.DispatchOperationRuntime.InvokeBegin(MessageRpc&amp; rpc)
+            at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage5(MessageRpc&amp; rpc)
+            at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage41(MessageRpc&amp; rpc)
+            at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage4(MessageRpc&amp; rpc)
+            at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage31(MessageRpc&amp; rpc)
+            at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage3(MessageRpc&amp; rpc)
+            at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage2(MessageRpc&amp; rpc)
+            at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage11(MessageRpc&amp; rpc)
+            at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage1(MessageRpc&amp; rpc)
+            at System.ServiceModel.Dispatcher.MessageRpc.Process(Boolean isOperationContextSet)
+          </StackTrace>
+          <Type>System.Exception</Type>
+        </ExceptionDetail>
+      </detail>
+    </Fault>
+  </FaultMessage>
+  <RequestMessage>
+    <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <s:Header xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+        <To
+          s:mustUnderstand="1" xmlns="http://schemas.microsoft.com/ws/2005/05/addressing/none">http://localhost:8889/Ampla/Data/2008/06/Soap11</To>
+        <Action
+          s:mustUnderstand="1" xmlns="http://schemas.microsoft.com/ws/2005/05/addressing/none">http://www.citect.com/Ampla/Data/2008/06/DataWebServiceContract/GetDataIn</Action>
+      </s:Header>
+      <soap:Body>
+        <GetDataRequestMessage xmlns="http://www.citect.com/Ampla/Data/2008/06">
+          <GetDataRequest>
+            <Credentials>
+              <Username>User</Username>
+              <Password>password</Password>
+            </Credentials>
+            <View>
+              <Context>Plant</Context>
+              <Mode>Location</Mode>
+              <Module>Production</Module>
+            </View>
+            <Filter>
+              <Location>Enterprise.Site.Area</Location>
+            </Filter>
+            <OutputOptions>
+              <ResolveIdentifiers>false</ResolveIdentifiers>
+            </OutputOptions>
+          </GetDataRequest>
+        </GetDataRequestMessage>
+      </soap:Body>
+    </soap:Envelope>
+  </RequestMessage>
+</WCFCall>

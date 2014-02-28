@@ -11,6 +11,9 @@ namespace Ampla.LogReader.Wcf
     {
         private XmlNode xmlNode;
         private const string fileName = @".\Wcf\Resources\SingleEntry.log";
+        private const string exceptionFileName = @".\Wcf\Resources\ExceptionEntry.log";
+        private const string businessErrorFileName = @".\Wcf\Resources\BusinessErrorEntry.log";
+
 
         protected override void OnSetUp()
         {
@@ -116,7 +119,7 @@ namespace Ampla.LogReader.Wcf
             string faultMessage = XmlHelper.GetInnerXml(xmlNode, "FaultMessage");
 
             Assert.That(faultMessage, Is.Empty);
-            Assert.That(call.FaultMessage, Is.EqualTo(faultMessage));
+            Assert.That(call.Fault, Is.Null);
         }
 
         [Test]
@@ -145,5 +148,51 @@ namespace Ampla.LogReader.Wcf
             Assert.That(source, Is.Not.Empty);
             Assert.That(call.Source, Is.EqualTo(source));
         }
+
+        [Test]
+        public void FaultObject()
+        {
+            WcfLogReader reader = new WcfLogReader(fileName);
+            reader.Read();
+
+            Assert.That(reader.Entries.Count, Is.EqualTo(1));
+            WcfCall call = reader.Entries[0];
+
+            Assert.That(call.IsFault, Is.False);
+            Assert.That(call.Fault, Is.Null);
+        }
+
+        [Test]
+        public void FaultObjectWithException()
+        {
+            WcfLogReader reader = new WcfLogReader(exceptionFileName);
+            reader.Read();
+
+            Assert.That(reader.Entries.Count, Is.EqualTo(1));
+            WcfCall call = reader.Entries[0];
+
+            Assert.That(call.IsFault, Is.True);
+            Assert.That(call.Fault, Is.Not.Null);
+            Assert.That(call.Fault.FaultCode, Is.EqualTo("a:InternalServiceFault"), "FaultCode");
+            Assert.That(call.Fault.FaultString, Is.EqualTo("User 'User' is currently disabled."), "FaultString");
+            Assert.That(call.Fault.Details, Is.Not.Empty, "StackTrace");
+        }
+
+        [Test]
+        public void FaultObjectWithBusinessError()
+        {
+            WcfLogReader reader = new WcfLogReader(businessErrorFileName);
+            reader.Read();
+
+            Assert.That(reader.Entries.Count, Is.EqualTo(1));
+            WcfCall call = reader.Entries[0];
+
+            Assert.That(call.IsFault, Is.True);
+            Assert.That(call.Fault, Is.Not.Null);
+            Assert.That(call.Fault.FaultCode, Is.EqualTo("a:Client"), "FaultCode");
+            Assert.That(call.Fault.FaultString, Is.EqualTo("A business error has occured. The field '' does not exist."), "FaultString");
+            Assert.That(call.Fault.Details, Is.Not.Empty, "StackTrace");
+        }
+
     }
 }

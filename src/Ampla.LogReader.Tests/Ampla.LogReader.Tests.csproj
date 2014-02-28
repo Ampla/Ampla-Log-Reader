@@ -124,6 +124,12 @@
     <None Include="Resources\AmplaProjects\WCFOnly\ReplayLogs\WCFRecorder\WCFRecorder.log">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Wcf\Resources\BusinessErrorEntry.log">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Wcf\Resources\ExceptionEntry.log">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Wcf\Resources\ErrorEntry.log">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

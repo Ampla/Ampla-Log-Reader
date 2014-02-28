@@ -17,7 +17,7 @@ namespace Ampla.LogReader.Reports.Pages
             summaryStatistic = new WcfSummaryStatistic("Faults");
             topNFaults = new TopNStatistics<WcfCall>
                 ("Top 20 Faults", 20,
-                 entry => entry.FaultMessage,
+                 entry => entry.Fault.FaultString,
                  entry => entry.IsFault);
         }
 

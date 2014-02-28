@@ -9,7 +9,7 @@ namespace Ampla.LogReader.Reports.Packs
     public class WcfExcelReportPackUnitTests : ExcelTestFixture
     {
          [Test]
-         public void WithWcfCalls()
+         public void SimpleAmplaProject()
          {
              AmplaProject project = AmplaTestProjects.GetAmplaProject();
 
@@ -20,6 +20,39 @@ namespace Ampla.LogReader.Reports.Packs
 
              AssertWorksheetExists("Summary");
              AssertWorksheetExists("WcfCalls");
+             AssertWorksheetExists("Faults");
          }
+
+         [Test]
+         public void WcfOnlyProject()
+         {
+             AmplaProject project = AmplaTestProjects.GetWcfOnlyProject();
+
+             WcfExcelReportPack reportPack = new WcfExcelReportPack(Filename, project);
+             reportPack.Render();
+
+             Assert.That(File.Exists(Filename), Is.True);
+
+             AssertWorksheetExists("Summary");
+             AssertWorksheetExists("WcfCalls");
+             AssertWorksheetExists("Faults");
+         }
+
+
+         [Test]
+         public void WcfFaults()
+         {
+             AmplaProject project = AmplaTestProjects.GetWcfFaultsProject();
+
+             WcfExcelReportPack reportPack = new WcfExcelReportPack(Filename, project);
+             reportPack.Render();
+
+             Assert.That(File.Exists(Filename), Is.True);
+
+             AssertWorksheetExists("Summary");
+             AssertWorksheetExists("WcfCalls");
+             AssertWorksheetExists("Faults");
+         }
+
     }
 }
