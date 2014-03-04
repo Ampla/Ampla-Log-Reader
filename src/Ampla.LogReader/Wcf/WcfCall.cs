@@ -99,9 +99,9 @@ namespace Ampla.LogReader.Wcf
                                    call.RequestMessage,
                                    call.ResponseMessageLength,
                                    call.IsFault,
-                                   call.Fault != null ? call.Fault.FaultCode : null,
-                                   call.Fault != null ? call.Fault.FaultString : null,
-                                   call.Fault != null ? call.Fault.Details : null,
+                                   call.Fault != null ? call.Fault.FaultCode : "",
+                                   call.Fault != null ? call.Fault.FaultString : "",
+                                   call.Fault != null ? call.Fault.Details : "",
                                    call.Source);
             }
 

@@ -127,11 +127,19 @@
     <None Include="Wcf\Resources\BusinessErrorEntry.log">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Wcf\Resources\InnerExceptionEntry.log">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Wcf\Resources\TcpFaultEntry.log">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Wcf\Resources\ExceptionEntry.log">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Wcf\Resources\ErrorEntry.log">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Wcf\Resources\SingleEntry.log">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

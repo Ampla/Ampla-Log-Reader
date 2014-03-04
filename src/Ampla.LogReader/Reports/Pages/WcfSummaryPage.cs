@@ -17,12 +17,12 @@ namespace Ampla.LogReader.Reports.Pages
         {
             summaryStatistic = new WcfSummaryStatistic("Summary");
             top10UrlStats = new TopNStatistics<WcfCall>
-                ("Top 20 Urls", 20,
+                ("Top Urls", 100,
                  entry => entry.Url,
                  entry => true);
 
             top10MethodStats = new TopNStatistics<WcfCall>
-                ("Top 20 Methods", 20,
+                ("Top Methods", 100,
                  entry => entry.Method,
                  entry => true);
         }
@@ -60,6 +60,5 @@ namespace Ampla.LogReader.Reports.Pages
                 writer.WriteRow("Count:", "no entries");
             }
         }
-        
     }
 }

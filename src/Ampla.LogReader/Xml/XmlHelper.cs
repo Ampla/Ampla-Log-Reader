@@ -90,5 +90,27 @@ namespace Ampla.LogReader.Xml
             XmlNode node = xmlNode.SelectSingleNode(xPath);
             return node;
         }
+
+        /// <summary>
+        /// Gets the text nodes from the specified xPath node
+        /// </summary>
+        /// <param name="xmlNode">The XML node.</param>
+        /// <param name="xPath">The executable path.</param>
+        /// <returns></returns>
+        public static string GetText(XmlNode xmlNode, string xPath)
+        {
+            XmlNode node = xmlNode.SelectSingleNode(xPath);
+            return node != null ? node.InnerText : null;
+        }
+
+        /// <summary>
+        /// Gets the namespace for the node
+        /// </summary>
+        /// <param name="xmlNode">The XML node.</param>
+        /// <returns></returns>
+        public static string GetNamespace(XmlNode xmlNode)
+        {
+            return xmlNode.NamespaceURI;
+        }
     }
 }

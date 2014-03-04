@@ -1,0 +1,94 @@
+﻿<WCFCall>
+  <CallTime>2013-09-04T00:44:59.1296903Z</CallTime>
+  <Url>http://localhost:8889/Ampla/Data/2008/06/Soap11</Url>
+  <Action>http://www.citect.com/Ampla/Data/2008/06/DataWebServiceContract/GetDataIn</Action>
+  <Method>GetData</Method>
+  <Duration>123.007</Duration>
+  <ResponseMessageLength>4.98</ResponseMessageLength>
+  <IsFault>true</IsFault>
+  <FaultMessage>
+    <Fault xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+      <faultcode xmlns:a="http://schemas.microsoft.com/net/2005/12/windowscommunicationfoundation/dispatcher" xmlns="">a:InternalServiceFault</faultcode>
+      <faultstring
+        xml:lang="en-AU" xmlns=""></faultstring>
+      <detail xmlns="">
+        <ExceptionDetail xmlns="http://schemas.datacontract.org/2004/07/System.ServiceModel" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+          <HelpLink
+            i:nil="true"></HelpLink>
+          <InnerException>
+            <HelpLink
+              i:nil="true"></HelpLink>
+            <InnerException
+              i:nil="true"></InnerException>
+            <Message>The value 'Value123' cannot be converted to the 'System.Boolean' data type.</Message>
+            <StackTrace>
+              at Citect.Ampla.General.Server.QueryParsing.ConditionBuilderData.parseBooleanValue(Type dataType, String stringValue) in c:\Projects\Applications\v5.2\Code\General.Server\QueryParsing\ConditionBuilderData.cs:line 228
+              at Citect.Ampla.General.Server.QueryParsing.ConditionBuilderData..ctor(Column column, Type dataType, Object resolvedValue, FilterDescriptor descriptor, PeriodBoundaryFilterBehavior periodBoundaryFilterBehavior, FilterMode filterMode) in c:\Projects\Applications\v5.2\Code\General.Server\QueryParsing\ConditionBuilderData.cs:line 107
+              at Citect.Ampla.General.Server.QueryParsing.SelectComparisonQueryFilter.ToCondition(ISelectQueryFilterData selectQueryFilterData) in c:\Projects\Applications\v5.2\Code\General.Server\QueryParsing\SelectComparisonQueryFilter.cs:line 89
+              at Citect.Ampla.General.Server.Helper.QueryDefinition.BuildSetTableWhereClause() in c:\Projects\Applications\v5.2\Code\General.Server\Helper\QueryDefinition.cs:line 922
+              at Citect.Ampla.Production.Server.ProductionQueryDefinition.Construct() in c:\Projects\Applications\v5.2\Code\Production.Server\ProductionQueryDefinition.cs:line 112
+              at Citect.Ampla.Production.Server.ProductionQueryEngine.QueryByView(Project project, IQueryView queryView, FilterValues filterEntries, QueryFlags flags) in c:\Projects\Applications\v5.2\Code\Production.Server\ProductionQueryEngine.cs:line 74
+              at Citect.Ampla.Production.Server.ProductionQueryEngine.Query(Project project, ViewDescriptor viewDescriptor, FilterValues filterEntries, QueryFlags flags) in c:\Projects\Applications\v5.2\Code\Production.Server\ProductionQueryEngine.cs:line 110
+              at Citect.Ampla.General.Server.QueryManager.Query(Project project, ViewDescriptor view, FilterValues filterEntries, QueryFlags flags) in c:\Projects\Applications\v5.2\Code\General.Server\QueryManager.cs:line 75
+              at Citect.Ampla.General.Server.DataServices.&lt;&gt;c__DisplayClassa.&lt;Query&gt;b__9() in c:\Projects\Applications\v5.2\Code\General.Server\DataServices.cs:line 131
+              at Citect.Ampla.General.Server.ServicesBase.Impersonate[TResult](Guid sessionGuid, Func`1 executeMethod) in c:\Projects\Applications\v5.2\Code\General.Server\ServicesBase.cs:line 136
+            </StackTrace>
+            <Type>System.InvalidOperationException</Type>
+          </InnerException>
+          <Message></Message>
+          <StackTrace>
+            at Citect.Ampla.General.Server.ServicesBase.Impersonate[TResult](Guid sessionGuid, Func`1 executeMethod) in c:\Projects\Applications\v5.2\Code\General.Server\ServicesBase.cs:line 141
+            at Citect.Ampla.General.Server.DataServices.Query(Guid sessionGuid, ViewDescriptor view, FilterValues filter, QueryFlags flags) in c:\Projects\Applications\v5.2\Code\General.Server\DataServices.cs:line 125
+            at Citect.Ampla.Public.WebService.Data.V200806.DataWebService.GetData(GetDataRequestMessage requestMessage) in c:\Projects\Applications\v5.2\Code\WebServices\Public\WebService\Data\V200806\DataWebServiceImplementation.cs:line 898
+            at SyncInvokeGetData(Object , Object[] , Object[] )
+            at System.ServiceModel.Dispatcher.SyncMethodInvoker.Invoke(Object instance, Object[] inputs, Object[]&amp; outputs)
+            at System.ServiceModel.Dispatcher.DispatchOperationRuntime.InvokeBegin(MessageRpc&amp; rpc)
+            at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage5(MessageRpc&amp; rpc)
+            at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage41(MessageRpc&amp; rpc)
+            at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage4(MessageRpc&amp; rpc)
+            at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage31(MessageRpc&amp; rpc)
+
+            at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage3(MessageRpc&amp; rpc)
+            at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage2(MessageRpc&amp; rpc)
+            at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage11(MessageRpc&amp; rpc)
+            at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage1(MessageRpc&amp; rpc)
+            at System.ServiceModel.Dispatcher.MessageRpc.Process(Boolean isOperationContextSet)
+          </StackTrace>
+          <Type>Citect.Ampla.General.Common.ClientServicesException</Type>
+        </ExceptionDetail>
+      </detail>
+    </Fault>
+  </FaultMessage>
+  <RequestMessage>
+    <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <s:Header xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+        <To
+          s:mustUnderstand="1" xmlns="http://schemas.microsoft.com/ws/2005/05/addressing/none">http://localhost:8889/Ampla/Data/2008/06/Soap11</To>
+        <Action
+          s:mustUnderstand="1" xmlns="http://schemas.microsoft.com/ws/2005/05/addressing/none">http://www.citect.com/Ampla/Data/2008/06/DataWebServiceContract/GetDataIn</Action>
+      </s:Header>
+      <soap:Body>
+        <GetDataRequestMessage xmlns="http://www.citect.com/Ampla/Data/2008/06">
+          <GetDataRequest>
+            <Credentials>
+              <Username>User</Username>
+              <Password>password</Password>
+            </Credentials>
+            <View>
+              <Context>Plant</Context>
+              <Mode>Location</Mode>
+              <Module>Production</Module>
+            </View>
+            <Filter>
+              <Location>Enterprise.Site.Area.Production</Location>
+              <Deleted>Value123</Deleted>
+            </Filter>
+            <OutputOptions>
+              <ResolveIdentifiers>false</ResolveIdentifiers>
+            </OutputOptions>
+          </GetDataRequest>
+        </GetDataRequestMessage>
+      </soap:Body>
+    </soap:Envelope>
+  </RequestMessage>
+</WCFCall>

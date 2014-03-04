@@ -1,0 +1,72 @@
+﻿<WCFCall>
+  <CallTime>2013-07-11T23:00:58.882223Z</CallTime>
+  <Url>net.tcp://localhost/Ampla/B2MML/2008/07/Tcp</Url>
+  <Action>http://www.citect.com/Ampla/B2MML/2008/07/B2MMLWebService/GetEquipmentInformation</Action>
+  <Method></Method>
+  <Duration>2514.1438000000003</Duration>
+  <ResponseMessageLength>3.71</ResponseMessageLength>
+  <IsFault>true</IsFault>
+  <FaultMessage>
+    <Fault xmlns="http://www.w3.org/2003/05/soap-envelope">
+      <Code>
+        <Value>Receiver</Value>
+        <Subcode>
+          <Value xmlns:a="http://schemas.microsoft.com/net/2005/12/windowscommunicationfoundation/dispatcher">a:InternalServiceFault</Value>
+        </Subcode>
+      </Code>
+      <Reason>
+        <Text
+          xml:lang="en-AU">Unable to acquire a license for this client connection. DemoPeriodComplete</Text>
+      </Reason>
+      <Detail xmlns:s="http://www.w3.org/2003/05/soap-envelope">
+        <ExceptionDetail xmlns="http://schemas.datacontract.org/2004/07/System.ServiceModel" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+          <HelpLink
+            i:nil="true"></HelpLink>
+          <InnerException
+            i:nil="true"></InnerException>
+          <Message>Unable to acquire a license for this client connection. DemoPeriodComplete</Message>
+          <StackTrace>
+            at Citect.Ampla.General.Server.Sessions.SessionManager.CreateSession(User user, Boolean integratedSecurity, String ipAddress) in c:\Projects\Applications\v5.2\Code\General.Server\Sessions\SessionManager.cs:line 128
+            at Citect.Ampla.General.Server.Services.Implementation.SessionManagerService.CreateClientSession(ICredentials credentials, String ipAddress) in c:\Projects\Applications\v5.2\Code\General.Server\Services\Implementation\SessionManagerService.cs:line 149
+            at Citect.Ampla.General.Server.Services.Implementation.SessionManagerService.CreateSession(ICredentials credentials, String ipAddress) in c:\Projects\Applications\v5.2\Code\General.Server\Services\Implementation\SessionManagerService.cs:line 113
+            at Citect.Ampla.General.Server.Sessions.AutoLogoutSession..ctor(ICredentials credentials, String ipAddress, ISessionManagerService sessionManagerService) in c:\Projects\Applications\v5.2\Code\General.Server\Sessions\AutoLogoutSession.cs:line 56
+            at Citect.Ampla.Public.WebService.B2MML.V200807.B2MMLWebService.getEquipmentInformation(GetEquipmentInformationRequest request) in c:\Projects\Applications\v5.2\Code\WebServices\Public\WebService\B2MML\V200807\B2MMLWebService_Implementation.cs:line 53
+            at Citect.Ampla.Public.WebService.B2MML.V200807.B2MMLWebService.GetEquipmentInformation(GetEquipmentInformationRequestMessage requestMessage) in c:\Projects\Applications\v5.2\Code\WebServices\Public\WebService\B2MML\V200807\B2MMLWebService.cs:line 41
+            at SyncInvokeGetEquipmentInformation(Object , Object[] , Object[] )
+            at System.ServiceModel.Dispatcher.SyncMethodInvoker.Invoke(Object instance, Object[] inputs, Object[]&amp; outputs)
+            at System.ServiceModel.Dispatcher.DispatchOperationRuntime.InvokeBegin(MessageRpc&amp; rpc)
+            at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage5(MessageRpc&amp; rpc)
+            at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage41(MessageRpc&amp; rpc)
+            at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage4(MessageRpc&amp; rpc)
+            at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage31(MessageRpc&amp; rpc)
+            at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage3(MessageRpc&amp; rpc)
+            at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage2(MessageRpc&amp; rpc)
+            at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage11(MessageRpc&amp; rpc)
+            at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage1(MessageRpc&amp; rpc)
+            at System.ServiceModel.Dispatcher.MessageRpc.Process(Boolean isOperationContextSet)
+          </StackTrace>
+          <Type>System.ArgumentException</Type>
+        </ExceptionDetail>
+      </Detail>
+    </Fault>
+  </FaultMessage>
+  <RequestMessage>
+    <s:Envelope xmlns:a="http://www.w3.org/2005/08/addressing" xmlns:s="http://www.w3.org/2003/05/soap-envelope">
+      <s:Header>
+        <a:Action
+          s:mustUnderstand="1">http://www.citect.com/Ampla/B2MML/2008/07/B2MMLWebService/GetEquipmentInformation</a:Action>
+        <a:MessageID>urn:uuid:6cfb5f79-a1b7-4422-8e09-1c1baca2be22</a:MessageID>
+        <a:ReplyTo>
+          <a:Address>http://www.w3.org/2005/08/addressing/anonymous</a:Address>
+        </a:ReplyTo>
+        <a:To
+          s:mustUnderstand="1">net.tcp://localhost/Ampla/B2MML/2008/07/Tcp</a:To>
+      </s:Header>
+      <s:Body>
+        <GetEquipmentInformationRequestMessage xmlns="http://www.citect.com/Ampla/B2MML/2008/07">
+          <Request></Request>
+        </GetEquipmentInformationRequestMessage>
+      </s:Body>
+    </s:Envelope>
+  </RequestMessage>
+</WCFCall>

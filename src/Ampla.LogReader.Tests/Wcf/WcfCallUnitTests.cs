@@ -12,8 +12,9 @@ namespace Ampla.LogReader.Wcf
         private XmlNode xmlNode;
         private const string fileName = @".\Wcf\Resources\SingleEntry.log";
         private const string exceptionFileName = @".\Wcf\Resources\ExceptionEntry.log";
+        private const string innerExceptionFileName = @".\Wcf\Resources\InnerExceptionEntry.log";
         private const string businessErrorFileName = @".\Wcf\Resources\BusinessErrorEntry.log";
-
+        private const string tcpFaultFileName = @".\Wcf\Resources\TcpFaultEntry.log";
 
         protected override void OnSetUp()
         {
@@ -194,5 +195,37 @@ namespace Ampla.LogReader.Wcf
             Assert.That(call.Fault.Details, Is.Not.Empty, "StackTrace");
         }
 
+        [Test]
+        public void TcpFaultWithError()
+        {
+            WcfLogReader reader = new WcfLogReader(tcpFaultFileName);
+            reader.Read();
+
+            Assert.That(reader.Entries.Count, Is.EqualTo(1));
+            WcfCall call = reader.Entries[0];
+
+            Assert.That(call.IsFault, Is.True);
+            Assert.That(call.Fault, Is.Not.Null);
+            Assert.That(call.Fault.FaultCode, Is.EqualTo("Receivera:InternalServiceFault"), "FaultCode");
+            Assert.That(call.Fault.FaultString, Is.EqualTo("Unable to acquire a license for this client connection. DemoPeriodComplete"), "FaultString");
+            Assert.That(call.Fault.Details, Is.Not.Empty, "StackTrace");
+        }
+
+
+        [Test]
+        public void FaultWithInnerException()
+        {
+            WcfLogReader reader = new WcfLogReader(innerExceptionFileName);
+            reader.Read();
+
+            Assert.That(reader.Entries.Count, Is.EqualTo(1));
+            WcfCall call = reader.Entries[0];
+
+            Assert.That(call.IsFault, Is.True);
+            Assert.That(call.Fault, Is.Not.Null);
+            Assert.That(call.Fault.FaultCode, Is.EqualTo("a:InternalServiceFault"), "FaultCode");
+            Assert.That(call.Fault.FaultString, Is.EqualTo("The value 'Value123' cannot be converted to the 'System.Boolean' data type."), "FaultString");
+            Assert.That(call.Fault.Details, Is.Not.Empty, "StackTrace");
+        }
     }
 }
