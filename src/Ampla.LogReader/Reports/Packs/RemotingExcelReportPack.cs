@@ -2,7 +2,6 @@
 using Ampla.LogReader.FileSystem;
 using Ampla.LogReader.Remoting;
 using Ampla.LogReader.Reports.Pages;
-using Ampla.LogReader.Reports.Remoting;
 
 namespace Ampla.LogReader.Reports.Packs
 {

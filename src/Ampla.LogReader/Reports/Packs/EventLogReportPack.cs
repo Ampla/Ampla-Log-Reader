@@ -1,7 +1,5 @@
-﻿using System.Diagnostics;
-using Ampla.LogReader.EventLogs;
+﻿using Ampla.LogReader.EventLogs;
 using Ampla.LogReader.Excel;
-using Ampla.LogReader.Remoting;
 
 namespace Ampla.LogReader.Reports.Packs
 {
