@@ -15,6 +15,7 @@ namespace Ampla.LogReader.EventLogs.Statistics
 
         public override void Add(SimpleEventLogEntry entry)
         {
+            TotalCount++;
             switch (entry.EntryType)
             {
                 case EventLogEntryType.Error:
@@ -77,6 +78,7 @@ namespace Ampla.LogReader.EventLogs.Statistics
         public int SuccessAuditCount { get; private set; }
         public int FailureAuditCount { get; private set; }
         public int OtherCount { get; private set; }
+        public int TotalCount { get; private set; }
 
         /// <summary>
         /// Compares the EventLogEntry Statistics

@@ -58,6 +58,7 @@
     <Compile Include="EventLogs\EventLogSystem.cs" />
     <Compile Include="EventLogs\IEventLogSystem.cs" />
     <Compile Include="EventLogs\SimpleEventLogEntry.cs" />
+    <Compile Include="EventLogs\Statistics\EventLogSummaryTable.cs" />
     <Compile Include="Excel\ExcelSpreadsheet.cs" />
     <Compile Include="Excel\ExcelWorksheet.cs" />
     <Compile Include="Excel\IExcelSpreadsheet.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="ReportWriters\XmlReportWriter.cs" />
     <Compile Include="Statistics\Comparer.cs" />
     <Compile Include="EventLogs\Statistics\EventLogEntryTypeStatistic.cs" />
+    <Compile Include="Statistics\IStatisticTable.cs" />
     <Compile Include="Statistics\RemotingSummaryStatistic.cs" />
     <Compile Include="Statistics\Statistic.cs" />
     <Compile Include="Statistics\GroupByAnalysis.cs" />

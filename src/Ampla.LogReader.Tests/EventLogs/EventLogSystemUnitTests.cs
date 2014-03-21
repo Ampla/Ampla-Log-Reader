@@ -8,11 +8,18 @@ namespace Ampla.LogReader.EventLogs
     [TestFixture]
     public class EventLogSystemUnitTests : TestFixture
     {
+        private IEventLogSystem eventLogSystem;
+
+        protected override void OnSetUp()
+        {
+            base.OnSetUp();
+            eventLogSystem = new EventLogSystem();
+        }
+
         [Test]
         public void GetEventLogs()
         {
-            EventLogSystem eventLogSystem = new EventLogSystem();
-            IList<EventLog> logs = eventLogSystem.GetEventLogs();
+            IEnumerable<EventLog> logs = eventLogSystem.GetEventLogs();
             List<string> nameOfLogs = null;
             // this will throw is there is a security exception accessing the name property
             Assert.DoesNotThrow(() => nameOfLogs = logs.Select(eventLog => eventLog.LogDisplayName).ToList());
@@ -22,7 +29,6 @@ namespace Ampla.LogReader.EventLogs
         [Test]
         public void ApplicationEventLog()
         {
-            EventLogSystem eventLogSystem = new EventLogSystem();
             EventLog application = eventLogSystem.GetEventLog("Application");
             Assert.That(application, Is.Not.Null);
             Assert.That(application.Entries, Is.Not.Empty);
@@ -31,7 +37,6 @@ namespace Ampla.LogReader.EventLogs
         [Test]
         public void SystemEventLog()
         {
-            EventLogSystem eventLogSystem = new EventLogSystem();
             EventLog system = eventLogSystem.GetEventLog("System");
             Assert.That(system, Is.Not.Null);
             Assert.That(system.Entries, Is.Not.Empty);
@@ -40,7 +45,6 @@ namespace Ampla.LogReader.EventLogs
         [Test]
         public void SecurityEventLog()
         {
-            EventLogSystem eventLogSystem = new EventLogSystem();
             EventLog system = eventLogSystem.GetEventLog("Security");
             Assert.That(system, Is.Null);
         }
@@ -48,8 +52,7 @@ namespace Ampla.LogReader.EventLogs
         [Test]
         public void GetReaders()
         {
-            EventLogSystem eventLogSystem = new EventLogSystem();
-            EventLogReader[] readers = eventLogSystem.GetReaders();
+            IEnumerable<EventLogReader> readers = eventLogSystem.GetReaders();
             Assert.That(readers, Is.Not.Empty);
             foreach (EventLogReader reader in readers)
             {

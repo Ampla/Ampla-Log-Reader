@@ -100,6 +100,10 @@ namespace Ampla.LogReader.Console
                             new WcfExcelReportPack(project).Render();
                             new RemotingExcelReportPack(project).Render();
                         }
+                        writer.WriteLine("Event Log Processing");
+                        EventLogSystem eventLogSystem = new EventLogSystem();
+
+                        new EventLogReportPack("EventLog.Details.xlsx", eventLogSystem).Render();
                     }
                 }
             }

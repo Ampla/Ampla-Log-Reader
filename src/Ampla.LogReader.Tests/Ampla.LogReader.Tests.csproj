@@ -51,6 +51,7 @@
       <Link>Properties\Assembly.Version.cs</Link>
     </Compile>
     <Compile Include="EventLogs\EventLogReaderUnitTests.cs" />
+    <Compile Include="EventLogs\Statistics\EventLogSummaryTableUnitTests.cs" />
     <Compile Include="Excel\ExcelCell.cs" />
     <Compile Include="Excel\ExcelPage.cs" />
     <Compile Include="Excel\ExcelPageUnitTests.cs" />
