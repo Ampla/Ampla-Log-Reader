@@ -1,5 +1,6 @@
-Ampla-Log-Reader
-================
+#Ampla-Log-Reader#
+
+[![Build status](https://ci.appveyor.com/api/projects/status/9alr99srnng53ni7)](https://ci.appveyor.com/project/JoePlant/ampla-log-reader)
 
 The Ampla software logs information in a number of places.  These include the WCF Logs, the Production Analyst Logs, and the Windows Event Log.
 
@@ -7,20 +8,19 @@ It can be difficult to combine this information and get a high level summary of 
 
 In the future, common issue can be addressed to provide indication about the health of the Ampla service.
 
-WCF Logs
-===
+###WCF Logs###
+
 Provides information about the number of calls, errors and types of messages from the Wcf Logs.
 
-Production Analyst Logs (Remoting Logs)
-===
+###Production Analyst Logs (Remoting Logs)###
+
 Provides summary information about the remoting calls between Ampla Server and Production Analyst clients
 
-Event Logs (Windows Event Logs)
-===
+###Event Logs (Windows Event Logs)###
+
 Provides summary information from machine event logs. 
 
-To Run 
-===
+###To Run###
 
 Output all Wcf and Remoting logs from all the project logs in %ProgramData%\Citect\Ampla\Projects
 ```
@@ -29,10 +29,8 @@ Ampla.LogReader.Console.exe
 
 Each Project will output a {ProjectName}.Wcf.xlsx and {ProjectName}.Remoting.xlsx.
 
+###Reports###
 
-
-Reports
-===
 The Ampla Log Reader outputs its findings in Reports.  Reports provide high level statistics about the entries in each of the logs.
 
 A list of current reports include:
@@ -62,5 +60,3 @@ Most reports provide group the events using different dimension and provide the 
  - Total Duration 
  - Average duration
  
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/Ampla/ampla-wcf-reader/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
