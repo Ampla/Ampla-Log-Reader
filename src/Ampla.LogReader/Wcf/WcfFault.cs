@@ -7,7 +7,7 @@ namespace Ampla.LogReader.Wcf
 {
     public class WcfFault
     {
-        private static readonly string[] Newline = new [] {"\r\n"};
+        private static readonly string[] Newline = new [] {"\r\n", "\n"};
 
         public WcfFault(XmlNode faultMessageNode)
         {
