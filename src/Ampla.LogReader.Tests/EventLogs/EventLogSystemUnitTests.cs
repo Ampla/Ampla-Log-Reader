@@ -45,8 +45,8 @@ namespace Ampla.LogReader.EventLogs
         [Test]
         public void SecurityEventLog()
         {
-            EventLog system = eventLogSystem.GetEventLog("Security");
-            Assert.That(system, Is.Null);
+            // this can throw if the Security Event Log does not have permission to view.
+            Assert.DoesNotThrow(() => eventLogSystem.GetEventLog("Security"));
         }
 
         [Test]
