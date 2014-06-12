@@ -82,7 +82,7 @@ namespace Ampla.LogReader.Wcf
 
         private string RemoveWhiteSpace(string value)
         {
-            if (value != null && value.Contains(Newline[0]))
+            if (value != null && value.Contains(Newline[1]))
             {
                 string[] parts = value.Split(Newline, StringSplitOptions.RemoveEmptyEntries);
                 List<string> cleaned = new List<string>();

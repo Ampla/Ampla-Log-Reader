@@ -9,8 +9,7 @@
   <FaultMessage>
     <Fault xmlns="http://schemas.xmlsoap.org/soap/envelope/">
       <faultcode xmlns:a="http://schemas.xmlsoap.org/soap/envelope/" xmlns="">a:Client</faultcode>
-      <faultstring
-        xml:lang="en-AU" xmlns="">
+      <faultstring xml:lang="en-AU" xmlns="">
         A business error has occured.
         The field '' does not exist.
       </faultstring>
