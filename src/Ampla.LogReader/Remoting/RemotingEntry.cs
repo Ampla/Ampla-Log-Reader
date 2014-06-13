@@ -58,12 +58,28 @@ namespace Ampla.LogReader.Remoting
             dataTable.Columns.Add("Method", typeof(string));
             dataTable.Columns.Add("Duration", typeof(double));
             dataTable.Columns.Add("Arguments", typeof(string));
+            dataTable.Columns.Add("ArgumentCount", typeof(int));
+            dataTable.Columns.Add("Argument_01", typeof(string));
+            dataTable.Columns.Add("Argument_02", typeof(string));
+            dataTable.Columns.Add("Argument_03", typeof(string));
+            dataTable.Columns.Add("Argument_04", typeof(string));
+            dataTable.Columns.Add("Argument_05", typeof(string));
+            dataTable.Columns.Add("Argument_06", typeof(string));
+            dataTable.Columns.Add("Argument_07", typeof(string));
             dataTable.Columns.Add("Source", typeof(string));
 
             int count = 0;
 
             foreach (RemotingEntry entry in entries)
             {
+                string argument01 = entry.Arguments.Length > 0 ? entry.Arguments[0].Value : null;
+                string argument02 = entry.Arguments.Length > 1 ? entry.Arguments[1].Value : null;
+                string argument03 = entry.Arguments.Length > 2 ? entry.Arguments[2].Value : null;
+                string argument04 = entry.Arguments.Length > 3 ? entry.Arguments[3].Value : null;
+                string argument05 = entry.Arguments.Length > 4 ? entry.Arguments[4].Value : null;
+                string argument06 = entry.Arguments.Length > 5 ? entry.Arguments[5].Value : null;
+                string argument07 = entry.Arguments.Length > 6 ? entry.Arguments[6].Value : null;
+
                 dataTable.Rows.Add(++count,
                                    entry.CallTime,
                                    entry.CallTime.ToLocalTime(),
@@ -72,6 +88,14 @@ namespace Ampla.LogReader.Remoting
                                    entry.Method,
                                    entry.Duration.TotalSeconds,
                                    entry.ArgumentXml,
+                                   entry.Arguments.Length,
+                                   argument01,
+                                   argument02,
+                                   argument03,
+                                   argument04,
+                                   argument05,
+                                   argument06,
+                                   argument07,
                                    entry.Source);
             }
 
