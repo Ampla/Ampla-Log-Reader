@@ -89,7 +89,7 @@ namespace Ampla.LogReader.Remoting
         }
 
         [Test]
-        public void Arguments()
+        public void ArgumentXml()
         {
             RemotingEntry entry = RemotingEntry.LoadFromXml(xmlNode);
 
@@ -97,7 +97,22 @@ namespace Ampla.LogReader.Remoting
 
             Assert.That(arguments, Is.Not.Empty);
             Assert.That(arguments, Is.StringContaining("System.Guid"));
-            Assert.That(entry.Arguments, Is.EqualTo(arguments));
+            Assert.That(entry.ArgumentXml, Is.EqualTo(arguments));
+        }
+
+        [Test]
+        public void Arguments()
+        {
+            RemotingEntry entry = RemotingEntry.LoadFromXml(xmlNode);
+
+            string arguments = XmlHelper.GetOuterXml(xmlNode, "__Args");
+
+            Assert.That(arguments, Is.Not.Empty);
+            Assert.That(arguments, Is.StringContaining("System.Guid"));
+            Assert.That(entry.Arguments.Length, Is.EqualTo(1));
+
+            Assert.That(entry.Arguments[0].TypeName, Is.EqualTo("System.Guid"));
+            Assert.That(entry.Arguments[0].Index, Is.EqualTo(1));
         }
     }
 }

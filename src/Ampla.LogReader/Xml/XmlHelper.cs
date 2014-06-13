@@ -92,6 +92,18 @@ namespace Ampla.LogReader.Xml
         }
 
         /// <summary>
+        /// Gets the xmlNode at the specified xPath.
+        /// </summary>
+        /// <param name="xmlNode">The XML node.</param>
+        /// <param name="xPath">The executable path.</param>
+        /// <returns></returns>
+        public static XmlNodeList GetNodes(XmlNode xmlNode, string xPath)
+        {
+            XmlNodeList nodeList = xmlNode.SelectNodes(xPath);
+            return nodeList;
+        }
+
+        /// <summary>
         /// Gets the text nodes from the specified xPath node
         /// </summary>
         /// <param name="xmlNode">The XML node.</param>

@@ -74,6 +74,7 @@
     <Compile Include="ILogReader.cs" />
     <Compile Include="LogReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Remoting\RemotingArgument.cs" />
     <Compile Include="Remoting\RemotingDirectory.cs" />
     <Compile Include="Remoting\RemotingEntry.cs" />
     <Compile Include="Remoting\RemotingLogReader.cs" />

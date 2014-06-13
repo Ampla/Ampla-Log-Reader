@@ -20,7 +20,9 @@ namespace Ampla.LogReader.Remoting
 
         public TimeSpan Duration { get; private set; }
 
-        public string Arguments { get; private set; }
+        public string ArgumentXml { get; private set; }
+
+        public RemotingArgument[] Arguments { get; private set; } 
 
         public string Source { get; set; }
 
@@ -33,7 +35,8 @@ namespace Ampla.LogReader.Remoting
                 Method = XmlHelper.GetValue(xmlNode, "__MethodName", string.Empty),
                 TypeName = XmlHelper.GetValue(xmlNode, "__TypeName", string.Empty),
                 Duration = TimeSpan.FromMilliseconds(XmlHelper.GetValue(xmlNode, "__MessageResponseTime", 0D)),
-                Arguments = XmlHelper.GetInnerXml(xmlNode, "__Args"),
+                ArgumentXml = XmlHelper.GetInnerXml(xmlNode, "__Args"),
+                Arguments = RemotingArgument.Parse(XmlHelper.GetNodes(xmlNode, "__Args/*")),
             };
 
             if (!string.IsNullOrEmpty(entry.TypeName))
@@ -68,7 +71,7 @@ namespace Ampla.LogReader.Remoting
                                    entry.TypeName,
                                    entry.Method,
                                    entry.Duration.TotalSeconds,
-                                   entry.Arguments,
+                                   entry.ArgumentXml,
                                    entry.Source);
             }
 
