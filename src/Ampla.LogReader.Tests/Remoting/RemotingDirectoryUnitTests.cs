@@ -17,14 +17,14 @@ namespace Ampla.LogReader.Remoting
         }
 
         [Test]
-        public void With1File()
+        public void With3Files()
         {
             RemotingDirectory remotingDirectory = new RemotingDirectory(directory);
             Assert.That(remotingDirectory.DirectoryExists(), Is.True);
             remotingDirectory.Read();
 
             Assert.That(remotingDirectory.Entries, Is.Not.Empty);
-            Assert.That(remotingDirectory.Entries.Count, Is.EqualTo(1));
+            Assert.That(remotingDirectory.Entries.Count, Is.EqualTo(3));
         }
 
     }

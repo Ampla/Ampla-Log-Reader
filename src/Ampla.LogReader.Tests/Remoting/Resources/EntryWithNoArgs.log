@@ -1,0 +1,9 @@
+﻿<RemotingEntry>
+<Identity>TESTDOMAIN\sysadmin</Identity>
+<UTCDateTime>2014-06-11T03:42:33</UTCDateTime>
+<LocalDateTime>2014-06-11T13:42:33</LocalDateTime>
+<__MethodName>Login</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.ISecurityService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args/>
+<__MessageResponseTime>75.0043</__MessageResponseTime>
+</RemotingEntry>

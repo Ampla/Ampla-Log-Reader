@@ -105,6 +105,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Remoting\Resources\EntryWithArgs.log">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Remoting\Resources\EntryWithNoArgs.log">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Remoting\Resources\SingleEntry.log">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

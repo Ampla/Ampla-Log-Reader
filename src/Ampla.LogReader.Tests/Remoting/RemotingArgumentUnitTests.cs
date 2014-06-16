@@ -8,9 +8,10 @@ namespace Ampla.LogReader.Remoting
     public class RemotingArgumentUnitTests : TestFixture
     {
         private XmlNode xmlNode;
-        private const string fileName = @".\Remoting\Resources\SingleEntry.log";
+        private const string fileName = @".\Remoting\Resources\EntryWithArgs.log";
 
         private RemotingArgument remotingArgument;
+        private RemotingEntry remotingEntry;
 
         protected override void OnSetUp()
         {
@@ -22,11 +23,11 @@ namespace Ampla.LogReader.Remoting
 
             Assert.That(xmlNode, Is.Not.Null);
 
-            RemotingEntry entry = RemotingEntry.LoadFromXml(xmlNode);
-            Assert.That(entry, Is.Not.Null);
-            Assert.That(entry.Arguments, Is.Not.Null);
-            Assert.That(entry.Arguments, Is.Not.Empty);
-            remotingArgument = entry.Arguments[0];
+            remotingEntry = RemotingEntry.LoadFromXml(xmlNode);
+            Assert.That(remotingEntry, Is.Not.Null);
+            Assert.That(remotingEntry.Arguments, Is.Not.Null);
+            Assert.That(remotingEntry.Arguments, Is.Not.Empty);
+            remotingArgument = remotingEntry.Arguments[0];
 
             base.OnSetUp();
         }
@@ -46,8 +47,21 @@ namespace Ampla.LogReader.Remoting
         [Test]
         public void Value()
         {
-            Assert.That(remotingArgument.Value, Is.EqualTo("9f061bbe-a80d-4881-9a8c-1aa4cc4e84e3"));
+            Assert.That(remotingArgument.Value, Is.EqualTo("d965fab7-f292-41c3-8a7a-2bdf2a369703"));
         }
 
+        [Test]
+        public void Arguments()
+        {
+            Assert.That(remotingEntry.Arguments.Length, Is.EqualTo(4));
+            Assert.That(remotingEntry.Arguments[0].Index, Is.EqualTo(1));
+            Assert.That(remotingEntry.Arguments[1].Index, Is.EqualTo(2));
+            Assert.That(remotingEntry.Arguments[2].Index, Is.EqualTo(3));
+            Assert.That(remotingEntry.Arguments[3].Index, Is.EqualTo(4));
+            Assert.That(remotingEntry.Arguments[0].Value, Is.Not.Empty);
+            Assert.That(remotingEntry.Arguments[1].Value, Is.Not.Empty);
+            Assert.That(remotingEntry.Arguments[2].Value, Is.Not.Empty);
+            Assert.That(remotingEntry.Arguments[3].Value, Is.Not.Empty);
+        }
     }
 }
