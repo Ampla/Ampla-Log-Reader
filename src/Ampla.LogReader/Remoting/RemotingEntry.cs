@@ -8,6 +8,10 @@ namespace Ampla.LogReader.Remoting
 {
     public class RemotingEntry
     {
+        private RemotingEntry()
+        {
+        }
+
         private static readonly char[] Comma = new[] { ',' };
         
         public DateTime CallTime { get; private set; }

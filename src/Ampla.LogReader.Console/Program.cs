@@ -72,6 +72,7 @@ namespace Ampla.LogReader.Console
                                 directory.Entries, reportWriter).Render();
                             new RemotingIdentitySummaryReport(
                                 directory.Entries, reportWriter).Render();
+
                             //new WcfFaultSummaryReport(
                             //    directory.Entries, reportWriter).Render();
                             //new RemotingHourlySummaryReport(

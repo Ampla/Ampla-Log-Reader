@@ -1,0 +1,135 @@
+﻿using System;
+using System.Collections.Generic;
+using NUnit.Framework;
+
+namespace Ampla.LogReader.Statistics
+{
+    [TestFixture]
+    public class TimeBasedStatisticUnitTests : TestFixture
+    {
+        private class Entry
+        {
+            public Entry()
+            {
+                Utc = DateTime.UtcNow;
+            }
+
+            public DateTime Utc { get; set; }
+
+            public static DateTime UtcFunc(Entry entry)
+            {
+                return entry.Utc;
+            }
+        }
+
+        [Test]
+        public void EmptyStatistic()
+        {
+            TimeBasedStatistic<Entry> statistic = new TimeBasedStatistic<Entry>("UnitTest", Entry.UtcFunc);
+            Assert.That(statistic.Count, Is.EqualTo(0));
+            Assert.That(statistic.FirstEntry, Is.Null);
+            Assert.That(statistic.LastEntry, Is.Null);
+            Assert.That(statistic.Results, Is.Not.Empty);
+        }
+
+        [Test]
+        public void OneEntry()
+        {
+            TimeBasedStatistic<Entry> statistic = new TimeBasedStatistic<Entry>("UnitTest", Entry.UtcFunc);
+            DateTime before = DateTime.UtcNow.AddSeconds(-2).ToLocalTime();
+            statistic.Add(new Entry());
+            DateTime after = DateTime.UtcNow.AddSeconds(2).ToLocalTime();
+            Assert.That(statistic.Count, Is.EqualTo(1));
+            Assert.That(statistic.FirstEntry, Is.InRange(before, after));
+            Assert.That(statistic.LastEntry, Is.InRange(before, after));
+            Assert.That(statistic.Results, Is.Not.Empty);
+        }
+
+        [Test]
+        public void SetDateTime()
+        {
+            TimeBasedStatistic<Entry> statistic = new TimeBasedStatistic<Entry>("UnitTest", Entry.UtcFunc);
+            statistic.Add(new Entry {Utc = DateTime.Today.ToUniversalTime()});
+            Assert.That(statistic.Count, Is.EqualTo(1));
+            Assert.That(statistic.FirstEntry, Is.EqualTo(DateTime.Today));
+            Assert.That(statistic.LastEntry, Is.EqualTo(DateTime.Today));
+            Assert.That(statistic.Results, Is.Not.Empty);
+        }
+
+        [Test]
+        public void AddTwoEntries()
+        {
+            TimeBasedStatistic<Entry> statistic = new TimeBasedStatistic<Entry>("UnitTest", Entry.UtcFunc);
+            statistic.Add(new Entry {Utc = DateTime.Today.ToUniversalTime()});
+            statistic.Add(new Entry {Utc = DateTime.Today.AddDays(-1).ToUniversalTime()});
+            Assert.That(statistic.Count, Is.EqualTo(2));
+            Assert.That(statistic.FirstEntry, Is.EqualTo(DateTime.Today.AddDays(-1)));
+            Assert.That(statistic.LastEntry, Is.EqualTo(DateTime.Today));
+            Assert.That(statistic.Results, Is.Not.Empty);
+        }
+
+        [Test]
+        public void CompareEmpty()
+        {
+            TimeBasedStatistic<Entry> statistic1 = new TimeBasedStatistic<Entry>("Unit Test", Entry.UtcFunc);
+            TimeBasedStatistic<Entry> statistic2 = new TimeBasedStatistic<Entry>("Unit Test", Entry.UtcFunc);
+            TimeBasedStatistic<Entry> statistic3 = new TimeBasedStatistic<Entry>("Earlier", Entry.UtcFunc);
+
+            List<TimeBasedStatistic<Entry>> list = new List<TimeBasedStatistic<Entry>>
+                {
+                    statistic1,
+                    statistic2,
+                    statistic3
+                };
+
+            list.Sort();
+
+            Assert.That(statistic1.CompareTo(statistic2), Is.EqualTo(0));
+            Assert.That(list[0], Is.EqualTo(statistic3));
+
+            statistic1.Add(new Entry {Utc = DateTime.Today.ToUniversalTime()});
+            list.Sort();
+            Assert.That(list[0], Is.EqualTo(statistic1)); // one entry
+            Assert.That(list[1], Is.EqualTo(statistic3)); // no entries (Earlier)
+            Assert.That(list[2], Is.EqualTo(statistic2)); // no entries (Unit Tests)
+        }
+
+
+        [Test]
+        public void CompareOne()
+        {
+            TimeBasedStatistic<Entry> statistic1 = new TimeBasedStatistic<Entry>("Unit Test", Entry.UtcFunc);
+            TimeBasedStatistic<Entry> statistic2 = new TimeBasedStatistic<Entry>("Unit Test", Entry.UtcFunc);
+            TimeBasedStatistic<Entry> statistic3 = new TimeBasedStatistic<Entry>("Earlier", Entry.UtcFunc);
+
+            List<TimeBasedStatistic<Entry>> list = new List<TimeBasedStatistic<Entry>>
+                {
+                    statistic1,
+                    statistic2,
+                    statistic3
+                };
+
+            Entry first = new Entry {Utc = DateTime.Today.ToUniversalTime()};
+            Entry last = new Entry {Utc = first.Utc.AddHours(1)};
+
+            statistic1.Add(first);
+            statistic2.Add(first);
+            statistic2.Add(last);
+            statistic3.Add(last);
+            list.Sort();
+            Assert.That(list[0], Is.EqualTo(statistic2)); // 2 entries
+            Assert.That(list[1], Is.EqualTo(statistic1)); // first entry
+            Assert.That(list[2], Is.EqualTo(statistic3)); // last entry
+        }
+
+        [Test]
+        public void TestToString()
+        {
+            TimeBasedStatistic<Entry> statistic = new TimeBasedStatistic<Entry>("Time-Unit Test", Entry.UtcFunc);
+            string toString = statistic.ToString();
+            Assert.That(toString, Is.StringContaining("Time-Unit Test")); // name
+            Assert.That(toString, Is.StringContaining("Entry")); // Entry type
+            Assert.That(toString, Is.StringContaining("Count: 0")); // count
+        }
+    }
+}

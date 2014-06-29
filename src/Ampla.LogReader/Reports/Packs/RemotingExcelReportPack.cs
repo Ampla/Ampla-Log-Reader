@@ -35,6 +35,7 @@ namespace Ampla.LogReader.Reports.Packs
             using (IExcelSpreadsheet excel = ExcelSpreadsheet.CreateNew(fileName))
             {
                 new RemotingSummaryPage(excel, reader.Entries).Render();
+                new RemotingSessionSummaryPage(excel, reader.Entries).Render();
                 excel.WriteDataToWorksheet(RemotingEntry.CreateDataTable(reader.Entries), "Remoting");
             }
         }

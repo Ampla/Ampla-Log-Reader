@@ -36,6 +36,14 @@ namespace Ampla.LogReader.Reports.Pages
             }
         }
 
+        protected void UpdateStatistic(IStatistic<TEntry> statistic)
+        {
+            foreach (TEntry entry in entries)
+            {
+                statistic.Add(entry);
+            }
+        }
+
         public string PageName { get; private set; }
 
         protected abstract void RenderPage(IWorksheetWriter writer);

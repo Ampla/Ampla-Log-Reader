@@ -58,6 +58,7 @@
     <Compile Include="Excel\ExcelRow.cs" />
     <Compile Include="FileSystem\AmplaProjects.cs" />
     <Compile Include="FileSystem\AmplaProjectUnitTests.cs" />
+    <Compile Include="Remoting\IdentitySessionUnitTests.cs" />
     <Compile Include="Remoting\RemotingArgumentUnitTests.cs" />
     <Compile Include="Remoting\RemotingDirectoryUnitTests.cs" />
     <Compile Include="Remoting\RemotingLogReaderUnitTests.cs" />
@@ -72,6 +73,8 @@
     <Compile Include="Reports\Pages\RemotingSummaryPageUnitTests.cs" />
     <Compile Include="Reports\Remoting\RemotingSummaryReportUnitTests.cs" />
     <Compile Include="Reports\Pages\WcfSummaryPageUnitTests.cs" />
+    <Compile Include="Statistics\SessionSummaryStatisticUnitTests.cs" />
+    <Compile Include="Statistics\TimeBasedStatisticUnitTests.cs" />
     <Compile Include="Statistics\CountStatisticUnitTests.cs" />
     <Compile Include="EventLogs\EventLogSystemUnitTests.cs" />
     <Compile Include="Excel\ExcelSpreadsheetUnitTests.cs" />

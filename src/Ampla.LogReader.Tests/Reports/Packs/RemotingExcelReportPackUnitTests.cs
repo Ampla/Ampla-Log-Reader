@@ -34,7 +34,6 @@ namespace Ampla.LogReader.Reports.Packs
 
              AssertWorksheetExists("Summary");
              AssertWorksheetExists("Remoting");
-
          }
     }
 }

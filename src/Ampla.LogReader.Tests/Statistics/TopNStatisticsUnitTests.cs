@@ -33,6 +33,7 @@ namespace Ampla.LogReader.Statistics
 
             results = new List<Result>(topStats.Results);
             Assert.That(results.Count, Is.EqualTo(1));
+            Assert.That(topStats.Count, Is.EqualTo(1));
         }
 
         [Test]
@@ -54,6 +55,63 @@ namespace Ampla.LogReader.Statistics
             results = new List<Result>(topStats.Results);
             Assert.That(results.Count, Is.EqualTo(2));
         }
- 
+
+        [Test]
+        public void CountEmpty()
+        {
+            TopNStatistics<TestEntry> topStats = new TopNStatistics<TestEntry>("Top 10", 10,
+                entry => entry.Group,
+                entry => true);
+
+            Assert.That(topStats.Results, Is.Empty);
+            Assert.That(topStats.Count, Is.EqualTo(0));
+
+            topStats.Add(new TestEntry("One"));
+            Assert.That(topStats.Count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Top2With5()
+        {
+            TopNStatistics<TestEntry> topStats = new TopNStatistics<TestEntry>("Top 2", 2,
+                entry => entry.Group,
+                entry => true);
+
+            Assert.That(topStats.Results, Is.Empty);
+            Assert.That(topStats.Count, Is.EqualTo(0));
+
+            topStats.Add(new TestEntry("One"));
+            Assert.That(topStats.Count, Is.EqualTo(1));
+            topStats.Add(new TestEntry("Two"));
+            Assert.That(topStats.Count, Is.EqualTo(2));
+            topStats.Add(new TestEntry("Three"));
+            Assert.That(topStats.Count, Is.EqualTo(2));
+            topStats.Add(new TestEntry("Four"));
+            Assert.That(topStats.Count, Is.EqualTo(2));
+            topStats.Add(new TestEntry("Five"));
+            Assert.That(topStats.Count, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void Top10With5()
+        {
+            TopNStatistics<TestEntry> topStats = new TopNStatistics<TestEntry>("Top 10", 5,
+                entry => entry.Group,
+                entry => true);
+
+            Assert.That(topStats.Results, Is.Empty);
+            Assert.That(topStats.Count, Is.EqualTo(0));
+
+            topStats.Add(new TestEntry("One"));
+            Assert.That(topStats.Count, Is.EqualTo(1));
+            topStats.Add(new TestEntry("Two"));
+            Assert.That(topStats.Count, Is.EqualTo(2));
+            topStats.Add(new TestEntry("Three"));
+            Assert.That(topStats.Count, Is.EqualTo(3));
+            topStats.Add(new TestEntry("Four"));
+            Assert.That(topStats.Count, Is.EqualTo(4));
+            topStats.Add(new TestEntry("Five"));
+            Assert.That(topStats.Count, Is.EqualTo(5));
+        }
     }
 }

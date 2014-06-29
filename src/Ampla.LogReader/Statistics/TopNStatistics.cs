@@ -38,5 +38,7 @@ namespace Ampla.LogReader.Statistics
         }
 
         public string Name { get; private set; }
+
+        public int Count { get { return Math.Min(topN, groupByAnalysis.Count); } }
     }
 }

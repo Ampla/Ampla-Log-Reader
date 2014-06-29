@@ -37,6 +37,7 @@ namespace Ampla.LogReader.Statistics
 
         public void Add(TEntry entry)
         {
+            ArgumentCheck.IsNotNull(entry, "entry");
             if (filterFunc(entry))
             {
                 TKey key = selector.Invoke(entry);
@@ -56,7 +57,7 @@ namespace Ampla.LogReader.Statistics
             return statistic;
         }
 
-        public List<TStatistic> Sort(IComparer<TStatistic> comparer)
+        public List<TStatistic> Sort(IComparer<TStatistic> comparer = null)
         {
             List<TStatistic> list = new List<TStatistic>();
             list.AddRange(dictionary.Values);
@@ -76,5 +77,7 @@ namespace Ampla.LogReader.Statistics
                 return results;
             }
         }
+
+        public int Count { get { return dictionary.Count; } }
     }
 }
