@@ -1,6 +1,8 @@
-﻿namespace Ampla.LogReader.Remoting
+﻿using System;
+
+namespace Ampla.LogReader.Remoting
 {
-    public class IdentitySession
+    public class IdentitySession : IComparable<IdentitySession>
     {
         public IdentitySession(string identity, string session)
         {
@@ -10,6 +12,16 @@
 
         public string Identity { get; private set; }
         public string Session { get; private set; }
+
+        public int CompareTo(IdentitySession other)
+        {
+            int compare = StringComparer.InvariantCulture.Compare(Identity, other.Identity);
+            if (compare == 0)
+            {
+                compare = StringComparer.InvariantCulture.Compare(Session, other.Session);
+            }
+            return compare;
+        }
 
         public override string ToString()
         {

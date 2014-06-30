@@ -3,16 +3,17 @@ using System.Collections.Generic;
 
 namespace Ampla.LogReader.Statistics
 {
-    public class TimeBasedStatistic<TEntry> : IStatistic<TEntry>, IComparable<TimeBasedStatistic<TEntry>>
+    public class TimeBasedStatistic<TEntry, TKey> : IStatistic<TEntry>, IComparable<TimeBasedStatistic<TEntry, TKey>> where TKey :IComparable<TKey> 
     {
         private readonly Func<TEntry, DateTime> dateTimeUtcFunc;
         private long firstEntryTicks = DateTime.MaxValue.Ticks;
         private long lastEntryTicks = DateTime.MinValue.Ticks;
         private int count;
 
-        public TimeBasedStatistic(string name, Func<TEntry, DateTime> dateTimeUtcFunc)
+        public TimeBasedStatistic(TKey key, Func<TEntry, DateTime> dateTimeUtcFunc)
         {
-            Name = name;
+            Name = key.ToString();
+            Key = key;
             this.dateTimeUtcFunc = dateTimeUtcFunc;
         }
 
@@ -26,6 +27,8 @@ namespace Ampla.LogReader.Statistics
         }
 
         public string Name { get; private set; }
+
+        public TKey Key { get; private set; }
 
         public DateTime? FirstEntry
         {
@@ -61,7 +64,7 @@ namespace Ampla.LogReader.Statistics
             }
         }
 
-        public int CompareTo(TimeBasedStatistic<TEntry> other)
+        public int CompareTo(TimeBasedStatistic<TEntry, TKey> other)
         {
             int compare = firstEntryTicks.CompareTo(other.firstEntryTicks);
             if (compare == 0)
@@ -74,7 +77,7 @@ namespace Ampla.LogReader.Statistics
             }
             if (compare == 0)
             {
-                compare = String.CompareOrdinal(Name, other.Name);
+                compare = Key.CompareTo(other.Key);
             }
 
             return compare;

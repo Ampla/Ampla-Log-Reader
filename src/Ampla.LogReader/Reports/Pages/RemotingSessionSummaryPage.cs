@@ -23,11 +23,11 @@ namespace Ampla.LogReader.Reports.Pages
             writer.WriteRow("Sessions");
             if (sessionStatistics.Count > 0)
             {
-                writer.WriteRow("Identity/Session", "Count", "First", "Last", "Hours");
+                writer.WriteRow("Identity", "Session", "Count", "First", "Last", "Hours");
                 var sessions = sessionStatistics.Sessions;
                 foreach (var session in sessions)
                 {
-                    writer.WriteRow(session.Name, session.Count, session.FirstEntry, session.LastEntry, session.Duration.TotalHours);
+                    writer.WriteRow(session.Key.Identity, session.Key.Session, session.Count, session.FirstEntry, session.LastEntry, session.Duration.TotalHours);
                 }
             }
             else

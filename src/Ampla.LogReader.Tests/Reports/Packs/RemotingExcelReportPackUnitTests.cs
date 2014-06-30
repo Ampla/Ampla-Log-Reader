@@ -19,6 +19,7 @@ namespace Ampla.LogReader.Reports.Packs
              Assert.That(File.Exists(Filename), Is.True);
 
              AssertWorksheetExists("Summary");
+             AssertWorksheetExists("Sessions");
              AssertWorksheetExists("Remoting");
          }
 
@@ -33,6 +34,7 @@ namespace Ampla.LogReader.Reports.Packs
              Assert.That(File.Exists(Filename), Is.True);
 
              AssertWorksheetExists("Summary");
+             AssertWorksheetExists("Sessions");
              AssertWorksheetExists("Remoting");
          }
     }

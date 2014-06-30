@@ -6,16 +6,16 @@ namespace Ampla.LogReader.Statistics
     
     public class SessionSummaryStatistic : IStatistic<RemotingEntry>
     {
-        private readonly GroupByAnalysis<RemotingEntry, TimeBasedStatistic<RemotingEntry>, IdentitySession> groupByAnalysis;
+        private readonly GroupByAnalysis<RemotingEntry, TimeBasedStatistic<RemotingEntry, IdentitySession>, IdentitySession> groupByAnalysis;
         
         public SessionSummaryStatistic(string name)
         {
             Name = name;
-            groupByAnalysis = new GroupByAnalysis<RemotingEntry, TimeBasedStatistic<RemotingEntry>, IdentitySession>
+            groupByAnalysis = new GroupByAnalysis<RemotingEntry, TimeBasedStatistic<RemotingEntry, IdentitySession>, IdentitySession>
                 {
                     GroupByFunc = entry => new IdentitySession(entry.Identity, entry.Arguments[0].Value),
                     WhereFunc = entry => entry.Arguments.Length > 0,
-                    StatisticFactory = key => new TimeBasedStatistic<RemotingEntry>(key.ToString(), entry => entry.CallTime)
+                    StatisticFactory = key => new TimeBasedStatistic<RemotingEntry, IdentitySession>(key, entry => entry.CallTime)
                 };
         }
 
@@ -24,7 +24,7 @@ namespace Ampla.LogReader.Statistics
             groupByAnalysis.Add(entry);
         }
 
-        public List<TimeBasedStatistic<RemotingEntry>> Sessions
+        public List<TimeBasedStatistic<RemotingEntry, IdentitySession>> Sessions
         {
             get
             {
@@ -38,7 +38,7 @@ namespace Ampla.LogReader.Statistics
             {
                 List<Result> results = new List<Result>();
                 var sessions = Sessions;
-                foreach (TimeBasedStatistic<RemotingEntry> session in sessions)
+                foreach (var session in sessions)
                 {
                     results.AddRange(session.Results);
                 }

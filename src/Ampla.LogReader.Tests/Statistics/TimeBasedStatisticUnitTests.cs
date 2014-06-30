@@ -25,7 +25,7 @@ namespace Ampla.LogReader.Statistics
         [Test]
         public void EmptyStatistic()
         {
-            TimeBasedStatistic<Entry> statistic = new TimeBasedStatistic<Entry>("UnitTest", Entry.UtcFunc);
+            TimeBasedStatistic<Entry, string> statistic = new TimeBasedStatistic<Entry, string>("UnitTest", Entry.UtcFunc);
             Assert.That(statistic.Count, Is.EqualTo(0));
             Assert.That(statistic.FirstEntry, Is.Null);
             Assert.That(statistic.LastEntry, Is.Null);
@@ -35,7 +35,7 @@ namespace Ampla.LogReader.Statistics
         [Test]
         public void OneEntry()
         {
-            TimeBasedStatistic<Entry> statistic = new TimeBasedStatistic<Entry>("UnitTest", Entry.UtcFunc);
+            TimeBasedStatistic<Entry, string> statistic = new TimeBasedStatistic<Entry, string>("UnitTest", Entry.UtcFunc);
             DateTime before = DateTime.UtcNow.AddSeconds(-2).ToLocalTime();
             statistic.Add(new Entry());
             DateTime after = DateTime.UtcNow.AddSeconds(2).ToLocalTime();
@@ -48,7 +48,7 @@ namespace Ampla.LogReader.Statistics
         [Test]
         public void SetDateTime()
         {
-            TimeBasedStatistic<Entry> statistic = new TimeBasedStatistic<Entry>("UnitTest", Entry.UtcFunc);
+            TimeBasedStatistic<Entry, string> statistic = new TimeBasedStatistic<Entry, string>("UnitTest", Entry.UtcFunc);
             statistic.Add(new Entry {Utc = DateTime.Today.ToUniversalTime()});
             Assert.That(statistic.Count, Is.EqualTo(1));
             Assert.That(statistic.FirstEntry, Is.EqualTo(DateTime.Today));
@@ -59,7 +59,7 @@ namespace Ampla.LogReader.Statistics
         [Test]
         public void AddTwoEntries()
         {
-            TimeBasedStatistic<Entry> statistic = new TimeBasedStatistic<Entry>("UnitTest", Entry.UtcFunc);
+            TimeBasedStatistic<Entry, string> statistic = new TimeBasedStatistic<Entry, string>("UnitTest", Entry.UtcFunc);
             statistic.Add(new Entry {Utc = DateTime.Today.ToUniversalTime()});
             statistic.Add(new Entry {Utc = DateTime.Today.AddDays(-1).ToUniversalTime()});
             Assert.That(statistic.Count, Is.EqualTo(2));
@@ -71,11 +71,11 @@ namespace Ampla.LogReader.Statistics
         [Test]
         public void CompareEmpty()
         {
-            TimeBasedStatistic<Entry> statistic1 = new TimeBasedStatistic<Entry>("Unit Test", Entry.UtcFunc);
-            TimeBasedStatistic<Entry> statistic2 = new TimeBasedStatistic<Entry>("Unit Test", Entry.UtcFunc);
-            TimeBasedStatistic<Entry> statistic3 = new TimeBasedStatistic<Entry>("Earlier", Entry.UtcFunc);
+            TimeBasedStatistic<Entry, string> statistic1 = new TimeBasedStatistic<Entry, string>("Unit Test", Entry.UtcFunc);
+            TimeBasedStatistic<Entry, string> statistic2 = new TimeBasedStatistic<Entry, string>("Unit Test", Entry.UtcFunc);
+            TimeBasedStatistic<Entry, string> statistic3 = new TimeBasedStatistic<Entry, string>("Earlier", Entry.UtcFunc);
 
-            List<TimeBasedStatistic<Entry>> list = new List<TimeBasedStatistic<Entry>>
+            List<TimeBasedStatistic<Entry, string>> list = new List<TimeBasedStatistic<Entry, string>>
                 {
                     statistic1,
                     statistic2,
@@ -98,11 +98,11 @@ namespace Ampla.LogReader.Statistics
         [Test]
         public void CompareOne()
         {
-            TimeBasedStatistic<Entry> statistic1 = new TimeBasedStatistic<Entry>("Unit Test", Entry.UtcFunc);
-            TimeBasedStatistic<Entry> statistic2 = new TimeBasedStatistic<Entry>("Unit Test", Entry.UtcFunc);
-            TimeBasedStatistic<Entry> statistic3 = new TimeBasedStatistic<Entry>("Earlier", Entry.UtcFunc);
+            TimeBasedStatistic<Entry, string> statistic1 = new TimeBasedStatistic<Entry, string>("Unit Test", Entry.UtcFunc);
+            TimeBasedStatistic<Entry, string> statistic2 = new TimeBasedStatistic<Entry, string>("Unit Test", Entry.UtcFunc);
+            TimeBasedStatistic<Entry, string> statistic3 = new TimeBasedStatistic<Entry, string>("Earlier", Entry.UtcFunc);
 
-            List<TimeBasedStatistic<Entry>> list = new List<TimeBasedStatistic<Entry>>
+            List<TimeBasedStatistic<Entry, string>> list = new List<TimeBasedStatistic<Entry, string>>
                 {
                     statistic1,
                     statistic2,
@@ -125,7 +125,7 @@ namespace Ampla.LogReader.Statistics
         [Test]
         public void TestToString()
         {
-            TimeBasedStatistic<Entry> statistic = new TimeBasedStatistic<Entry>("Time-Unit Test", Entry.UtcFunc);
+            TimeBasedStatistic<Entry, string> statistic = new TimeBasedStatistic<Entry, string>("Time-Unit Test", Entry.UtcFunc);
             string toString = statistic.ToString();
             Assert.That(toString, Is.StringContaining("Time-Unit Test")); // name
             Assert.That(toString, Is.StringContaining("Entry")); // Entry type

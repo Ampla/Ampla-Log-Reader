@@ -35,7 +35,7 @@ namespace Ampla.LogReader.Statistics
             statistic.Add(entry);
             Assert.That(statistic.Count, Is.EqualTo(1));
             Assert.That(statistic.Results, Is.Not.Empty);
-            List<TimeBasedStatistic<RemotingEntry>> sessions = statistic.Sessions;
+            List<TimeBasedStatistic<RemotingEntry, IdentitySession>> sessions = statistic.Sessions;
 
             Assert.That(sessions, Is.Not.Empty);
             Assert.That(sessions.Count, Is.EqualTo(1));
