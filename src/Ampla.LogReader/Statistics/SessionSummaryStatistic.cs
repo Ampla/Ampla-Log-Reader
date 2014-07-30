@@ -14,7 +14,7 @@ namespace Ampla.LogReader.Statistics
             groupByAnalysis = new GroupByAnalysis<RemotingEntry, TimeBasedStatistic<RemotingEntry, IdentitySession>, IdentitySession>
                 {
                     GroupByFunc = entry => new IdentitySession(entry.Identity, entry.Arguments[0].Value),
-                    WhereFunc = entry => entry.Arguments.Length > 0,
+                    WhereFunc = entry => entry.Arguments.Length > 0 && entry.Arguments[0].TypeName == "System.Guid",
                     StatisticFactory = key => new TimeBasedStatistic<RemotingEntry, IdentitySession>(key, entry => entry.CallTime)
                 };
         }

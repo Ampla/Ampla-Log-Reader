@@ -54,5 +54,28 @@ namespace Ampla.LogReader.Statistics
             Assert.That(statistic.Count, Is.EqualTo(1));
             Assert.That(statistic.Results, Is.Not.Empty);
         }
+
+        /// <summary>
+        /// 
+        /// When a simple user logs in, the arguments are username and password.
+        /// This entry should be ignored as there is no session guid on the 
+        ///   <__Args>
+        ///   <System.String>User</System.String>
+        ///   <System.String>Password</System.String>
+        ///   </__Args>
+        /// </summary>
+        [Test]
+        public void IgnoreLoginCommands()
+        {
+            SessionSummaryStatistic statistic = new SessionSummaryStatistic("Sessions");
+            var entries = reader.Entries.FindAll(match => match.Method == "Login");
+            foreach (var entry in entries)
+            {
+                statistic.Add(entry);
+            }
+            Assert.That(statistic.Count, Is.EqualTo(0));
+            Assert.That(statistic.Results, Is.Empty);
+        }
+
     }
 }

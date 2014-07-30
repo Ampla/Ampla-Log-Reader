@@ -373,3 +373,15 @@
 </__Args>
 <__MessageResponseTime>0</__MessageResponseTime>
 </RemotingEntry>
+<RemotingEntry>
+<Identity>LAPTOP\Test.User</Identity>
+<UTCDateTime>2014-07-19T21:14:15</UTCDateTime>
+<LocalDateTime>2014-07-20T02:44:15</LocalDateTime>
+<__MethodName>Login</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.ISecurityService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.String>User</System.String>
+<System.String>Password</System.String>
+</__Args>
+<__MessageResponseTime>1263.5757</__MessageResponseTime>
+</RemotingEntry>
