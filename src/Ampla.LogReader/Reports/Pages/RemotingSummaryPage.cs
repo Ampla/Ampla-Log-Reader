@@ -10,27 +10,27 @@ namespace Ampla.LogReader.Reports.Pages
     public class RemotingSummaryPage : ReportPage<RemotingEntry>
     {
         private readonly RemotingSummaryStatistic summaryStatistic;
-        private readonly TopNStatistics<RemotingEntry> top10IdentityStats;
-        private readonly TopNStatistics<RemotingEntry> top10MethodStats;
+        private readonly TopNStatistics<RemotingEntry> top50IdentityStats;
+        private readonly TopNStatistics<RemotingEntry> top50MethodStats;
 
         public RemotingSummaryPage(IExcelSpreadsheet excelSpreadsheet, List<RemotingEntry> entries)
             : base(excelSpreadsheet, entries, "Summary")
         {
             summaryStatistic = new RemotingSummaryStatistic("Summary");
-            top10IdentityStats = new TopNStatistics<RemotingEntry>
-                ("Top 20 Identities", 20,
+            top50IdentityStats = new TopNStatistics<RemotingEntry>
+                ("Top 50 Identities", 50,
                  entry => entry.Identity,
                  entry => true);
 
-            top10MethodStats = new TopNStatistics<RemotingEntry>
-                ("Top 20 Methods", 20,
+            top50MethodStats = new TopNStatistics<RemotingEntry>
+                ("Top 50 Methods", 50,
                  entry => entry.Method,
                  entry => true);
         }
 
         protected override void RenderPage(IWorksheetWriter writer)
         {
-            UpdateStatistics(new IStatistic<RemotingEntry>[] {summaryStatistic, top10IdentityStats, top10MethodStats});
+            UpdateStatistics(new IStatistic<RemotingEntry>[] {summaryStatistic, top50IdentityStats, top50MethodStats});
 
             writer.WriteRow("Summary of Remoting calls");
             if (summaryStatistic.Count > 0)
@@ -43,12 +43,12 @@ namespace Ampla.LogReader.Reports.Pages
                 var current = writer.GetCurrentCell();
                 writer.WriteRow();
 
-                WriteStatistics(top10MethodStats, writer);
+                WriteStatistics(top50MethodStats, writer);
 
                 writer.MoveTo(current.Row, current.Column + 3);
                 writer.WriteRow();
 
-                WriteStatistics(top10IdentityStats, writer);
+                WriteStatistics(top50IdentityStats, writer);
             }
             else
             {
