@@ -14,7 +14,9 @@ namespace Ampla.LogReader.Remoting
 
         private static readonly char[] Comma = new[] { ',' };
         
-        public DateTime CallTime { get; private set; }
+        public DateTime CallTimeUtc { get; private set; }
+
+        public DateTime CallTimeLocal { get { return CallTimeUtc.ToLocalTime(); } }
 
         public string Identity { get; private set; }
             
@@ -28,13 +30,11 @@ namespace Ampla.LogReader.Remoting
 
         public RemotingArgument[] Arguments { get; private set; } 
 
-        public string Source { get; set; }
-
         public static RemotingEntry LoadFromXml(XmlNode xmlNode)
         {
             RemotingEntry entry = new RemotingEntry
             {
-                CallTime = XmlHelper.GetDateTime(xmlNode, "UTCDateTime", DateTime.MinValue),
+                CallTimeUtc = XmlHelper.GetDateTime(xmlNode, "UTCDateTime", DateTime.MinValue),
                 Identity = XmlHelper.GetValue(xmlNode, "Identity", string.Empty),
                 Method = XmlHelper.GetValue(xmlNode, "__MethodName", string.Empty),
                 TypeName = XmlHelper.GetValue(xmlNode, "__TypeName", string.Empty),
@@ -70,7 +70,6 @@ namespace Ampla.LogReader.Remoting
             dataTable.Columns.Add("Argument_05", typeof(string));
             dataTable.Columns.Add("Argument_06", typeof(string));
             dataTable.Columns.Add("Argument_07", typeof(string));
-            dataTable.Columns.Add("Source", typeof(string));
 
             int count = 0;
 
@@ -85,8 +84,8 @@ namespace Ampla.LogReader.Remoting
                 string argument07 = entry.Arguments.Length > 6 ? entry.Arguments[6].Value : null;
 
                 dataTable.Rows.Add(++count,
-                                   entry.CallTime,
-                                   entry.CallTime.ToLocalTime(),
+                                   entry.CallTimeUtc,
+                                   entry.CallTimeLocal,
                                    entry.Identity,
                                    entry.TypeName,
                                    entry.Method,
@@ -99,8 +98,7 @@ namespace Ampla.LogReader.Remoting
                                    argument04,
                                    argument05,
                                    argument06,
-                                   argument07,
-                                   entry.Source);
+                                   argument07);
             }
 
             dataTable.AcceptChanges();

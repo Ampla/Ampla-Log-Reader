@@ -35,7 +35,7 @@ namespace Ampla.LogReader.Remoting
 
             Assert.That(callTime, Is.GreaterThan(DateTime.MinValue));
             Assert.That(callTime.Kind, Is.EqualTo(DateTimeKind.Utc), "UTCDateTime: {0}", callTime);
-            Assert.That(entry.CallTime, Is.EqualTo(expected));
+            Assert.That(entry.CallTimeUtc, Is.EqualTo(expected));
             Assert.That(callTime, Is.EqualTo(expected));
         }
 

@@ -7,7 +7,7 @@ namespace Ampla.LogReader.Statistics
         public RemotingSummaryStatistic(string name)
             : base(name, 
             null /* no faults */,
-            entry => entry.CallTime, 
+            entry => entry.CallTimeUtc, 
             entry => entry.Duration)
         {
         }
