@@ -41,7 +41,7 @@ namespace Ampla.LogReader.Xml
         /// <param name="xPath">The executable path.</param>
         /// <param name="defaultValue">The default value.</param>
         /// <returns></returns>
-        public static DateTime GetDateTime(XmlNode xmlNode, string xPath, DateTime defaultValue)
+        public static DateTime GetDateTimeUtc(XmlNode xmlNode, string xPath, DateTime defaultValue)
         {
             XmlNode valueNode = xmlNode.SelectSingleNode(xPath);
             if (valueNode != null)
@@ -54,6 +54,28 @@ namespace Ampla.LogReader.Xml
             }
             return defaultValue;
         }
+
+        /// <summary>
+        /// Gets the date time as Local Value
+        /// </summary>
+        /// <param name="xmlNode">The XML node.</param>
+        /// <param name="xPath">The executable path.</param>
+        /// <param name="defaultValue">The default value.</param>
+        /// <returns></returns>
+        public static DateTime GetDateTimeLocal(XmlNode xmlNode, string xPath, DateTime defaultValue)
+        {
+            XmlNode valueNode = xmlNode.SelectSingleNode(xPath);
+            if (valueNode != null)
+            {
+                string value = valueNode.InnerText;
+                if (!string.IsNullOrEmpty(value))
+                {
+                    return XmlConvert.ToDateTime(value, XmlDateTimeSerializationMode.Local);
+                }
+            }
+            return defaultValue;
+        }
+
 
         /// <summary> 
         /// Gets the outer XML from the xPath specified of xmlNode

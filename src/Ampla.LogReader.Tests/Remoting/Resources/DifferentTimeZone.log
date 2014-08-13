@@ -1,7 +1,7 @@
 ﻿<RemotingEntry>
 <Identity>TESTDOMAIN\sysadmin</Identity>
-<UTCDateTime>2014-01-28T01:43:03</UTCDateTime>
-<LocalDateTime>2014-01-28T11:43:03</LocalDateTime>
+<UTCDateTime>2014-01-29T01:13:03</UTCDateTime>
+<LocalDateTime>2014-01-29T07:43:03</LocalDateTime>
 <__MethodName>GetAvailableReports</__MethodName>
 <__TypeName>Citect.Ampla.General.Common.IReportingService, Citect.Ampla.General.Common, Version=5.0.5343.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
 <__Args>

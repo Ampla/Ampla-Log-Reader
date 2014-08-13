@@ -32,7 +32,7 @@ namespace Ampla.LogReader.Wcf
         {
             WcfCall call = new WcfCall
                 {
-                    CallTime = XmlHelper.GetDateTime(xmlNode, "CallTime", DateTime.MinValue),
+                    CallTime = XmlHelper.GetDateTimeUtc(xmlNode, "CallTime", DateTime.MinValue),
                     Url = XmlHelper.GetValue(xmlNode, "Url", string.Empty),
                     Action = XmlHelper.GetValue(xmlNode, "Action", string.Empty),
                     Method = XmlHelper.GetValue(xmlNode, "Method", string.Empty),

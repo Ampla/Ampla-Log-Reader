@@ -9,16 +9,18 @@ namespace Ampla.LogReader.Reports.Pages
     public class RemotingSessionSummaryPage : ReportPage<RemotingEntry>
     {
         private readonly SessionSummaryStatistic sessionStatistics;
+        private readonly TimeBasedStatistic<RemotingEntry, string> summary; 
         
         public RemotingSessionSummaryPage(IExcelSpreadsheet excelSpreadsheet, List<RemotingEntry> entries)
             : base(excelSpreadsheet, entries, "Sessions")
         {
             sessionStatistics = new SessionSummaryStatistic("Sessions");
+            summary = new TimeBasedStatistic<RemotingEntry, string>("TimeBase", entry => entry.CallTimeUtc);
         }
 
         protected override void RenderPage(IWorksheetWriter writer)
         {
-            UpdateStatistic(sessionStatistics);
+            UpdateStatistics(new IStatistic<RemotingEntry>[] {sessionStatistics, summary});
 
             writer.WriteRow("Sessions");
             if (sessionStatistics.Count > 0)

@@ -10,15 +10,20 @@ namespace Ampla.LogReader.Remoting
     public class RemotingEntryUnitTests : TestFixture
     {
         private XmlNode xmlNode;
-        private const string fileName = @".\Remoting\Resources\SingleEntry.log";
+        private const string singleFileName = @".\Remoting\Resources\SingleEntry.log";
+        private const string differentTimeZone = @".\Remoting\Resources\DifferentTimeZone.log";
 
-        protected override void OnSetUp()
+        private void LoadXmlFile(string fileName)
         {
             XmlFragmentTextReader reader = new XmlFragmentTextReader("Xml", fileName);
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(reader);
-
             xmlNode = xmlDoc.SelectSingleNode("/Xml/RemotingEntry");
+        }
+
+        protected override void OnSetUp()
+        {
+            LoadXmlFile(singleFileName);
 
             Assert.That(xmlNode, Is.Not.Null);
             base.OnSetUp();
@@ -29,7 +34,7 @@ namespace Ampla.LogReader.Remoting
         {
             RemotingEntry entry = RemotingEntry.LoadFromXml(xmlNode);
 
-            DateTime callTime = XmlHelper.GetDateTime(xmlNode, "UTCDateTime", DateTime.MinValue);
+            DateTime callTime = XmlHelper.GetDateTimeUtc(xmlNode, "UTCDateTime", DateTime.MinValue);
             DateTime expected = DateTime.Parse("2014-01-28T01:43:03", null,
                                                DateTimeStyles.AdjustToUniversal | DateTimeStyles.AssumeUniversal);
 
@@ -37,8 +42,29 @@ namespace Ampla.LogReader.Remoting
             Assert.That(callTime.Kind, Is.EqualTo(DateTimeKind.Utc), "UTCDateTime: {0}", callTime);
             Assert.That(entry.CallTimeUtc, Is.EqualTo(expected));
             Assert.That(callTime, Is.EqualTo(expected));
+
+            Assert.That(entry.CallTimeLocal, Is.EqualTo(entry.CallTimeUtc.ToLocalTime()), "Local time");
         }
 
+        [Test]
+        public void LocalDateTime()
+        {
+            LoadXmlFile(differentTimeZone);
+
+            RemotingEntry entry = RemotingEntry.LoadFromXml(xmlNode);
+
+            DateTime localTime = XmlHelper.GetDateTimeLocal(xmlNode, "LocalDateTime", DateTime.MinValue);
+            DateTime expected = DateTime.Parse("2014-01-29T07:43:03", null,
+                                               DateTimeStyles.AdjustToUniversal | DateTimeStyles.AssumeLocal).ToLocalTime();
+
+            Assert.That(localTime, Is.GreaterThan(DateTime.MinValue));
+            Assert.That(localTime.Kind, Is.EqualTo(DateTimeKind.Local), "LocalDateTime: {0}", localTime);
+            Assert.That(entry.CallTimeLocal, Is.EqualTo(expected));
+            Assert.That(localTime, Is.EqualTo(expected));
+
+            Assert.That(entry.CallTimeLocal, Is.Not.EqualTo(entry.CallTimeUtc.ToLocalTime()), "Local time");
+        }
+        
         [Test]
         public void Identity()
         {

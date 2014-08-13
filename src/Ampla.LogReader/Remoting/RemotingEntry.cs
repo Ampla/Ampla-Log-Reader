@@ -16,7 +16,7 @@ namespace Ampla.LogReader.Remoting
         
         public DateTime CallTimeUtc { get; private set; }
 
-        public DateTime CallTimeLocal { get { return CallTimeUtc.ToLocalTime(); } }
+        public DateTime CallTimeLocal { get; private set; }
 
         public string Identity { get; private set; }
             
@@ -34,7 +34,8 @@ namespace Ampla.LogReader.Remoting
         {
             RemotingEntry entry = new RemotingEntry
             {
-                CallTimeUtc = XmlHelper.GetDateTime(xmlNode, "UTCDateTime", DateTime.MinValue),
+                CallTimeUtc = XmlHelper.GetDateTimeUtc(xmlNode, "UTCDateTime", DateTime.MinValue),
+                CallTimeLocal = XmlHelper.GetDateTimeLocal(xmlNode, "LocalDateTime", DateTime.MinValue),
                 Identity = XmlHelper.GetValue(xmlNode, "Identity", string.Empty),
                 Method = XmlHelper.GetValue(xmlNode, "__MethodName", string.Empty),
                 TypeName = XmlHelper.GetValue(xmlNode, "__TypeName", string.Empty),

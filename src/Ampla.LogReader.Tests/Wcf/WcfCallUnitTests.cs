@@ -33,7 +33,7 @@ namespace Ampla.LogReader.Wcf
         {
             WcfCall call = WcfCall.LoadFromXml(xmlNode);
 
-            DateTime callTime = XmlHelper.GetDateTime(xmlNode, "CallTime", DateTime.MinValue);
+            DateTime callTime = XmlHelper.GetDateTimeUtc(xmlNode, "CallTime", DateTime.MinValue);
             DateTime expected = DateTime.Parse("2013-04-29T02:45:06.4647667Z", null,
                                                DateTimeStyles.AdjustToUniversal | DateTimeStyles.AssumeUniversal);
 
