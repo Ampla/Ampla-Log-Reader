@@ -32,5 +32,16 @@ namespace Ampla.LogReader.Statistics
             Assert.That(result, Is.EqualTo(utcNow.Subtract(local.TimeOfDay)));
             Assert.That(result.Kind, Is.EqualTo(DateTimeKind.Utc));
         }
+
+        [Test]
+        public void OnMidnight()
+        {
+            DateTime midnight = DateTime.Today;
+            Assert.That(midnight.TruncateToLocalDay(), Is.EqualTo(midnight));
+
+            Assert.That(midnight.AddTicks(1).TruncateToLocalDay(), Is.EqualTo(midnight));
+            Assert.That(midnight.AddTicks(-1).TruncateToLocalDay(), Is.EqualTo(midnight.AddDays(-1)));
+
+        }
     }
 }
