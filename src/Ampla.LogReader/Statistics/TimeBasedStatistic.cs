@@ -5,21 +5,23 @@ namespace Ampla.LogReader.Statistics
 {
     public class TimeBasedStatistic<TEntry, TKey> : IStatistic<TEntry>, IComparable<TimeBasedStatistic<TEntry, TKey>> where TKey :IComparable<TKey> 
     {
-        private readonly Func<TEntry, DateTime> dateTimeUtcFunc;
+        private readonly Func<TEntry, DateTime> dateTimeFunc;
         private long firstEntryTicks = DateTime.MaxValue.Ticks;
         private long lastEntryTicks = DateTime.MinValue.Ticks;
         private int count;
+        private readonly bool isLocalTime;
 
-        public TimeBasedStatistic(TKey key, Func<TEntry, DateTime> dateTimeUtcFunc)
+        public TimeBasedStatistic(TKey key, Func<TEntry, DateTime> dateTimeFunc, bool isLocalTime = false)
         {
             Name = key.ToString();
             Key = key;
-            this.dateTimeUtcFunc = dateTimeUtcFunc;
+            this.dateTimeFunc = dateTimeFunc;
+            this.isLocalTime = isLocalTime;
         }
 
         public void Add(TEntry entry)
         {
-            DateTime dateTime = dateTimeUtcFunc(entry);
+            DateTime dateTime = dateTimeFunc(entry);
             long ticks = dateTime.Ticks;
             count++;
             firstEntryTicks = Math.Min(firstEntryTicks, ticks);
@@ -32,12 +34,26 @@ namespace Ampla.LogReader.Statistics
 
         public DateTime? FirstEntry
         {
-            get { return count == 0 ? (DateTime?) null : new DateTime(firstEntryTicks, DateTimeKind.Utc).ToLocalTime(); }
+            get
+            {
+                return count == 0
+                           ? (DateTime?) null
+                           : isLocalTime
+                                 ? new DateTime(firstEntryTicks, DateTimeKind.Local)
+                                 : new DateTime(firstEntryTicks, DateTimeKind.Utc).ToLocalTime();
+            }
         }
 
         public DateTime? LastEntry
         {
-            get { return count == 0 ? (DateTime?) null : new DateTime(lastEntryTicks, DateTimeKind.Utc).ToLocalTime(); }
+            get
+            {
+                return count == 0
+                           ? (DateTime?)null
+                           : isLocalTime
+                                 ? new DateTime(lastEntryTicks, DateTimeKind.Local)
+                                 : new DateTime(lastEntryTicks, DateTimeKind.Utc).ToLocalTime();
+            }
         }
 
         public TimeSpan Duration

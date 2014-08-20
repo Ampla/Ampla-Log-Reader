@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Ampla.LogReader.Excel;
 using Ampla.LogReader.FileSystem;
 using Ampla.LogReader.Remoting;
@@ -51,6 +52,9 @@ namespace Ampla.LogReader.Reports.Pages
                 pageName = page.PageName;
             }
 
+            DateTime start = logReader.Entries[0].CallTimeLocal;
+            DateTime end = logReader.Entries[0].CallTimeLocal;
+
             using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.OpenReadOnly(Filename))
             {
                 using (ExcelPage page = new ExcelPage(spreadsheet, pageName))
@@ -60,11 +64,12 @@ namespace Ampla.LogReader.Reports.Pages
                     page.Row(2).AssertValues<string>(Is.Not.Empty);
                     page.Row(3).AssertValues<string>(Is.Not.Empty);
 
-                    page.FindRow(
+                    ExcelRow row = page.FindRow(
                         2,
-                        value => value == "9f061bbe-a80d-4881-9a8c-1aa4cc4e84e3")
-                        .Column(3)
-                        .AssertValue<int>(Is.EqualTo(1));
+                        value => value == "9f061bbe-a80d-4881-9a8c-1aa4cc4e84e3");
+                    row.Column(3).AssertValue<int>(Is.EqualTo(1));
+                    row.Column(4).AssertValue<DateTime>(Is.EqualTo(start));
+                    row.Column(5).AssertValue<DateTime>(Is.EqualTo(end));
                 }
             }
         }
@@ -74,6 +79,8 @@ namespace Ampla.LogReader.Reports.Pages
         {
             AmplaProject project = AmplaTestProjects.GetAmplaProject();
 
+            DateTime start;
+            DateTime end = DateTime.MinValue;
             string pageName;
             using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.CreateNew(Filename))
             {
@@ -82,8 +89,21 @@ namespace Ampla.LogReader.Reports.Pages
                 RemotingSessionSummaryPage page = new RemotingSessionSummaryPage(spreadsheet, directory.Entries);
                 page.Render();
                 pageName = page.PageName;
-            }
 
+
+                start = directory.Entries[0].CallTimeLocal;
+
+                foreach (var entry in directory.Entries)
+                {
+                    if (entry.Arguments.Length > 0 
+                        && entry.Arguments[0].Value == "4682a57e-7d20-4b2c-a2ae-46a6899feaaf"
+                        && entry.CallTimeLocal > end)
+                    {
+                        end = entry.CallTimeLocal;
+                    }
+                }
+                
+            }
             using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.OpenReadOnly(Filename))
             {
                 using (ExcelPage page = new ExcelPage(spreadsheet, pageName))
@@ -94,11 +114,13 @@ namespace Ampla.LogReader.Reports.Pages
                     page.Row(3).AssertValues<string>(Is.Not.Empty);
                     page.Row(4).AssertValues<string>(Is.Empty);
 
-                    page.FindRow(
-                        2,
-                        value => value == "4682a57e-7d20-4b2c-a2ae-46a6899feaaf")
-                        .Column(3)
-                        .AssertValue<int>(Is.GreaterThan(1));
+                    ExcelRow row = page.FindRow(
+                       2,
+                       value => value == "4682a57e-7d20-4b2c-a2ae-46a6899feaaf");
+                    row.Column(3).AssertValue<int>(Is.GreaterThan(1));
+                    row.Column(4).AssertValue<DateTime>(Is.EqualTo(start));
+                    row.Column(5).AssertValue<DateTime>(Is.EqualTo(end));
+
                 }
             }
         }
