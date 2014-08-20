@@ -121,6 +121,11 @@ namespace Ampla.LogReader.Reports.Pages
                     row.Column(4).AssertValue<DateTime>(Is.EqualTo(start));
                     row.Column(5).AssertValue<DateTime>(Is.EqualTo(end));
 
+                    page.Row(2).Column(7).AssertValue<string>(Is.EqualTo("Offset"));
+                    double delta = TimeSpan.FromSeconds(5).TotalDays;
+                    double expectedOffset = start.TimeOfDay.TotalDays;
+                    row.Column(7).AssertValue<double>(Is.InRange(expectedOffset - delta, expectedOffset + delta));
+
                 }
             }
         }

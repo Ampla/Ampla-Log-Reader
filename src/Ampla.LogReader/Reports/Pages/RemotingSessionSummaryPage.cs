@@ -24,8 +24,9 @@ namespace Ampla.LogReader.Reports.Pages
         {
             UpdateStatistics(new IStatistic<RemotingEntry>[] {sessionStatistics, summary});
 
-            DateTime offset = summary.FirstEntry.HasValue ? summary.FirstEntry.Value : new DateTime(DateTime.Now.Year, 1, 1);
-            
+            DateTime offset = summary.FirstEntry.HasValue ? summary.FirstEntry.Value : new DateTime(DateTime.Now.Year, 1, 1, 0,0,0,DateTimeKind.Local);
+            offset = offset.TruncateToLocalDay();
+
             writer.WriteRow("Sessions");
             if (sessionStatistics.Count > 0)
             {
