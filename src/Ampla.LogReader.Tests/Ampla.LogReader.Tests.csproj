@@ -80,6 +80,7 @@
     <Compile Include="Reports\Pages\RemotingSummaryPageUnitTests.cs" />
     <Compile Include="Reports\Remoting\RemotingSummaryReportUnitTests.cs" />
     <Compile Include="Reports\Pages\WcfSummaryPageUnitTests.cs" />
+    <Compile Include="Statistics\DateTimeExtensionsUnitTests.cs" />
     <Compile Include="Statistics\SessionSummaryStatisticUnitTests.cs" />
     <Compile Include="Statistics\TimeBasedStatisticUnitTests.cs" />
     <Compile Include="Statistics\CountStatisticUnitTests.cs" />

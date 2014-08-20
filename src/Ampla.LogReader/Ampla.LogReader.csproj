@@ -107,6 +107,7 @@
     <Compile Include="ReportWriters\XmlReportWriter.cs" />
     <Compile Include="Statistics\Comparer.cs" />
     <Compile Include="EventLogs\Statistics\EventLogEntryTypeStatistic.cs" />
+    <Compile Include="Statistics\DateTimeHelper.cs" />
     <Compile Include="Statistics\SessionSummaryStatistic.cs" />
     <Compile Include="Statistics\IStatisticTable.cs" />
     <Compile Include="Statistics\RemotingSummaryStatistic.cs" />
