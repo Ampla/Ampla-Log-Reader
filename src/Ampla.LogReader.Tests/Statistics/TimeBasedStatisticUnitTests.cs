@@ -168,8 +168,8 @@ namespace Ampla.LogReader.Statistics
                     statistic3
                 };
 
-            Entry first = new Entry { Local = DateTime.Today };
-            Entry last = new Entry { Local = first.Local.AddHours(1) };
+            Entry last = new Entry { Local = DateTime.Today.AddHours(1) };
+            Entry first = new Entry { Local = last.Local.AddHours(-1) };
 
             statistic1.Add(first);
             statistic2.Add(first);
