@@ -155,6 +155,33 @@ namespace Ampla.LogReader.Statistics
         }
 
         [Test]
+        public void CompareOneLocal()
+        {
+            TimeBasedStatistic<Entry, string> statistic1 = new TimeBasedStatistic<Entry, string>("Unit Test", Entry.LocalFunc, isLocalTime: true);
+            TimeBasedStatistic<Entry, string> statistic2 = new TimeBasedStatistic<Entry, string>("Unit Test", Entry.LocalFunc, isLocalTime:true);
+            TimeBasedStatistic<Entry, string> statistic3 = new TimeBasedStatistic<Entry, string>("Earlier", Entry.LocalFunc, isLocalTime: true);
+
+            List<TimeBasedStatistic<Entry, string>> list = new List<TimeBasedStatistic<Entry, string>>
+                {
+                    statistic1,
+                    statistic2,
+                    statistic3
+                };
+
+            Entry first = new Entry { Local = DateTime.Today };
+            Entry last = new Entry { Local = first.Local.AddHours(1) };
+
+            statistic1.Add(first);
+            statistic2.Add(first);
+            statistic2.Add(last);
+            statistic3.Add(last);
+            list.Sort();
+            Assert.That(list[0], Is.EqualTo(statistic2)); // 2 entries
+            Assert.That(list[1], Is.EqualTo(statistic1)); // first entry
+            Assert.That(list[2], Is.EqualTo(statistic3)); // last entry
+        }
+
+        [Test]
         public void TestToString()
         {
             TimeBasedStatistic<Entry, string> statistic = new TimeBasedStatistic<Entry, string>("Time-Unit Test", Entry.UtcFunc);
