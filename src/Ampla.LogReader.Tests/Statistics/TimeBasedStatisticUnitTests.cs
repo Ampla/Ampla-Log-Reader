@@ -12,13 +12,20 @@ namespace Ampla.LogReader.Statistics
             public Entry()
             {
                 Utc = DateTime.UtcNow;
+                Local = DateTime.Now;
             }
 
             public DateTime Utc { get; set; }
+            public DateTime Local { get; set; }
 
             public static DateTime UtcFunc(Entry entry)
             {
                 return entry.Utc;
+            }
+
+            public static DateTime LocalFunc(Entry entry)
+            {
+                return entry.Local;
             }
         }
 
@@ -44,6 +51,31 @@ namespace Ampla.LogReader.Statistics
             Assert.That(statistic.LastEntry, Is.InRange(before, after));
             Assert.That(statistic.Results, Is.Not.Empty);
         }
+
+        [Test]
+        public void LocalTime()
+        {
+            TimeBasedStatistic<Entry, string> statistic = new TimeBasedStatistic<Entry, string>("UnitTest", Entry.LocalFunc, true);
+            DateTime before = DateTime.Now.AddSeconds(-2);
+            statistic.Add(new Entry());
+            DateTime after = DateTime.Now.AddSeconds(2);
+            Assert.That(statistic.Count, Is.EqualTo(1));
+            Assert.That(statistic.FirstEntry, Is.InRange(before, after));
+            Assert.That(statistic.LastEntry, Is.InRange(before, after));
+            Assert.That(statistic.Results, Is.Not.Empty);
+        }
+
+        [Test]
+        public void SetLocalTime()
+        {
+            TimeBasedStatistic<Entry, string> statistic = new TimeBasedStatistic<Entry, string>("UnitTest", Entry.LocalFunc, true);
+            statistic.Add(new Entry { Local = DateTime.Today});
+            Assert.That(statistic.Count, Is.EqualTo(1));
+            Assert.That(statistic.FirstEntry, Is.EqualTo(DateTime.Today));
+            Assert.That(statistic.LastEntry, Is.EqualTo(DateTime.Today));
+            Assert.That(statistic.Results, Is.Not.Empty);
+        }
+
 
         [Test]
         public void SetDateTime()
