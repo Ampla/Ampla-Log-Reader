@@ -73,6 +73,7 @@
     <Compile Include="Reports\EventLogs\EventLogHourlySummaryReportUnitTests.cs" />
     <Compile Include="Reports\EventLogs\EventLogSummaryReportUnitTests.cs" />
     <Compile Include="Reports\Packs\WcfExcelReportPackUnitTests.cs" />
+    <Compile Include="Reports\Pages\RemotingSessionSummaryPageUnitTests.cs" />
     <Compile Include="Reports\Pages\WcfFaultSummaryPageUnitTests.cs" />
     <Compile Include="Reports\Remoting\RemotingIdentitySummaryReportUnitTests.cs" />
     <Compile Include="Reports\Packs\RemotingExcelReportPackUnitTests.cs" />

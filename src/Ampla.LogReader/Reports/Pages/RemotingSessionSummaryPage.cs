@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using Ampla.LogReader.Excel;
 using Ampla.LogReader.Excel.Writer;
 using Ampla.LogReader.Remoting;
@@ -22,14 +24,24 @@ namespace Ampla.LogReader.Reports.Pages
         {
             UpdateStatistics(new IStatistic<RemotingEntry>[] {sessionStatistics, summary});
 
+            DateTime offset = summary.FirstEntry.HasValue ? summary.FirstEntry.Value : new DateTime(DateTime.Now.Year, 1, 1);
+            
             writer.WriteRow("Sessions");
             if (sessionStatistics.Count > 0)
             {
-                writer.WriteRow("Identity", "Session", "Count", "First", "Last", "Hours");
+                writer.WriteRow("Identity", "Session", "Count", "First", "Last", "Hours", "Offset", "Duration");
                 var sessions = sessionStatistics.Sessions;
                 foreach (var session in sessions)
                 {
-                    writer.WriteRow(session.Key.Identity, session.Key.Session, session.Count, session.FirstEntry, session.LastEntry, session.Duration.TotalHours);
+                    Debug.Assert(session.FirstEntry != null, "session.FirstEntry != null");
+                    DateTime firstEntry = session.FirstEntry.Value;
+                    DateTime? lastEntry = session.LastEntry;
+                    double start = firstEntry.Subtract(offset).TotalDays;
+                    double duration = session.Duration.TotalDays; 
+                    writer.WriteRow(session.Key.Identity, session.Key.Session, session.Count, 
+                        firstEntry, lastEntry, 
+                        session.Duration.TotalHours,
+                        start, duration );
                 }
             }
             else
