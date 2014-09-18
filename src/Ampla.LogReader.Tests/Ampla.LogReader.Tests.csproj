@@ -64,6 +64,8 @@
     <Compile Include="Excel\ExcelRow.cs" />
     <Compile Include="FileSystem\AmplaProjects.cs" />
     <Compile Include="FileSystem\AmplaProjectUnitTests.cs" />
+    <Compile Include="Remoting\EditedDataDescriptorCollectionUnitTests.cs" />
+    <Compile Include="Remoting\UpdateParametersUnitTests.cs" />
     <Compile Include="Remoting\FilterValuesUnitTests.cs" />
     <Compile Include="Remoting\ViewDescriptorUnitTests.cs" />
     <Compile Include="Remoting\IdentitySessionUnitTests.cs" />
