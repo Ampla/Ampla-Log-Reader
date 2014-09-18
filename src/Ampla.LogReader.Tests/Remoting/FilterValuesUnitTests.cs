@@ -14,6 +14,13 @@ namespace Ampla.LogReader.Remoting
         }
 
         [Test]
+        public void WithRecurse()
+        {
+            FilterValues filter = new FilterValues("@GroupBy={Hour}, Location={\"Enterprise\" with recurse}, Sample Period={Current Day}");
+            Assert.That(filter.Location, Is.EqualTo("\"Enterprise\" with recurse"));
+        }
+
+        [Test]
         public void LocationWithQuotes()
         {
             FilterValues filter = new FilterValues("Location={\"Enterprise.Site.Area\"}");

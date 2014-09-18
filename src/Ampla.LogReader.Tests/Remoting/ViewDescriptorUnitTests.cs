@@ -22,6 +22,13 @@ namespace Ampla.LogReader.Remoting
         }
 
         [Test]
+        public void Metrics()
+        {
+            ViewDescriptor view = new ViewDescriptor("View Descriptor [Metrics.AnalysisView]");
+            Assert.That(view.Module, Is.EqualTo("Metrics"));
+        }
+
+        [Test]
         public void Null()
         {
             ViewDescriptor view = new ViewDescriptor(null);

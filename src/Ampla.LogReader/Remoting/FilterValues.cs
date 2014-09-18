@@ -41,7 +41,7 @@ namespace Ampla.LogReader.Remoting
                     if (parts.Length > 0)
                     {
                         string location = parts[0];
-                        return location.Trim('"');
+                        return (location.StartsWith("\"") && location.EndsWith("\"")) ? location.Trim('\"') : location;
                     }
                 }
             }
