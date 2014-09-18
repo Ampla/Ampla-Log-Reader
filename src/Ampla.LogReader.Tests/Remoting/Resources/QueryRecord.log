@@ -1,0 +1,14 @@
+﻿<RemotingEntry>
+<Identity>TESTDOMAIN\sysadmin</Identity>
+<UTCDateTime>2014-06-11T03:42:36</UTCDateTime>
+<LocalDateTime>2014-06-11T13:42:36</LocalDateTime>
+<__MethodName>Query</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.IDataService, Citect.Ampla.General.Common, Version=5.2.6135.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>d965fab7-f292-41c3-8a7a-2bdf2a369703</System.Guid>
+<Citect.Ampla.General.Common.ViewDescriptor>View Descriptor [Downtime.StandardView]</Citect.Ampla.General.Common.ViewDescriptor>
+<Citect.Ampla.General.Common.FilterValues>Location={&quot;Enterprise&quot;}, Sample Period={Current Day}</Citect.Ampla.General.Common.FilterValues>
+<Citect.Ampla.General.Common.QueryFlags>Pivot, FieldMask, LookupLists, EvaluatedFields</Citect.Ampla.General.Common.QueryFlags>
+</__Args>
+<__MessageResponseTime>402.023</__MessageResponseTime>
+</RemotingEntry>

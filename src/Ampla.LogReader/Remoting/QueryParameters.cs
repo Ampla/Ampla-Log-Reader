@@ -4,11 +4,8 @@ namespace Ampla.LogReader.Remoting
 {
     public class QueryParameters
     {
-        private RemotingEntry remotingEntry;
-
         public QueryParameters(RemotingEntry remotingEntry)
         {
-            this.remotingEntry = remotingEntry;
             if (remotingEntry.Method == "Query")
             {
                 if (remotingEntry.Arguments.Length > 3)
@@ -34,8 +31,6 @@ namespace Ampla.LogReader.Remoting
         public string Location { get; private set; }
 
         public string Module { get; private set; }
-
-
 
     }
 }

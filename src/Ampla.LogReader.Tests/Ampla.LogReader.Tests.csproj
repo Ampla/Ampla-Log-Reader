@@ -119,6 +119,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Remoting\Resources\QueryRecord.log">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Remoting\Resources\UpdateRecord.log">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Remoting\Resources\DifferentTimeZone.log">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -9,8 +9,9 @@ namespace Ampla.LogReader.Remoting
     {
         private XmlNode xmlNode;
         private const string availableReportsFileName = @".\Remoting\Resources\SingleEntry.log";
-        private const string queryFileName = @".\Remoting\Resources\EntryWithArgs.log";
         private const string loginFileName = @".\Remoting\Resources\EntryWithNoArgs.log";
+        private const string queryFileName = @".\Remoting\Resources\QueryRecord.log";
+        private const string updateFileName = @".\Remoting\Resources\UpdateRecord.log";
 
         private void LoadXmlFile(string fileName)
         {
@@ -39,6 +40,19 @@ namespace Ampla.LogReader.Remoting
             Assert.That(query.Module, Is.EqualTo("Downtime"));
             Assert.That(query.Location, Is.Not.Null);
             Assert.That(query.Location, Is.EqualTo("Enterprise"));
+        }
+
+        [Test]
+        public void UpdateRecord()
+        {
+            LoadXmlFile(updateFileName);
+            RemotingEntry entry = RemotingEntry.LoadFromXml(xmlNode);
+            Assert.That(entry.Method, Is.EqualTo("Update"));
+
+            QueryParameters query = new QueryParameters(entry);
+            Assert.That(query, Is.Not.Null);
+            Assert.That(query.Module, Is.Null);
+            Assert.That(query.Location, Is.Null);
         }
 
         [Test]
