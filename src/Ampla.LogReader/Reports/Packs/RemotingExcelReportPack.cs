@@ -1,6 +1,8 @@
-﻿using Ampla.LogReader.Excel;
+﻿using System.Data;
+using Ampla.LogReader.Excel;
 using Ampla.LogReader.FileSystem;
 using Ampla.LogReader.Remoting;
+using Ampla.LogReader.Reports.Data;
 using Ampla.LogReader.Reports.Pages;
 
 namespace Ampla.LogReader.Reports.Packs
@@ -36,7 +38,9 @@ namespace Ampla.LogReader.Reports.Packs
             {
                 new RemotingSummaryPage(excel, reader.Entries).Render();
                 new RemotingSessionSummaryPage(excel, reader.Entries).Render();
-                excel.WriteDataToWorksheet(RemotingEntry.CreateDataTable(reader.Entries), "Remoting");
+                
+                DataTable table = new RemotingEntryTable(reader.Entries).Data;
+                excel.WriteDataToWorksheet(table, "Remoting");
             }
         }
     }

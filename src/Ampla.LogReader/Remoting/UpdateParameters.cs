@@ -8,14 +8,14 @@
             {
                 if (remotingEntry.Arguments.Length == 3)
                 {
-                    // ViewDescriptor
+                    // ViewDescriptor (string)
                     RemotingArgument view = remotingEntry.Arguments[1];
                     if (view.TypeName == "Citect.Ampla.General.Common.ViewDescriptor")
                     {
                         ViewDescriptor viewDescriptor = new ViewDescriptor(view.Value);
                         Module = viewDescriptor.Module;
                     }
-                    // FilterValues
+                    // EditedDataDescriptorCollection (xml)
                     RemotingArgument editDataDescriptor = remotingEntry.Arguments[2];
                     if (editDataDescriptor.TypeName == "Citect.Ampla.General.Common.EditedDataDescriptorCollection")
                     {
