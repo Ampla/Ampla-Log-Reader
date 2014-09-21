@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace Ampla.LogReader.Remoting
 {
     public class QueryParameters : ILocationParameter

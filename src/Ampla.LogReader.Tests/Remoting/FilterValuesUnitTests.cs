@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace Ampla.LogReader.Remoting
 {
@@ -39,6 +38,27 @@ namespace Ampla.LogReader.Remoting
         {
             FilterValues filter = new FilterValues("Group By={Day},Location={\"Enterprise.Site.Area\"},Value={100}");
             Assert.That(filter.Location, Is.EqualTo("Enterprise.Site.Area"));
+        }
+
+        [Test]
+        public void NoLocation()
+        {
+            FilterValues filter = new FilterValues("Id={7265655}");
+            Assert.That(filter.Location, Is.EqualTo("Unknown"));
+        }
+
+        [Test]
+        public void EmptyFilter()
+        {
+            FilterValues filter = new FilterValues("");
+            Assert.That(filter.Location, Is.EqualTo(null));
+        }
+
+        [Test]
+        public void NullFilter()
+        {
+            FilterValues filter = new FilterValues(null);
+            Assert.That(filter.Location, Is.EqualTo(null));
         }
 
     }

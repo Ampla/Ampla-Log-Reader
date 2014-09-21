@@ -30,6 +30,10 @@ namespace Ampla.LogReader.Remoting
 
         private string GetLocation(string filterValues)
         {
+            if (string.IsNullOrEmpty(filterValues))
+            {
+                return null;
+            }
             //Location={&quot;Enterprise&quot;}, Sample Period={Current Day}
             if (filterValues.Contains("Location={"))
             {
@@ -45,7 +49,7 @@ namespace Ampla.LogReader.Remoting
                     }
                 }
             }
-            return null;
+            return "Unknown";
         }
 
     }
