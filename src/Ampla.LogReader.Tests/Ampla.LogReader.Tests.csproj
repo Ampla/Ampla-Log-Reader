@@ -74,6 +74,8 @@
     <Compile Include="Remoting\QueryParametersUnitTests.cs" />
     <Compile Include="Remoting\RemotingLogReaderUnitTests.cs" />
     <Compile Include="Remoting\RemotingEntryUnitTests.cs" />
+    <Compile Include="Reports\Data\RemotingLocationsTableUnitTests.cs" />
+    <Compile Include="Reports\Data\RemotingEntryTableUnitTests.cs" />
     <Compile Include="Reports\EventLogs\EventLogDetailsReportUnitTests.cs" />
     <Compile Include="Reports\EventLogs\EventLogHourlySummaryReportUnitTests.cs" />
     <Compile Include="Reports\EventLogs\EventLogSummaryReportUnitTests.cs" />

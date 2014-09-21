@@ -1,6 +1,6 @@
 ﻿namespace Ampla.LogReader.Remoting
 {
-    public class UpdateParameters
+    public class UpdateParameters : ILocationParameter
     {
         public UpdateParameters(RemotingEntry remotingEntry)
         {
@@ -24,6 +24,11 @@
                     }
                 }
             }
+        }
+
+        public string Operation
+        {
+            get { return "Update"; }
         }
 
         public string Location { get; private set; }

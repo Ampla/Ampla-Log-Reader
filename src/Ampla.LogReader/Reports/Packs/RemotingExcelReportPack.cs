@@ -41,6 +41,9 @@ namespace Ampla.LogReader.Reports.Packs
                 
                 DataTable table = new RemotingEntryTable(reader.Entries).Data;
                 excel.WriteDataToWorksheet(table, "Remoting");
+
+                DataTable locationTable = new RemotingLocationsTable(reader.Entries).Data;
+                excel.WriteDataToWorksheet(locationTable, "Locations");
             }
         }
     }

@@ -18,9 +18,29 @@ namespace Ampla.LogReader.Reports.Packs
 
              Assert.That(File.Exists(Filename), Is.True);
 
-             AssertWorksheetExists("Summary");
-             AssertWorksheetExists("Sessions");
-             AssertWorksheetExists("Remoting");
+             using (ExcelPage page = AssertWorksheetContainsData("Summary", 10))
+             {
+                 page.Row(1).AssertValues<string>(Is.Not.Empty);
+                 page.Row(2).AssertValues<string>(Is.Not.Empty);
+             }
+             
+             using (ExcelPage page = AssertWorksheetContainsData("Sessions", 10))
+             {
+                 page.Row(1).AssertValues<string>(Is.Not.Empty);
+                 page.Row(2).AssertValues<string>(Is.Not.Empty);
+             }
+             
+             using (ExcelPage page = AssertWorksheetContainsData("Remoting", 10))
+             {
+                 page.Row(1).AssertValues<string>(Is.Not.Empty);
+                 page.Row(2).AssertValues<string>(Is.Not.Empty);
+             }
+
+             using (ExcelPage page = AssertWorksheetContainsData("Locations", 10))
+             {
+                 page.Row(1).AssertValues<string>(Is.Not.Empty);
+                 page.Row(2).AssertValues<string>(Is.Not.Empty);
+             }
          }
 
          [Test]
@@ -33,9 +53,29 @@ namespace Ampla.LogReader.Reports.Packs
 
              Assert.That(File.Exists(Filename), Is.True);
 
-             AssertWorksheetExists("Summary");
-             AssertWorksheetExists("Sessions");
-             AssertWorksheetExists("Remoting");
+             using (ExcelPage page = AssertWorksheetContainsData("Summary", 10))
+             {
+                 page.Row(1).AssertValues<string>(Is.Not.Empty);
+                 page.Row(2).AssertValues<string>(Is.Not.Empty);
+             }
+            
+             using (ExcelPage page = AssertWorksheetContainsData("Sessions", 10))
+             {
+                 page.Row(1).AssertValues<string>(Is.Not.Empty);
+                 page.Row(2).AssertValues<string>(Is.EqualTo(new string[] {"None"}));
+             }
+             
+             using (ExcelPage page = AssertWorksheetContainsData("Remoting", 10))
+             {
+                 page.Row(1).AssertValues<string>(Is.Not.Empty);
+                 page.Row(2).AssertValues<string>(Is.Empty);
+             }
+
+             using (ExcelPage page = AssertWorksheetContainsData("Locations", 10))
+             {
+                 page.Row(1).AssertValues<string>(Is.Not.Empty);
+                 page.Row(2).AssertValues<string>(Is.Empty);
+             }
          }
     }
 }

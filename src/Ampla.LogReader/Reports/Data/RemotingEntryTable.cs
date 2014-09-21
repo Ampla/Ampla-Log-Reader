@@ -11,6 +11,7 @@ namespace Ampla.LogReader.Reports.Data
         {
             DataTable data = CreateTable("RemotingEntries");
             AddEntries(data, entries);
+            Data = data;
         }
 
         private DataTable CreateTable(string name)

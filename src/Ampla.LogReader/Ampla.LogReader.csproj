@@ -78,6 +78,7 @@
     <Compile Include="Remoting\EditedDataDescriptorCollection.cs" />
     <Compile Include="Remoting\FilterValues.cs" />
     <Compile Include="Remoting\IdentitySession.cs" />
+    <Compile Include="Remoting\ILocationParameter.cs" />
     <Compile Include="Remoting\RemotingArgument.cs" />
     <Compile Include="Remoting\RemotingDirectory.cs" />
     <Compile Include="Remoting\RemotingEntry.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Remoting\RemotingLogReader.cs" />
     <Compile Include="Remoting\UpdateParameters.cs" />
     <Compile Include="Remoting\ViewDescriptor.cs" />
+    <Compile Include="Reports\Data\RemotingLocationsTable.cs" />
     <Compile Include="Reports\Data\RemotingEntryTable.cs" />
     <Compile Include="Reports\EventLogs\EventLogDetailsReport.cs" />
     <Compile Include="Reports\EventLogs\EventLogHourlySummaryReport.cs" />

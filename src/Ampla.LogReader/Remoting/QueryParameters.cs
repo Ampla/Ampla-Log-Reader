@@ -2,7 +2,7 @@
 
 namespace Ampla.LogReader.Remoting
 {
-    public class QueryParameters
+    public class QueryParameters : ILocationParameter
     {
         public QueryParameters(RemotingEntry remotingEntry)
         {
@@ -26,6 +26,11 @@ namespace Ampla.LogReader.Remoting
                     }
                 }
             }
+        }
+
+        public string Operation
+        {
+            get { return "Query"; }
         }
 
         public string Location { get; private set; }
