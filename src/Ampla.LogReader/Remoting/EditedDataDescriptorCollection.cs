@@ -23,7 +23,7 @@ namespace Ampla.LogReader.Remoting
                 string value = XmlHelper.GetText(xmlField, "@editedValue");
                 fields.Add(field + "={" + value + "}");
             }
-            FieldValues = string.Join(",", fields);
+            FieldValues = string.Join(", ", fields);
         }
 
         public string Location { get; private set; }

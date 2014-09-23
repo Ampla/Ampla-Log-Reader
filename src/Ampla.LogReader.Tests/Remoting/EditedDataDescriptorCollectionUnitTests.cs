@@ -26,16 +26,16 @@ namespace Ampla.LogReader.Remoting
             EditedDataDescriptorCollection collection = new EditedDataDescriptorCollection(qualityXml);
             Assert.That(collection.Location, Is.EqualTo("Enterprise.Site.Area.Quality"));
             Assert.That(collection.SetId, Is.EqualTo("5"));
-            Assert.That(collection.FieldValues, Is.EqualTo("LastModified={11/06/2014 3:48:03 AM},SampleDateTime={11/06/2014 3:47:09 AM}"));
+            Assert.That(collection.FieldValues, Is.EqualTo("LastModified={11/06/2014 3:48:03 AM}, SampleDateTime={11/06/2014 3:47:09 AM}"));
         }
 
         [Test]
-        public void Downtimelocation()
+        public void DowntimeLocation()
         {
             EditedDataDescriptorCollection collection = new EditedDataDescriptorCollection(downtimeXml);
             Assert.That(collection.Location, Is.EqualTo("Enterprise.Site.Area.Downtime"));
             Assert.That(collection.SetId, Is.EqualTo("2"));
-            Assert.That(collection.FieldValues, Is.EqualTo("LastModified={10/10/2013 1:57:45 AM},Cause={9020},Cause Location={Enterprise.Site.Area}"));
+            Assert.That(collection.FieldValues, Is.EqualTo("LastModified={10/10/2013 1:57:45 AM}, Cause={9020}, Cause Location={Enterprise.Site.Area}"));
         }
 
     }
