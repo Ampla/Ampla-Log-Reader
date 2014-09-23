@@ -69,5 +69,14 @@ namespace Ampla.LogReader.Remoting
             Assert.That(filter.FilterData, Is.EqualTo(null));
         }
 
+        [Test]
+        public void LongDateTime()
+        {
+            const string filterString = "@GroupBy={Day}, Location={\"Enterprise.Site.Area\"}, Value={100}, Sample Period={>= \"Saturday, 19 July 2014 00:00:00\" And < \"Monday, 21 July 2014 12:00:00\"}";
+            FilterValues filter = new FilterValues(filterString);
+            Assert.That(filter.Location, Is.EqualTo("Enterprise.Site.Area"));
+            Assert.That(filter.FilterData, Is.EqualTo("@GroupBy={Day}, Value={100}, Sample Period={>= \"Saturday, 19 July 2014 00:00:00\" And < \"Monday, 21 July 2014 12:00:00\"}"));
+        }
+
     }
 }

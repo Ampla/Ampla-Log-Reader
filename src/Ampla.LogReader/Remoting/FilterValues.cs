@@ -88,8 +88,19 @@ namespace Ampla.LogReader.Remoting
         {
             if (filter != null)
             {
-                string[] parsed = filter.Split(new[] {", "}, StringSplitOptions.None);
-                List<FilterValue> filters = parsed.Select(FilterValue.Parse).Where(fv => fv != null).ToList();
+                string[] parsed = filter.Split(new[] {"}, "}, StringSplitOptions.None);
+                int missing = parsed.Length - 1;
+                List<FilterValue> filters = new List<FilterValue>();
+                for (int i = 0; i < parsed.Length; i++)
+                {
+                    string parse = parsed[i] + (missing > 0 ? "}" : "");
+                    FilterValue filterValue = FilterValue.Parse(parse);
+                    if (filterValue != null)
+                    {
+                        filters.Add(filterValue);
+                    }
+                    missing--;
+                }
                 return filters;
             }
             return new List<FilterValue>();
