@@ -19,8 +19,9 @@
                     RemotingArgument editDataDescriptor = remotingEntry.Arguments[2];
                     if (editDataDescriptor.TypeName == "Citect.Ampla.General.Common.EditedDataDescriptorCollection")
                     {
-                        EditedDataDescriptorCollection filterValues = new EditedDataDescriptorCollection(editDataDescriptor.Value);
-                        Location = filterValues.Location;
+                        EditedDataDescriptorCollection collection = new EditedDataDescriptorCollection(editDataDescriptor.Value);
+                        Location = collection.Location;
+                        MetaData = collection.FieldValues;
                     }
                 }
             }
@@ -33,6 +34,9 @@
 
         public string Location { get; private set; }
 
-        public string Module { get; private set; } 
+        public string Module { get; private set; }
+
+        public string MetaData { get; private set; }
+
     }
 }

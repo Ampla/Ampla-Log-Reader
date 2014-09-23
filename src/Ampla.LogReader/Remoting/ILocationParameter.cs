@@ -5,5 +5,6 @@
         string Operation { get; }
         string Location { get; }
         string Module { get; }
+        string MetaData { get; }
     }
 }

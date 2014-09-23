@@ -24,6 +24,7 @@ namespace Ampla.LogReader.Reports.Data
             table.Columns.Add("Module", typeof(string));
             table.Columns.Add("Location", typeof(string));
             table.Columns.Add("Operation", typeof(string));
+            table.Columns.Add("MetaData", typeof(string));
             return table;
         }
 
@@ -59,7 +60,8 @@ namespace Ampla.LogReader.Reports.Data
                         entry.Identity,
                         location.Module,
                         location.Location,
-                        location.Operation
+                        location.Operation,
+                        location.MetaData
                         );
                 }
             }

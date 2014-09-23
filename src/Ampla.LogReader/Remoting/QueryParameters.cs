@@ -36,5 +36,7 @@ namespace Ampla.LogReader.Remoting
 
         public string Module { get; private set; }
 
+        public string MetaData { get; private set; }
+
     }
 }
