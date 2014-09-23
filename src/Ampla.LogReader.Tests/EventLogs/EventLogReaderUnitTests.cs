@@ -24,12 +24,12 @@ namespace Ampla.LogReader.EventLogs
             reader.Read();
 
             Assert.That(reader.Entries, Is.Not.Empty);
-            Assert.That(reader.Entries.Count, Is.EqualTo(count));
+            Assert.That(reader.Entries.Count, Is.EqualTo(count).Or.EqualTo(count + 1));
 
             reader.Read();
 
             Assert.That(reader.Entries, Is.Not.Empty);
-            Assert.That(reader.Entries.Count, Is.EqualTo(count));
+            Assert.That(reader.Entries.Count, Is.EqualTo(count).Or.EqualTo(count + 1));
         }
         
     }
