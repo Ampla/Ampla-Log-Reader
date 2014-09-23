@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Ampla.LogReader.Remoting
 {
@@ -7,15 +9,69 @@ namespace Ampla.LogReader.Remoting
     /// </summary>
     public class FilterValues
     {
-        private readonly string filter;
+        private readonly string filterString;
 
-        public FilterValues(string filter)
+        private class FilterValue
         {
-            this.filter = filter;
-            Location = GetLocation(filter);
+            public string Name { get; private set; }
+            public string Value { get; private set; }
+
+            public static FilterValue Parse(string filter)
+            {
+                string[] parts = filter.Split(new[] { "={", "}" }, StringSplitOptions.None);
+                if (parts.Length > 1)
+                {
+                    string name = parts[0];
+                    string value = parts[1];
+
+                    if (value.StartsWith("\"") && value.EndsWith("\""))
+                    {
+                        value = value.Trim('\"');
+                    }
+
+                    return new FilterValue
+                        {
+                            Name = name,
+                            Value = value,
+                        };
+                }
+                return null;
+            }
+
+            public string NameValue
+            {
+                get
+                {
+                    return Name + "={" + Value + "}";
+                }
+            }
+        }
+
+        public FilterValues(string filterString)
+        {
+            this.filterString = filterString;
+            List<FilterValue> filters = GetFilters(filterString);
+            List<string> filterData = new List<string>();
+
+            Location = filters.Count > 0 ? "Unknown" : null;
+            
+            foreach (FilterValue filterValue in filters)
+            {
+                if (filterValue.Name == "Location")
+                {
+                    Location = filterValue.Value;
+                }
+                else
+                {
+                    filterData.Add(filterValue.NameValue);
+                }
+            }
+
+            FilterData = filterData.Count > 0 ? string.Join(", ", filterData) : null;
         }
 
         public string Location { get; private set; }
+        public string FilterData { get; private set; }
 
         /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.
@@ -25,32 +81,19 @@ namespace Ampla.LogReader.Remoting
         /// </returns>
         public override string ToString()
         {
-            return filter;
+            return filterString;
         }
 
-        private string GetLocation(string filterValues)
+        private List<FilterValue> GetFilters(string filter)
         {
-            if (string.IsNullOrEmpty(filterValues))
+            if (filter != null)
             {
-                return null;
+                string[] parsed = filter.Split(new[] {", "}, StringSplitOptions.None);
+                List<FilterValue> filters = parsed.Select(FilterValue.Parse).Where(fv => fv != null).ToList();
+                return filters;
             }
-            //Location={&quot;Enterprise&quot;}, Sample Period={Current Day}
-            if (filterValues.Contains("Location={"))
-            {
-                int position = filterValues.IndexOf("Location={", StringComparison.InvariantCulture);
-                if (position >= 0)
-                {
-                    string trim = filterValues.Substring(position + "Location={".Length);
-                    string[] parts = trim.Split(new[] { "={", "}" }, StringSplitOptions.RemoveEmptyEntries);
-                    if (parts.Length > 0)
-                    {
-                        string location = parts[0];
-                        return (location.StartsWith("\"") && location.EndsWith("\"")) ? location.Trim('\"') : location;
-                    }
-                }
-            }
-            return "Unknown";
+            return new List<FilterValue>();
         }
-
+        
     }
 }

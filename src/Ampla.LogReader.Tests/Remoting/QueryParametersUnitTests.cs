@@ -40,6 +40,7 @@ namespace Ampla.LogReader.Remoting
             Assert.That(query.Module, Is.EqualTo("Downtime"));
             Assert.That(query.Location, Is.Not.Null);
             Assert.That(query.Location, Is.EqualTo("Enterprise"));
+            Assert.That(query.MetaData, Is.EqualTo("Sample Period={Current Day}"));
         }
 
         [Test]
@@ -53,6 +54,7 @@ namespace Ampla.LogReader.Remoting
             Assert.That(query, Is.Not.Null);
             Assert.That(query.Module, Is.Null);
             Assert.That(query.Location, Is.Null);
+            Assert.That(query.MetaData, Is.Null);
         }
 
         [Test]
@@ -66,6 +68,7 @@ namespace Ampla.LogReader.Remoting
             Assert.That(query, Is.Not.Null);
             Assert.That(query.Location, Is.Null);
             Assert.That(query.Module, Is.Null);
+            Assert.That(query.MetaData, Is.Null);
         }
 
         [Test]
@@ -79,6 +82,7 @@ namespace Ampla.LogReader.Remoting
             Assert.That(query, Is.Not.Null);
             Assert.That(query.Location, Is.Null);
             Assert.That(query.Module, Is.Null);
+            Assert.That(query.MetaData, Is.Null);
         }
 
     }

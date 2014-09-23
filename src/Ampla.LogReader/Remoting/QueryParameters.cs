@@ -22,6 +22,7 @@ namespace Ampla.LogReader.Remoting
                     {
                         FilterValues filterValues = new FilterValues(filter.Value);
                         Location = filterValues.Location;
+                        MetaData = filterValues.FilterData;
                     }
                 }
             }
