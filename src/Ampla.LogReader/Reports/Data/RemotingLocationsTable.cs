@@ -49,6 +49,11 @@ namespace Ampla.LogReader.Reports.Data
                             location = new UpdateParameters(entry);
                             break;
                         }
+                    case "GetNewSample":
+                        {
+                            location = new GetNewSampleParameters(entry);
+                            break;
+                        }
                 }
 
                 if (location != null)

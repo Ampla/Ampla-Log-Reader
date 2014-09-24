@@ -8,7 +8,7 @@ namespace Ampla.LogReader.Reports.Data
     public class RemotingEntryTableUnitTests : TestFixture
     {
         private const string directory = @".\Remoting\Resources";
-        private const int numberOfEntries = 6;
+        private const int numberOfEntries = 7;
 
         [Test]
         public void EmptyTable()

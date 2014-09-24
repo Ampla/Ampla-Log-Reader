@@ -8,7 +8,7 @@ namespace Ampla.LogReader.Reports.Data
     public class RemotingLocationsTableUnitTests : TestFixture
     {
         private const string directory = @".\Remoting\Resources";
-        private const int numberOfEntries = 6;
+        private const int numberOfEntries = 7;
 
         [Test]
         public void EmptyTable()
@@ -35,6 +35,11 @@ namespace Ampla.LogReader.Reports.Data
             Assert.That(table.Data.Columns.Count, Is.GreaterThan(5));
             Assert.That(table.Data.Rows.Count, Is.GreaterThan(0));
             Assert.That(table.Data.Rows.Count, Is.LessThan(numberOfEntries));
+
+            Assert.That(table.Data.Select("[Operation] = 'Query'"), Is.Not.Empty, "Query Rows");
+            Assert.That(table.Data.Select("[Operation] = 'Update'"), Is.Not.Empty, "Update Rows");
+            Assert.That(table.Data.Select("[Operation] = 'New Record'"), Is.Not.Empty, "New Record Rows");
+            Assert.That(table.Data.Select("[Operation] = 'Confirm'"), Is.Empty, "Confirm Rows");
         }
     }
 }

@@ -1,0 +1,13 @@
+﻿<RemotingEntry>
+<Identity>TESTDOMAIN\sysadmin</Identity>
+<UTCDateTime>2014-06-11T04:42:36</UTCDateTime>
+<LocalDateTime>2014-06-11T14:42:36</LocalDateTime>
+<__MethodName>GetNewSample</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.IDataService, Citect.Ampla.General.Common, Version=5.0.5343.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>959807d6-aabe-42c0-b0d6-f9bf10c54d1a</System.Guid>
+<System.String>Enterprise.Site.Area.Point</System.String>
+<Citect.Ampla.General.Common.QueryFlags>Pivot, FieldMask, LookupLists, EvaluatedFields</Citect.Ampla.General.Common.QueryFlags>
+</__Args>
+<__MessageResponseTime>93.5976</__MessageResponseTime>
+</RemotingEntry>

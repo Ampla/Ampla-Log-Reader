@@ -75,6 +75,7 @@
     <Compile Include="ILogReader.cs" />
     <Compile Include="LogReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Remoting\GetNewSampleParameters.cs" />
     <Compile Include="Remoting\EditedDataDescriptorCollection.cs" />
     <Compile Include="Remoting\FilterValues.cs" />
     <Compile Include="Remoting\IdentitySession.cs" />
