@@ -8,6 +8,8 @@ namespace Ampla.LogReader.Remoting
     {
         private const string directory = @".\Remoting\Resources";
 
+        private const int numFiles = 8;
+
         [Test]
         public void InvalidDirectory()
         {
@@ -17,14 +19,14 @@ namespace Ampla.LogReader.Remoting
         }
 
         [Test]
-        public void With7Files()
+        public void WithFiles()
         {
             RemotingDirectory remotingDirectory = new RemotingDirectory(directory);
             Assert.That(remotingDirectory.DirectoryExists(), Is.True);
             remotingDirectory.Read();
 
             Assert.That(remotingDirectory.Entries, Is.Not.Empty);
-            Assert.That(remotingDirectory.Entries.Count, Is.EqualTo(7));
+            Assert.That(remotingDirectory.Entries.Count, Is.EqualTo(numFiles));
         }
 
     }

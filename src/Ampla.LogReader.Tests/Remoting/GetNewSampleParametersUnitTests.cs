@@ -12,6 +12,7 @@ namespace Ampla.LogReader.Remoting
         private const string loginFileName = @".\Remoting\Resources\EntryWithNoArgs.log";
         private const string queryFileName = @".\Remoting\Resources\QueryRecord.log";
         private const string updateFileName = @".\Remoting\Resources\UpdateRecord.log";
+        private const string confirmFileName = @".\Remoting\Resources\ConfirmRecord.log";
         private const string newFileName = @".\Remoting\Resources\NewRecord.log";
 
         private void LoadXmlFile(string fileName)
@@ -88,6 +89,20 @@ namespace Ampla.LogReader.Remoting
         public void UpdateRecord()
         {
             LoadXmlFile(updateFileName);
+            RemotingEntry entry = RemotingEntry.LoadFromXml(xmlNode);
+            Assert.That(entry.Method, Is.EqualTo("Update"));
+
+            GetNewSampleParameters query = new GetNewSampleParameters(entry);
+            Assert.That(query, Is.Not.Null);
+            Assert.That(query.Location, Is.Null);
+            Assert.That(query.Module, Is.Null);
+            Assert.That(query.MetaData, Is.Null);
+        }
+
+        [Test]
+        public void ConfirmRecord()
+        {
+            LoadXmlFile(confirmFileName);
             RemotingEntry entry = RemotingEntry.LoadFromXml(xmlNode);
             Assert.That(entry.Method, Is.EqualTo("Update"));
 

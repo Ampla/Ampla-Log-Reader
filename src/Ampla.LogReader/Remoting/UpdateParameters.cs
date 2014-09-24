@@ -6,6 +6,7 @@
         {
             if (remotingEntry.Method == "Update")
             {
+                Operation = "Update";
                 if (remotingEntry.Arguments.Length == 3)
                 {
                     // ViewDescriptor (string)
@@ -22,15 +23,13 @@
                         EditedDataDescriptorCollection collection = new EditedDataDescriptorCollection(editDataDescriptor.Value);
                         Location = collection.Location;
                         MetaData = collection.FieldValues;
+                        Operation = collection.Operation;
                     }
                 }
             }
         }
 
-        public string Operation
-        {
-            get { return "Update"; }
-        }
+        public string Operation { get; private set; }
 
         public string Location { get; private set; }
 

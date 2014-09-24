@@ -1,0 +1,13 @@
+﻿<RemotingEntry>
+<Identity>TESTDOMAIN\sysadmin</Identity>
+<UTCDateTime>2014-07-19T07:46:17</UTCDateTime>
+<LocalDateTime>2014-07-19T13:16:17</LocalDateTime>
+<__MethodName>Update</__MethodName>
+<__TypeName>Citect.Ampla.General.Common.IDataService, Citect.Ampla.General.Common, Version=5.0.5343.0, Culture=neutral, PublicKeyToken=13aaee2494f61799</__TypeName>
+<__Args>
+<System.Guid>589a6d4b-6453-4e0f-ac3e-77830458703a</System.Guid>
+<Citect.Ampla.General.Common.ViewDescriptor>View Descriptor [Downtime.StandardView]</Citect.Ampla.General.Common.ViewDescriptor>
+<Citect.Ampla.General.Common.EditedDataDescriptorCollection>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;EditedDataDescriptorCollection Location=&quot;Enterprise.Site.Area.Downtime&quot; Comment=&quot;&quot; SetId=&quot;11&quot; UserName=&quot;System Configuration.Users.Administrator&quot; SampleTimeUTC=&quot;1/1/0001 12:00:00 AM&quot;&gt;&lt;EditedDataDescriptor comment=&quot;&quot; baseTable=&quot;Set&quot; dataId=&quot;61929&quot; dataStatus=&quot;0&quot; editedValue=&quot;System Configuration.Users.Administrator&quot; isNewData=&quot;False&quot; name=&quot;ConfirmedBy&quot; setId=&quot;11&quot; /&gt;&lt;EditedDataDescriptor comment=&quot;&quot; baseTable=&quot;Set&quot; dataId=&quot;11&quot; dataStatus=&quot;0&quot; editedValue=&quot;True&quot; isNewData=&quot;False&quot; name=&quot;IsConfirmed&quot; setId=&quot;11&quot; /&gt;&lt;EditedDataDescriptor comment=&quot;&quot; baseTable=&quot;Set&quot; dataId=&quot;11&quot; dataStatus=&quot;0&quot; editedValue=&quot;7/19/2014 7:46:06 AM&quot; isNewData=&quot;False&quot; name=&quot;ConfirmedDateTime&quot; setId=&quot;61929&quot; /&gt;&lt;EditedDataDescriptor comment=&quot;&quot; baseTable=&quot;Field&quot; dataId=&quot;-1&quot; dataStatus=&quot;0&quot; editedValue=&quot;7/19/2014 7:46:17 AM&quot; isNewData=&quot;False&quot; name=&quot;LastModified&quot; setId=&quot;11&quot; /&gt;&lt;/EditedDataDescriptorCollection&gt;</Citect.Ampla.General.Common.EditedDataDescriptorCollection>
+</__Args>
+<__MessageResponseTime>46.7991</__MessageResponseTime>
+</RemotingEntry>

@@ -125,6 +125,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Remoting\Resources\ConfirmRecord.log">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Remoting\Resources\NewRecord.log">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
