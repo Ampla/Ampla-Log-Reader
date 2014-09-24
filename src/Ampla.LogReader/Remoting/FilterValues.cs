@@ -11,51 +11,15 @@ namespace Ampla.LogReader.Remoting
     {
         private readonly string filterString;
 
-        private class FilterValue
-        {
-            public string Name { get; private set; }
-            public string Value { get; private set; }
-
-            public static FilterValue Parse(string filter)
-            {
-                string[] parts = filter.Split(new[] { "={", "}" }, StringSplitOptions.None);
-                if (parts.Length > 1)
-                {
-                    string name = parts[0];
-                    string value = parts[1];
-
-                    if (value.StartsWith("\"") && value.EndsWith("\""))
-                    {
-                        value = value.Trim('\"');
-                    }
-
-                    return new FilterValue
-                        {
-                            Name = name,
-                            Value = value,
-                        };
-                }
-                return null;
-            }
-
-            public string NameValue
-            {
-                get
-                {
-                    return Name + "={" + Value + "}";
-                }
-            }
-        }
-
         public FilterValues(string filterString)
         {
             this.filterString = filterString;
-            List<FilterValue> filters = GetFilters(filterString);
+            List<FieldValue> filters = GetFilters(filterString);
             List<string> filterData = new List<string>();
 
             Location = filters.Count > 0 ? "Unknown" : null;
             
-            foreach (FilterValue filterValue in filters)
+            foreach (FieldValue filterValue in filters)
             {
                 if (filterValue.Name == "Location")
                 {
@@ -84,26 +48,26 @@ namespace Ampla.LogReader.Remoting
             return filterString;
         }
 
-        private List<FilterValue> GetFilters(string filter)
+        private List<FieldValue> GetFilters(string filter)
         {
             if (filter != null)
             {
                 string[] parsed = filter.Split(new[] {"}, "}, StringSplitOptions.None);
                 int missing = parsed.Length - 1;
-                List<FilterValue> filters = new List<FilterValue>();
+                List<FieldValue> filters = new List<FieldValue>();
                 for (int i = 0; i < parsed.Length; i++)
                 {
                     string parse = parsed[i] + (missing > 0 ? "}" : "");
-                    FilterValue filterValue = FilterValue.Parse(parse);
-                    if (filterValue != null)
+                    FieldValue fieldValue = FieldValue.Parse(parse);
+                    if (fieldValue != null)
                     {
-                        filters.Add(filterValue);
+                        filters.Add(fieldValue);
                     }
                     missing--;
                 }
                 return filters;
             }
-            return new List<FilterValue>();
+            return new List<FieldValue>();
         }
         
     }

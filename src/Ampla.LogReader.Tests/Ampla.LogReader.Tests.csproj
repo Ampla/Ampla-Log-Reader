@@ -64,6 +64,7 @@
     <Compile Include="Excel\ExcelRow.cs" />
     <Compile Include="FileSystem\AmplaProjects.cs" />
     <Compile Include="FileSystem\AmplaProjectUnitTests.cs" />
+    <Compile Include="Remoting\FieldValueUnitTests.cs" />
     <Compile Include="Remoting\GetNewSampleParametersUnitTests.cs" />
     <Compile Include="Remoting\EditedDataDescriptorCollectionUnitTests.cs" />
     <Compile Include="Remoting\UpdateParametersUnitTests.cs" />

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Xml;
+﻿using System.Xml;
 using Ampla.LogReader.Xml;
 
 namespace Ampla.LogReader.Remoting
@@ -16,23 +15,55 @@ namespace Ampla.LogReader.Remoting
 
             Location = XmlHelper.GetText(xmlDoc, "/EditedDataDescriptorCollection/@Location");
             SetId = XmlHelper.GetValue(xmlDoc, "/EditedDataDescriptorCollection/@SetId", -1);
-            List<string> fields = new List<string>();
+
+            FieldValuesList fields = new FieldValuesList();
+
             if (SetId > 0)
             {
-                fields.Add("Id={" + SetId + "}");
+                fields.Add(new FieldValue("Id", SetId.ToString("0")));
             }
+
             foreach (XmlNode xmlField in XmlHelper.GetNodes(xmlDoc, "/EditedDataDescriptorCollection/EditedDataDescriptor"))
             {
                 string field = XmlHelper.GetText(xmlField, "@name");
                 string value = XmlHelper.GetText(xmlField, "@editedValue");
-                fields.Add(field + "={" + value + "}");
+                fields.Add(new FieldValue(field, value));
             }
-            FieldValues = string.Join(", ", fields);
+
+            FieldValues = fields.ToString();
+
+            Operation = "Update Record";
+            switch (fields.Count)
+            {
+                case 3:
+                    {
+                        if (fields["IsDeleted"] == "True"
+                            && fields["Id"] != null
+                            && fields["LastModified"] != null)
+                        {
+                            Operation = "Delete Record";
+                        }
+                        break;
+                    }
+                case 5:
+                    {
+                        if (fields["IsConfirmed"] == "True"
+                            && fields["Id"] != null
+                            && fields["LastModified"] != null
+                            && fields["ConfirmedBy"] != null
+                            && fields["ConfirmedDateTime"] != null)
+                        {
+                            Operation = "Confirm Record";
+                        }
+                        break;
+                    }
+            }
         }
 
         public string Location { get; private set; }
         public int SetId { get; private set; }
         public string FieldValues { get; private set; }
+        public string Operation { get; private set; }
 
         /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.
