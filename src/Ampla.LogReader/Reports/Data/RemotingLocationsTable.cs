@@ -21,6 +21,7 @@ namespace Ampla.LogReader.Reports.Data
             table.Columns.Add("CallTimeUtc", typeof(DateTime));
             table.Columns.Add("CallTimeLocal", typeof(DateTime));
             table.Columns.Add("Identity", typeof(string));
+            table.Columns.Add("Session", typeof(string));
             table.Columns.Add("Module", typeof(string));
             table.Columns.Add("Location", typeof(string));
             table.Columns.Add("Operation", typeof(string));
@@ -63,6 +64,7 @@ namespace Ampla.LogReader.Reports.Data
                         entry.CallTimeUtc,
                         entry.CallTimeLocal,
                         entry.Identity,
+                        entry.Arguments[0].Value,
                         location.Module,
                         location.Location,
                         location.Operation,

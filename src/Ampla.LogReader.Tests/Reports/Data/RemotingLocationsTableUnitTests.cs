@@ -41,5 +41,22 @@ namespace Ampla.LogReader.Reports.Data
             Assert.That(table.Data.Select("[Operation] = 'New Record'"), Is.Not.Empty, "New Record Rows");
             Assert.That(table.Data.Select("[Operation] = 'Confirm'"), Is.Empty, "Confirm Rows");
         }
+
+        [Test]
+        public void SessionGuids()
+        {
+            RemotingDirectory remotingDirectory = new RemotingDirectory(directory);
+            Assert.That(remotingDirectory.DirectoryExists(), Is.True);
+            remotingDirectory.Read();
+
+            Assert.That(remotingDirectory.Entries, Is.Not.Empty);
+            RemotingEntry query = remotingDirectory.Entries.Find(re => re.Method == "Query");
+            
+            Assert.That(query, Is.Not.Null);
+            string session = query.Arguments[0].Value;
+
+            RemotingLocationsTable table = new RemotingLocationsTable(remotingDirectory.Entries);
+            Assert.That(table.Data.Select("[Session] = '" + session + "'"), Is.Not.Empty, "Unable to find session: {0}", session);
+        }
     }
 }
