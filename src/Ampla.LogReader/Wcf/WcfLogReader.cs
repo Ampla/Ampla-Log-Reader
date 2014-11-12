@@ -18,18 +18,24 @@ namespace Ampla.LogReader.Wcf
         protected override List<WcfCall> ReadEntries()
         {
             List<WcfCall> wcfCalls = new List<WcfCall>();
-            XmlContentTextReader contentReader = new XmlContentTextReader("<WCFCall>", File.OpenRead(fileName));
-            XmlFragmentTextReader reader = new XmlFragmentTextReader("Xml", contentReader);
-            XmlDocument xmlDoc = new XmlDocument();
-            try
+            Exception ex;
+            XmlDocument xmlDoc;
+
+            xmlDoc = LoadXmlDocument(fileName,
+                                     s => new SkipToContentTextReader("<WCFCall>", s),
+                                     out ex);
+            if (xmlDoc == null)
             {
-                xmlDoc.Load(reader);
-            }
-            catch (Exception ex)
-            {
-                throw new XmlException("Error reading file: " + fileName, ex);
+                xmlDoc = LoadXmlDocument(fileName,
+                                         s => new TruncatedTextReader("</WCFCall>",
+                                            new SkipToContentTextReader("<WCFCall>", s)),
+                                         out ex);
             }
 
+            if (xmlDoc == null)
+            {
+                throw new XmlException("Unable to read file: " + fileName, ex);
+            }
             XmlNodeList xmlNodeList = xmlDoc.SelectNodes("/Xml/WCFCall");
             if (xmlNodeList != null)
             {
@@ -40,7 +46,33 @@ namespace Ampla.LogReader.Wcf
                     wcfCalls.Add(wcfCall);
                 }
             }
+
             return wcfCalls;
+        }
+
+        private XmlDocument LoadXmlDocument(string xmlFileName, Func<Stream, TextReader> createTextReader, out Exception exception)
+        {
+            exception = null;
+            using (FileStream stream = File.OpenRead(xmlFileName))
+            {
+                using (TextReader contentReader = createTextReader(stream))
+                {
+                    using (TextReader reader = new XmlFragmentTextReader("Xml", contentReader))
+                    {
+                        try
+                        {
+                            XmlDocument xmlDoc = new XmlDocument();
+                            xmlDoc.Load(reader);
+                            return xmlDoc;
+                        }
+                        catch (Exception ex)
+                        {
+                            exception = ex;
+                        }
+                    }
+                }
+            }
+            return null;
         }
 
     }

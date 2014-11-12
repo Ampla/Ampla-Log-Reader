@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using NUnit.Framework;
 
 namespace Ampla.LogReader.Xml
@@ -28,6 +29,24 @@ namespace Ampla.LogReader.Xml
             XmlFragmentTextReader reader = new XmlFragmentTextReader("Xml", new StringReader("<One>Two</One>"));
             string xml = reader.ReadToEnd();
             Assert.That(xml, Is.EqualTo("<Xml><One>Two</One></Xml>"));
+        }
+
+        [Test]
+        public void WithTruncatedNodes()
+        {
+            StringReader stringReader = new StringReader(string.Join("\r\n", "<One>","<Two />", "</One>", "<Blah>"));
+            XmlFragmentTextReader reader = new XmlFragmentTextReader("Xml", new TruncatedTextReader("</One>", stringReader));
+            string xml = reader.ReadToEnd();
+            Assert.That(xml, Is.EqualTo("<Xml><One>\r\n<Two />\r\n</One>\r\n</Xml>"));
+        }
+
+        [Test]
+        public void WithInvalidNodes()
+        { 
+            StringReader stringReader = new StringReader(string.Join(Environment.NewLine, "<Blah>","<One>", "<Two />", "</One>", "<Blah>"));
+            XmlFragmentTextReader reader = new XmlFragmentTextReader("Xml", new TruncatedTextReader("</One>", new SkipToContentTextReader("<One>", stringReader)));
+            string xml = reader.ReadToEnd();
+            Assert.That(xml, Is.EqualTo("<Xml><One>\r\n<Two />\r\n</One>\r\n</Xml>"));
         }
 
         [Test]

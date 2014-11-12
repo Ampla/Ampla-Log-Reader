@@ -37,5 +37,15 @@ namespace Ampla.LogReader.Wcf
             reader.Read();
             Assert.That(reader.Entries.Count, Is.EqualTo(count));
         }
+
+        [Test]
+        public void LoadInvalidEntry()
+        {
+            ILogReader<WcfCall> reader = new WcfLogReader(@".\Wcf\Resources\Incomplete.log");
+            Assert.That(reader.Entries, Is.Empty);
+            reader.Read();
+
+            Assert.That(reader.Entries, Is.Not.Empty);
+        }
     }
 }

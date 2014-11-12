@@ -19,16 +19,24 @@ namespace Ampla.LogReader.Remoting
         protected override List<RemotingEntry> ReadEntries()
         {
             List<RemotingEntry> entries = new List<RemotingEntry>();
-            XmlContentTextReader contentReader = new XmlContentTextReader("<RemotingEntry>", File.OpenRead(fileName));
-            XmlFragmentTextReader reader = new XmlFragmentTextReader("Xml", contentReader);
-            XmlDocument xmlDoc = new XmlDocument();
-            try
+
+            Exception ex;
+            XmlDocument xmlDoc;
+
+            xmlDoc = LoadXmlDocument(fileName,
+                                     s => new SkipToContentTextReader("<RemotingEntry>", s), 
+                                     out ex);
+            if (xmlDoc == null)
             {
-                xmlDoc.Load(reader);
+                xmlDoc = LoadXmlDocument(fileName,
+                                         s => new TruncatedTextReader("</RemotingEntry>",
+                                                  new SkipToContentTextReader("<RemotingEntry>", s)),
+                                         out ex);
             }
-            catch (Exception ex)
+
+            if (xmlDoc == null)
             {
-                throw new XmlException("Error reading file: " + fileName, ex);
+                throw new XmlException("Unable to read file: " + fileName, ex);
             }
 
             XmlNodeList xmlNodeList = xmlDoc.SelectNodes("/Xml/RemotingEntry");
@@ -37,6 +45,31 @@ namespace Ampla.LogReader.Remoting
                 entries.AddRange(from XmlNode node in xmlNodeList select RemotingEntry.LoadFromXml(node));
             }
             return entries;
+        }
+
+        private XmlDocument LoadXmlDocument(string xmlFileName, Func<Stream, TextReader> createTextReader, out Exception exception)
+        {
+            exception = null;
+            using (FileStream stream = File.OpenRead(xmlFileName))
+            {
+                using (TextReader contentReader = createTextReader(stream))
+                {
+                    using (TextReader reader = new XmlFragmentTextReader("Xml", contentReader))
+                    {
+                        try
+                        {
+                            XmlDocument xmlDoc = new XmlDocument();
+                            xmlDoc.Load(reader);
+                            return xmlDoc;
+                        }
+                        catch (Exception ex)
+                        {
+                            exception = ex;
+                        }
+                    }
+                }
+            }
+            return null;
         }
     }
 }

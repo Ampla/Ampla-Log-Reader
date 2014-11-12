@@ -27,5 +27,15 @@ namespace Ampla.LogReader.Remoting
             reader.Read();
             Assert.That(reader.Entries.Count, Is.EqualTo(count));
         }
+
+        [Test]
+        public void LoadInvalidEntry()
+        {
+            ILogReader<RemotingEntry> reader = new RemotingLogReader(@".\Remoting\Resources\Incomplete.log");
+            Assert.That(reader.Entries, Is.Empty);
+            reader.Read();
+
+            Assert.That(reader.Entries, Is.Not.Empty);
+        }
     }
 }

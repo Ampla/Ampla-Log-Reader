@@ -138,8 +138,10 @@
     <Compile Include="Wcf\WcfLogReader.cs" />
     <Compile Include="ReportWriters\IReportWriter.cs" />
     <Compile Include="ReportWriters\TextReportWriter.cs" />
+    <Compile Include="Xml\ChunkedOffsetTextReader.cs" />
+    <Compile Include="Xml\TruncatedTextReader.cs" />
     <Compile Include="Xml\NamespaceHelper.cs" />
-    <Compile Include="Xml\XmlContentTextReader.cs" />
+    <Compile Include="Xml\SkipToContentTextReader.cs" />
     <Compile Include="Xml\XmlFragmentTextReader.cs" />
     <Compile Include="Xml\XmlHelper.cs" />
   </ItemGroup>

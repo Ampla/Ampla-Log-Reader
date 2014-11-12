@@ -112,7 +112,9 @@
     <Compile Include="Wcf\WcfCallExcelUnitTests.cs" />
     <Compile Include="Wcf\WcfCallUnitTests.cs" />
     <Compile Include="Wcf\WcfLogReaderUnitTests.cs" />
-    <Compile Include="Xml\XmlContentTextReaderUnitTests.cs" />
+    <Compile Include="Xml\ChunkedOffsetTextReaderUnitTests.cs" />
+    <Compile Include="Xml\TruncatedTextReaderUnitTests.cs" />
+    <Compile Include="Xml\SkipToContentTextReaderUnitTests.cs" />
     <Compile Include="Xml\XmlFragmentTextReaderUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +128,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Remoting\Resources\ConfirmRecord.log">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Remoting\Resources\Incomplete.log">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Remoting\Resources\NewRecord.log">
@@ -168,6 +173,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Wcf\Resources\BusinessErrorEntry.log">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Wcf\Resources\Incomplete.log">
+      <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Wcf\Resources\InnerExceptionEntry.log">

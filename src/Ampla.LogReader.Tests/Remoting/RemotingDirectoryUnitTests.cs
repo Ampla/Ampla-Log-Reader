@@ -8,7 +8,7 @@ namespace Ampla.LogReader.Remoting
     {
         private const string directory = @".\Remoting\Resources";
 
-        private const int numFiles = 8;
+        private const int numFiles = 9;
 
         [Test]
         public void InvalidDirectory()
