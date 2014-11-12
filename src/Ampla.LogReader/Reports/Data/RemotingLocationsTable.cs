@@ -26,6 +26,9 @@ namespace Ampla.LogReader.Reports.Data
             table.Columns.Add("Location", typeof(string));
             table.Columns.Add("Operation", typeof(string));
             table.Columns.Add("MetaData", typeof(string));
+            table.Columns.Add("LocalDate", typeof(DateTime));
+            table.Columns.Add("LocalHour", typeof(string));
+            table.Columns.Add("DayOfWeek", typeof(string));
             return table;
         }
 
@@ -68,7 +71,10 @@ namespace Ampla.LogReader.Reports.Data
                         location.Module,
                         location.Location,
                         location.Operation,
-                        location.MetaData
+                        location.MetaData,
+                        entry.CallTimeLocal.Date,
+                        TimeSpan.FromHours(entry.CallTimeLocal.Hour),
+                        entry.CallTimeLocal.DayOfWeek
                         );
                 }
             }
