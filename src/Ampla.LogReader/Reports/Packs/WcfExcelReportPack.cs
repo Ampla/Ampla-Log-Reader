@@ -1,6 +1,8 @@
-﻿using Ampla.LogReader.Excel;
+﻿using System.Data;
+using Ampla.LogReader.Excel;
 using Ampla.LogReader.FileSystem;
 using Ampla.LogReader.Reports.Pages;
+using Ampla.LogReader.Statistics;
 using Ampla.LogReader.Wcf;
 
 namespace Ampla.LogReader.Reports.Packs
@@ -33,7 +35,8 @@ namespace Ampla.LogReader.Reports.Packs
             using (IExcelSpreadsheet excel = ExcelSpreadsheet.CreateNew(fileName))
             {
                 new WcfSummaryPage(excel, reader.Entries).Render();
-                excel.WriteDataToWorksheet(WcfCall.CreateDataTable(reader.Entries), "WcfCalls");
+                DataTable wcfCalls = new WcfCallTable(TimeZoneHelper.GetTimeZone()).Create(reader.Entries);
+                excel.WriteDataToWorksheet(wcfCalls, "WcfCalls");
 
                 // write fault details to separate page
                 new WcfFaultSummaryPage(excel, reader.Entries).Render();

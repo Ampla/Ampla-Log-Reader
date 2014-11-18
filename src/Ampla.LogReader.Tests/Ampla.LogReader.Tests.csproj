@@ -106,10 +106,11 @@
     <Compile Include="Reports\Wcf\WcfFaultSummaryReportUnitTests.cs" />
     <Compile Include="Reports\Wcf\WcfActionSummaryReportUnitTests.cs" />
     <Compile Include="ReportWriters\SimpleReportWriter.cs" />
+    <Compile Include="Statistics\TimeZoneHelperUnitTests.cs" />
     <Compile Include="Statistics\TopNStatisticsUnitTests.cs" />
     <Compile Include="TempDirectory.cs" />
     <Compile Include="TestFixture.cs" />
-    <Compile Include="Wcf\WcfCallExcelUnitTests.cs" />
+    <Compile Include="Wcf\WcfCallTableUnitTests.cs" />
     <Compile Include="Wcf\WcfCallUnitTests.cs" />
     <Compile Include="Wcf\WcfLogReaderUnitTests.cs" />
     <Compile Include="Xml\ChunkedOffsetTextReaderUnitTests.cs" />

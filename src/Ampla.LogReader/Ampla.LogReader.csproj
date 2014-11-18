@@ -130,9 +130,11 @@
     <Compile Include="Statistics\CountStatistic.cs" />
     <Compile Include="Statistics\IStatistic.cs" />
     <Compile Include="Statistics\TimeBasedStatistic.cs" />
+    <Compile Include="Statistics\TimeZoneHelper.cs" />
     <Compile Include="Statistics\TopNStatistics.cs" />
     <Compile Include="Statistics\WcfSummaryStatistic.cs" />
     <Compile Include="Wcf\WcfCall.cs" />
+    <Compile Include="Wcf\WcfCallTable.cs" />
     <Compile Include="Wcf\WcfFault.cs" />
     <Compile Include="Wcf\WcfLogDirectory.cs" />
     <Compile Include="Wcf\WcfLogReader.cs" />

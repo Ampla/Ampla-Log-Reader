@@ -55,58 +55,12 @@ namespace Ampla.LogReader.Wcf
             if (string.IsNullOrEmpty(call.Method))
             {
                 call.Method = call.Action != null && call.Action.Contains("/")
-                                  ? call.Action.Substring(call.Action.LastIndexOf('/')+1)
+                                  ? call.Action.Substring(call.Action.LastIndexOf('/') + 1)
                                   : call.Action;
             }
 
             return call;
         }
 
-        /// <summary>
-        /// Creates the data table with the WcfCalls
-        /// </summary>
-        /// <param name="wcfCalls">The WCF calls.</param>
-        /// <returns></returns>
-        public static DataTable CreateDataTable(IEnumerable<WcfCall> wcfCalls)
-        {
-            DataTable dataTable = new DataTable("WcfCalls");
-            dataTable.Columns.Add("Id", typeof (int));
-            dataTable.Columns.Add("CallTimeUtc", typeof (DateTime));
-            dataTable.Columns.Add("CallTimeLocal", typeof (DateTime));
-            dataTable.Columns.Add("Url", typeof (string));
-            dataTable.Columns.Add("Action", typeof (string));
-            dataTable.Columns.Add("Method", typeof (string));
-            dataTable.Columns.Add("Duration", typeof (double));
-            dataTable.Columns.Add("RequestMessage", typeof (string));
-            dataTable.Columns.Add("ResponseMessageLength", typeof (double));
-            dataTable.Columns.Add("IsFault", typeof (bool));
-            dataTable.Columns.Add("FaultCode", typeof (string));
-            dataTable.Columns.Add("FaultString", typeof (string));
-            dataTable.Columns.Add("FaultDetails", typeof(string));
-            dataTable.Columns.Add("Source", typeof(string));
-
-            int count = 0;
-
-            foreach (WcfCall call in wcfCalls)
-            {
-                dataTable.Rows.Add(++count,
-                                   call.CallTime,
-                                   call.CallTime.ToLocalTime(),
-                                   call.Url,
-                                   call.Action,
-                                   call.Method,
-                                   call.Duration.TotalSeconds,
-                                   call.RequestMessage,
-                                   call.ResponseMessageLength,
-                                   call.IsFault,
-                                   call.Fault != null ? call.Fault.FaultCode : "",
-                                   call.Fault != null ? call.Fault.FaultString : "",
-                                   call.Fault != null ? call.Fault.Details : "",
-                                   call.Source);
-            }
-
-            dataTable.AcceptChanges();
-            return dataTable;
-        }
     }
 }

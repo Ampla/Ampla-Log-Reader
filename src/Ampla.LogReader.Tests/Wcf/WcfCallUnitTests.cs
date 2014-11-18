@@ -144,7 +144,7 @@ namespace Ampla.LogReader.Wcf
             Assert.That(reader.Entries.Count, Is.EqualTo(1));
             WcfCall call = reader.Entries[0];
 
-            string source = fileName;
+            const string source = fileName;
 
             Assert.That(source, Is.Not.Empty);
             Assert.That(call.Source, Is.EqualTo(source));
