@@ -5,7 +5,7 @@ using Ampla.LogReader.Remoting;
 
 namespace Ampla.LogReader.Reports.Data
 {
-    public sealed class RemotingEntryTable
+    public sealed class RemotingEntryTable 
     {
         public RemotingEntryTable(IEnumerable<RemotingEntry> entries)
         {

@@ -110,7 +110,7 @@
     <Compile Include="Statistics\TopNStatisticsUnitTests.cs" />
     <Compile Include="TempDirectory.cs" />
     <Compile Include="TestFixture.cs" />
-    <Compile Include="Wcf\WcfCallTableUnitTests.cs" />
+    <Compile Include="Reports\Data\WcfCallTableUnitTests.cs" />
     <Compile Include="Wcf\WcfCallUnitTests.cs" />
     <Compile Include="Wcf\WcfLogReaderUnitTests.cs" />
     <Compile Include="Xml\ChunkedOffsetTextReaderUnitTests.cs" />

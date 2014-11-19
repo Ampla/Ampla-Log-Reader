@@ -4,9 +4,10 @@ using System.Data;
 using Ampla.LogReader.Excel;
 using Ampla.LogReader.Excel.Reader;
 using Ampla.LogReader.Statistics;
+using Ampla.LogReader.Wcf;
 using NUnit.Framework;
 
-namespace Ampla.LogReader.Wcf
+namespace Ampla.LogReader.Reports.Data
 {
     public class WcfCallTableUnitTests : ExcelTestFixture
     {
@@ -22,7 +23,7 @@ namespace Ampla.LogReader.Wcf
 
             using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.CreateNew(Filename))
             {
-                DataTable table = new WcfCallTable(null).Create(reader.Entries);
+                DataTable table = new WcfCallTable(reader.Entries, null).Data;
                 spreadsheet.WriteDataToWorksheet(table, "WcfCalls");
             }
 
@@ -57,10 +58,10 @@ namespace Ampla.LogReader.Wcf
 
             using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.CreateNew(Filename))
             {
-                DataTable localTable = new WcfCallTable(TimeZoneInfo.Local).Create(reader.Entries);
+                DataTable localTable = new WcfCallTable(reader.Entries, TimeZoneInfo.Local).Data;
                 spreadsheet.WriteDataToWorksheet(localTable, "LocalTime");
-                
-                DataTable utcTable = new WcfCallTable(TimeZoneInfo.Utc).Create(reader.Entries);
+
+                DataTable utcTable = new WcfCallTable(reader.Entries, TimeZoneInfo.Utc).Data;
                 spreadsheet.WriteDataToWorksheet(utcTable, "UtcTime");
 
                 Assert.That(localTable.Columns["CallTimeLocal"], Is.Not.Null);
@@ -89,10 +90,10 @@ namespace Ampla.LogReader.Wcf
             
             using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.CreateNew(Filename))
             {
-                DataTable localTable = new WcfCallTable(TimeZoneInfo.Local).Create(reader.Entries);
+                DataTable localTable = new WcfCallTable(reader.Entries,TimeZoneInfo.Local).Data;
                 spreadsheet.WriteDataToWorksheet(localTable, "LocalTime");
 
-                DataTable istTable = new WcfCallTable(ist).Create(reader.Entries);
+                DataTable istTable = new WcfCallTable(reader.Entries,ist).Data;
                 spreadsheet.WriteDataToWorksheet(istTable, "IST Time");
 
                 Assert.That(localTable.Columns["CallTimeLocal"], Is.Not.Null);
