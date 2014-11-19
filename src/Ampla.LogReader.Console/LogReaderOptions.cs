@@ -27,5 +27,8 @@ namespace Ampla.LogReader.Console
 
         [Option('x', "debug", HelpText = "Attach the debugger", Required = false, DefaultValue = false)]
         public bool Debug { get; set; }
+
+        [Option('z', "timezone", HelpText = "TimeZone for local date times", DefaultValue = null)]
+        public string TimeZone { get; set; }
     }
 }

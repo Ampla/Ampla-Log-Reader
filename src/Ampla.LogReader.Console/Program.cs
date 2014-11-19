@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Xml;
 using Ampla.LogReader.EventLogs;
 using Ampla.LogReader.FileSystem;
@@ -7,6 +8,7 @@ using Ampla.LogReader.ReportWriters;
 using Ampla.LogReader.Reports.Packs;
 using Ampla.LogReader.Reports.Remoting;
 using Ampla.LogReader.Reports.Wcf;
+using Ampla.LogReader.Statistics;
 using Ampla.LogReader.Wcf;
 
 namespace Ampla.LogReader.Console
@@ -33,6 +35,13 @@ namespace Ampla.LogReader.Console
                                 Directory = options.LogDirectory,
                             };
 
+
+                        TimeZoneInfo timeZone = TimeZoneHelper.GetTimeZone();
+                        if (!string.IsNullOrEmpty(options.TimeZone))
+                        {
+                            timeZone = TimeZoneHelper.GetSpecificTimeZone(options.TimeZone);
+                        }
+
                         if (!options.SkipWcf)
                         {
                             writer.WriteLine("LogDirectory: {0}", project.Directory);
@@ -43,7 +52,7 @@ namespace Ampla.LogReader.Console
 
                             writer.WriteLine("Creating Wcf Report -> WcfCall.Details.xlsx");
 
-                            new WcfExcelReportPack("WcfCall.Details.xlsx", directory).Render();
+                            new WcfExcelReportPack("WcfCall.Details.xlsx", directory, timeZone).Render();
 
                             new WcfSummaryReport(
                                 directory.Entries, reportWriter).Render();

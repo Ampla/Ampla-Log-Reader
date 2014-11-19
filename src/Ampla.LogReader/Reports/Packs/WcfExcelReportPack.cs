@@ -1,8 +1,8 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using Ampla.LogReader.Excel;
 using Ampla.LogReader.FileSystem;
 using Ampla.LogReader.Reports.Pages;
-using Ampla.LogReader.Statistics;
 using Ampla.LogReader.Wcf;
 
 namespace Ampla.LogReader.Reports.Packs
@@ -11,11 +11,13 @@ namespace Ampla.LogReader.Reports.Packs
     {
         private readonly string fileName;
         private readonly ILogReader<WcfCall> reader;
+        private readonly TimeZoneInfo timeZoneInfo;
 
         public WcfExcelReportPack(AmplaProject amplaProject)
         {
             fileName = amplaProject.ProjectName + ".Wcf.xlsx";
             reader = new WcfLogDirectory(amplaProject);
+            timeZoneInfo = TimeZoneInfo.Local;
         }
         public WcfExcelReportPack(string fileName, AmplaProject amplaProject)
         {
@@ -23,10 +25,11 @@ namespace Ampla.LogReader.Reports.Packs
             reader = new WcfLogDirectory(amplaProject);
         }
 
-        public WcfExcelReportPack(string fileName, ILogReader<WcfCall> reader)
+        public WcfExcelReportPack(string fileName, ILogReader<WcfCall> reader, TimeZoneInfo timeZoneInfo)
         {
             this.fileName = fileName;
             this.reader = reader;
+            this.timeZoneInfo = timeZoneInfo ?? TimeZoneInfo.Local;
         }
 
         public override void Render()
@@ -35,7 +38,7 @@ namespace Ampla.LogReader.Reports.Packs
             using (IExcelSpreadsheet excel = ExcelSpreadsheet.CreateNew(fileName))
             {
                 new WcfSummaryPage(excel, reader.Entries).Render();
-                DataTable wcfCalls = new WcfCallTable(TimeZoneHelper.GetTimeZone()).Create(reader.Entries);
+                DataTable wcfCalls = new WcfCallTable(timeZoneInfo).Create(reader.Entries);
                 excel.WriteDataToWorksheet(wcfCalls, "WcfCalls");
 
                 // write fault details to separate page

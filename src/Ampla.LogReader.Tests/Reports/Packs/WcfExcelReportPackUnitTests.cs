@@ -1,6 +1,9 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Ampla.LogReader.Excel;
 using Ampla.LogReader.FileSystem;
+using Ampla.LogReader.Statistics;
+using Ampla.LogReader.Wcf;
 using NUnit.Framework;
 
 namespace Ampla.LogReader.Reports.Packs
@@ -53,6 +56,25 @@ namespace Ampla.LogReader.Reports.Packs
              AssertWorksheetExists("WcfCalls");
              AssertWorksheetExists("Faults");
          }
+
+        [Test]
+        public void TimeZoneReport()
+        {
+            AmplaProject project = AmplaTestProjects.GetAmplaProject();
+
+            WcfLogDirectory directory = new WcfLogDirectory(project);
+
+            TimeZoneInfo timeZone = TimeZoneHelper.GetSpecificTimeZone("India Standard Time");
+
+            WcfExcelReportPack reportPack = new WcfExcelReportPack(Filename, directory, timeZone);
+            reportPack.Render();
+
+            Assert.That(File.Exists(Filename), Is.True);
+
+            AssertWorksheetExists("Summary");
+            AssertWorksheetExists("WcfCalls");
+            AssertWorksheetExists("Faults");
+        }
 
     }
 }
