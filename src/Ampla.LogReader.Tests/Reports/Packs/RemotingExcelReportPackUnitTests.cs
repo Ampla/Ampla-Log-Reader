@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using Ampla.LogReader.Excel;
 using Ampla.LogReader.FileSystem;
+using Ampla.LogReader.Remoting;
 using NUnit.Framework;
 
 namespace Ampla.LogReader.Reports.Packs
@@ -75,6 +76,40 @@ namespace Ampla.LogReader.Reports.Packs
              {
                  page.Row(1).AssertValues<string>(Is.Not.Empty);
                  page.Row(2).AssertValues<string>(Is.Empty);
+             }
+         }
+
+         [Test]
+         public void UsingRemotingResourceFiles()
+         {
+             RemotingDirectory directory = new RemotingDirectory(@"./Remoting/Resources");
+             RemotingExcelReportPack reportPack = new RemotingExcelReportPack(Filename, directory);
+             reportPack.Render();
+
+             Assert.That(File.Exists(Filename), Is.True);
+
+             using (ExcelPage page = AssertWorksheetContainsData("Summary", 10))
+             {
+                 page.Row(1).AssertValues<string>(Is.Not.Empty);
+                 page.Row(2).AssertValues<string>(Is.Not.Empty);
+             }
+
+             using (ExcelPage page = AssertWorksheetContainsData("Sessions", 10))
+             {
+                 page.Row(1).AssertValues<string>(Is.Not.Empty);
+                 page.Row(2).AssertValues<string>(Is.Not.Empty);
+             }
+
+             using (ExcelPage page = AssertWorksheetContainsData("Remoting", 10))
+             {
+                 page.Row(1).AssertValues<string>(Is.Not.Empty);
+                 page.Row(2).AssertValues<string>(Is.Not.Empty);
+             }
+
+             using (ExcelPage page = AssertWorksheetContainsData("Locations", 10))
+             {
+                 page.Row(1).AssertValues<string>(Is.Not.Empty);
+                 page.Row(2).AssertValues<string>(Is.Not.Empty);
              }
          }
     }

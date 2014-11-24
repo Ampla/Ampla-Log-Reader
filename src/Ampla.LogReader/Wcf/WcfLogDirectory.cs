@@ -8,14 +8,17 @@ namespace Ampla.LogReader.Wcf
     {
         private readonly string directory;
 
-        public WcfLogDirectory(AmplaProject project)
+        public WcfLogDirectory(AmplaProject project) : this(project.WcfLogDirectory)
         {
-            string folder = project.WcfLogDirectory;
-            if (!Directory.Exists(folder))
+        }
+
+        public WcfLogDirectory(string directory)
+        {
+            if (!Directory.Exists(directory))
             {
                 //throw new DirectoryNotFoundException(folder + " does not exist.");
             }
-            directory = folder;
+            this.directory = directory;
         }
 
         protected override List<WcfCall> ReadEntries()
@@ -29,6 +32,11 @@ namespace Ampla.LogReader.Wcf
                 list.AddRange(reader.Entries);
             }
             return list;
+        }
+
+        public bool DirectoryExists()
+        {
+            return Directory.Exists(directory);
         }
 
     }

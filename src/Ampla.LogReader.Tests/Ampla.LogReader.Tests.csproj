@@ -76,6 +76,7 @@
     <Compile Include="Remoting\QueryParametersUnitTests.cs" />
     <Compile Include="Remoting\RemotingLogReaderUnitTests.cs" />
     <Compile Include="Remoting\RemotingEntryUnitTests.cs" />
+    <Compile Include="Reports\Data\WcfLocationsTableUnitTests.cs" />
     <Compile Include="Reports\Data\RemotingLocationsTableUnitTests.cs" />
     <Compile Include="Reports\Data\RemotingEntryTableUnitTests.cs" />
     <Compile Include="Reports\EventLogs\EventLogDetailsReportUnitTests.cs" />
@@ -111,8 +112,10 @@
     <Compile Include="TempDirectory.cs" />
     <Compile Include="TestFixture.cs" />
     <Compile Include="Reports\Data\WcfCallTableUnitTests.cs" />
+    <Compile Include="Wcf\GetDataParameterUnitTests.cs" />
     <Compile Include="Wcf\WcfCallUnitTests.cs" />
     <Compile Include="Wcf\WcfLogReaderUnitTests.cs" />
+    <Compile Include="Wcf\WcfResponseMessageUnitTests.cs" />
     <Compile Include="Xml\ChunkedOffsetTextReaderUnitTests.cs" />
     <Compile Include="Xml\TruncatedTextReaderUnitTests.cs" />
     <Compile Include="Xml\SkipToContentTextReaderUnitTests.cs" />
@@ -175,6 +178,14 @@
     </None>
     <None Include="Wcf\Resources\BusinessErrorEntry.log">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Wcf\Resources\GetDataUser.log">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Wcf\Resources\GetData.log">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Wcf\Resources\Incomplete.log">
       <SubType>Designer</SubType>

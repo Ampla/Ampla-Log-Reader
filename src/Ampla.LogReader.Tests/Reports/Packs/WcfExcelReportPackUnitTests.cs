@@ -24,6 +24,7 @@ namespace Ampla.LogReader.Reports.Packs
              AssertWorksheetExists("Summary");
              AssertWorksheetExists("WcfCalls");
              AssertWorksheetExists("Faults");
+             AssertWorksheetExists("Locations");
          }
 
          [Test]
@@ -39,6 +40,7 @@ namespace Ampla.LogReader.Reports.Packs
              AssertWorksheetExists("Summary");
              AssertWorksheetExists("WcfCalls");
              AssertWorksheetExists("Faults");
+             AssertWorksheetExists("Locations");
          }
 
 
@@ -55,6 +57,7 @@ namespace Ampla.LogReader.Reports.Packs
              AssertWorksheetExists("Summary");
              AssertWorksheetExists("WcfCalls");
              AssertWorksheetExists("Faults");
+             AssertWorksheetExists("Locations");
          }
 
         [Test]
@@ -74,6 +77,23 @@ namespace Ampla.LogReader.Reports.Packs
             AssertWorksheetExists("Summary");
             AssertWorksheetExists("WcfCalls");
             AssertWorksheetExists("Faults");
+            AssertWorksheetExists("Locations");
+        }
+
+        [Test]
+        public void WcfResourceFiles()
+        {
+            WcfLogDirectory directory = new WcfLogDirectory(@".\Wcf\Resources");
+
+            WcfExcelReportPack reportPack = new WcfExcelReportPack(Filename, directory, TimeZoneInfo.Local);
+            reportPack.Render();
+
+            Assert.That(File.Exists(Filename), Is.True);
+
+            AssertWorksheetExists("Summary");
+            AssertWorksheetExists("WcfCalls");
+            AssertWorksheetExists("Faults");
+            AssertWorksheetExists("Locations");
         }
 
     }

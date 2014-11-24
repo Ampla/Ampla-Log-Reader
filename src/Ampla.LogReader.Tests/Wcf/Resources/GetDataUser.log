@@ -1,0 +1,47 @@
+﻿<WCFCall>
+  <CallTime>2013-11-14T02:44:58.2235712Z</CallTime>
+  <Url>net.tcp://localhost/Ampla/Data/2008/06/Tcp</Url>
+  <Action>http://www.citect.com/Ampla/Data/2008/06/DataWebServiceContract/GetDataIn</Action>
+  <Method>GetData</Method>
+  <Duration>8.0005</Duration>
+  <ResponseMessageLength>3.71</ResponseMessageLength>
+  <IsFault>false</IsFault>
+  <FaultMessage />
+  <RequestMessage>
+    <s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://www.w3.org/2005/08/addressing">
+      <s:Header>
+        <a:Action
+          s:mustUnderstand="1">http://www.citect.com/Ampla/Data/2008/06/DataWebServiceContract/GetDataIn</a:Action>
+        <a:MessageID>urn:uuid:bab3e277-705c-430b-a338-d4a35c54a145</a:MessageID>
+        <a:ReplyTo>
+          <a:Address>http://www.w3.org/2005/08/addressing/anonymous</a:Address>
+        </a:ReplyTo>
+        <a:To
+          s:mustUnderstand="1">net.tcp://localhost/Ampla/Data/2008/06/Tcp</a:To>
+      </s:Header>
+      <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <GetDataRequestMessage xmlns="http://www.citect.com/Ampla/Data/2008/06">
+          <GetDataRequest>
+            <Credentials>
+              <Username>User</Username>
+              <Password>password</Password>
+            </Credentials>
+            <View>
+              <Context>Plant</Context>
+              <Mode>Location</Mode>
+              <Module>Quality</Module>
+            </View>
+            <Filter>
+              <Location>Enterprise.Site.Area.Quality</Location>
+              <Deleted>False</Deleted>
+              <Criteria/>
+            </Filter>
+            <OutputOptions>
+              <ResolveIdentifiers>true</ResolveIdentifiers>
+            </OutputOptions>
+          </GetDataRequest>
+        </GetDataRequestMessage>
+      </s:Body>
+    </s:Envelope>
+  </RequestMessage>
+</WCFCall>
