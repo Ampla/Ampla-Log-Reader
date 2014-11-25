@@ -6,11 +6,10 @@ using NUnit.Framework;
 namespace Ampla.LogReader.Wcf
 {
     [TestFixture]
-    public class GetDataParameterUnitTests : TestFixture
+    public class SubmitDataParameterUnitTests : TestFixture
     {
         private XmlNode xmlNode;
         private const string getDataFileName = @".\Wcf\Resources\GetData.log";
-        private const string getDataUserFileName = @".\Wcf\Resources\GetDataUser.log";
         private const string getViewsFileName = @".\Wcf\Resources\GetViews.log";
         private const string submitDataUpdateFileName = @".\Wcf\Resources\SubmitDataUpdate.log";
 
@@ -32,36 +31,21 @@ namespace Ampla.LogReader.Wcf
         }
 
         [Test]
-        public void GetDataSession()
+        public void SubmitDataUpdate()
         {
-            LoadXmlFile(getDataFileName);
+            LoadXmlFile(submitDataUpdateFileName);
             WcfCall wcfCall = WcfCall.LoadFromXml(xmlNode);
-            Assert.That(wcfCall.Method, Is.EqualTo("GetData"));
+            Assert.That(wcfCall.Method, Is.EqualTo("SubmitData"));
 
-            IWcfLocationParameter parameter = new GetDataParameter(wcfCall);
+            IWcfLocationParameter parameter = new SubmitDataParameter(wcfCall);
             Assert.That(parameter, Is.Not.Null);
             Assert.That(parameter.Module, Is.EqualTo("Production"));
-            Assert.That(parameter.Location, Is.EqualTo("Enterprise with recurse"));
-            Assert.That(parameter.Operation, Is.EqualTo("GetData"));
-            Assert.That(parameter.MetaData, Is.EqualTo("Id={2}"));
-            Assert.That(parameter.Credentials, Is.EqualTo("Session: 8bca9a70-627b-4a14-a2f6-5ec051a94953"));
+            Assert.That(parameter.Location, Is.EqualTo("Enterprise.Site.Area.Production"));
+            Assert.That(parameter.Operation, Is.EqualTo("UpdateData"));
+            Assert.That(parameter.MetaData, Is.EqualTo("SetId={1}, Shift={Day}"));
+            Assert.That(parameter.Credentials, Is.EqualTo("Session: ad3ed383-df45-4ef2-ba54-e349a4d4244b"));
         }
 
-        [Test]
-        public void GetDataUser()
-        {
-            LoadXmlFile(getDataUserFileName);
-            WcfCall wcfCall = WcfCall.LoadFromXml(xmlNode);
-            Assert.That(wcfCall.Method, Is.EqualTo("GetData"));
-
-            IWcfLocationParameter parameter = new GetDataParameter(wcfCall);
-            Assert.That(parameter, Is.Not.Null);
-            Assert.That(parameter.Module, Is.EqualTo("Quality"));
-            Assert.That(parameter.Location, Is.EqualTo("Enterprise.Site.Area.Quality"));
-            Assert.That(parameter.Operation, Is.EqualTo("GetData"));
-            Assert.That(parameter.MetaData, Is.EqualTo("Deleted={False}"));
-            Assert.That(parameter.Credentials, Is.EqualTo("User: User"));
-        }
 
         [Test]
         public void GetViews()
@@ -70,7 +54,7 @@ namespace Ampla.LogReader.Wcf
             WcfCall wcfCall = WcfCall.LoadFromXml(xmlNode);
             Assert.That(wcfCall.Method, Is.EqualTo("GetViews"));
 
-            IWcfLocationParameter parameter = new GetDataParameter(wcfCall);
+            IWcfLocationParameter parameter = new SubmitDataParameter(wcfCall);
             Assert.That(parameter, Is.Not.Null);
             Assert.That(parameter.Module, Is.Null);
             Assert.That(parameter.Location, Is.Null);
@@ -80,13 +64,13 @@ namespace Ampla.LogReader.Wcf
         }
 
         [Test]
-        public void SubmitDataUpdate()
+        public void GetData()
         {
-            LoadXmlFile(submitDataUpdateFileName);
+            LoadXmlFile(getDataFileName);
             WcfCall wcfCall = WcfCall.LoadFromXml(xmlNode);
-            Assert.That(wcfCall.Method, Is.EqualTo("SubmitData"));
+            Assert.That(wcfCall.Method, Is.EqualTo("GetData"));
 
-            IWcfLocationParameter parameter = new GetDataParameter(wcfCall);
+            IWcfLocationParameter parameter = new SubmitDataParameter(wcfCall);
             Assert.That(parameter, Is.Not.Null);
             Assert.That(parameter.Module, Is.Null);
             Assert.That(parameter.Location, Is.Null);
@@ -94,6 +78,5 @@ namespace Ampla.LogReader.Wcf
             Assert.That(parameter.MetaData, Is.Null);
             Assert.That(parameter.Credentials, Is.Null);
         }
-
     }
 }

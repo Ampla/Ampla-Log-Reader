@@ -134,6 +134,7 @@
     <Compile Include="Statistics\TimeZoneHelper.cs" />
     <Compile Include="Statistics\TopNStatistics.cs" />
     <Compile Include="Statistics\WcfSummaryStatistic.cs" />
+    <Compile Include="Wcf\SubmitDataParameters.cs" />
     <Compile Include="Wcf\WcfLocationParameter.cs" />
     <Compile Include="Wcf\GetViewsParameters.cs" />
     <Compile Include="Wcf\GetDataParameters.cs" />

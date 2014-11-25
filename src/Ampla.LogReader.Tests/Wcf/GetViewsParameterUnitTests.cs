@@ -11,6 +11,7 @@ namespace Ampla.LogReader.Wcf
         private XmlNode xmlNode;
         private const string getDataFileName = @".\Wcf\Resources\GetData.log";
         private const string getViewsFileName = @".\Wcf\Resources\GetViews.log";
+        private const string submitDataUpdateFileName = @".\Wcf\Resources\SubmitDataUpdate.log";
 
         private void LoadXmlFile(string fileName)
         {
@@ -51,6 +52,22 @@ namespace Ampla.LogReader.Wcf
             LoadXmlFile(getDataFileName);
             WcfCall wcfCall = WcfCall.LoadFromXml(xmlNode);
             Assert.That(wcfCall.Method, Is.EqualTo("GetData"));
+
+            IWcfLocationParameter parameter = new GetViewsParameter(wcfCall);
+            Assert.That(parameter, Is.Not.Null);
+            Assert.That(parameter.Module, Is.Null);
+            Assert.That(parameter.Location, Is.Null);
+            Assert.That(parameter.Operation, Is.Null);
+            Assert.That(parameter.MetaData, Is.Null);
+            Assert.That(parameter.Credentials, Is.Null);
+        }
+
+        [Test]
+        public void SubmitData()
+        {
+            LoadXmlFile(submitDataUpdateFileName);
+            WcfCall wcfCall = WcfCall.LoadFromXml(xmlNode);
+            Assert.That(wcfCall.Method, Is.EqualTo("SubmitData"));
 
             IWcfLocationParameter parameter = new GetViewsParameter(wcfCall);
             Assert.That(parameter, Is.Not.Null);

@@ -1,0 +1,49 @@
+﻿<WCFCall>
+  <CallTime>2013-10-17T03:06:02.6082412Z</CallTime>
+  <Url>net.tcp://localhost/Ampla/Data/2008/06/Tcp</Url>
+  <Action>http://www.citect.com/Ampla/Data/2008/06/DataWebServiceContract/SubmitDataIn</Action>
+  <Method>SubmitData</Method>
+  <Duration>295.0169</Duration>
+  <ResponseMessageLength>0.76</ResponseMessageLength>
+  <IsFault>false</IsFault>
+  <FaultMessage />
+  <RequestMessage>
+    <s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://www.w3.org/2005/08/addressing">
+      <s:Header>
+        <a:Action
+          s:mustUnderstand="1">http://www.citect.com/Ampla/Data/2008/06/DataWebServiceContract/SubmitDataIn</a:Action>
+        <a:MessageID>urn:uuid:643e0c7d-fc27-4dd8-be33-237a8a7c74b9</a:MessageID>
+        <a:ReplyTo>
+          <a:Address>http://www.w3.org/2005/08/addressing/anonymous</a:Address>
+        </a:ReplyTo>
+        <VsDebuggerCausalityData xmlns="http://schemas.microsoft.com/vstudio/diagnostics/servicemodelsink">uIDPo9Di6e675FpHh7PuprU7a0EAAAAAzfKSq8b5n0erQVqT4e/Rejsx+ywPFBJCsBsw5fd+vfMACQAA</VsDebuggerCausalityData>
+        <a:To
+          s:mustUnderstand="1">net.tcp://localhost/Ampla/Data/2008/06/Tcp</a:To>
+      </s:Header>
+      <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <SubmitDataRequestMessage xmlns="http://www.citect.com/Ampla/Data/2008/06">
+          <SubmitDataRequest>
+            <Credentials>
+              <Session>ad3ed383-df45-4ef2-ba54-e349a4d4244b</Session>
+            </Credentials>
+            <SubmitDataRecords>
+              <Records>
+                <Module>Production</Module>
+                <Location>Enterprise.Site.Area.Production</Location>
+                <MergeCriteria>
+                  <SetId>1</SetId>
+                </MergeCriteria>
+                <Fields>
+                  <Field>
+                    <Name>Shift</Name>
+                    <Value>Day</Value>
+                  </Field>
+                </Fields>
+              </Records>
+            </SubmitDataRecords>
+          </SubmitDataRequest>
+        </SubmitDataRequestMessage>
+      </s:Body>
+    </s:Envelope>
+  </RequestMessage>
+</WCFCall>

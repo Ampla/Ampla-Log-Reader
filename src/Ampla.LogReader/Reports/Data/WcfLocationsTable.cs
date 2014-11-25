@@ -57,9 +57,9 @@ namespace Ampla.LogReader.Reports.Data
                             location = new GetViewsParameter(call);
                             break;
                         }
-                    case "Update":
+                    case "SubmitData":
                         {
-                            //location = new UpdateParameters(entry);
+                            location = new SubmitDataParameter(call);
                             break;
                         }
                     case "GetNewSample":
