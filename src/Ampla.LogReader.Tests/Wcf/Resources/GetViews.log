@@ -1,0 +1,39 @@
+﻿<WCFCall>
+  <CallTime>2013-11-14T02:43:50.7141417Z</CallTime>
+  <Url>net.tcp://localhost/Ampla/Data/2008/06/Tcp</Url>
+  <Action>http://www.citect.com/Ampla/Data/2008/06/DataWebServiceContract/GetViewsIn</Action>
+  <Method>GetViews</Method>
+  <Duration>283.0162</Duration>
+  <ResponseMessageLength>4.13</ResponseMessageLength>
+  <IsFault>false</IsFault>
+  <FaultMessage />
+  <RequestMessage>
+    <s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://www.w3.org/2005/08/addressing">
+      <s:Header>
+        <a:Action
+          s:mustUnderstand="1">http://www.citect.com/Ampla/Data/2008/06/DataWebServiceContract/GetViewsIn</a:Action>
+        <a:MessageID>urn:uuid:b8f49724-d58a-4cfb-8e6d-cef4a76cf3d0</a:MessageID>
+        <a:ReplyTo>
+          <a:Address>http://www.w3.org/2005/08/addressing/anonymous</a:Address>
+        </a:ReplyTo>
+        <VsDebuggerCausalityData xmlns="http://schemas.microsoft.com/vstudio/diagnostics/servicemodelsink">uIDPo4r3cd++R51PpkeLUaYGxo4AAAAA1vWoCS9gs0WCAr2eCwl8D9PDo5/rLFVKtEPqVOHKDNQACQAA</VsDebuggerCausalityData>
+        <a:To
+          s:mustUnderstand="1">net.tcp://localhost/Ampla/Data/2008/06/Tcp</a:To>
+      </s:Header>
+      <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <GetViewsRequestMessage xmlns="http://www.citect.com/Ampla/Data/2008/06">
+          <GetViewsRequest>
+            <Credentials>
+              <Session>8bca9a70-627b-4a14-a2f6-5ec051a94953</Session>
+            </Credentials>
+            <Context>Plant</Context>
+            <Mode>Location</Mode>
+            <Module>Quality</Module>
+            <ViewPoint>Enterprise</ViewPoint>
+            <Localization></Localization>
+          </GetViewsRequest>
+        </GetViewsRequestMessage>
+      </s:Body>
+    </s:Envelope>
+  </RequestMessage>
+</WCFCall>

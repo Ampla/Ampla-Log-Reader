@@ -8,7 +8,7 @@ namespace Ampla.LogReader.Reports.Data
     public class WcfLocationsTableUnitTests : TestFixture
     {
         private const string directory = @".\Wcf\Resources";
-        private const int numberOfEntries = 9;
+        private const int numberOfEntries = 10;
 
         [Test]
         public void EmptyTable()
@@ -37,9 +37,10 @@ namespace Ampla.LogReader.Reports.Data
             Assert.That(table.Data.Rows.Count, Is.LessThan(numberOfEntries));
 
             Assert.That(table.Data.Select("[Operation] = 'GetData'"), Is.Not.Empty, "GetData Rows");
-            Assert.That(table.Data.Select("[Operation] = 'Update Record'"), Is.Empty, "Update Rows");
-            Assert.That(table.Data.Select("[Operation] = 'New Record'"), Is.Empty, "New Record Rows");
-            Assert.That(table.Data.Select("[Operation] = 'Confirm Record'"), Is.Empty, "Confirm Rows");
+            Assert.That(table.Data.Select("[Operation] = 'GetViews'"), Is.Not.Empty, "GetViews Rows");
+            Assert.That(table.Data.Select("[Operation] = 'SubmitData'"), Is.Empty, "SubmitData Rows");
+            Assert.That(table.Data.Select("[Operation] = 'Delete'"), Is.Empty, "Delete Rows");
+            Assert.That(table.Data.Select("[Operation] = 'Confirm'"), Is.Empty, "Confirm Rows");
         }
 
         [Test]

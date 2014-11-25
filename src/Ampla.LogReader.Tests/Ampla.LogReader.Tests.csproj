@@ -112,6 +112,7 @@
     <Compile Include="TempDirectory.cs" />
     <Compile Include="TestFixture.cs" />
     <Compile Include="Reports\Data\WcfCallTableUnitTests.cs" />
+    <Compile Include="Wcf\GetViewsParameterUnitTests.cs" />
     <Compile Include="Wcf\GetDataParameterUnitTests.cs" />
     <Compile Include="Wcf\WcfCallUnitTests.cs" />
     <Compile Include="Wcf\WcfLogReaderUnitTests.cs" />
@@ -177,6 +178,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Wcf\Resources\BusinessErrorEntry.log">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Wcf\Resources\GetViews.log">
+      <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Wcf\Resources\GetDataUser.log">
