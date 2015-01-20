@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using Ampla.LogReader.Excel.Reader;
 using Ampla.LogReader.Excel.Writer;
 using NUnit.Framework;
@@ -101,6 +102,17 @@ namespace Ampla.LogReader.Excel
             Assert.That(result2, Is.EquivalentTo(new[] { "One", "1", "1.1" }));
             Assert.That(result3, Is.EquivalentTo(new[] { "Two", "2", "1.2" }));
             Assert.That(result4, Is.EquivalentTo(new[] { "Three", "3", "1.3" }));
+        }
+
+        [Test]
+        public void EmptySpreadsheetIsNotWrittenToDisk()
+        {
+            using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.CreateNew(Filename))
+            {
+                Assert.That(spreadsheet.IsReadOnly, Is.False);
+            }
+
+            Assert.That(File.Exists(Filename), Is.False, "{0} exists", Filename);
         }
 
 

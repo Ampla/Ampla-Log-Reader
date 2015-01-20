@@ -47,13 +47,16 @@ namespace Ampla.LogReader.Excel
             if (disposed) return;
             if (!IsReadOnly)
             {
-                if (existingFile)
+                if (workbook.Worksheets.Count > 0)
                 {
-                    workbook.Save();
-                }
-                else
-                {
-                    workbook.SaveAs(filename);
+                    if (existingFile)
+                    {
+                        workbook.Save();
+                    }
+                    else
+                    {
+                        workbook.SaveAs(filename);
+                    }
                 }
             }
             disposed = true;
