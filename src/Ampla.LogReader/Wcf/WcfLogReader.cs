@@ -53,7 +53,7 @@ namespace Ampla.LogReader.Wcf
         private XmlDocument LoadXmlDocument(string xmlFileName, Func<Stream, TextReader> createTextReader, out Exception exception)
         {
             exception = null;
-            using (FileStream stream = File.OpenRead(xmlFileName))
+            using (FileStream stream = File.Open(xmlFileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
                 using (TextReader contentReader = createTextReader(stream))
                 {
