@@ -55,9 +55,11 @@
       <Link>Properties\Assembly.Version.cs</Link>
     </Compile>
     <Compile Include="ArgumentCheck.cs" />
+    <Compile Include="EventLogs\EventLogExporter.cs" />
     <Compile Include="EventLogs\EventLogFileReader.cs" />
     <Compile Include="EventLogs\FileEventLogSystem.cs" />
     <Compile Include="EventLogs\EventLogReader.cs" />
+    <Compile Include="EventLogs\IEventLogExporter.cs" />
     <Compile Include="EventLogs\IEventLogSystem.cs" />
     <Compile Include="EventLogs\ILocalEventLogSystem.cs" />
     <Compile Include="EventLogs\LocalEventLogSystem.cs" />

@@ -31,6 +31,17 @@ namespace Ampla.LogReader
             }
         }
 
+        public string GetSpecificFileName(string fileName)
+        {
+            FileInfo file = new FileInfo(Path.Combine(directoryName, fileName));
+            if (file.Exists)
+            {
+                file.Delete();
+            }
+            Assert.That(file.Exists, Is.False);
+            return file.FullName;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -38,13 +49,7 @@ namespace Ampla.LogReader
         public string GetNextTemporaryFile()
         {
             string name = string.Format(pattern, ++count);
-            FileInfo file = new FileInfo(Path.Combine(directoryName, name));
-            if (file.Exists)
-            {
-                file.Delete();
-            }
-            Assert.That(file.Exists, Is.False);
-            return file.FullName;
+            return GetSpecificFileName(name);
         }
     }
 }

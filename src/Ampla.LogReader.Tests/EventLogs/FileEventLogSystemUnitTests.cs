@@ -11,10 +11,10 @@ namespace Ampla.LogReader.EventLogs
     {
         private FileEventLogSystem eventLogSystem;
 
-        private const string hardwareEventsLog = @".\EventLogs\Resources\HardwareEvents.evtx";
+        private const string hardwareEventsLog = @".\EventLogs\Resources\Empty.evtx";
 
         [Test]
-        public void HardwareEvents()
+        public void EmptyFile()
         {
             Assert.That(File.Exists(hardwareEventsLog), Is.True);
             eventLogSystem = new FileEventLogSystem(hardwareEventsLog);
@@ -23,7 +23,7 @@ namespace Ampla.LogReader.EventLogs
             Assert.That(readers, Is.Not.Empty);
             foreach (ILogReader<SimpleEventLogEntry> reader in readers)
             {
-                Assert.That(reader.Name, Is.EqualTo("HardwareEvents.evtx"));
+                Assert.That(reader.Name, Is.EqualTo("Empty.evtx"));
             }
         }
     }

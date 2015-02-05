@@ -56,6 +56,7 @@
     <Compile Include="..\Assembly.Version.cs">
       <Link>Properties\Assembly.Version.cs</Link>
     </Compile>
+    <Compile Include="EventLogs\EventLogExporterUnitTests.cs" />
     <Compile Include="EventLogs\FileEventLogSystemUnitTests.cs" />
     <Compile Include="EventLogs\EventLogReaderUnitTests.cs" />
     <Compile Include="EventLogs\Statistics\EventLogSummaryTableUnitTests.cs" />
@@ -126,7 +127,7 @@
     <Compile Include="Xml\XmlFragmentTextReaderUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="EventLogs\Resources\HardwareEvents.evtx">
+    <None Include="EventLogs\Resources\Empty.evtx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
