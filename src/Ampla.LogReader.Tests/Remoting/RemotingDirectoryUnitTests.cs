@@ -16,6 +16,7 @@ namespace Ampla.LogReader.Remoting
             string invalid = Path.Combine(directory, "Invalid");
             RemotingDirectory remotingDirectory = new RemotingDirectory(invalid);
             Assert.That(remotingDirectory.DirectoryExists(), Is.False);
+            Assert.That(remotingDirectory.Name, Is.EqualTo(invalid));
         }
 
         [Test]
@@ -27,6 +28,7 @@ namespace Ampla.LogReader.Remoting
 
             Assert.That(remotingDirectory.Entries, Is.Not.Empty);
             Assert.That(remotingDirectory.Entries.Count, Is.EqualTo(numFiles));
+            Assert.That(remotingDirectory.Name, Is.EqualTo("Resources"));
         }
 
     }

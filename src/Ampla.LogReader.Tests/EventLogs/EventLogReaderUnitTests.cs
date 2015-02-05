@@ -10,7 +10,7 @@ namespace Ampla.LogReader.EventLogs
         [Test]
         public void ReadEntries()
         {
-            EventLogSystem eventLogSystem = new EventLogSystem();
+            ILocalEventLogSystem eventLogSystem = new LocalEventLogSystem();
             EventLog eventLog = eventLogSystem.GetEventLogs().FirstOrDefault(ev => ev.Entries.Count > 0);
             Assert.That(eventLog, Is.Not.Null, "Unable to find an Event Log with something in it.");
             

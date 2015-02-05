@@ -13,6 +13,7 @@ namespace Ampla.LogReader.Wcf
         public WcfLogReader(string fileName)
         {
             this.fileName = fileName;
+            Name = new FileInfo(fileName).Name;
         }
 
         protected override List<WcfCall> ReadEntries()

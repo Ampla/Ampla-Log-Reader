@@ -2,11 +2,30 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 
 namespace Ampla.LogReader.EventLogs
 {
     public class SimpleEventLogEntry
     {
+        public SimpleEventLogEntry(EventRecord eventRecord)
+        {
+            Index = (int)GetValue(eventRecord.RecordId, 0);
+            CallTime = GetValue(eventRecord.TimeCreated, DateTime.MinValue).ToUniversalTime();
+            Source = eventRecord.ProviderName;
+            InstanceId = GetValue(eventRecord.Id, 0);
+            Category = eventRecord.LevelDisplayName;
+            EntryType = EventLogEntryType.Information;
+            MachineName = eventRecord.MachineName;
+            UserName = eventRecord.UserId.Value;
+            Message = eventRecord.FormatDescription();
+        }
+
+        private T GetValue<T>(T? nullable, T defaultValue) where T : struct
+        {
+            return nullable.HasValue ? nullable.Value : defaultValue;
+        }
+
         public SimpleEventLogEntry(EventLogEntry eventLogEntry)
         {
             Index = eventLogEntry.Index;

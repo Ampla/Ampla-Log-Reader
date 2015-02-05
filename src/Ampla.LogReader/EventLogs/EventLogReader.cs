@@ -18,8 +18,5 @@ namespace Ampla.LogReader.EventLogs
         {
             return (from EventLogEntry entry in eventLog.Entries select new SimpleEventLogEntry(entry)).ToList();
         }
-
-        public string Name { get; private set; }
-
     }
 }

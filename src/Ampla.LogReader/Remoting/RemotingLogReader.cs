@@ -14,6 +14,7 @@ namespace Ampla.LogReader.Remoting
         public RemotingLogReader(string fileName)
         {
             this.fileName = fileName;
+            Name = new FileInfo(fileName).Name;
         }
 
         protected override List<RemotingEntry> ReadEntries()

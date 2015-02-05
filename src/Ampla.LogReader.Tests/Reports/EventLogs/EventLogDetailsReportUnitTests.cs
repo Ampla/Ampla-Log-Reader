@@ -12,7 +12,7 @@ namespace Ampla.LogReader.Reports.EventLogs
          [Test]
          public void EmptyCalls()
          {
-             EventLog eventLog = new EventLogSystem().GetEventLog("Application");
+             EventLog eventLog = new LocalEventLogSystem().GetEventLog("Application");
              SimpleReportWriter writer = new SimpleReportWriter();
              EventLogDetailsReport report = new EventLogDetailsReport(eventLog, new List<SimpleEventLogEntry>(), writer);
              

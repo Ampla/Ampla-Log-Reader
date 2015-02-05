@@ -24,7 +24,7 @@ namespace Ampla.LogReader.EventLogs.Statistics
         public void WithEmptyEventLog()
         {
             EventLogSummaryTable table = new EventLogSummaryTable("Summary");
-            IEventLogSystem eventLogSystem = new EventLogSystem();
+            ILocalEventLogSystem eventLogSystem = new LocalEventLogSystem();
             EventLogReader reader = (from eventLog in eventLogSystem.GetEventLogs() 
                                      where eventLog.Entries.Count == 0 
                                      select new EventLogReader(eventLog)).FirstOrDefault();

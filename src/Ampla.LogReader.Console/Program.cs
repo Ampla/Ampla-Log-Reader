@@ -95,7 +95,7 @@ namespace Ampla.LogReader.Console
                         if (!options.SkipEventLog)
                         {
                             writer.WriteLine("Event Log Processing");
-                            EventLogSystem eventLogSystem = new EventLogSystem();
+                            IEventLogSystem eventLogSystem = new LocalEventLogSystem();
 
                             new EventLogReportPack("EventLog.Details.xlsx", eventLogSystem).Render();
                         }
@@ -111,7 +111,7 @@ namespace Ampla.LogReader.Console
                             new RemotingExcelReportPack(project).Render();
                         }
                         writer.WriteLine("Event Log Processing");
-                        EventLogSystem eventLogSystem = new EventLogSystem();
+                        IEventLogSystem eventLogSystem = new LocalEventLogSystem();
 
                         new EventLogReportPack("EventLog.Details.xlsx", eventLogSystem).Render();
                     }

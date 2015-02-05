@@ -8,12 +8,10 @@ namespace Ampla.LogReader.Remoting
     {
         private readonly string directory;
 
-        public RemotingDirectory(string folder)
+        public RemotingDirectory(string directory)
         {
-            if (!Directory.Exists(folder))
-            {
-            }
-            directory = folder;
+            this.directory = directory;
+            Name = DirectoryExists() ? new DirectoryInfo(this.directory).Name : directory;
         }
 
         public RemotingDirectory(AmplaProject project) : this(project.RemotingDirectory)

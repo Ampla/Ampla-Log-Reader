@@ -56,6 +56,7 @@
     <Compile Include="..\Assembly.Version.cs">
       <Link>Properties\Assembly.Version.cs</Link>
     </Compile>
+    <Compile Include="EventLogs\FileEventLogSystemUnitTests.cs" />
     <Compile Include="EventLogs\EventLogReaderUnitTests.cs" />
     <Compile Include="EventLogs\Statistics\EventLogSummaryTableUnitTests.cs" />
     <Compile Include="Excel\ExcelCell.cs" />
@@ -94,7 +95,7 @@
     <Compile Include="Statistics\SessionSummaryStatisticUnitTests.cs" />
     <Compile Include="Statistics\TimeBasedStatisticUnitTests.cs" />
     <Compile Include="Statistics\CountStatisticUnitTests.cs" />
-    <Compile Include="EventLogs\EventLogSystemUnitTests.cs" />
+    <Compile Include="EventLogs\LocalEventLogSystemUnitTests.cs" />
     <Compile Include="Excel\ExcelSpreadsheetUnitTests.cs" />
     <Compile Include="Excel\ExcelTestFixture.cs" />
     <Compile Include="Excel\Reader\CellReaderUnitTests.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="Wcf\GetViewsParameterUnitTests.cs" />
     <Compile Include="Wcf\GetDataParameterUnitTests.cs" />
     <Compile Include="Wcf\WcfCallUnitTests.cs" />
+    <Compile Include="Wcf\WcfLogDirectoryUnitTests.cs" />
     <Compile Include="Wcf\WcfLogReaderUnitTests.cs" />
     <Compile Include="Wcf\WcfResponseMessageUnitTests.cs" />
     <Compile Include="Xml\ChunkedOffsetTextReaderUnitTests.cs" />
@@ -124,6 +126,9 @@
     <Compile Include="Xml\XmlFragmentTextReaderUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="EventLogs\Resources\HardwareEvents.evtx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

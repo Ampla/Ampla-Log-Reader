@@ -23,5 +23,6 @@ namespace Ampla.LogReader
         protected abstract List<TEntry> ReadEntries();
 
         public List<TEntry> Entries { get; private set; }
+        public string Name { get; protected set; }
     }
 }

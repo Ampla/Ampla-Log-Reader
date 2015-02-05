@@ -14,11 +14,8 @@ namespace Ampla.LogReader.Wcf
 
         public WcfLogDirectory(string directory)
         {
-            if (!Directory.Exists(directory))
-            {
-                //throw new DirectoryNotFoundException(folder + " does not exist.");
-            }
             this.directory = directory;
+            Name = DirectoryExists() ? new DirectoryInfo(directory).Name : directory;
         }
 
         protected override List<WcfCall> ReadEntries()

@@ -5,20 +5,20 @@ using System.Security;
 
 namespace Ampla.LogReader.EventLogs
 {
-    public class EventLogSystem : IEventLogSystem
+    public class LocalEventLogSystem : ILocalEventLogSystem
     {
         private readonly string machineName;
 
-        public EventLogSystem() : this(".")
+        public LocalEventLogSystem() : this(".")
         {
         }
 
-        private EventLogSystem(string machineName)
+        private LocalEventLogSystem(string machineName)
         {
             this.machineName = machineName;
         }
 
-        public IEnumerable<EventLogReader> GetReaders()
+        public IEnumerable<ILogReader<SimpleEventLogEntry>> GetReaders()
         {
             return GetEventLogs().Select(eventLog => new EventLogReader(eventLog)).ToArray();
         }
@@ -47,5 +47,6 @@ namespace Ampla.LogReader.EventLogs
         {
             return GetEventLogs().FirstOrDefault(eventLog => eventLog.LogDisplayName == displayName);
         }
+
     }
 }

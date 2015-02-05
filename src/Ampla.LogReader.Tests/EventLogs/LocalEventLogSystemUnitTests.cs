@@ -6,14 +6,14 @@ using NUnit.Framework;
 namespace Ampla.LogReader.EventLogs
 {
     [TestFixture]
-    public class EventLogSystemUnitTests : TestFixture
+    public class LocalEventLogSystemUnitTests : TestFixture
     {
-        private IEventLogSystem eventLogSystem;
+        private LocalEventLogSystem eventLogSystem;
 
         protected override void OnSetUp()
         {
             base.OnSetUp();
-            eventLogSystem = new EventLogSystem();
+            eventLogSystem = new LocalEventLogSystem();
         }
 
         [Test]
@@ -52,7 +52,7 @@ namespace Ampla.LogReader.EventLogs
         [Test]
         public void GetReaders()
         {
-            IEnumerable<EventLogReader> readers = eventLogSystem.GetReaders();
+            IEnumerable<ILogReader<SimpleEventLogEntry>> readers = eventLogSystem.GetReaders();
             Assert.That(readers, Is.Not.Empty);
             foreach (EventLogReader reader in readers)
             {
