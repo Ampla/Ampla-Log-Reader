@@ -25,7 +25,7 @@ namespace Ampla.LogReader.Reports.Data
         {
             RemotingDirectory remotingDirectory = new RemotingDirectory(directory);
             Assert.That(remotingDirectory.DirectoryExists(), Is.True);
-            remotingDirectory.Read();
+            remotingDirectory.ReadAll();
 
             Assert.That(remotingDirectory.Entries, Is.Not.Empty);
             Assert.That(remotingDirectory.Entries.Count, Is.EqualTo(numberOfEntries));
@@ -47,7 +47,7 @@ namespace Ampla.LogReader.Reports.Data
         {
             RemotingDirectory remotingDirectory = new RemotingDirectory(directory);
             Assert.That(remotingDirectory.DirectoryExists(), Is.True);
-            remotingDirectory.Read();
+            remotingDirectory.ReadAll();
 
             Assert.That(remotingDirectory.Entries, Is.Not.Empty);
             RemotingEntry query = remotingDirectory.Entries.Find(re => re.Method == "Query");

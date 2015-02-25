@@ -32,7 +32,7 @@ namespace Ampla.LogReader.Reports.Packs
 
         public override void Render()
         {
-            reader.Read();
+            reader.ReadAll();
 
             using (IExcelSpreadsheet excel = ExcelSpreadsheet.CreateNew(fileName))
             {

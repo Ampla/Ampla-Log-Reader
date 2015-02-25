@@ -42,7 +42,7 @@ namespace Ampla.LogReader.Reports.Pages
         public void OneRecord()
         {
             ILogReader<RemotingEntry> logReader = new RemotingLogReader(logFileName);
-            logReader.Read();
+            logReader.ReadAll();
 
             string pageName;
             using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.CreateNew(Filename))
@@ -78,7 +78,7 @@ namespace Ampla.LogReader.Reports.Pages
             using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.CreateNew(Filename))
             {
                 RemotingDirectory directory = new RemotingDirectory(project);
-                directory.Read();
+                directory.ReadAll();
                 RemotingSummaryPage page = new RemotingSummaryPage(spreadsheet, directory.Entries);
                 page.Render();
                 pageName = page.PageName;

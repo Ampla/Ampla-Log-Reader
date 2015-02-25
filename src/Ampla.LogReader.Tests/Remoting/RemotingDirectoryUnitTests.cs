@@ -24,7 +24,7 @@ namespace Ampla.LogReader.Remoting
         {
             RemotingDirectory remotingDirectory = new RemotingDirectory(directory);
             Assert.That(remotingDirectory.DirectoryExists(), Is.True);
-            remotingDirectory.Read();
+            remotingDirectory.ReadAll();
 
             Assert.That(remotingDirectory.Entries, Is.Not.Empty);
             Assert.That(remotingDirectory.Entries.Count, Is.EqualTo(numFiles));

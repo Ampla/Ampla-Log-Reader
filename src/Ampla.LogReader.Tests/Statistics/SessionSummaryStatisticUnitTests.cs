@@ -14,7 +14,7 @@ namespace Ampla.LogReader.Statistics
         {
             AmplaProject project = AmplaTestProjects.GetAmplaProject();
             reader = new RemotingDirectory(project);
-            reader.Read();
+            reader.ReadAll();
             Assert.That(reader.Entries, Is.Not.Empty);
             base.OnFixtureSetUp();
         }

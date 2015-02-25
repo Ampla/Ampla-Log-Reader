@@ -25,7 +25,7 @@ namespace Ampla.LogReader.Wcf
             foreach (FileInfo file in wcfReaderFiles)
             {
                 WcfLogReader reader = new WcfLogReader(file.FullName);
-                reader.Read();
+                reader.ReadAll();
                 list.AddRange(reader.Entries);
             }
             return list;

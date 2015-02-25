@@ -25,7 +25,7 @@ namespace Ampla.LogReader.Wcf
         {
             WcfLogDirectory wcfLogDirectory = new WcfLogDirectory(directory);
             Assert.That(wcfLogDirectory.DirectoryExists(), Is.True);
-            wcfLogDirectory.Read();
+            wcfLogDirectory.ReadAll();
 
             Assert.That(wcfLogDirectory.Entries, Is.Not.Empty);
             Assert.That(wcfLogDirectory.Entries.Count, Is.EqualTo(numFiles));

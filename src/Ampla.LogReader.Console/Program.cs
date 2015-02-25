@@ -46,7 +46,7 @@ namespace Ampla.LogReader.Console
                         {
                             writer.WriteLine("LogDirectory: {0}", project.Directory);
                             WcfLogDirectory directory = new WcfLogDirectory(project);
-                            directory.Read();
+                            directory.ReadAll();
 
                             writer.WriteLine("Read {0} entries from WcfLog files", directory.Entries.Count);
 
@@ -70,7 +70,7 @@ namespace Ampla.LogReader.Console
                         {
                             writer.WriteLine("LogDirectory: {0}", project.Directory);
                             RemotingDirectory directory = new RemotingDirectory(project);
-                            directory.Read();
+                            directory.ReadAll();
 
                             writer.WriteLine("Read {0} entries from Remoting files", directory.Entries.Count);
 

@@ -4,7 +4,7 @@ namespace Ampla.LogReader
 {
     public interface ILogReader<TEntry>
     {
-        void Read();
+        void ReadAll();
         List<TEntry> Entries { get; }
         string Name { get; }
     }

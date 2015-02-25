@@ -28,7 +28,7 @@ namespace Ampla.LogReader.Remoting
                 foreach (FileInfo file in remotingFiles)
                 {
                     RemotingLogReader reader = new RemotingLogReader(file.FullName);
-                    reader.Read();
+                    reader.ReadAll();
                     list.AddRange(reader.Entries);
                 }
             }

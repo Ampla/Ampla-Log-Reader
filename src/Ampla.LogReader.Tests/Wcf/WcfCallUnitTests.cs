@@ -139,7 +139,7 @@ namespace Ampla.LogReader.Wcf
         public void Source()
         {
             WcfLogReader reader = new WcfLogReader(fileName);
-            reader.Read();
+            reader.ReadAll();
 
             Assert.That(reader.Entries.Count, Is.EqualTo(1));
             WcfCall call = reader.Entries[0];
@@ -154,7 +154,7 @@ namespace Ampla.LogReader.Wcf
         public void FaultObject()
         {
             WcfLogReader reader = new WcfLogReader(fileName);
-            reader.Read();
+            reader.ReadAll();
 
             Assert.That(reader.Entries.Count, Is.EqualTo(1));
             WcfCall call = reader.Entries[0];
@@ -167,7 +167,7 @@ namespace Ampla.LogReader.Wcf
         public void FaultObjectWithException()
         {
             WcfLogReader reader = new WcfLogReader(exceptionFileName);
-            reader.Read();
+            reader.ReadAll();
 
             Assert.That(reader.Entries.Count, Is.EqualTo(1));
             WcfCall call = reader.Entries[0];
@@ -183,7 +183,7 @@ namespace Ampla.LogReader.Wcf
         public void FaultObjectWithBusinessError()
         {
             WcfLogReader reader = new WcfLogReader(businessErrorFileName);
-            reader.Read();
+            reader.ReadAll();
 
             Assert.That(reader.Entries.Count, Is.EqualTo(1));
             WcfCall call = reader.Entries[0];
@@ -199,7 +199,7 @@ namespace Ampla.LogReader.Wcf
         public void TcpFaultWithError()
         {
             WcfLogReader reader = new WcfLogReader(tcpFaultFileName);
-            reader.Read();
+            reader.ReadAll();
 
             Assert.That(reader.Entries.Count, Is.EqualTo(1));
             WcfCall call = reader.Entries[0];
@@ -216,7 +216,7 @@ namespace Ampla.LogReader.Wcf
         public void FaultWithInnerException()
         {
             WcfLogReader reader = new WcfLogReader(innerExceptionFileName);
-            reader.Read();
+            reader.ReadAll();
 
             Assert.That(reader.Entries.Count, Is.EqualTo(1));
             WcfCall call = reader.Entries[0];

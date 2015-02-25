@@ -4,7 +4,7 @@ using Ampla.LogReader.Statistics;
 
 namespace Ampla.LogReader.EventLogs.Statistics
 {
-    public class EventLogSummaryTable : IStatisticTable<EventLogReader>
+    public class EventLogSummaryTable : IStatisticTable<ILogReader<SimpleEventLogEntry>>
     {
         private readonly DataTable dataTable;
         private readonly DateTime last1Hr;
@@ -30,9 +30,9 @@ namespace Ampla.LogReader.EventLogs.Statistics
             dataTable.Columns.Add("Total", typeof(int));
         }
 
-        public void Add(EventLogReader entry)
+        public void Add(ILogReader<SimpleEventLogEntry> entry)
         {
-            entry.Read();
+            entry.ReadAll();
             EventLogEntryTypeStatistic statistic = new EventLogEntryTypeStatistic(entry.Name);
             EventLogEntryTypeStatistic lastHour = new EventLogEntryTypeStatistic(entry.Name);
             EventLogEntryTypeStatistic lastDay = new EventLogEntryTypeStatistic(entry.Name);

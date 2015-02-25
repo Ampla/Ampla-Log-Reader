@@ -11,7 +11,7 @@ namespace Ampla.LogReader
 
         private bool hasRead;
 
-        public void Read()
+        public void ReadAll()
         {
             if (!hasRead)
             {

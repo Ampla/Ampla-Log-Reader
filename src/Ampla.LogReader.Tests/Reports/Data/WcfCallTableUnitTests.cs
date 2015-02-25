@@ -17,7 +17,7 @@ namespace Ampla.LogReader.Reports.Data
         public void CreateDataTable()
         {
             WcfLogReader reader = new WcfLogReader(logFileName);
-            reader.Read();
+            reader.ReadAll();
             
             Assert.That(reader.Entries, Is.Not.Empty);
 
@@ -50,7 +50,7 @@ namespace Ampla.LogReader.Reports.Data
         public void LocalTimeColumnUsesTimeZone()
         {
             WcfLogReader reader = new WcfLogReader(logFileName);
-            reader.Read();
+            reader.ReadAll();
 
             Assert.That(reader.Entries, Is.Not.Empty);
 
@@ -79,7 +79,7 @@ namespace Ampla.LogReader.Reports.Data
         public void IndiaStandardTime()
         {
             WcfLogReader reader = new WcfLogReader(logFileName);
-            reader.Read();
+            reader.ReadAll();
 
             Assert.That(reader.Entries, Is.Not.Empty);
 

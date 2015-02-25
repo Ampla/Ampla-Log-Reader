@@ -25,9 +25,9 @@ namespace Ampla.LogReader.Reports.Packs
             {
                 EventLogSummaryTable summaryTable = new EventLogSummaryTable("Summary");
 
-                foreach (EventLogReader reader in eventLogSystem.GetReaders())
+                foreach (var reader in eventLogSystem.GetReaders())
                 {
-                    reader.Read();
+                    reader.ReadAll();
                     summaryTable.Add(reader);
                     dataTable.Add(SimpleEventLogEntry.CreateDataTable(reader.Entries));
                     names.Add(reader.Name);

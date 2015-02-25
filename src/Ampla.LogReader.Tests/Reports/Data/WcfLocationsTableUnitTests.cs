@@ -25,7 +25,7 @@ namespace Ampla.LogReader.Reports.Data
         {
             WcfLogDirectory wcfLogDirectory = new WcfLogDirectory(directory);
             Assert.That(wcfLogDirectory.DirectoryExists(), Is.True);
-            wcfLogDirectory.Read();
+            wcfLogDirectory.ReadAll();
 
             Assert.That(wcfLogDirectory.Entries, Is.Not.Empty);
             Assert.That(wcfLogDirectory.Entries.Count, Is.EqualTo(numberOfEntries));
@@ -48,7 +48,7 @@ namespace Ampla.LogReader.Reports.Data
         {
             WcfLogDirectory logDirectory = new WcfLogDirectory(directory);
             Assert.That(logDirectory.DirectoryExists(), Is.True);
-            logDirectory.Read();
+            logDirectory.ReadAll();
 
             Assert.That(logDirectory.Entries, Is.Not.Empty);
             WcfCall getData = logDirectory.Entries.Find(re => re.Method == "GetData");

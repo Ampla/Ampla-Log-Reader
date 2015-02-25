@@ -10,7 +10,7 @@ namespace Ampla.LogReader.Remoting
         {
             ILogReader<RemotingEntry> reader = new RemotingLogReader(@".\Remoting\Resources\SingleEntry.log");
             Assert.That(reader.Entries, Is.Empty);
-            reader.Read();
+            reader.ReadAll();
 
             Assert.That(reader.Entries, Is.Not.Empty);
         }
@@ -20,11 +20,11 @@ namespace Ampla.LogReader.Remoting
         {
             ILogReader<RemotingEntry> reader = new RemotingLogReader(@".\Remoting\Resources\SingleEntry.log");
             Assert.That(reader.Entries, Is.Empty);
-            reader.Read();
+            reader.ReadAll();
             int count = reader.Entries.Count;
             Assert.That(reader.Entries, Is.Not.Empty);
 
-            reader.Read();
+            reader.ReadAll();
             Assert.That(reader.Entries.Count, Is.EqualTo(count));
         }
 
@@ -33,7 +33,7 @@ namespace Ampla.LogReader.Remoting
         {
             ILogReader<RemotingEntry> reader = new RemotingLogReader(@".\Remoting\Resources\Incomplete.log");
             Assert.That(reader.Entries, Is.Empty);
-            reader.Read();
+            reader.ReadAll();
 
             Assert.That(reader.Entries, Is.Not.Empty);
         }

@@ -44,7 +44,7 @@ namespace Ampla.LogReader.Reports.Pages
             using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.CreateNew(Filename))
             {
                 WcfLogDirectory directory = new WcfLogDirectory(project);
-                directory.Read();
+                directory.ReadAll();
                 var page = CreatePage(spreadsheet, directory.Entries);
                 page.Render();
                 pageName = page.PageName;
@@ -67,7 +67,7 @@ namespace Ampla.LogReader.Reports.Pages
         public void SingleRecordNoFault()
         {
             ILogReader<WcfCall> logReader = new WcfLogReader(logFileName);
-            logReader.Read();
+            logReader.ReadAll();
 
             string pageName;
             using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.CreateNew(Filename))
@@ -99,7 +99,7 @@ namespace Ampla.LogReader.Reports.Pages
             using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.CreateNew(Filename))
             {
                 WcfLogDirectory directory = new WcfLogDirectory(project);
-                directory.Read();
+                directory.ReadAll();
                 var page = CreatePage(spreadsheet, directory.Entries);
                 page.Render();
                 pageName = page.PageName;
