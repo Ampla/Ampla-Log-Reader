@@ -56,6 +56,7 @@
     <Compile Include="..\Assembly.Version.cs">
       <Link>Properties\Assembly.Version.cs</Link>
     </Compile>
+    <Compile Include="EventLogs\FileEventLogReaderUnitTests.cs" />
     <Compile Include="EventLogs\EventLogExporterUnitTests.cs" />
     <Compile Include="EventLogs\FileEventLogSystemUnitTests.cs" />
     <Compile Include="EventLogs\EventLogReaderUnitTests.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Reports\EventLogs\EventLogDetailsReportUnitTests.cs" />
     <Compile Include="Reports\EventLogs\EventLogHourlySummaryReportUnitTests.cs" />
     <Compile Include="Reports\EventLogs\EventLogSummaryReportUnitTests.cs" />
+    <Compile Include="Reports\Packs\EventLogExcelReportPackUnitTests.cs" />
     <Compile Include="Reports\Packs\WcfExcelReportPackUnitTests.cs" />
     <Compile Include="Reports\Pages\RemotingSessionSummaryPageUnitTests.cs" />
     <Compile Include="Reports\Pages\WcfFaultSummaryPageUnitTests.cs" />
@@ -92,6 +94,7 @@
     <Compile Include="Reports\Pages\RemotingSummaryPageUnitTests.cs" />
     <Compile Include="Reports\Remoting\RemotingSummaryReportUnitTests.cs" />
     <Compile Include="Reports\Pages\WcfSummaryPageUnitTests.cs" />
+    <Compile Include="ThreadCultureUnitTests.cs" />
     <Compile Include="Statistics\DateTimeExtensionsUnitTests.cs" />
     <Compile Include="Statistics\SessionSummaryStatisticUnitTests.cs" />
     <Compile Include="Statistics\TimeBasedStatisticUnitTests.cs" />
@@ -112,6 +115,7 @@
     <Compile Include="Statistics\TimeZoneHelperUnitTests.cs" />
     <Compile Include="Statistics\TopNStatisticsUnitTests.cs" />
     <Compile Include="TempDirectory.cs" />
+    <Compile Include="TemporaryFileTestFixture.cs" />
     <Compile Include="TestFixture.cs" />
     <Compile Include="Reports\Data\WcfCallTableUnitTests.cs" />
     <Compile Include="Wcf\SubmitDataParameterUnitTests.cs" />

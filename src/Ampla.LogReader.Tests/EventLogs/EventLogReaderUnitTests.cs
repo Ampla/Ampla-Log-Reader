@@ -8,6 +8,21 @@ namespace Ampla.LogReader.EventLogs
     public class EventLogReaderUnitTests : TestFixture
     {
         [Test]
+        public void ReadApplication()
+        {
+            ILocalEventLogSystem eventLogSystem = new LocalEventLogSystem();
+            EventLog eventLog = eventLogSystem.GetEventLog("Application");
+            Assert.That(eventLog, Is.Not.Null);
+
+            EventLogReader reader = new EventLogReader(eventLog);
+            Assert.That(reader.Entries, Is.Empty);
+
+            reader.ReadAll();
+
+            Assert.That(reader.Entries, Is.Not.Empty);
+        }
+
+        [Test]
         public void ReadEntries()
         {
             ILocalEventLogSystem eventLogSystem = new LocalEventLogSystem();
@@ -20,16 +35,41 @@ namespace Ampla.LogReader.EventLogs
             int count = eventLog != null ? eventLog.Entries.Count : -1;
             Assert.That(count, Is.GreaterThan(0), "No entries in the EventLog");
 
-            reader.Read();
+            reader.ReadAll();
 
             Assert.That(reader.Entries, Is.Not.Empty);
-            Assert.That(reader.Entries.Count, Is.EqualTo(count).Or.EqualTo(count + 2));
+            Assert.That(reader.Entries.Count, Is.GreaterThanOrEqualTo(count).And.LessThanOrEqualTo(count + 2));
 
-            reader.Read();
+            reader.ReadAll();
 
             Assert.That(reader.Entries, Is.Not.Empty);
-            Assert.That(reader.Entries.Count, Is.EqualTo(count).Or.EqualTo(count + 2));
+            Assert.That(reader.Entries.Count, Is.GreaterThanOrEqualTo(count).And.LessThanOrEqualTo(count + 2));
         }
-        
+
+
+        [Test]
+        public void Read10Entries()
+        {
+            ILocalEventLogSystem eventLogSystem = new LocalEventLogSystem();
+            EventLog eventLog = eventLogSystem.GetEventLogs().FirstOrDefault(ev => ev.Entries.Count > 10);
+            Assert.That(eventLog, Is.Not.Null, "Unable to find an Event Log with something in it.");
+
+            EventLogReader reader = new EventLogReader(eventLog, 10);
+            Assert.That(reader.Entries, Is.Empty);
+
+            int count = eventLog != null ? eventLog.Entries.Count : -1;
+            Assert.That(count, Is.GreaterThan(0), "No entries in the EventLog");
+
+            reader.ReadAll();
+
+            Assert.That(reader.Entries, Is.Not.Empty);
+            Assert.That(reader.Entries.Count, Is.EqualTo(10));
+
+            reader.ReadAll();
+
+            Assert.That(reader.Entries, Is.Not.Empty);
+            Assert.That(reader.Entries.Count, Is.EqualTo(10));
+        }
+
     }
 }

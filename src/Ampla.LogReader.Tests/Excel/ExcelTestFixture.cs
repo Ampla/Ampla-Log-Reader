@@ -1,35 +1,29 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 
 namespace Ampla.LogReader.Excel
 {
     [TestFixture]
-    public abstract class ExcelTestFixture : TestFixture
+    public abstract class ExcelTestFixture : TemporaryFilesTestFixture
     {
-        protected override void OnFixtureSetUp()
+        protected ExcelTestFixture() : base("xlsx")
         {
-            base.OnFixtureSetUp();
-            string directory = @"Files\" + GetType().Name;
-            TempDirectory = new TempDirectory(directory, "UnitTest_{0:00}.xlsx");
-            TempDirectory.DeleteAllFiles();
         }
 
         protected override void OnSetUp()
         {
             base.OnSetUp();
-            Filename = TempDirectory.GetNextTemporaryFile();
+            Filename = GetNextTemporaryFile();
         }
 
         protected string Filename { get; private set; }
-
-        private TempDirectory TempDirectory { get; set; }
-
 
         protected void AssertWorksheetExists(string worksheet)
         {
             using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.OpenReadOnly(Filename))
             {
-                IWorksheet ws = spreadsheet.GetWorksheet(worksheet);
-                Assert.That(ws, Is.Not.Null, "{0} worksheet does not exist in {1}", worksheet, Filename);
+                string[] available = spreadsheet.GetWorksheetNames();
+                Assert.That(available, Contains.Item(worksheet), "{0} worksheet does not exist in {1}", worksheet, Filename);
             }
         }
 

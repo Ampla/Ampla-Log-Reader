@@ -42,5 +42,11 @@ namespace Ampla.LogReader.Excel
         /// <c>true</c> if this instance is read only; otherwise, <c>false</c>.
         /// </value>
         bool IsReadOnly { get; }
+
+        /// <summary>
+        ///     Gets a list of worksheet names
+        /// </summary>
+        /// <returns></returns>
+        string[] GetWorksheetNames();
     }
 }

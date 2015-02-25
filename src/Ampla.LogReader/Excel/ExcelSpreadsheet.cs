@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -122,6 +123,15 @@ namespace Ampla.LogReader.Excel
 
             }
             private set { isReadOnly = value; }
+        }
+
+        /// <summary>
+        /// Gets a list of worksheet names
+        /// </summary>
+        /// <returns></returns>
+        public string[] GetWorksheetNames()
+        {
+            return workbook.Worksheets.Select(worksheet => worksheet.Name).ToArray();
         }
 
         /// <summary>
