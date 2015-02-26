@@ -38,7 +38,7 @@ namespace Ampla.LogReader
             {
                 file.Delete();
             }
-            Assert.That(file.Exists, Is.False);
+            Assert.That(file.Exists, Is.False, "File already exists: {0}", file.FullName);
             return file.FullName;
         }
 
