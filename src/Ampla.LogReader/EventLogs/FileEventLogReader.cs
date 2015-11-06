@@ -16,6 +16,20 @@ namespace Ampla.LogReader.EventLogs
             this.limitEntries = limitEntries;
         }
 
+        private static string RemoveDirectoryNames(string logName)
+        {
+            // sometimes the EventLog.LogName will include full filenames
+            if (logName.Contains(@"\"))
+            {
+                if (File.Exists(logName))
+                {
+                    return new FileInfo(logName).Name;
+                }
+                return logName.Replace("\\", "_");
+            }
+            return logName;
+        }
+
         protected override List<SimpleEventLogEntry> ReadEntries()
         {
             List<SimpleEventLogEntry> entries = new List<SimpleEventLogEntry>();
@@ -27,7 +41,9 @@ namespace Ampla.LogReader.EventLogs
                     int count = 0;
                     if (eventRecord != null)
                     {
-                        Name = eventRecord.LogName;
+                        // Use the name of event log from the records
+                        // may need to remove directory names
+                        Name = RemoveDirectoryNames(eventRecord.LogName);
                         count = 1;
                     }
                     if (limitEntries > 0)
