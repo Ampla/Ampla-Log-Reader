@@ -33,6 +33,36 @@ namespace Ampla.LogReader.Reports.Packs
                     names.Add(reader.Name);
                 }
 
+                bool hasDuplicates = false;
+                foreach (string name in names)
+                {
+                    hasDuplicates = names.FindAll(s => s == name).Count > 1;
+                }
+
+                if (hasDuplicates)
+                {
+                    List<string> newNames = new List<string>();
+                    foreach (string name in names)
+                    {
+                        if (!newNames.Contains(name))
+                        {
+                            newNames.Add(name);
+                        }
+                        else
+                        {
+                            int count = 1;
+                            string newName = string.Format("{0}.{1}", name, count);
+                            while (newNames.Contains(newName))
+                            {
+                                count++;
+                                newName = string.Format("{0}.{1}", name, count);
+                            }
+                            newNames.Add(newName);
+                        }
+                    }
+                    names = newNames;
+                }
+
                 excel.WriteDataToWorksheet(summaryTable.GetData(), "Summary");
                 for (int i = 0; i < names.Count; i++)
                 {

@@ -115,6 +115,27 @@ namespace Ampla.LogReader.Excel
             Assert.That(File.Exists(Filename), Is.False, "{0} exists", Filename);
         }
 
+        [Test]
+        public void DuplicateSheetAdded()
+        {
+            DataTable dataTable = new DataTable("Test");
+            dataTable.Columns.Add("A", typeof(string));
+            dataTable.Columns.Add("B", typeof(int));
+            dataTable.Columns.Add("C", typeof(double));
+
+            dataTable.Rows.Add("One", 1, 1.1D);
+            dataTable.Rows.Add("Two", 2, 1.2D);
+            dataTable.Rows.Add("Three", 3, 1.3D);
+
+            using (IExcelSpreadsheet spreadsheet = ExcelSpreadsheet.CreateNew(Filename))
+            {
+                IWorksheetWriter worksheet = spreadsheet.WriteDataToWorksheet(dataTable, "Test");
+                Assert.That(worksheet, Is.Not.Null);
+
+                Assert.Throws<ArgumentException>(()=> spreadsheet.WriteDataToWorksheet(dataTable, "Test"));
+            }
+        }
+
 
     }
 
