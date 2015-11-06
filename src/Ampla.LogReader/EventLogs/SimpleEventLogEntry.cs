@@ -45,11 +45,13 @@ namespace Ampla.LogReader.EventLogs
             string message = eventRecord.FormatDescription();
             if (string.IsNullOrEmpty(message))
             {
-                if (eventRecord.Properties.Count > 1)
+                IList<EventProperty> eventProperties = eventRecord.Properties;
+
+                if (eventProperties.Count > 1)
                 {
                     StringBuilder builder = new StringBuilder();
-                    builder.AppendFormat("{0} properties", eventRecord.Properties.Count);
-                    foreach (EventProperty property in eventRecord.Properties)
+                    builder.AppendFormat("{0} properties", eventProperties.Count);
+                    foreach (EventProperty property in eventProperties)
                     {
                         builder.AppendLine();
                         builder.AppendFormat("{0}", property.Value);
@@ -59,7 +61,7 @@ namespace Ampla.LogReader.EventLogs
                 else
                 {
                     message =
-                        eventRecord.Properties.Select(property => Convert.ToString(property.Value)).FirstOrDefault();
+                        eventProperties.Select(property => Convert.ToString(property.Value)).FirstOrDefault();
                 }
             }
 

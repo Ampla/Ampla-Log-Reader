@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security.Principal;
 
 namespace Ampla.LogReader.EventLogs
@@ -6,6 +7,7 @@ namespace Ampla.LogReader.EventLogs
     public class SecurityResolver : ISecurityResolver
     {
         private static readonly ISecurityResolver Resolver = new SecurityResolver();
+        private readonly Dictionary<string, string> cache = new Dictionary<string, string>();
 
         public static ISecurityResolver Instance
         {
@@ -19,15 +21,24 @@ namespace Ampla.LogReader.EventLogs
         {
             if (string.IsNullOrEmpty(sid)) return "";
 
+            string resolved;
+            if (cache.TryGetValue(sid, out resolved))
+            {
+                return resolved;
+            }
+
             if (!sid.StartsWith("S-", StringComparison.InvariantCulture))
             {
+                cache[sid] = sid;
                 return sid;
             }
 
             try
             {
                 SecurityIdentifier security = new SecurityIdentifier(sid);
-                return security.Translate(typeof (NTAccount)).Value;
+                string value = security.Translate(typeof (NTAccount)).Value;
+                cache[sid] = value;
+                return value;
             }
             catch (IdentityNotMappedException)
             {
@@ -37,6 +48,7 @@ namespace Ampla.LogReader.EventLogs
             {
                 throw new ArgumentException("SID: " + sid, ex);
             }
+            cache[sid] = sid; 
             return sid;
         }
     }
