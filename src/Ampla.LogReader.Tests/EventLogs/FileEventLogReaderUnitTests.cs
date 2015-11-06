@@ -20,12 +20,15 @@ namespace Ampla.LogReader.EventLogs
 
             ILogReader<SimpleEventLogEntry> reader = new FileEventLogReader(fileName);
             Assert.That(reader.Entries, Is.Empty);
+            Assert.That(reader.Name, Is.EqualTo("Application.All.evtx"), "Before ReadAll()");
 
             reader.ReadAll();
             Assert.That(reader.Entries, Is.Not.Empty);
 
             SimpleEventLogEntry firstEntry = reader.Entries[0];
             Assert.That(firstEntry.Message, Is.Not.Null.Or.Empty);
+
+            Assert.That(reader.Name, Is.EqualTo("Application"), "After ReadAll()");
         }
 
         [Test]
@@ -54,8 +57,11 @@ namespace Ampla.LogReader.EventLogs
             ILogReader<SimpleEventLogEntry> reader = new FileEventLogReader(fileName);
             Assert.That(reader.Entries, Is.Empty);
 
+            Assert.That(reader.Name, Is.EqualTo("HardwareEvents.evtx"), "Before ReadAll()");
+
             reader.ReadAll();
             Assert.That(reader.Entries, Is.Empty);
+            Assert.That(reader.Name, Is.EqualTo("HardwareEvents.evtx"), "After ReadAll()");
         }
     }
 }

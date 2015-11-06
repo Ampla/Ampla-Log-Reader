@@ -12,7 +12,7 @@ namespace Ampla.LogReader.EventLogs
     {
         public SimpleEventLogEntry(EventRecord eventRecord)
         {
-            Index = (int)GetValue(eventRecord.RecordId, 0);
+            Index = (int) GetValue(eventRecord.RecordId, 0);
             CallTime = GetValue(eventRecord.TimeCreated, DateTime.MinValue).ToUniversalTime();
             Source = eventRecord.ProviderName;
             InstanceId = GetValue(eventRecord.Id, 0);
@@ -58,7 +58,8 @@ namespace Ampla.LogReader.EventLogs
                 }
                 else
                 {
-                    message = eventRecord.Properties.Select(property => Convert.ToString(property.Value)).FirstOrDefault();
+                    message =
+                        eventRecord.Properties.Select(property => Convert.ToString(property.Value)).FirstOrDefault();
                 }
             }
 
@@ -76,9 +77,9 @@ namespace Ampla.LogReader.EventLogs
                         {
                             return EventLogEntryType.Warning;
                         }
-                    case 2: 
+                    case 2:
                         {
-                            return  EventLogEntryType.Error;
+                            return EventLogEntryType.Error;
                         }
                 }
             }
@@ -86,22 +87,24 @@ namespace Ampla.LogReader.EventLogs
             return EventLogEntryType.Information;
         }
 
+        private static readonly string[] IgnoredCategories = new string[] {"(0)", "(1)", "(2)"};
+    
         public SimpleEventLogEntry(EventLogEntry eventLogEntry)
         {
             Index = eventLogEntry.Index;
             CallTime = eventLogEntry.TimeGenerated.ToUniversalTime();
             Source = eventLogEntry.Source;
             InstanceId = eventLogEntry.InstanceId;
-            Category = Ignore(eventLogEntry.Category, "(0)");
+            Category = IgnoreValues(eventLogEntry.Category, IgnoredCategories);
             EntryType = eventLogEntry.EntryType;
             MachineName = eventLogEntry.MachineName;
-            UserName = eventLogEntry.UserName ?? "";
+            UserName = SecurityResolver.Instance.GetName(eventLogEntry.UserName);
             Message = eventLogEntry.Message;
         }
 
-        private string Ignore(string value, string ignoreIfValue)
+        private string IgnoreValues(string value, IEnumerable<string> ignoredValues)
         {
-            return StringComparer.InvariantCulture.Compare(value, ignoreIfValue) == 0 ? null : value;
+            return ignoredValues.Contains(value) ? null : value;
         }
 
         public int Index { get; private set; }

@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -60,6 +61,7 @@
     <Compile Include="EventLogs\EventLogExporterUnitTests.cs" />
     <Compile Include="EventLogs\FileEventLogSystemUnitTests.cs" />
     <Compile Include="EventLogs\EventLogReaderUnitTests.cs" />
+    <Compile Include="EventLogs\SecurityResolverUnitTests.cs" />
     <Compile Include="EventLogs\Statistics\EventLogSummaryTableUnitTests.cs" />
     <Compile Include="Excel\ExcelCell.cs" />
     <Compile Include="Excel\ExcelPage.cs" />
